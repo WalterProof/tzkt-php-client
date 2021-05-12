@@ -1,0 +1,49 @@
+# # Delegate
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**type** | **string** | Type of the account, &#x60;delegate&#x60; - account, registered as a delegate (baker) |
+**active** | **bool** | Delegation status (&#x60;true&#x60; - active, &#x60;false&#x60; - deactivated) | [optional]
+**alias** | **string** | Name of the baking service | [optional]
+**address** | **string** | Public key hash of the delegate (baker) | [optional]
+**public_key** | **string** | Public key of the delegate (baker) | [optional]
+**revealed** | **bool** | Public key revelation status. Unrevealed account can&#39;t send manager operation (transaction, origination etc.) | [optional]
+**balance** | **int** | Total balance of the delegate (baker), including spendable and frozen funds (micro tez) | [optional]
+**frozen_deposits** | **int** | Amount of security deposit, currently locked for baked (produced) blocks and (or) given endorsements (micro tez) | [optional]
+**frozen_rewards** | **int** | Amount of currently frozen baking rewards (micro tez) | [optional]
+**frozen_fees** | **int** | Amount of currently frozen fees paid by operations inside blocks, baked (produced) by the delegate (micro tez) | [optional]
+**counter** | **int** | An account nonce which is used to prevent operation replay | [optional]
+**activation_level** | **int** | Block height when delegate (baker) was registered as a baker last time | [optional]
+**activation_time** | [**\DateTime**](\DateTime.md) | Block datetime when delegate (baker) was registered as a baker last time (ISO 8601, e.g. 2019-11-31) | [optional]
+**deactivation_level** | **int** | Block height when delegate (baker) was deactivated as a baker because of lack of funds or inactivity | [optional]
+**deactivation_time** | [**\DateTime**](\DateTime.md) | Block datetime when delegate (baker) was deactivated as a baker because of lack of funds or inactivity (ISO 8601, e.g. 2019-11-31) | [optional]
+**staking_balance** | **int** | Sum of delegate (baker) balance and delegated funds minus frozen rewards (micro tez) | [optional]
+**num_contracts** | **int** | Number of contracts, created (originated) and/or managed by the delegate (baker) | [optional]
+**num_delegators** | **int** | Number of current delegators (accounts, delegated their funds) of the delegate (baker) | [optional]
+**num_blocks** | **int** | Number of baked (validated) blocks all the time by the delegate (baker) | [optional]
+**num_endorsements** | **int** | Number of given endorsements (approvals) by the delegate (baker) | [optional]
+**num_ballots** | **int** | Number of submitted by the delegate ballots during a voting period | [optional]
+**num_proposals** | **int** | Number of submitted (upvoted) by the delegate proposals during a proposal period | [optional]
+**num_activations** | **int** | Number of account activation operations. Are used to activate accounts that were recommended allocations of tezos tokens for donations to the Tezos Foundation’s fundraiser | [optional]
+**num_double_baking** | **int** | Number of double baking (baking two different blocks at the same height) evidence operations, included in blocks, baked (validated) by the delegate | [optional]
+**num_double_endorsing** | **int** | Number of double endorsement (endorsing two different blocks at the same block height) evidence operations, included in blocks, baked (validated) by the delegate | [optional]
+**num_nonce_revelations** | **int** | Number of seed nonce revelation (are used by the blockchain to create randomness) operations provided by the delegate | [optional]
+**num_revelation_penalties** | **int** | Number of operations for all time in which rewards were lost due to unrevealed seed nonces by the delegate (synthetic type) | [optional]
+**num_delegations** | **int** | Number of all delegation related operations (new delegator, left delegator, registration as a baker), related to the delegate (baker) | [optional]
+**num_originations** | **int** | Number of all origination (deployment / contract creation) operations, related to the delegate (baker) | [optional]
+**num_transactions** | **int** | Number of all transaction (tez transfer) operations, related to the delegate (baker) | [optional]
+**num_reveals** | **int** | Number of reveal (is used to reveal the public key associated with an account) operations of the delegate (baker) | [optional]
+**num_migrations** | **int** | Number of migration (result of the context (database) migration during a protocol update) operations, related to the delegate (synthetic type) | [optional]
+**first_activity** | **int** | Block height of the first operation, related to the delegate (baker) | [optional]
+**first_activity_time** | [**\DateTime**](\DateTime.md) | Block datetime of the first operation, related to the delegate (ISO 8601, e.g. &#x60;2020-02-20T02:40:57Z&#x60;) | [optional]
+**last_activity** | **int** | Height of the block in which the account state was changed last time | [optional]
+**last_activity_time** | [**\DateTime**](\DateTime.md) | Datetime of the block in which the account state was changed last time (ISO 8601, e.g. &#x60;2020-02-20T02:40:57Z&#x60;) | [optional]
+**contracts** | [**\Bzzhh\Tzkt\Model\RelatedContract[]**](RelatedContract.md) | List of contracts, related (originated or managed) to the delegate (baker) | [optional]
+**delegators** | [**\Bzzhh\Tzkt\Model\Delegator[]**](Delegator.md) | List of current delegators of the delegate (baker) | [optional]
+**operations** | [**\Bzzhh\Tzkt\Model\Operation[]**](Operation.md) | List of all operations (synthetic type included), related to the delegate | [optional]
+**metadata** | [**OneOfAccountMetadata**](OneOfAccountMetadata.md) | Metadata of the delegate (alias, logo, website, contacts, etc) | [optional]
+**software** | [**OneOfSoftwareAlias**](OneOfSoftwareAlias.md) | Last seen baker&#39;s software | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
