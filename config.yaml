@@ -1,0 +1,3 @@
+inputSpec: https://api.tzkt.io/v1/swagger.json
+generatorName: php
+invokerPackage: Bzzhh\Tzkt
