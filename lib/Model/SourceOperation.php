@@ -64,7 +64,7 @@ class SourceOperation implements ModelInterface, ArrayAccess, \JsonSerializable
         'hash' => 'string',
         'counter' => 'int',
         'nonce' => 'int',
-        'parameter' => 'OneOfTxParameter'
+        'parameter' => 'array<Bzzhh\Tzkt\Model\TxParameter>',
     ];
 
     /**

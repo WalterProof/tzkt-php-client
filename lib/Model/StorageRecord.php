@@ -63,8 +63,8 @@ class StorageRecord implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'level' => 'int',
         'timestamp' => '\DateTime',
-        'operation' => 'OneOfSourceOperation',
-        'value' => 'mixed'
+        'operation' => 'Bzzhh\Tzkt\Model\SourceOperation',
+	'value' => 'object',
     ];
 
     /**
