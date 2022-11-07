@@ -362,6 +362,11 @@ class ObjectSerializer
             return $data;
         } else {
             $data = is_string($data) ? json_decode($data) : $data;
+
+            if (!class_exists($class)) {
+                return $instance ?? null;
+            }
+
             // If a discriminator is defined and points to a valid subclass, use it.
             $discriminator = $class::DISCRIMINATOR;
             if (!empty($discriminator) && isset($data->{$discriminator}) && is_string($data->{$discriminator})) {
@@ -385,6 +390,7 @@ class ObjectSerializer
                     $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
                 }
             }
+
             return $instance;
         }
     }
