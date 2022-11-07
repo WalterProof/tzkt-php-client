@@ -363,34 +363,35 @@ class ObjectSerializer
         } else {
             $data = is_string($data) ? json_decode($data) : $data;
 
-            if (class_exists($class)) {
+            if (!class_exists($class)) {
+                return $instance ?? null;
+            }
 
-                // If a discriminator is defined and points to a valid subclass, use it.
-                $discriminator = $class::DISCRIMINATOR;
-                if (!empty($discriminator) && isset($data->{$discriminator}) && is_string($data->{$discriminator})) {
-                    $subclass = '\Bzzhh\Tzkt\Model\\' . $data->{$discriminator};
-                    if (is_subclass_of($subclass, $class)) {
-                        $class = $subclass;
-                    }
-                }
-
-                /** @var ModelInterface $instance */
-                $instance = new $class();
-                foreach ($instance::openAPITypes() as $property => $type) {
-                    $propertySetter = $instance::setters()[$property];
-
-                    if (!isset($propertySetter) || !isset($data->{$instance::attributeMap()[$property]})) {
-                        continue;
-                    }
-
-                    if (isset($data->{$instance::attributeMap()[$property]})) {
-                        $propertyValue = $data->{$instance::attributeMap()[$property]};
-                        $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
-                    }
+            // If a discriminator is defined and points to a valid subclass, use it.
+            $discriminator = $class::DISCRIMINATOR;
+            if (!empty($discriminator) && isset($data->{$discriminator}) && is_string($data->{$discriminator})) {
+                $subclass = '\Bzzhh\Tzkt\Model\\' . $data->{$discriminator};
+                if (is_subclass_of($subclass, $class)) {
+                    $class = $subclass;
                 }
             }
 
-            return $instance ?? null;
+            /** @var ModelInterface $instance */
+            $instance = new $class();
+            foreach ($instance::openAPITypes() as $property => $type) {
+                $propertySetter = $instance::setters()[$property];
+
+                if (!isset($propertySetter) || !isset($data->{$instance::attributeMap()[$property]})) {
+                    continue;
+                }
+
+                if (isset($data->{$instance::attributeMap()[$property]})) {
+                    $propertyValue = $data->{$instance::attributeMap()[$property]};
+                    $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
+                }
+            }
+
+            return $instance;
         }
     }
 }
