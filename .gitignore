@@ -1,5 +1,8 @@
 # ref: https://github.com/github/gitignore/blob/master/Composer.gitignore
 
+.DS_Store
+/.idea
+
 composer.phar
 /vendor/
 
