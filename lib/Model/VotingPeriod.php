@@ -2,7 +2,7 @@
 /**
  * VotingPeriod
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -68,19 +66,25 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
         'end_time' => '\DateTime',
         'kind' => 'string',
         'status' => 'string',
+        'dictator' => 'string',
         'total_bakers' => 'int',
-        'total_rolls' => 'int',
-        'upvotes_quorum' => 'double',
+        'total_voting_power' => 'int',
+        'upvotes_quorum' => 'float',
         'proposals_count' => 'int',
         'top_upvotes' => 'int',
-        'top_rolls' => 'int',
-        'ballots_quorum' => 'double',
-        'supermajority' => 'double',
+        'top_voting_power' => 'int',
+        'ballots_quorum' => 'float',
+        'supermajority' => 'float',
         'yay_ballots' => 'int',
-        'yay_rolls' => 'int',
+        'yay_voting_power' => 'int',
         'nay_ballots' => 'int',
-        'nay_rolls' => 'int',
+        'nay_voting_power' => 'int',
         'pass_ballots' => 'int',
+        'pass_voting_power' => 'int',
+        'total_rolls' => 'int',
+        'top_rolls' => 'int',
+        'yay_rolls' => 'int',
+        'nay_rolls' => 'int',
         'pass_rolls' => 'int'
     ];
 
@@ -100,21 +104,70 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
         'end_time' => 'date-time',
         'kind' => null,
         'status' => null,
+        'dictator' => null,
         'total_bakers' => 'int32',
-        'total_rolls' => 'int32',
+        'total_voting_power' => 'int64',
         'upvotes_quorum' => 'double',
         'proposals_count' => 'int32',
         'top_upvotes' => 'int32',
-        'top_rolls' => 'int32',
+        'top_voting_power' => 'int64',
         'ballots_quorum' => 'double',
         'supermajority' => 'double',
         'yay_ballots' => 'int32',
-        'yay_rolls' => 'int32',
+        'yay_voting_power' => 'int64',
         'nay_ballots' => 'int32',
-        'nay_rolls' => 'int32',
+        'nay_voting_power' => 'int64',
         'pass_ballots' => 'int32',
+        'pass_voting_power' => 'int64',
+        'total_rolls' => 'int32',
+        'top_rolls' => 'int32',
+        'yay_rolls' => 'int32',
+        'nay_rolls' => 'int32',
         'pass_rolls' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'index' => false,
+		'epoch' => false,
+		'first_level' => false,
+		'start_time' => false,
+		'last_level' => false,
+		'end_time' => false,
+		'kind' => true,
+		'status' => true,
+		'dictator' => true,
+		'total_bakers' => true,
+		'total_voting_power' => true,
+		'upvotes_quorum' => true,
+		'proposals_count' => true,
+		'top_upvotes' => true,
+		'top_voting_power' => true,
+		'ballots_quorum' => true,
+		'supermajority' => true,
+		'yay_ballots' => true,
+		'yay_voting_power' => true,
+		'nay_ballots' => true,
+		'nay_voting_power' => true,
+		'pass_ballots' => true,
+		'pass_voting_power' => true,
+		'total_rolls' => true,
+		'top_rolls' => true,
+		'yay_rolls' => true,
+		'nay_rolls' => true,
+		'pass_rolls' => true
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -137,6 +190,58 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -151,19 +256,25 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
         'end_time' => 'endTime',
         'kind' => 'kind',
         'status' => 'status',
+        'dictator' => 'dictator',
         'total_bakers' => 'totalBakers',
-        'total_rolls' => 'totalRolls',
+        'total_voting_power' => 'totalVotingPower',
         'upvotes_quorum' => 'upvotesQuorum',
         'proposals_count' => 'proposalsCount',
         'top_upvotes' => 'topUpvotes',
-        'top_rolls' => 'topRolls',
+        'top_voting_power' => 'topVotingPower',
         'ballots_quorum' => 'ballotsQuorum',
         'supermajority' => 'supermajority',
         'yay_ballots' => 'yayBallots',
-        'yay_rolls' => 'yayRolls',
+        'yay_voting_power' => 'yayVotingPower',
         'nay_ballots' => 'nayBallots',
-        'nay_rolls' => 'nayRolls',
+        'nay_voting_power' => 'nayVotingPower',
         'pass_ballots' => 'passBallots',
+        'pass_voting_power' => 'passVotingPower',
+        'total_rolls' => 'totalRolls',
+        'top_rolls' => 'topRolls',
+        'yay_rolls' => 'yayRolls',
+        'nay_rolls' => 'nayRolls',
         'pass_rolls' => 'passRolls'
     ];
 
@@ -181,19 +292,25 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
         'end_time' => 'setEndTime',
         'kind' => 'setKind',
         'status' => 'setStatus',
+        'dictator' => 'setDictator',
         'total_bakers' => 'setTotalBakers',
-        'total_rolls' => 'setTotalRolls',
+        'total_voting_power' => 'setTotalVotingPower',
         'upvotes_quorum' => 'setUpvotesQuorum',
         'proposals_count' => 'setProposalsCount',
         'top_upvotes' => 'setTopUpvotes',
-        'top_rolls' => 'setTopRolls',
+        'top_voting_power' => 'setTopVotingPower',
         'ballots_quorum' => 'setBallotsQuorum',
         'supermajority' => 'setSupermajority',
         'yay_ballots' => 'setYayBallots',
-        'yay_rolls' => 'setYayRolls',
+        'yay_voting_power' => 'setYayVotingPower',
         'nay_ballots' => 'setNayBallots',
-        'nay_rolls' => 'setNayRolls',
+        'nay_voting_power' => 'setNayVotingPower',
         'pass_ballots' => 'setPassBallots',
+        'pass_voting_power' => 'setPassVotingPower',
+        'total_rolls' => 'setTotalRolls',
+        'top_rolls' => 'setTopRolls',
+        'yay_rolls' => 'setYayRolls',
+        'nay_rolls' => 'setNayRolls',
         'pass_rolls' => 'setPassRolls'
     ];
 
@@ -211,19 +328,25 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
         'end_time' => 'getEndTime',
         'kind' => 'getKind',
         'status' => 'getStatus',
+        'dictator' => 'getDictator',
         'total_bakers' => 'getTotalBakers',
-        'total_rolls' => 'getTotalRolls',
+        'total_voting_power' => 'getTotalVotingPower',
         'upvotes_quorum' => 'getUpvotesQuorum',
         'proposals_count' => 'getProposalsCount',
         'top_upvotes' => 'getTopUpvotes',
-        'top_rolls' => 'getTopRolls',
+        'top_voting_power' => 'getTopVotingPower',
         'ballots_quorum' => 'getBallotsQuorum',
         'supermajority' => 'getSupermajority',
         'yay_ballots' => 'getYayBallots',
-        'yay_rolls' => 'getYayRolls',
+        'yay_voting_power' => 'getYayVotingPower',
         'nay_ballots' => 'getNayBallots',
-        'nay_rolls' => 'getNayRolls',
+        'nay_voting_power' => 'getNayVotingPower',
         'pass_ballots' => 'getPassBallots',
+        'pass_voting_power' => 'getPassVotingPower',
+        'total_rolls' => 'getTotalRolls',
+        'top_rolls' => 'getTopRolls',
+        'yay_rolls' => 'getYayRolls',
+        'nay_rolls' => 'getNayRolls',
         'pass_rolls' => 'getPassRolls'
     ];
 
@@ -284,28 +407,52 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['index'] = $data['index'] ?? null;
-        $this->container['epoch'] = $data['epoch'] ?? null;
-        $this->container['first_level'] = $data['first_level'] ?? null;
-        $this->container['start_time'] = $data['start_time'] ?? null;
-        $this->container['last_level'] = $data['last_level'] ?? null;
-        $this->container['end_time'] = $data['end_time'] ?? null;
-        $this->container['kind'] = $data['kind'] ?? null;
-        $this->container['status'] = $data['status'] ?? null;
-        $this->container['total_bakers'] = $data['total_bakers'] ?? null;
-        $this->container['total_rolls'] = $data['total_rolls'] ?? null;
-        $this->container['upvotes_quorum'] = $data['upvotes_quorum'] ?? null;
-        $this->container['proposals_count'] = $data['proposals_count'] ?? null;
-        $this->container['top_upvotes'] = $data['top_upvotes'] ?? null;
-        $this->container['top_rolls'] = $data['top_rolls'] ?? null;
-        $this->container['ballots_quorum'] = $data['ballots_quorum'] ?? null;
-        $this->container['supermajority'] = $data['supermajority'] ?? null;
-        $this->container['yay_ballots'] = $data['yay_ballots'] ?? null;
-        $this->container['yay_rolls'] = $data['yay_rolls'] ?? null;
-        $this->container['nay_ballots'] = $data['nay_ballots'] ?? null;
-        $this->container['nay_rolls'] = $data['nay_rolls'] ?? null;
-        $this->container['pass_ballots'] = $data['pass_ballots'] ?? null;
-        $this->container['pass_rolls'] = $data['pass_rolls'] ?? null;
+        $this->setIfExists('index', $data ?? [], null);
+        $this->setIfExists('epoch', $data ?? [], null);
+        $this->setIfExists('first_level', $data ?? [], null);
+        $this->setIfExists('start_time', $data ?? [], null);
+        $this->setIfExists('last_level', $data ?? [], null);
+        $this->setIfExists('end_time', $data ?? [], null);
+        $this->setIfExists('kind', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('dictator', $data ?? [], null);
+        $this->setIfExists('total_bakers', $data ?? [], null);
+        $this->setIfExists('total_voting_power', $data ?? [], null);
+        $this->setIfExists('upvotes_quorum', $data ?? [], null);
+        $this->setIfExists('proposals_count', $data ?? [], null);
+        $this->setIfExists('top_upvotes', $data ?? [], null);
+        $this->setIfExists('top_voting_power', $data ?? [], null);
+        $this->setIfExists('ballots_quorum', $data ?? [], null);
+        $this->setIfExists('supermajority', $data ?? [], null);
+        $this->setIfExists('yay_ballots', $data ?? [], null);
+        $this->setIfExists('yay_voting_power', $data ?? [], null);
+        $this->setIfExists('nay_ballots', $data ?? [], null);
+        $this->setIfExists('nay_voting_power', $data ?? [], null);
+        $this->setIfExists('pass_ballots', $data ?? [], null);
+        $this->setIfExists('pass_voting_power', $data ?? [], null);
+        $this->setIfExists('total_rolls', $data ?? [], null);
+        $this->setIfExists('top_rolls', $data ?? [], null);
+        $this->setIfExists('yay_rolls', $data ?? [], null);
+        $this->setIfExists('nay_rolls', $data ?? [], null);
+        $this->setIfExists('pass_rolls', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -351,6 +498,11 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setIndex($index)
     {
+
+        if (is_null($index)) {
+            throw new \InvalidArgumentException('non-nullable index cannot be null');
+        }
+
         $this->container['index'] = $index;
 
         return $this;
@@ -375,6 +527,11 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setEpoch($epoch)
     {
+
+        if (is_null($epoch)) {
+            throw new \InvalidArgumentException('non-nullable epoch cannot be null');
+        }
+
         $this->container['epoch'] = $epoch;
 
         return $this;
@@ -399,6 +556,11 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFirstLevel($first_level)
     {
+
+        if (is_null($first_level)) {
+            throw new \InvalidArgumentException('non-nullable first_level cannot be null');
+        }
+
         $this->container['first_level'] = $first_level;
 
         return $this;
@@ -423,6 +585,11 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setStartTime($start_time)
     {
+
+        if (is_null($start_time)) {
+            throw new \InvalidArgumentException('non-nullable start_time cannot be null');
+        }
+
         $this->container['start_time'] = $start_time;
 
         return $this;
@@ -447,6 +614,11 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLastLevel($last_level)
     {
+
+        if (is_null($last_level)) {
+            throw new \InvalidArgumentException('non-nullable last_level cannot be null');
+        }
+
         $this->container['last_level'] = $last_level;
 
         return $this;
@@ -471,6 +643,11 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setEndTime($end_time)
     {
+
+        if (is_null($end_time)) {
+            throw new \InvalidArgumentException('non-nullable end_time cannot be null');
+        }
+
         $this->container['end_time'] = $end_time;
 
         return $this;
@@ -495,6 +672,18 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setKind($kind)
     {
+
+        if (is_null($kind)) {
+            array_push($this->openAPINullablesSetToNull, 'kind');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('kind', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['kind'] = $kind;
 
         return $this;
@@ -513,13 +702,61 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status Status of the voting period: `active` - means that the voting period is in progress `no_proposals` - means that there were no proposals during the voting period `no_quorum` - means that there was a voting but the quorum was not reached `no_supermajority` - means that there was a voting but the supermajority was not reached `success` - means that the period was finished with positive voting result
+     * @param string|null $status Status of the voting period: `active` - means that the voting period is in progress `no_proposals` - means that there were no proposals during the voting period `no_quorum` - means that there was a voting but the quorum was not reached `no_supermajority` - means that there was a voting but the supermajority was not reached `no_single_winner` - means that there were multiple winning proposals with the same voting power `success` - means that the period was finished with positive voting result
      *
      * @return self
      */
     public function setStatus($status)
     {
+
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets dictator
+     *
+     * @return string|null
+     */
+    public function getDictator()
+    {
+        return $this->container['dictator'];
+    }
+
+    /**
+     * Sets dictator
+     *
+     * @param string|null $dictator Status of the governance dictator: `none` - means that there were no actions by the dictator  `abort` - means that the epoch was aborted by the dictator `reset` - means that the period was reset by the dictator `submit` - means that the dictator submitted a proposal
+     *
+     * @return self
+     */
+    public function setDictator($dictator)
+    {
+
+        if (is_null($dictator)) {
+            array_push($this->openAPINullablesSetToNull, 'dictator');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dictator', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['dictator'] = $dictator;
 
         return $this;
     }
@@ -543,31 +780,55 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalBakers($total_bakers)
     {
+
+        if (is_null($total_bakers)) {
+            array_push($this->openAPINullablesSetToNull, 'total_bakers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('total_bakers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['total_bakers'] = $total_bakers;
 
         return $this;
     }
 
     /**
-     * Gets total_rolls
+     * Gets total_voting_power
      *
      * @return int|null
      */
-    public function getTotalRolls()
+    public function getTotalVotingPower()
     {
-        return $this->container['total_rolls'];
+        return $this->container['total_voting_power'];
     }
 
     /**
-     * Sets total_rolls
+     * Sets total_voting_power
      *
-     * @param int|null $total_rolls The number of rolls of bakers on the voters list
+     * @param int|null $total_voting_power Total voting power of bakers on the voters list
      *
      * @return self
      */
-    public function setTotalRolls($total_rolls)
+    public function setTotalVotingPower($total_voting_power)
     {
-        $this->container['total_rolls'] = $total_rolls;
+
+        if (is_null($total_voting_power)) {
+            array_push($this->openAPINullablesSetToNull, 'total_voting_power');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('total_voting_power', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['total_voting_power'] = $total_voting_power;
 
         return $this;
     }
@@ -575,7 +836,7 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets upvotes_quorum
      *
-     * @return double|null
+     * @return float|null
      */
     public function getUpvotesQuorum()
     {
@@ -585,12 +846,24 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets upvotes_quorum
      *
-     * @param double|null $upvotes_quorum Upvotes quorum percentage (only for proposal period)
+     * @param float|null $upvotes_quorum Upvotes quorum percentage (only for proposal period)
      *
      * @return self
      */
     public function setUpvotesQuorum($upvotes_quorum)
     {
+
+        if (is_null($upvotes_quorum)) {
+            array_push($this->openAPINullablesSetToNull, 'upvotes_quorum');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('upvotes_quorum', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['upvotes_quorum'] = $upvotes_quorum;
 
         return $this;
@@ -615,6 +888,18 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setProposalsCount($proposals_count)
     {
+
+        if (is_null($proposals_count)) {
+            array_push($this->openAPINullablesSetToNull, 'proposals_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('proposals_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['proposals_count'] = $proposals_count;
 
         return $this;
@@ -639,31 +924,55 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTopUpvotes($top_upvotes)
     {
+
+        if (is_null($top_upvotes)) {
+            array_push($this->openAPINullablesSetToNull, 'top_upvotes');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('top_upvotes', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['top_upvotes'] = $top_upvotes;
 
         return $this;
     }
 
     /**
-     * Gets top_rolls
+     * Gets top_voting_power
      *
      * @return int|null
      */
-    public function getTopRolls()
+    public function getTopVotingPower()
     {
-        return $this->container['top_rolls'];
+        return $this->container['top_voting_power'];
     }
 
     /**
-     * Sets top_rolls
+     * Sets top_voting_power
      *
-     * @param int|null $top_rolls This is how many rolls the most upvoted proposal has (only for proposal period)
+     * @param int|null $top_voting_power This is how much voting power the most upvoted proposal has (only for proposal period)
      *
      * @return self
      */
-    public function setTopRolls($top_rolls)
+    public function setTopVotingPower($top_voting_power)
     {
-        $this->container['top_rolls'] = $top_rolls;
+
+        if (is_null($top_voting_power)) {
+            array_push($this->openAPINullablesSetToNull, 'top_voting_power');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('top_voting_power', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['top_voting_power'] = $top_voting_power;
 
         return $this;
     }
@@ -671,7 +980,7 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets ballots_quorum
      *
-     * @return double|null
+     * @return float|null
      */
     public function getBallotsQuorum()
     {
@@ -681,12 +990,24 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ballots_quorum
      *
-     * @param double|null $ballots_quorum Ballots quorum percentage (only for exploration and promotion periods)
+     * @param float|null $ballots_quorum Ballots quorum percentage (only for exploration and promotion periods)
      *
      * @return self
      */
     public function setBallotsQuorum($ballots_quorum)
     {
+
+        if (is_null($ballots_quorum)) {
+            array_push($this->openAPINullablesSetToNull, 'ballots_quorum');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ballots_quorum', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['ballots_quorum'] = $ballots_quorum;
 
         return $this;
@@ -695,7 +1016,7 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets supermajority
      *
-     * @return double|null
+     * @return float|null
      */
     public function getSupermajority()
     {
@@ -705,12 +1026,24 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets supermajority
      *
-     * @param double|null $supermajority Supermajority percentage (only for exploration and promotion periods)
+     * @param float|null $supermajority Supermajority percentage (only for exploration and promotion periods)
      *
      * @return self
      */
     public function setSupermajority($supermajority)
     {
+
+        if (is_null($supermajority)) {
+            array_push($this->openAPINullablesSetToNull, 'supermajority');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('supermajority', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['supermajority'] = $supermajority;
 
         return $this;
@@ -735,31 +1068,55 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setYayBallots($yay_ballots)
     {
+
+        if (is_null($yay_ballots)) {
+            array_push($this->openAPINullablesSetToNull, 'yay_ballots');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('yay_ballots', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['yay_ballots'] = $yay_ballots;
 
         return $this;
     }
 
     /**
-     * Gets yay_rolls
+     * Gets yay_voting_power
      *
      * @return int|null
      */
-    public function getYayRolls()
+    public function getYayVotingPower()
     {
-        return $this->container['yay_rolls'];
+        return $this->container['yay_voting_power'];
     }
 
     /**
-     * Sets yay_rolls
+     * Sets yay_voting_power
      *
-     * @param int|null $yay_rolls Total rolls of the ballots with \"yay\" vote (only for exploration and promotion periods)
+     * @param int|null $yay_voting_power Total voting power of the ballots with \"yay\" vote (only for exploration and promotion periods)
      *
      * @return self
      */
-    public function setYayRolls($yay_rolls)
+    public function setYayVotingPower($yay_voting_power)
     {
-        $this->container['yay_rolls'] = $yay_rolls;
+
+        if (is_null($yay_voting_power)) {
+            array_push($this->openAPINullablesSetToNull, 'yay_voting_power');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('yay_voting_power', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['yay_voting_power'] = $yay_voting_power;
 
         return $this;
     }
@@ -783,31 +1140,55 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setNayBallots($nay_ballots)
     {
+
+        if (is_null($nay_ballots)) {
+            array_push($this->openAPINullablesSetToNull, 'nay_ballots');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('nay_ballots', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['nay_ballots'] = $nay_ballots;
 
         return $this;
     }
 
     /**
-     * Gets nay_rolls
+     * Gets nay_voting_power
      *
      * @return int|null
      */
-    public function getNayRolls()
+    public function getNayVotingPower()
     {
-        return $this->container['nay_rolls'];
+        return $this->container['nay_voting_power'];
     }
 
     /**
-     * Sets nay_rolls
+     * Sets nay_voting_power
      *
-     * @param int|null $nay_rolls Total rolls of the ballots with \"nay\" vote (only for exploration and promotion periods)
+     * @param int|null $nay_voting_power Total voting power of the ballots with \"nay\" vote (only for exploration and promotion periods)
      *
      * @return self
      */
-    public function setNayRolls($nay_rolls)
+    public function setNayVotingPower($nay_voting_power)
     {
-        $this->container['nay_rolls'] = $nay_rolls;
+
+        if (is_null($nay_voting_power)) {
+            array_push($this->openAPINullablesSetToNull, 'nay_voting_power');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('nay_voting_power', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['nay_voting_power'] = $nay_voting_power;
 
         return $this;
     }
@@ -831,7 +1212,199 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setPassBallots($pass_ballots)
     {
+
+        if (is_null($pass_ballots)) {
+            array_push($this->openAPINullablesSetToNull, 'pass_ballots');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('pass_ballots', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['pass_ballots'] = $pass_ballots;
+
+        return $this;
+    }
+
+    /**
+     * Gets pass_voting_power
+     *
+     * @return int|null
+     */
+    public function getPassVotingPower()
+    {
+        return $this->container['pass_voting_power'];
+    }
+
+    /**
+     * Sets pass_voting_power
+     *
+     * @param int|null $pass_voting_power Total voting power of the ballots with \"pass\" vote (only for exploration and promotion periods)
+     *
+     * @return self
+     */
+    public function setPassVotingPower($pass_voting_power)
+    {
+
+        if (is_null($pass_voting_power)) {
+            array_push($this->openAPINullablesSetToNull, 'pass_voting_power');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('pass_voting_power', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['pass_voting_power'] = $pass_voting_power;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_rolls
+     *
+     * @return int|null
+     */
+    public function getTotalRolls()
+    {
+        return $this->container['total_rolls'];
+    }
+
+    /**
+     * Sets total_rolls
+     *
+     * @param int|null $total_rolls [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setTotalRolls($total_rolls)
+    {
+
+        if (is_null($total_rolls)) {
+            array_push($this->openAPINullablesSetToNull, 'total_rolls');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('total_rolls', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['total_rolls'] = $total_rolls;
+
+        return $this;
+    }
+
+    /**
+     * Gets top_rolls
+     *
+     * @return int|null
+     */
+    public function getTopRolls()
+    {
+        return $this->container['top_rolls'];
+    }
+
+    /**
+     * Sets top_rolls
+     *
+     * @param int|null $top_rolls [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setTopRolls($top_rolls)
+    {
+
+        if (is_null($top_rolls)) {
+            array_push($this->openAPINullablesSetToNull, 'top_rolls');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('top_rolls', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['top_rolls'] = $top_rolls;
+
+        return $this;
+    }
+
+    /**
+     * Gets yay_rolls
+     *
+     * @return int|null
+     */
+    public function getYayRolls()
+    {
+        return $this->container['yay_rolls'];
+    }
+
+    /**
+     * Sets yay_rolls
+     *
+     * @param int|null $yay_rolls [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setYayRolls($yay_rolls)
+    {
+
+        if (is_null($yay_rolls)) {
+            array_push($this->openAPINullablesSetToNull, 'yay_rolls');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('yay_rolls', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['yay_rolls'] = $yay_rolls;
+
+        return $this;
+    }
+
+    /**
+     * Gets nay_rolls
+     *
+     * @return int|null
+     */
+    public function getNayRolls()
+    {
+        return $this->container['nay_rolls'];
+    }
+
+    /**
+     * Sets nay_rolls
+     *
+     * @param int|null $nay_rolls [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setNayRolls($nay_rolls)
+    {
+
+        if (is_null($nay_rolls)) {
+            array_push($this->openAPINullablesSetToNull, 'nay_rolls');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('nay_rolls', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['nay_rolls'] = $nay_rolls;
 
         return $this;
     }
@@ -849,12 +1422,24 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets pass_rolls
      *
-     * @param int|null $pass_rolls Total rolls of the ballots with \"pass\" vote (only for exploration and promotion periods)
+     * @param int|null $pass_rolls [DEPRECATED]
      *
      * @return self
      */
     public function setPassRolls($pass_rolls)
     {
+
+        if (is_null($pass_rolls)) {
+            array_push($this->openAPINullablesSetToNull, 'pass_rolls');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('pass_rolls', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['pass_rolls'] = $pass_rolls;
 
         return $this;
@@ -866,7 +1451,7 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -878,6 +1463,7 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -891,7 +1477,7 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -907,7 +1493,7 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -919,6 +1505,7 @@ class VotingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

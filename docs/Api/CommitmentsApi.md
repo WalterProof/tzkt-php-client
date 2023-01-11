@@ -1,12 +1,12 @@
 # Bzzhh\Tzkt\CommitmentsApi
 
-All URIs are relative to https://api.tzkt.io.
+All URIs are relative to https://api.tzkt.io, except if the operation defines another base path.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**commitmentsGet()**](CommitmentsApi.md#commitmentsGet) | **GET** /v1/commitments/{address} | Get commitment by blinded address
-[**commitmentsGetAll()**](CommitmentsApi.md#commitmentsGetAll) | **GET** /v1/commitments | Get commitments
-[**commitmentsGetCount()**](CommitmentsApi.md#commitmentsGetCount) | **GET** /v1/commitments/count | Get commitments count
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**commitmentsGet()**](CommitmentsApi.md#commitmentsGet) | **GET** /v1/commitments/{address} | Get commitment by blinded address |
+| [**commitmentsGetAll()**](CommitmentsApi.md#commitmentsGetAll) | **GET** /v1/commitments | Get commitments |
+| [**commitmentsGetCount()**](CommitmentsApi.md#commitmentsGetCount) | **GET** /v1/commitments/count | Get commitments count |
 
 
 ## `commitmentsGet()`
@@ -44,9 +44,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Blinded address (starting with btz) |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Blinded address (starting with btz) | |
 
 ### Return type
 
@@ -89,11 +89,11 @@ $apiInstance = new Bzzhh\Tzkt\Api\CommitmentsApi(
     new GuzzleHttp\Client()
 );
 $activated = True; // bool | Filters commitments by activation status
-$activation_level = new \Bzzhh\Tzkt\Model\OneOfInt32NullParameter(); // OneOfInt32NullParameter | Filters commitments by activation level
-$balance = new \Bzzhh\Tzkt\Model\OneOfInt64Parameter(); // OneOfInt64Parameter | Filters commitments by activated balance
-$select = new \Bzzhh\Tzkt\Model\OneOfSelectParameter(); // OneOfSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts delegators by specified field. Supported fields: `id` (default), `balance`, `activationLevel`.
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$activation_level = new \Bzzhh\Tzkt\Model\CommitmentsGetAllActivationLevelParameter(); // CommitmentsGetAllActivationLevelParameter | Filters commitments by activation level
+$balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters commitments by activated balance
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts delegators by specified field. Supported fields: `id` (default), `balance`, `activationLevel`.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
 
 try {
@@ -106,15 +106,15 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **activated** | **bool**| Filters commitments by activation status | [optional]
- **activation_level** | [**OneOfInt32NullParameter**](../Model/.md)| Filters commitments by activation level | [optional]
- **balance** | [**OneOfInt64Parameter**](../Model/.md)| Filters commitments by activated balance | [optional]
- **select** | [**OneOfSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional]
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;activationLevel&#x60;. | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **activated** | **bool**| Filters commitments by activation status | [optional] |
+| **activation_level** | [**CommitmentsGetAllActivationLevelParameter**](../Model/.md)| Filters commitments by activation level | [optional] |
+| **balance** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters commitments by activated balance | [optional] |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;activationLevel&#x60;. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
 
 ### Return type
 
@@ -157,7 +157,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\CommitmentsApi(
     new GuzzleHttp\Client()
 );
 $activated = True; // bool | Filters commitments by activation status
-$balance = new \Bzzhh\Tzkt\Model\OneOfInt64Parameter(); // OneOfInt64Parameter | Filters commitments by activated balance
+$balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters commitments by activated balance
 
 try {
     $result = $apiInstance->commitmentsGetCount($activated, $balance);
@@ -169,10 +169,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **activated** | **bool**| Filters commitments by activation status | [optional]
- **balance** | [**OneOfInt64Parameter**](../Model/.md)| Filters commitments by activated balance | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **activated** | **bool**| Filters commitments by activation status | [optional] |
+| **balance** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters commitments by activated balance | [optional] |
 
 ### Return type
 

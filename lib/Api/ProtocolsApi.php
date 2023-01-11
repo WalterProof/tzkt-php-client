@@ -1,7 +1,7 @@
 <?php
 /**
  * ProtocolsApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,29 @@ class ProtocolsApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'protocolsGet' => [
+            'application/json',
+        ],
+        'protocolsGetByCode' => [
+            'application/json',
+        ],
+        'protocolsGetByCycle' => [
+            'application/json',
+        ],
+        'protocolsGetByHash' => [
+            'application/json',
+        ],
+        'protocolsGetCount' => [
+            'application/json',
+        ],
+        'protocolsGetCurrent' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -120,17 +143,18 @@ class ProtocolsApi
      *
      * Get protocols
      *
-     * @param  OneOfSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;code&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;code&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Protocol[]
      */
-    public function protocolsGet($sort = null, $offset = null, $limit = 100)
+    public function protocolsGet($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['protocolsGet'][0])
     {
-        list($response) = $this->protocolsGetWithHttpInfo($sort, $offset, $limit);
+        list($response) = $this->protocolsGetWithHttpInfo($sort, $offset, $limit, $contentType);
         return $response;
     }
 
@@ -139,17 +163,18 @@ class ProtocolsApi
      *
      * Get protocols
      *
-     * @param  OneOfSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;code&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;code&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Protocol[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function protocolsGetWithHttpInfo($sort = null, $offset = null, $limit = 100)
+    public function protocolsGetWithHttpInfo($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['protocolsGet'][0])
     {
-        $request = $this->protocolsGetRequest($sort, $offset, $limit);
+        $request = $this->protocolsGetRequest($sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -161,6 +186,13 @@ class ProtocolsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -185,6 +217,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Protocol[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -199,6 +234,9 @@ class ProtocolsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -227,16 +265,17 @@ class ProtocolsApi
      *
      * Get protocols
      *
-     * @param  OneOfSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;code&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;code&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetAsync($sort = null, $offset = null, $limit = 100)
+    public function protocolsGetAsync($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['protocolsGet'][0])
     {
-        return $this->protocolsGetAsyncWithHttpInfo($sort, $offset, $limit)
+        return $this->protocolsGetAsyncWithHttpInfo($sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -249,17 +288,18 @@ class ProtocolsApi
      *
      * Get protocols
      *
-     * @param  OneOfSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;code&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;code&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetAsyncWithHttpInfo($sort = null, $offset = null, $limit = 100)
+    public function protocolsGetAsyncWithHttpInfo($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['protocolsGet'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Protocol[]';
-        $request = $this->protocolsGetRequest($sort, $offset, $limit);
+        $request = $this->protocolsGetRequest($sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -269,6 +309,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -297,22 +340,26 @@ class ProtocolsApi
     /**
      * Create request for operation 'protocolsGet'
      *
-     * @param  OneOfSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;code&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts protocols by specified field. Supported fields: &#x60;code&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function protocolsGetRequest($sort = null, $offset = null, $limit = 100)
+    public function protocolsGetRequest($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['protocolsGet'][0])
     {
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ProtocolsApi.protocolsGet, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ProtocolsApi.protocolsGet, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/protocols';
         $formParams = [];
@@ -322,52 +369,41 @@ class ProtocolsApi
         $multipart = false;
 
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -385,12 +421,12 @@ class ProtocolsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -406,10 +442,11 @@ class ProtocolsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -421,14 +458,15 @@ class ProtocolsApi
      * Get protocol by code
      *
      * @param  int $code Protocol code (e.g. 4 for Athens, 5 for Babylon, etc) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCode'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Protocol
      */
-    public function protocolsGetByCode($code)
+    public function protocolsGetByCode($code, string $contentType = self::contentTypes['protocolsGetByCode'][0])
     {
-        list($response) = $this->protocolsGetByCodeWithHttpInfo($code);
+        list($response) = $this->protocolsGetByCodeWithHttpInfo($code, $contentType);
         return $response;
     }
 
@@ -438,14 +476,15 @@ class ProtocolsApi
      * Get protocol by code
      *
      * @param  int $code Protocol code (e.g. 4 for Athens, 5 for Babylon, etc) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCode'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Protocol, HTTP status code, HTTP response headers (array of strings)
      */
-    public function protocolsGetByCodeWithHttpInfo($code)
+    public function protocolsGetByCodeWithHttpInfo($code, string $contentType = self::contentTypes['protocolsGetByCode'][0])
     {
-        $request = $this->protocolsGetByCodeRequest($code);
+        $request = $this->protocolsGetByCodeRequest($code, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -457,6 +496,13 @@ class ProtocolsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -481,6 +527,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Protocol' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -495,6 +544,9 @@ class ProtocolsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -524,13 +576,14 @@ class ProtocolsApi
      * Get protocol by code
      *
      * @param  int $code Protocol code (e.g. 4 for Athens, 5 for Babylon, etc) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetByCodeAsync($code)
+    public function protocolsGetByCodeAsync($code, string $contentType = self::contentTypes['protocolsGetByCode'][0])
     {
-        return $this->protocolsGetByCodeAsyncWithHttpInfo($code)
+        return $this->protocolsGetByCodeAsyncWithHttpInfo($code, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -544,14 +597,15 @@ class ProtocolsApi
      * Get protocol by code
      *
      * @param  int $code Protocol code (e.g. 4 for Athens, 5 for Babylon, etc) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetByCodeAsyncWithHttpInfo($code)
+    public function protocolsGetByCodeAsyncWithHttpInfo($code, string $contentType = self::contentTypes['protocolsGetByCode'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Protocol';
-        $request = $this->protocolsGetByCodeRequest($code);
+        $request = $this->protocolsGetByCodeRequest($code, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -561,6 +615,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -590,18 +647,21 @@ class ProtocolsApi
      * Create request for operation 'protocolsGetByCode'
      *
      * @param  int $code Protocol code (e.g. 4 for Athens, 5 for Babylon, etc) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function protocolsGetByCodeRequest($code)
+    public function protocolsGetByCodeRequest($code, string $contentType = self::contentTypes['protocolsGetByCode'][0])
     {
+
         // verify the required parameter 'code' is set
         if ($code === null || (is_array($code) && count($code) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $code when calling protocolsGetByCode'
             );
         }
+
 
         $resourcePath = '/v1/protocols/{code}';
         $formParams = [];
@@ -622,16 +682,11 @@ class ProtocolsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -649,12 +704,12 @@ class ProtocolsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -670,10 +725,11 @@ class ProtocolsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -685,14 +741,15 @@ class ProtocolsApi
      * Get protocol by cycle
      *
      * @param  int $cycle Cycle index (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCycle'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Protocol
      */
-    public function protocolsGetByCycle($cycle)
+    public function protocolsGetByCycle($cycle, string $contentType = self::contentTypes['protocolsGetByCycle'][0])
     {
-        list($response) = $this->protocolsGetByCycleWithHttpInfo($cycle);
+        list($response) = $this->protocolsGetByCycleWithHttpInfo($cycle, $contentType);
         return $response;
     }
 
@@ -702,14 +759,15 @@ class ProtocolsApi
      * Get protocol by cycle
      *
      * @param  int $cycle Cycle index (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCycle'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Protocol, HTTP status code, HTTP response headers (array of strings)
      */
-    public function protocolsGetByCycleWithHttpInfo($cycle)
+    public function protocolsGetByCycleWithHttpInfo($cycle, string $contentType = self::contentTypes['protocolsGetByCycle'][0])
     {
-        $request = $this->protocolsGetByCycleRequest($cycle);
+        $request = $this->protocolsGetByCycleRequest($cycle, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -721,6 +779,13 @@ class ProtocolsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -745,6 +810,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Protocol' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -759,6 +827,9 @@ class ProtocolsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -788,13 +859,14 @@ class ProtocolsApi
      * Get protocol by cycle
      *
      * @param  int $cycle Cycle index (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetByCycleAsync($cycle)
+    public function protocolsGetByCycleAsync($cycle, string $contentType = self::contentTypes['protocolsGetByCycle'][0])
     {
-        return $this->protocolsGetByCycleAsyncWithHttpInfo($cycle)
+        return $this->protocolsGetByCycleAsyncWithHttpInfo($cycle, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -808,14 +880,15 @@ class ProtocolsApi
      * Get protocol by cycle
      *
      * @param  int $cycle Cycle index (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetByCycleAsyncWithHttpInfo($cycle)
+    public function protocolsGetByCycleAsyncWithHttpInfo($cycle, string $contentType = self::contentTypes['protocolsGetByCycle'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Protocol';
-        $request = $this->protocolsGetByCycleRequest($cycle);
+        $request = $this->protocolsGetByCycleRequest($cycle, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -825,6 +898,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -854,18 +930,21 @@ class ProtocolsApi
      * Create request for operation 'protocolsGetByCycle'
      *
      * @param  int $cycle Cycle index (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function protocolsGetByCycleRequest($cycle)
+    public function protocolsGetByCycleRequest($cycle, string $contentType = self::contentTypes['protocolsGetByCycle'][0])
     {
+
         // verify the required parameter 'cycle' is set
         if ($cycle === null || (is_array($cycle) && count($cycle) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $cycle when calling protocolsGetByCycle'
             );
         }
+
 
         $resourcePath = '/v1/protocols/cycles/{cycle}';
         $formParams = [];
@@ -886,16 +965,11 @@ class ProtocolsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -913,12 +987,12 @@ class ProtocolsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -934,10 +1008,11 @@ class ProtocolsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -949,14 +1024,15 @@ class ProtocolsApi
      * Get protocol by hash
      *
      * @param  string $hash Protocol hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByHash'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Protocol
      */
-    public function protocolsGetByHash($hash)
+    public function protocolsGetByHash($hash, string $contentType = self::contentTypes['protocolsGetByHash'][0])
     {
-        list($response) = $this->protocolsGetByHashWithHttpInfo($hash);
+        list($response) = $this->protocolsGetByHashWithHttpInfo($hash, $contentType);
         return $response;
     }
 
@@ -966,14 +1042,15 @@ class ProtocolsApi
      * Get protocol by hash
      *
      * @param  string $hash Protocol hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByHash'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Protocol, HTTP status code, HTTP response headers (array of strings)
      */
-    public function protocolsGetByHashWithHttpInfo($hash)
+    public function protocolsGetByHashWithHttpInfo($hash, string $contentType = self::contentTypes['protocolsGetByHash'][0])
     {
-        $request = $this->protocolsGetByHashRequest($hash);
+        $request = $this->protocolsGetByHashRequest($hash, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -985,6 +1062,13 @@ class ProtocolsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1009,6 +1093,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Protocol' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1023,6 +1110,9 @@ class ProtocolsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1052,13 +1142,14 @@ class ProtocolsApi
      * Get protocol by hash
      *
      * @param  string $hash Protocol hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetByHashAsync($hash)
+    public function protocolsGetByHashAsync($hash, string $contentType = self::contentTypes['protocolsGetByHash'][0])
     {
-        return $this->protocolsGetByHashAsyncWithHttpInfo($hash)
+        return $this->protocolsGetByHashAsyncWithHttpInfo($hash, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1072,14 +1163,15 @@ class ProtocolsApi
      * Get protocol by hash
      *
      * @param  string $hash Protocol hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetByHashAsyncWithHttpInfo($hash)
+    public function protocolsGetByHashAsyncWithHttpInfo($hash, string $contentType = self::contentTypes['protocolsGetByHash'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Protocol';
-        $request = $this->protocolsGetByHashRequest($hash);
+        $request = $this->protocolsGetByHashRequest($hash, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1089,6 +1181,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1118,18 +1213,21 @@ class ProtocolsApi
      * Create request for operation 'protocolsGetByHash'
      *
      * @param  string $hash Protocol hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetByHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function protocolsGetByHashRequest($hash)
+    public function protocolsGetByHashRequest($hash, string $contentType = self::contentTypes['protocolsGetByHash'][0])
     {
+
         // verify the required parameter 'hash' is set
         if ($hash === null || (is_array($hash) && count($hash) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $hash when calling protocolsGetByHash'
             );
         }
+
 
         $resourcePath = '/v1/protocols/{hash}';
         $formParams = [];
@@ -1150,16 +1248,11 @@ class ProtocolsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1177,12 +1270,12 @@ class ProtocolsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1198,10 +1291,11 @@ class ProtocolsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1212,14 +1306,15 @@ class ProtocolsApi
      *
      * Get protocols count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function protocolsGetCount()
+    public function protocolsGetCount(string $contentType = self::contentTypes['protocolsGetCount'][0])
     {
-        list($response) = $this->protocolsGetCountWithHttpInfo();
+        list($response) = $this->protocolsGetCountWithHttpInfo($contentType);
         return $response;
     }
 
@@ -1228,14 +1323,15 @@ class ProtocolsApi
      *
      * Get protocols count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function protocolsGetCountWithHttpInfo()
+    public function protocolsGetCountWithHttpInfo(string $contentType = self::contentTypes['protocolsGetCount'][0])
     {
-        $request = $this->protocolsGetCountRequest();
+        $request = $this->protocolsGetCountRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1247,6 +1343,13 @@ class ProtocolsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1271,6 +1374,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1285,6 +1391,9 @@ class ProtocolsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1313,13 +1422,14 @@ class ProtocolsApi
      *
      * Get protocols count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetCountAsync()
+    public function protocolsGetCountAsync(string $contentType = self::contentTypes['protocolsGetCount'][0])
     {
-        return $this->protocolsGetCountAsyncWithHttpInfo()
+        return $this->protocolsGetCountAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1332,14 +1442,15 @@ class ProtocolsApi
      *
      * Get protocols count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetCountAsyncWithHttpInfo()
+    public function protocolsGetCountAsyncWithHttpInfo(string $contentType = self::contentTypes['protocolsGetCount'][0])
     {
         $returnType = 'int';
-        $request = $this->protocolsGetCountRequest();
+        $request = $this->protocolsGetCountRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1349,6 +1460,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1377,12 +1491,14 @@ class ProtocolsApi
     /**
      * Create request for operation 'protocolsGetCount'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function protocolsGetCountRequest()
+    public function protocolsGetCountRequest(string $contentType = self::contentTypes['protocolsGetCount'][0])
     {
+
 
         $resourcePath = '/v1/protocols/count';
         $formParams = [];
@@ -1395,16 +1511,11 @@ class ProtocolsApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1422,12 +1533,12 @@ class ProtocolsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1443,10 +1554,11 @@ class ProtocolsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1457,14 +1569,15 @@ class ProtocolsApi
      *
      * Get current protocol
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCurrent'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Protocol
      */
-    public function protocolsGetCurrent()
+    public function protocolsGetCurrent(string $contentType = self::contentTypes['protocolsGetCurrent'][0])
     {
-        list($response) = $this->protocolsGetCurrentWithHttpInfo();
+        list($response) = $this->protocolsGetCurrentWithHttpInfo($contentType);
         return $response;
     }
 
@@ -1473,14 +1586,15 @@ class ProtocolsApi
      *
      * Get current protocol
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCurrent'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Protocol, HTTP status code, HTTP response headers (array of strings)
      */
-    public function protocolsGetCurrentWithHttpInfo()
+    public function protocolsGetCurrentWithHttpInfo(string $contentType = self::contentTypes['protocolsGetCurrent'][0])
     {
-        $request = $this->protocolsGetCurrentRequest();
+        $request = $this->protocolsGetCurrentRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1492,6 +1606,13 @@ class ProtocolsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1516,6 +1637,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Protocol' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1530,6 +1654,9 @@ class ProtocolsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1558,13 +1685,14 @@ class ProtocolsApi
      *
      * Get current protocol
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCurrent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetCurrentAsync()
+    public function protocolsGetCurrentAsync(string $contentType = self::contentTypes['protocolsGetCurrent'][0])
     {
-        return $this->protocolsGetCurrentAsyncWithHttpInfo()
+        return $this->protocolsGetCurrentAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1577,14 +1705,15 @@ class ProtocolsApi
      *
      * Get current protocol
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCurrent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function protocolsGetCurrentAsyncWithHttpInfo()
+    public function protocolsGetCurrentAsyncWithHttpInfo(string $contentType = self::contentTypes['protocolsGetCurrent'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Protocol';
-        $request = $this->protocolsGetCurrentRequest();
+        $request = $this->protocolsGetCurrentRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1594,6 +1723,9 @@ class ProtocolsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1622,12 +1754,14 @@ class ProtocolsApi
     /**
      * Create request for operation 'protocolsGetCurrent'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['protocolsGetCurrent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function protocolsGetCurrentRequest()
+    public function protocolsGetCurrentRequest(string $contentType = self::contentTypes['protocolsGetCurrent'][0])
     {
+
 
         $resourcePath = '/v1/protocols/current';
         $formParams = [];
@@ -1640,16 +1774,11 @@ class ProtocolsApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1667,12 +1796,12 @@ class ProtocolsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1688,10 +1817,11 @@ class ProtocolsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

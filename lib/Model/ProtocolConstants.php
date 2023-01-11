@@ -2,7 +2,7 @@
 /**
  * ProtocolConstants
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -36,12 +36,11 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * ProtocolConstants Class Doc Comment
  *
  * @category Class
+ * @description Information about the protocol constants
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -52,7 +51,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ProtocolConstants';
+    protected static $openAPIModelName = 'Protocol_constants';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -80,9 +79,24 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
         'endorsement_reward' => 'int[]',
         'origination_size' => 'int',
         'byte_cost' => 'int',
-        'proposal_quorum' => 'double',
-        'ballot_quorum_min' => 'double',
-        'ballot_quorum_max' => 'double'
+        'proposal_quorum' => 'float',
+        'ballot_quorum_min' => 'float',
+        'ballot_quorum_max' => 'float',
+        'lb_subsidy' => 'int',
+        'lb_toggle_threshold' => 'int',
+        'consensus_threshold' => 'int',
+        'min_participation_numerator' => 'int',
+        'min_participation_denominator' => 'int',
+        'max_slashing_period' => 'int',
+        'frozen_deposits_percentage' => 'int',
+        'double_baking_punishment' => 'int',
+        'double_endorsing_punishment_numerator' => 'int',
+        'double_endorsing_punishment_denominator' => 'int',
+        'tx_rollup_origination_size' => 'int',
+        'tx_rollup_commitment_bond' => 'int',
+        'dictator' => 'string',
+        'lb_escape_threshold' => 'int',
+        'lb_sunset_level' => 'int'
     ];
 
     /**
@@ -115,8 +129,76 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
         'byte_cost' => 'int32',
         'proposal_quorum' => 'double',
         'ballot_quorum_min' => 'double',
-        'ballot_quorum_max' => 'double'
+        'ballot_quorum_max' => 'double',
+        'lb_subsidy' => 'int32',
+        'lb_toggle_threshold' => 'int32',
+        'consensus_threshold' => 'int32',
+        'min_participation_numerator' => 'int32',
+        'min_participation_denominator' => 'int32',
+        'max_slashing_period' => 'int32',
+        'frozen_deposits_percentage' => 'int32',
+        'double_baking_punishment' => 'int64',
+        'double_endorsing_punishment_numerator' => 'int32',
+        'double_endorsing_punishment_denominator' => 'int32',
+        'tx_rollup_origination_size' => 'int32',
+        'tx_rollup_commitment_bond' => 'int64',
+        'dictator' => null,
+        'lb_escape_threshold' => 'int32',
+        'lb_sunset_level' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'ramp_up_cycles' => false,
+		'no_reward_cycles' => false,
+		'preserved_cycles' => false,
+		'blocks_per_cycle' => false,
+		'blocks_per_commitment' => false,
+		'blocks_per_snapshot' => false,
+		'blocks_per_voting' => false,
+		'time_between_blocks' => false,
+		'endorsers_per_block' => false,
+		'hard_operation_gas_limit' => false,
+		'hard_operation_storage_limit' => false,
+		'hard_block_gas_limit' => false,
+		'tokens_per_roll' => false,
+		'revelation_reward' => false,
+		'block_deposit' => false,
+		'block_reward' => true,
+		'endorsement_deposit' => false,
+		'endorsement_reward' => true,
+		'origination_size' => false,
+		'byte_cost' => false,
+		'proposal_quorum' => false,
+		'ballot_quorum_min' => false,
+		'ballot_quorum_max' => false,
+		'lb_subsidy' => false,
+		'lb_toggle_threshold' => false,
+		'consensus_threshold' => false,
+		'min_participation_numerator' => false,
+		'min_participation_denominator' => false,
+		'max_slashing_period' => false,
+		'frozen_deposits_percentage' => false,
+		'double_baking_punishment' => false,
+		'double_endorsing_punishment_numerator' => false,
+		'double_endorsing_punishment_denominator' => false,
+		'tx_rollup_origination_size' => false,
+		'tx_rollup_commitment_bond' => false,
+		'dictator' => true,
+		'lb_escape_threshold' => false,
+		'lb_sunset_level' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -136,6 +218,58 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
     public static function openAPIFormats()
     {
         return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
     }
 
     /**
@@ -167,7 +301,22 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
         'byte_cost' => 'byteCost',
         'proposal_quorum' => 'proposalQuorum',
         'ballot_quorum_min' => 'ballotQuorumMin',
-        'ballot_quorum_max' => 'ballotQuorumMax'
+        'ballot_quorum_max' => 'ballotQuorumMax',
+        'lb_subsidy' => 'lbSubsidy',
+        'lb_toggle_threshold' => 'lbToggleThreshold',
+        'consensus_threshold' => 'consensusThreshold',
+        'min_participation_numerator' => 'minParticipationNumerator',
+        'min_participation_denominator' => 'minParticipationDenominator',
+        'max_slashing_period' => 'maxSlashingPeriod',
+        'frozen_deposits_percentage' => 'frozenDepositsPercentage',
+        'double_baking_punishment' => 'doubleBakingPunishment',
+        'double_endorsing_punishment_numerator' => 'doubleEndorsingPunishmentNumerator',
+        'double_endorsing_punishment_denominator' => 'doubleEndorsingPunishmentDenominator',
+        'tx_rollup_origination_size' => 'txRollupOriginationSize',
+        'tx_rollup_commitment_bond' => 'txRollupCommitmentBond',
+        'dictator' => 'dictator',
+        'lb_escape_threshold' => 'lbEscapeThreshold',
+        'lb_sunset_level' => 'lbSunsetLevel'
     ];
 
     /**
@@ -198,7 +347,22 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
         'byte_cost' => 'setByteCost',
         'proposal_quorum' => 'setProposalQuorum',
         'ballot_quorum_min' => 'setBallotQuorumMin',
-        'ballot_quorum_max' => 'setBallotQuorumMax'
+        'ballot_quorum_max' => 'setBallotQuorumMax',
+        'lb_subsidy' => 'setLbSubsidy',
+        'lb_toggle_threshold' => 'setLbToggleThreshold',
+        'consensus_threshold' => 'setConsensusThreshold',
+        'min_participation_numerator' => 'setMinParticipationNumerator',
+        'min_participation_denominator' => 'setMinParticipationDenominator',
+        'max_slashing_period' => 'setMaxSlashingPeriod',
+        'frozen_deposits_percentage' => 'setFrozenDepositsPercentage',
+        'double_baking_punishment' => 'setDoubleBakingPunishment',
+        'double_endorsing_punishment_numerator' => 'setDoubleEndorsingPunishmentNumerator',
+        'double_endorsing_punishment_denominator' => 'setDoubleEndorsingPunishmentDenominator',
+        'tx_rollup_origination_size' => 'setTxRollupOriginationSize',
+        'tx_rollup_commitment_bond' => 'setTxRollupCommitmentBond',
+        'dictator' => 'setDictator',
+        'lb_escape_threshold' => 'setLbEscapeThreshold',
+        'lb_sunset_level' => 'setLbSunsetLevel'
     ];
 
     /**
@@ -229,7 +393,22 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
         'byte_cost' => 'getByteCost',
         'proposal_quorum' => 'getProposalQuorum',
         'ballot_quorum_min' => 'getBallotQuorumMin',
-        'ballot_quorum_max' => 'getBallotQuorumMax'
+        'ballot_quorum_max' => 'getBallotQuorumMax',
+        'lb_subsidy' => 'getLbSubsidy',
+        'lb_toggle_threshold' => 'getLbToggleThreshold',
+        'consensus_threshold' => 'getConsensusThreshold',
+        'min_participation_numerator' => 'getMinParticipationNumerator',
+        'min_participation_denominator' => 'getMinParticipationDenominator',
+        'max_slashing_period' => 'getMaxSlashingPeriod',
+        'frozen_deposits_percentage' => 'getFrozenDepositsPercentage',
+        'double_baking_punishment' => 'getDoubleBakingPunishment',
+        'double_endorsing_punishment_numerator' => 'getDoubleEndorsingPunishmentNumerator',
+        'double_endorsing_punishment_denominator' => 'getDoubleEndorsingPunishmentDenominator',
+        'tx_rollup_origination_size' => 'getTxRollupOriginationSize',
+        'tx_rollup_commitment_bond' => 'getTxRollupCommitmentBond',
+        'dictator' => 'getDictator',
+        'lb_escape_threshold' => 'getLbEscapeThreshold',
+        'lb_sunset_level' => 'getLbSunsetLevel'
     ];
 
     /**
@@ -289,29 +468,62 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->container['ramp_up_cycles'] = $data['ramp_up_cycles'] ?? null;
-        $this->container['no_reward_cycles'] = $data['no_reward_cycles'] ?? null;
-        $this->container['preserved_cycles'] = $data['preserved_cycles'] ?? null;
-        $this->container['blocks_per_cycle'] = $data['blocks_per_cycle'] ?? null;
-        $this->container['blocks_per_commitment'] = $data['blocks_per_commitment'] ?? null;
-        $this->container['blocks_per_snapshot'] = $data['blocks_per_snapshot'] ?? null;
-        $this->container['blocks_per_voting'] = $data['blocks_per_voting'] ?? null;
-        $this->container['time_between_blocks'] = $data['time_between_blocks'] ?? null;
-        $this->container['endorsers_per_block'] = $data['endorsers_per_block'] ?? null;
-        $this->container['hard_operation_gas_limit'] = $data['hard_operation_gas_limit'] ?? null;
-        $this->container['hard_operation_storage_limit'] = $data['hard_operation_storage_limit'] ?? null;
-        $this->container['hard_block_gas_limit'] = $data['hard_block_gas_limit'] ?? null;
-        $this->container['tokens_per_roll'] = $data['tokens_per_roll'] ?? null;
-        $this->container['revelation_reward'] = $data['revelation_reward'] ?? null;
-        $this->container['block_deposit'] = $data['block_deposit'] ?? null;
-        $this->container['block_reward'] = $data['block_reward'] ?? null;
-        $this->container['endorsement_deposit'] = $data['endorsement_deposit'] ?? null;
-        $this->container['endorsement_reward'] = $data['endorsement_reward'] ?? null;
-        $this->container['origination_size'] = $data['origination_size'] ?? null;
-        $this->container['byte_cost'] = $data['byte_cost'] ?? null;
-        $this->container['proposal_quorum'] = $data['proposal_quorum'] ?? null;
-        $this->container['ballot_quorum_min'] = $data['ballot_quorum_min'] ?? null;
-        $this->container['ballot_quorum_max'] = $data['ballot_quorum_max'] ?? null;
+        $this->setIfExists('ramp_up_cycles', $data ?? [], null);
+        $this->setIfExists('no_reward_cycles', $data ?? [], null);
+        $this->setIfExists('preserved_cycles', $data ?? [], null);
+        $this->setIfExists('blocks_per_cycle', $data ?? [], null);
+        $this->setIfExists('blocks_per_commitment', $data ?? [], null);
+        $this->setIfExists('blocks_per_snapshot', $data ?? [], null);
+        $this->setIfExists('blocks_per_voting', $data ?? [], null);
+        $this->setIfExists('time_between_blocks', $data ?? [], null);
+        $this->setIfExists('endorsers_per_block', $data ?? [], null);
+        $this->setIfExists('hard_operation_gas_limit', $data ?? [], null);
+        $this->setIfExists('hard_operation_storage_limit', $data ?? [], null);
+        $this->setIfExists('hard_block_gas_limit', $data ?? [], null);
+        $this->setIfExists('tokens_per_roll', $data ?? [], null);
+        $this->setIfExists('revelation_reward', $data ?? [], null);
+        $this->setIfExists('block_deposit', $data ?? [], null);
+        $this->setIfExists('block_reward', $data ?? [], null);
+        $this->setIfExists('endorsement_deposit', $data ?? [], null);
+        $this->setIfExists('endorsement_reward', $data ?? [], null);
+        $this->setIfExists('origination_size', $data ?? [], null);
+        $this->setIfExists('byte_cost', $data ?? [], null);
+        $this->setIfExists('proposal_quorum', $data ?? [], null);
+        $this->setIfExists('ballot_quorum_min', $data ?? [], null);
+        $this->setIfExists('ballot_quorum_max', $data ?? [], null);
+        $this->setIfExists('lb_subsidy', $data ?? [], null);
+        $this->setIfExists('lb_toggle_threshold', $data ?? [], null);
+        $this->setIfExists('consensus_threshold', $data ?? [], null);
+        $this->setIfExists('min_participation_numerator', $data ?? [], null);
+        $this->setIfExists('min_participation_denominator', $data ?? [], null);
+        $this->setIfExists('max_slashing_period', $data ?? [], null);
+        $this->setIfExists('frozen_deposits_percentage', $data ?? [], null);
+        $this->setIfExists('double_baking_punishment', $data ?? [], null);
+        $this->setIfExists('double_endorsing_punishment_numerator', $data ?? [], null);
+        $this->setIfExists('double_endorsing_punishment_denominator', $data ?? [], null);
+        $this->setIfExists('tx_rollup_origination_size', $data ?? [], null);
+        $this->setIfExists('tx_rollup_commitment_bond', $data ?? [], null);
+        $this->setIfExists('dictator', $data ?? [], null);
+        $this->setIfExists('lb_escape_threshold', $data ?? [], null);
+        $this->setIfExists('lb_sunset_level', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -357,6 +569,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setRampUpCycles($ramp_up_cycles)
     {
+
+        if (is_null($ramp_up_cycles)) {
+            throw new \InvalidArgumentException('non-nullable ramp_up_cycles cannot be null');
+        }
+
         $this->container['ramp_up_cycles'] = $ramp_up_cycles;
 
         return $this;
@@ -381,6 +598,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setNoRewardCycles($no_reward_cycles)
     {
+
+        if (is_null($no_reward_cycles)) {
+            throw new \InvalidArgumentException('non-nullable no_reward_cycles cannot be null');
+        }
+
         $this->container['no_reward_cycles'] = $no_reward_cycles;
 
         return $this;
@@ -405,6 +627,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setPreservedCycles($preserved_cycles)
     {
+
+        if (is_null($preserved_cycles)) {
+            throw new \InvalidArgumentException('non-nullable preserved_cycles cannot be null');
+        }
+
         $this->container['preserved_cycles'] = $preserved_cycles;
 
         return $this;
@@ -429,6 +656,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setBlocksPerCycle($blocks_per_cycle)
     {
+
+        if (is_null($blocks_per_cycle)) {
+            throw new \InvalidArgumentException('non-nullable blocks_per_cycle cannot be null');
+        }
+
         $this->container['blocks_per_cycle'] = $blocks_per_cycle;
 
         return $this;
@@ -453,6 +685,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setBlocksPerCommitment($blocks_per_commitment)
     {
+
+        if (is_null($blocks_per_commitment)) {
+            throw new \InvalidArgumentException('non-nullable blocks_per_commitment cannot be null');
+        }
+
         $this->container['blocks_per_commitment'] = $blocks_per_commitment;
 
         return $this;
@@ -471,12 +708,17 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets blocks_per_snapshot
      *
-     * @param int|null $blocks_per_snapshot A number of blocks that indicates how often a snapshot (snapshots are records of the state of rolls distributions) is taken
+     * @param int|null $blocks_per_snapshot A number of blocks that indicates how often a snapshot (snapshots are records of the state of stake distributions) is taken
      *
      * @return self
      */
     public function setBlocksPerSnapshot($blocks_per_snapshot)
     {
+
+        if (is_null($blocks_per_snapshot)) {
+            throw new \InvalidArgumentException('non-nullable blocks_per_snapshot cannot be null');
+        }
+
         $this->container['blocks_per_snapshot'] = $blocks_per_snapshot;
 
         return $this;
@@ -501,6 +743,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setBlocksPerVoting($blocks_per_voting)
     {
+
+        if (is_null($blocks_per_voting)) {
+            throw new \InvalidArgumentException('non-nullable blocks_per_voting cannot be null');
+        }
+
         $this->container['blocks_per_voting'] = $blocks_per_voting;
 
         return $this;
@@ -525,6 +772,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setTimeBetweenBlocks($time_between_blocks)
     {
+
+        if (is_null($time_between_blocks)) {
+            throw new \InvalidArgumentException('non-nullable time_between_blocks cannot be null');
+        }
+
         $this->container['time_between_blocks'] = $time_between_blocks;
 
         return $this;
@@ -549,6 +801,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setEndorsersPerBlock($endorsers_per_block)
     {
+
+        if (is_null($endorsers_per_block)) {
+            throw new \InvalidArgumentException('non-nullable endorsers_per_block cannot be null');
+        }
+
         $this->container['endorsers_per_block'] = $endorsers_per_block;
 
         return $this;
@@ -573,6 +830,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setHardOperationGasLimit($hard_operation_gas_limit)
     {
+
+        if (is_null($hard_operation_gas_limit)) {
+            throw new \InvalidArgumentException('non-nullable hard_operation_gas_limit cannot be null');
+        }
+
         $this->container['hard_operation_gas_limit'] = $hard_operation_gas_limit;
 
         return $this;
@@ -597,6 +859,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setHardOperationStorageLimit($hard_operation_storage_limit)
     {
+
+        if (is_null($hard_operation_storage_limit)) {
+            throw new \InvalidArgumentException('non-nullable hard_operation_storage_limit cannot be null');
+        }
+
         $this->container['hard_operation_storage_limit'] = $hard_operation_storage_limit;
 
         return $this;
@@ -621,6 +888,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setHardBlockGasLimit($hard_block_gas_limit)
     {
+
+        if (is_null($hard_block_gas_limit)) {
+            throw new \InvalidArgumentException('non-nullable hard_block_gas_limit cannot be null');
+        }
+
         $this->container['hard_block_gas_limit'] = $hard_block_gas_limit;
 
         return $this;
@@ -645,6 +917,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setTokensPerRoll($tokens_per_roll)
     {
+
+        if (is_null($tokens_per_roll)) {
+            throw new \InvalidArgumentException('non-nullable tokens_per_roll cannot be null');
+        }
+
         $this->container['tokens_per_roll'] = $tokens_per_roll;
 
         return $this;
@@ -669,6 +946,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setRevelationReward($revelation_reward)
     {
+
+        if (is_null($revelation_reward)) {
+            throw new \InvalidArgumentException('non-nullable revelation_reward cannot be null');
+        }
+
         $this->container['revelation_reward'] = $revelation_reward;
 
         return $this;
@@ -693,6 +975,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setBlockDeposit($block_deposit)
     {
+
+        if (is_null($block_deposit)) {
+            throw new \InvalidArgumentException('non-nullable block_deposit cannot be null');
+        }
+
         $this->container['block_deposit'] = $block_deposit;
 
         return $this;
@@ -717,6 +1004,18 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setBlockReward($block_reward)
     {
+
+        if (is_null($block_reward)) {
+            array_push($this->openAPINullablesSetToNull, 'block_reward');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('block_reward', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['block_reward'] = $block_reward;
 
         return $this;
@@ -741,6 +1040,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setEndorsementDeposit($endorsement_deposit)
     {
+
+        if (is_null($endorsement_deposit)) {
+            throw new \InvalidArgumentException('non-nullable endorsement_deposit cannot be null');
+        }
+
         $this->container['endorsement_deposit'] = $endorsement_deposit;
 
         return $this;
@@ -765,6 +1069,18 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setEndorsementReward($endorsement_reward)
     {
+
+        if (is_null($endorsement_reward)) {
+            array_push($this->openAPINullablesSetToNull, 'endorsement_reward');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('endorsement_reward', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['endorsement_reward'] = $endorsement_reward;
 
         return $this;
@@ -789,6 +1105,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setOriginationSize($origination_size)
     {
+
+        if (is_null($origination_size)) {
+            throw new \InvalidArgumentException('non-nullable origination_size cannot be null');
+        }
+
         $this->container['origination_size'] = $origination_size;
 
         return $this;
@@ -813,6 +1134,11 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function setByteCost($byte_cost)
     {
+
+        if (is_null($byte_cost)) {
+            throw new \InvalidArgumentException('non-nullable byte_cost cannot be null');
+        }
+
         $this->container['byte_cost'] = $byte_cost;
 
         return $this;
@@ -821,7 +1147,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets proposal_quorum
      *
-     * @return double|null
+     * @return float|null
      */
     public function getProposalQuorum()
     {
@@ -831,12 +1157,17 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets proposal_quorum
      *
-     * @param double|null $proposal_quorum Percentage of the total number of rolls required to select a proposal on the proposal period
+     * @param float|null $proposal_quorum Percentage of the total number of voting power required to select a proposal on the proposal period
      *
      * @return self
      */
     public function setProposalQuorum($proposal_quorum)
     {
+
+        if (is_null($proposal_quorum)) {
+            throw new \InvalidArgumentException('non-nullable proposal_quorum cannot be null');
+        }
+
         $this->container['proposal_quorum'] = $proposal_quorum;
 
         return $this;
@@ -845,7 +1176,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets ballot_quorum_min
      *
-     * @return double|null
+     * @return float|null
      */
     public function getBallotQuorumMin()
     {
@@ -855,12 +1186,17 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets ballot_quorum_min
      *
-     * @param double|null $ballot_quorum_min The minimum value of quorum percentage on the exploration and promotion periods
+     * @param float|null $ballot_quorum_min The minimum value of quorum percentage on the exploration and promotion periods
      *
      * @return self
      */
     public function setBallotQuorumMin($ballot_quorum_min)
     {
+
+        if (is_null($ballot_quorum_min)) {
+            throw new \InvalidArgumentException('non-nullable ballot_quorum_min cannot be null');
+        }
+
         $this->container['ballot_quorum_min'] = $ballot_quorum_min;
 
         return $this;
@@ -869,7 +1205,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets ballot_quorum_max
      *
-     * @return double|null
+     * @return float|null
      */
     public function getBallotQuorumMax()
     {
@@ -879,13 +1215,460 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets ballot_quorum_max
      *
-     * @param double|null $ballot_quorum_max The maximum value of quorum percentage on the exploration and promotion periods
+     * @param float|null $ballot_quorum_max The maximum value of quorum percentage on the exploration and promotion periods
      *
      * @return self
      */
     public function setBallotQuorumMax($ballot_quorum_max)
     {
+
+        if (is_null($ballot_quorum_max)) {
+            throw new \InvalidArgumentException('non-nullable ballot_quorum_max cannot be null');
+        }
+
         $this->container['ballot_quorum_max'] = $ballot_quorum_max;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_subsidy
+     *
+     * @return int|null
+     */
+    public function getLbSubsidy()
+    {
+        return $this->container['lb_subsidy'];
+    }
+
+    /**
+     * Sets lb_subsidy
+     *
+     * @param int|null $lb_subsidy Liquidity baking subsidy is 1/16th of total rewards for a block of priority 0 with all endorsements
+     *
+     * @return self
+     */
+    public function setLbSubsidy($lb_subsidy)
+    {
+
+        if (is_null($lb_subsidy)) {
+            throw new \InvalidArgumentException('non-nullable lb_subsidy cannot be null');
+        }
+
+        $this->container['lb_subsidy'] = $lb_subsidy;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_toggle_threshold
+     *
+     * @return int|null
+     */
+    public function getLbToggleThreshold()
+    {
+        return $this->container['lb_toggle_threshold'];
+    }
+
+    /**
+     * Sets lb_toggle_threshold
+     *
+     * @param int|null $lb_toggle_threshold 1/2 window size of 2000 blocks with precision of 1000000 for integer computation
+     *
+     * @return self
+     */
+    public function setLbToggleThreshold($lb_toggle_threshold)
+    {
+
+        if (is_null($lb_toggle_threshold)) {
+            throw new \InvalidArgumentException('non-nullable lb_toggle_threshold cannot be null');
+        }
+
+        $this->container['lb_toggle_threshold'] = $lb_toggle_threshold;
+
+        return $this;
+    }
+
+    /**
+     * Gets consensus_threshold
+     *
+     * @return int|null
+     */
+    public function getConsensusThreshold()
+    {
+        return $this->container['consensus_threshold'];
+    }
+
+    /**
+     * Sets consensus_threshold
+     *
+     * @param int|null $consensus_threshold Endorsement quorum
+     *
+     * @return self
+     */
+    public function setConsensusThreshold($consensus_threshold)
+    {
+
+        if (is_null($consensus_threshold)) {
+            throw new \InvalidArgumentException('non-nullable consensus_threshold cannot be null');
+        }
+
+        $this->container['consensus_threshold'] = $consensus_threshold;
+
+        return $this;
+    }
+
+    /**
+     * Gets min_participation_numerator
+     *
+     * @return int|null
+     */
+    public function getMinParticipationNumerator()
+    {
+        return $this->container['min_participation_numerator'];
+    }
+
+    /**
+     * Sets min_participation_numerator
+     *
+     * @param int|null $min_participation_numerator Number of endorsed slots needed to receive endorsing rewards
+     *
+     * @return self
+     */
+    public function setMinParticipationNumerator($min_participation_numerator)
+    {
+
+        if (is_null($min_participation_numerator)) {
+            throw new \InvalidArgumentException('non-nullable min_participation_numerator cannot be null');
+        }
+
+        $this->container['min_participation_numerator'] = $min_participation_numerator;
+
+        return $this;
+    }
+
+    /**
+     * Gets min_participation_denominator
+     *
+     * @return int|null
+     */
+    public function getMinParticipationDenominator()
+    {
+        return $this->container['min_participation_denominator'];
+    }
+
+    /**
+     * Sets min_participation_denominator
+     *
+     * @param int|null $min_participation_denominator Number of endorsed slots needed to receive endorsing rewards
+     *
+     * @return self
+     */
+    public function setMinParticipationDenominator($min_participation_denominator)
+    {
+
+        if (is_null($min_participation_denominator)) {
+            throw new \InvalidArgumentException('non-nullable min_participation_denominator cannot be null');
+        }
+
+        $this->container['min_participation_denominator'] = $min_participation_denominator;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_slashing_period
+     *
+     * @return int|null
+     */
+    public function getMaxSlashingPeriod()
+    {
+        return $this->container['max_slashing_period'];
+    }
+
+    /**
+     * Sets max_slashing_period
+     *
+     * @param int|null $max_slashing_period Number of cycles after double baking/(pre)endorsing where an accusation operation can be injected
+     *
+     * @return self
+     */
+    public function setMaxSlashingPeriod($max_slashing_period)
+    {
+
+        if (is_null($max_slashing_period)) {
+            throw new \InvalidArgumentException('non-nullable max_slashing_period cannot be null');
+        }
+
+        $this->container['max_slashing_period'] = $max_slashing_period;
+
+        return $this;
+    }
+
+    /**
+     * Gets frozen_deposits_percentage
+     *
+     * @return int|null
+     */
+    public function getFrozenDepositsPercentage()
+    {
+        return $this->container['frozen_deposits_percentage'];
+    }
+
+    /**
+     * Sets frozen_deposits_percentage
+     *
+     * @param int|null $frozen_deposits_percentage How much of baker's active stake is frozen as a security deposit
+     *
+     * @return self
+     */
+    public function setFrozenDepositsPercentage($frozen_deposits_percentage)
+    {
+
+        if (is_null($frozen_deposits_percentage)) {
+            throw new \InvalidArgumentException('non-nullable frozen_deposits_percentage cannot be null');
+        }
+
+        $this->container['frozen_deposits_percentage'] = $frozen_deposits_percentage;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_baking_punishment
+     *
+     * @return int|null
+     */
+    public function getDoubleBakingPunishment()
+    {
+        return $this->container['double_baking_punishment'];
+    }
+
+    /**
+     * Sets double_baking_punishment
+     *
+     * @param int|null $double_baking_punishment How much mutez is burned from baker's frozen deposits, in case of double baking
+     *
+     * @return self
+     */
+    public function setDoubleBakingPunishment($double_baking_punishment)
+    {
+
+        if (is_null($double_baking_punishment)) {
+            throw new \InvalidArgumentException('non-nullable double_baking_punishment cannot be null');
+        }
+
+        $this->container['double_baking_punishment'] = $double_baking_punishment;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_endorsing_punishment_numerator
+     *
+     * @return int|null
+     */
+    public function getDoubleEndorsingPunishmentNumerator()
+    {
+        return $this->container['double_endorsing_punishment_numerator'];
+    }
+
+    /**
+     * Sets double_endorsing_punishment_numerator
+     *
+     * @param int|null $double_endorsing_punishment_numerator How much is burned from baker's frozen deposits, in case of double (pre)endorsing
+     *
+     * @return self
+     */
+    public function setDoubleEndorsingPunishmentNumerator($double_endorsing_punishment_numerator)
+    {
+
+        if (is_null($double_endorsing_punishment_numerator)) {
+            throw new \InvalidArgumentException('non-nullable double_endorsing_punishment_numerator cannot be null');
+        }
+
+        $this->container['double_endorsing_punishment_numerator'] = $double_endorsing_punishment_numerator;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_endorsing_punishment_denominator
+     *
+     * @return int|null
+     */
+    public function getDoubleEndorsingPunishmentDenominator()
+    {
+        return $this->container['double_endorsing_punishment_denominator'];
+    }
+
+    /**
+     * Sets double_endorsing_punishment_denominator
+     *
+     * @param int|null $double_endorsing_punishment_denominator How much is burned from baker's frozen deposits, in case of double (pre)endorsing
+     *
+     * @return self
+     */
+    public function setDoubleEndorsingPunishmentDenominator($double_endorsing_punishment_denominator)
+    {
+
+        if (is_null($double_endorsing_punishment_denominator)) {
+            throw new \InvalidArgumentException('non-nullable double_endorsing_punishment_denominator cannot be null');
+        }
+
+        $this->container['double_endorsing_punishment_denominator'] = $double_endorsing_punishment_denominator;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_origination_size
+     *
+     * @return int|null
+     */
+    public function getTxRollupOriginationSize()
+    {
+        return $this->container['tx_rollup_origination_size'];
+    }
+
+    /**
+     * Sets tx_rollup_origination_size
+     *
+     * @param int|null $tx_rollup_origination_size Initial storage size of an originated (created) tx rollup (bytes)
+     *
+     * @return self
+     */
+    public function setTxRollupOriginationSize($tx_rollup_origination_size)
+    {
+
+        if (is_null($tx_rollup_origination_size)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_origination_size cannot be null');
+        }
+
+        $this->container['tx_rollup_origination_size'] = $tx_rollup_origination_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_commitment_bond
+     *
+     * @return int|null
+     */
+    public function getTxRollupCommitmentBond()
+    {
+        return $this->container['tx_rollup_commitment_bond'];
+    }
+
+    /**
+     * Sets tx_rollup_commitment_bond
+     *
+     * @param int|null $tx_rollup_commitment_bond Tx rollup commitment bond (mutez)
+     *
+     * @return self
+     */
+    public function setTxRollupCommitmentBond($tx_rollup_commitment_bond)
+    {
+
+        if (is_null($tx_rollup_commitment_bond)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_commitment_bond cannot be null');
+        }
+
+        $this->container['tx_rollup_commitment_bond'] = $tx_rollup_commitment_bond;
+
+        return $this;
+    }
+
+    /**
+     * Gets dictator
+     *
+     * @return string|null
+     */
+    public function getDictator()
+    {
+        return $this->container['dictator'];
+    }
+
+    /**
+     * Sets dictator
+     *
+     * @param string|null $dictator Governance dictator
+     *
+     * @return self
+     */
+    public function setDictator($dictator)
+    {
+
+        if (is_null($dictator)) {
+            array_push($this->openAPINullablesSetToNull, 'dictator');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dictator', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['dictator'] = $dictator;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_escape_threshold
+     *
+     * @return int|null
+     */
+    public function getLbEscapeThreshold()
+    {
+        return $this->container['lb_escape_threshold'];
+    }
+
+    /**
+     * Sets lb_escape_threshold
+     *
+     * @param int|null $lb_escape_threshold [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setLbEscapeThreshold($lb_escape_threshold)
+    {
+
+        if (is_null($lb_escape_threshold)) {
+            throw new \InvalidArgumentException('non-nullable lb_escape_threshold cannot be null');
+        }
+
+        $this->container['lb_escape_threshold'] = $lb_escape_threshold;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_sunset_level
+     *
+     * @return int|null
+     */
+    public function getLbSunsetLevel()
+    {
+        return $this->container['lb_sunset_level'];
+    }
+
+    /**
+     * Sets lb_sunset_level
+     *
+     * @param int|null $lb_sunset_level [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setLbSunsetLevel($lb_sunset_level)
+    {
+
+        if (is_null($lb_sunset_level)) {
+            throw new \InvalidArgumentException('non-nullable lb_sunset_level cannot be null');
+        }
+
+        $this->container['lb_sunset_level'] = $lb_sunset_level;
 
         return $this;
     }
@@ -896,7 +1679,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -908,6 +1691,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -921,7 +1705,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -937,7 +1721,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -949,6 +1733,7 @@ class ProtocolConstants implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

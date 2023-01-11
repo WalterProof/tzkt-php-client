@@ -1,7 +1,7 @@
 <?php
 /**
  * ContractsApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,89 @@ class ContractsApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'contractsBuildEntrypointParametersGET' => [
+            'application/json',
+        ],
+        'contractsBuildEntrypointParametersPOST' => [
+            'application/json',
+        ],
+        'contractsGet' => [
+            'application/json',
+        ],
+        'contractsGetBigMapByName' => [
+            'application/json',
+        ],
+        'contractsGetBigMapByNameKeys' => [
+            'application/json',
+        ],
+        'contractsGetBigMaps' => [
+            'application/json',
+        ],
+        'contractsGetByAddress' => [
+            'application/json',
+        ],
+        'contractsGetCode' => [
+            'application/json',
+        ],
+        'contractsGetContractViewByName' => [
+            'application/json',
+        ],
+        'contractsGetContractViews' => [
+            'application/json',
+        ],
+        'contractsGetCount' => [
+            'application/json',
+        ],
+        'contractsGetEntrypointByName' => [
+            'application/json',
+        ],
+        'contractsGetEntrypoints' => [
+            'application/json',
+        ],
+        'contractsGetHistoricalKeys' => [
+            'application/json',
+        ],
+        'contractsGetInterface' => [
+            'application/json',
+        ],
+        'contractsGetKey' => [
+            'application/json',
+        ],
+        'contractsGetKey2' => [
+            'application/json',
+        ],
+        'contractsGetKeyUpdates' => [
+            'application/json',
+        ],
+        'contractsGetRawStorage' => [
+            'application/json',
+        ],
+        'contractsGetRawStorageHistory' => [
+            'application/json',
+        ],
+        'contractsGetRawStorageSchema' => [
+            'application/json',
+        ],
+        'contractsGetSame' => [
+            'application/json',
+        ],
+        'contractsGetSimilar' => [
+            'application/json',
+        ],
+        'contractsGetStorage' => [
+            'application/json',
+        ],
+        'contractsGetStorageHistory' => [
+            'application/json',
+        ],
+        'contractsGetStorageSchema' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -116,40 +199,42 @@ class ContractsApi
     }
 
     /**
-     * Operation contractsBuildEntrypointParameters
+     * Operation contractsBuildEntrypointParametersGET
      *
      * Build entrypoint parameters
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  string $value Json parameters (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersGET'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function contractsBuildEntrypointParameters($address, $name, $value = null)
+    public function contractsBuildEntrypointParametersGET($address, $name, $value = null, string $contentType = self::contentTypes['contractsBuildEntrypointParametersGET'][0])
     {
-        list($response) = $this->contractsBuildEntrypointParametersWithHttpInfo($address, $name, $value);
+        list($response) = $this->contractsBuildEntrypointParametersGETWithHttpInfo($address, $name, $value, $contentType);
         return $response;
     }
 
     /**
-     * Operation contractsBuildEntrypointParametersWithHttpInfo
+     * Operation contractsBuildEntrypointParametersGETWithHttpInfo
      *
      * Build entrypoint parameters
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  string $value Json parameters (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersGET'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsBuildEntrypointParametersWithHttpInfo($address, $name, $value = null)
+    public function contractsBuildEntrypointParametersGETWithHttpInfo($address, $name, $value = null, string $contentType = self::contentTypes['contractsBuildEntrypointParametersGET'][0])
     {
-        $request = $this->contractsBuildEntrypointParametersRequest($address, $name, $value);
+        $request = $this->contractsBuildEntrypointParametersGETRequest($address, $name, $value, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -161,6 +246,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -185,6 +277,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -199,6 +294,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -223,20 +321,21 @@ class ContractsApi
     }
 
     /**
-     * Operation contractsBuildEntrypointParametersAsync
+     * Operation contractsBuildEntrypointParametersGETAsync
      *
      * Build entrypoint parameters
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  string $value Json parameters (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersGET'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsBuildEntrypointParametersAsync($address, $name, $value = null)
+    public function contractsBuildEntrypointParametersGETAsync($address, $name, $value = null, string $contentType = self::contentTypes['contractsBuildEntrypointParametersGET'][0])
     {
-        return $this->contractsBuildEntrypointParametersAsyncWithHttpInfo($address, $name, $value)
+        return $this->contractsBuildEntrypointParametersGETAsyncWithHttpInfo($address, $name, $value, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -245,21 +344,22 @@ class ContractsApi
     }
 
     /**
-     * Operation contractsBuildEntrypointParametersAsyncWithHttpInfo
+     * Operation contractsBuildEntrypointParametersGETAsyncWithHttpInfo
      *
      * Build entrypoint parameters
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  string $value Json parameters (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersGET'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsBuildEntrypointParametersAsyncWithHttpInfo($address, $name, $value = null)
+    public function contractsBuildEntrypointParametersGETAsyncWithHttpInfo($address, $name, $value = null, string $contentType = self::contentTypes['contractsBuildEntrypointParametersGET'][0])
     {
         $returnType = '\SplFileObject';
-        $request = $this->contractsBuildEntrypointParametersRequest($address, $name, $value);
+        $request = $this->contractsBuildEntrypointParametersGETRequest($address, $name, $value, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -269,6 +369,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -295,29 +398,34 @@ class ContractsApi
     }
 
     /**
-     * Create request for operation 'contractsBuildEntrypointParameters'
+     * Create request for operation 'contractsBuildEntrypointParametersGET'
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  string $value Json parameters (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersGET'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsBuildEntrypointParametersRequest($address, $name, $value = null)
+    public function contractsBuildEntrypointParametersGETRequest($address, $name, $value = null, string $contentType = self::contentTypes['contractsBuildEntrypointParametersGET'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $address when calling contractsBuildEntrypointParameters'
+                'Missing the required parameter $address when calling contractsBuildEntrypointParametersGET'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling contractsBuildEntrypointParameters'
+                'Missing the required parameter $name when calling contractsBuildEntrypointParametersGET'
             );
         }
+
+
 
         $resourcePath = '/v1/contracts/{address}/entrypoints/{name}/build';
         $formParams = [];
@@ -327,16 +435,14 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($value !== null) {
-            if('form' === 'form' && is_array($value)) {
-                foreach($value as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['value'] = $value;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $value,
+            'value', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -357,16 +463,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/octet-stream']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/octet-stream'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/octet-stream', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -384,12 +485,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -405,50 +506,53 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
     }
 
     /**
-     * Operation contractsBuildEntrypointParameters2
+     * Operation contractsBuildEntrypointParametersPOST
      *
      * Build entrypoint parameters
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  mixed $body Json parameters (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersPOST'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function contractsBuildEntrypointParameters2($address, $name, $body)
+    public function contractsBuildEntrypointParametersPOST($address, $name, $body, string $contentType = self::contentTypes['contractsBuildEntrypointParametersPOST'][0])
     {
-        list($response) = $this->contractsBuildEntrypointParameters2WithHttpInfo($address, $name, $body);
+        list($response) = $this->contractsBuildEntrypointParametersPOSTWithHttpInfo($address, $name, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation contractsBuildEntrypointParameters2WithHttpInfo
+     * Operation contractsBuildEntrypointParametersPOSTWithHttpInfo
      *
      * Build entrypoint parameters
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  mixed $body Json parameters (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersPOST'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsBuildEntrypointParameters2WithHttpInfo($address, $name, $body)
+    public function contractsBuildEntrypointParametersPOSTWithHttpInfo($address, $name, $body, string $contentType = self::contentTypes['contractsBuildEntrypointParametersPOST'][0])
     {
-        $request = $this->contractsBuildEntrypointParameters2Request($address, $name, $body);
+        $request = $this->contractsBuildEntrypointParametersPOSTRequest($address, $name, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -460,6 +564,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -484,6 +595,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -498,6 +612,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -522,20 +639,21 @@ class ContractsApi
     }
 
     /**
-     * Operation contractsBuildEntrypointParameters2Async
+     * Operation contractsBuildEntrypointParametersPOSTAsync
      *
      * Build entrypoint parameters
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  mixed $body Json parameters (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersPOST'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsBuildEntrypointParameters2Async($address, $name, $body)
+    public function contractsBuildEntrypointParametersPOSTAsync($address, $name, $body, string $contentType = self::contentTypes['contractsBuildEntrypointParametersPOST'][0])
     {
-        return $this->contractsBuildEntrypointParameters2AsyncWithHttpInfo($address, $name, $body)
+        return $this->contractsBuildEntrypointParametersPOSTAsyncWithHttpInfo($address, $name, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -544,21 +662,22 @@ class ContractsApi
     }
 
     /**
-     * Operation contractsBuildEntrypointParameters2AsyncWithHttpInfo
+     * Operation contractsBuildEntrypointParametersPOSTAsyncWithHttpInfo
      *
      * Build entrypoint parameters
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  mixed $body Json parameters (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersPOST'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsBuildEntrypointParameters2AsyncWithHttpInfo($address, $name, $body)
+    public function contractsBuildEntrypointParametersPOSTAsyncWithHttpInfo($address, $name, $body, string $contentType = self::contentTypes['contractsBuildEntrypointParametersPOST'][0])
     {
         $returnType = '\SplFileObject';
-        $request = $this->contractsBuildEntrypointParameters2Request($address, $name, $body);
+        $request = $this->contractsBuildEntrypointParametersPOSTRequest($address, $name, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -568,6 +687,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -594,35 +716,40 @@ class ContractsApi
     }
 
     /**
-     * Create request for operation 'contractsBuildEntrypointParameters2'
+     * Create request for operation 'contractsBuildEntrypointParametersPOST'
      *
      * @param  string $address Contract address (required)
      * @param  string $name Entrypoint name (required)
      * @param  mixed $body Json parameters (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsBuildEntrypointParametersPOST'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsBuildEntrypointParameters2Request($address, $name, $body)
+    public function contractsBuildEntrypointParametersPOSTRequest($address, $name, $body, string $contentType = self::contentTypes['contractsBuildEntrypointParametersPOST'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $address when calling contractsBuildEntrypointParameters2'
+                'Missing the required parameter $address when calling contractsBuildEntrypointParametersPOST'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling contractsBuildEntrypointParameters2'
+                'Missing the required parameter $name when calling contractsBuildEntrypointParametersPOST'
             );
         }
+
         // verify the required parameter 'body' is set
         if ($body === null || (is_array($body) && count($body) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $body when calling contractsBuildEntrypointParameters2'
+                'Missing the required parameter $body when calling contractsBuildEntrypointParametersPOST'
             );
         }
+
 
         $resourcePath = '/v1/contracts/{address}/entrypoints/{name}/build';
         $formParams = [];
@@ -651,20 +778,16 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/octet-stream']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/octet-stream'],
-                ['application/json']
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/octet-stream', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (isset($body)) {
-            if ($headers['Content-Type'] === 'application/json') {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
                 $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($body));
             } else {
                 $httpBody = $body;
@@ -684,12 +807,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -705,10 +828,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -719,24 +843,30 @@ class ContractsApi
      *
      * Get contracts
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
-     * @param  OneOfAccountParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetAddressParameter $address Filters by address (optional)
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
+     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
+     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Contract[]
      */
-    public function contractsGet($kind = null, $creator = null, $manager = null, $delegate = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false)
+    public function contractsGet($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
-        list($response) = $this->contractsGetWithHttpInfo($kind, $creator, $manager, $delegate, $last_activity, $select, $sort, $offset, $limit, $include_storage);
+        list($response) = $this->contractsGetWithHttpInfo($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage, $contentType);
         return $response;
     }
 
@@ -745,24 +875,30 @@ class ContractsApi
      *
      * Get contracts
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
-     * @param  OneOfAccountParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetAddressParameter $address Filters by address (optional)
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
+     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
+     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Contract[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetWithHttpInfo($kind = null, $creator = null, $manager = null, $delegate = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false)
+    public function contractsGetWithHttpInfo($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
-        $request = $this->contractsGetRequest($kind, $creator, $manager, $delegate, $last_activity, $select, $sort, $offset, $limit, $include_storage);
+        $request = $this->contractsGetRequest($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -774,6 +910,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -798,6 +941,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Contract[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -812,6 +958,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -840,23 +989,29 @@ class ContractsApi
      *
      * Get contracts
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
-     * @param  OneOfAccountParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetAddressParameter $address Filters by address (optional)
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
+     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
+     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetAsync($kind = null, $creator = null, $manager = null, $delegate = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false)
+    public function contractsGetAsync($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
-        return $this->contractsGetAsyncWithHttpInfo($kind, $creator, $manager, $delegate, $last_activity, $select, $sort, $offset, $limit, $include_storage)
+        return $this->contractsGetAsyncWithHttpInfo($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -869,24 +1024,30 @@ class ContractsApi
      *
      * Get contracts
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
-     * @param  OneOfAccountParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetAddressParameter $address Filters by address (optional)
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
+     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
+     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetAsyncWithHttpInfo($kind = null, $creator = null, $manager = null, $delegate = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false)
+    public function contractsGetAsyncWithHttpInfo($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Contract[]';
-        $request = $this->contractsGetRequest($kind, $creator, $manager, $delegate, $last_activity, $select, $sort, $offset, $limit, $include_storage);
+        $request = $this->contractsGetRequest($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -896,6 +1057,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -924,28 +1088,49 @@ class ContractsApi
     /**
      * Create request for operation 'contractsGet'
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
-     * @param  OneOfAccountParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  OneOfAccountParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetAddressParameter $address Filters by address (optional)
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
+     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
+     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetRequest($kind = null, $creator = null, $manager = null, $delegate = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false)
+    public function contractsGetRequest($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGet, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGet, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/contracts';
@@ -956,129 +1141,149 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($kind !== null) {
-            if('form' === 'form' && is_array($kind)) {
-                foreach($kind as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['kind'] = $kind;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $address,
+            'address', // param base name
+            'OneOfAddressParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($creator !== null) {
-            if('form' === 'form' && is_array($creator)) {
-                foreach($creator as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['creator'] = $creator;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $kind,
+            'kind', // param base name
+            'OneOfContractKindParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($manager !== null) {
-            if('form' === 'form' && is_array($manager)) {
-                foreach($manager as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['manager'] = $manager;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $tzips,
+            'tzips', // param base name
+            'OneOfContractTagsParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($delegate !== null) {
-            if('form' === 'form' && is_array($delegate)) {
-                foreach($delegate as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['delegate'] = $delegate;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $creator,
+            'creator', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($last_activity !== null) {
-            if('form' === 'form' && is_array($last_activity)) {
-                foreach($last_activity as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['lastActivity'] = $last_activity;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $manager,
+            'manager', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $delegate,
+            'delegate', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $balance,
+            'balance', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_activity,
+            'lastActivity', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $type_hash,
+            'typeHash', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($include_storage !== null) {
-            if('form' === 'form' && is_array($include_storage)) {
-                foreach($include_storage as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['includeStorage'] = $include_storage;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $code_hash,
+            'codeHash', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_storage,
+            'includeStorage', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1096,12 +1301,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1117,10 +1322,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1133,15 +1339,16 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByName'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BigMap
      */
-    public function contractsGetBigMapByName($address, $name, $micheline = null)
+    public function contractsGetBigMapByName($address, $name, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByName'][0])
     {
-        list($response) = $this->contractsGetBigMapByNameWithHttpInfo($address, $name, $micheline);
+        list($response) = $this->contractsGetBigMapByNameWithHttpInfo($address, $name, $micheline, $contentType);
         return $response;
     }
 
@@ -1152,15 +1359,16 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByName'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BigMap, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetBigMapByNameWithHttpInfo($address, $name, $micheline = null)
+    public function contractsGetBigMapByNameWithHttpInfo($address, $name, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByName'][0])
     {
-        $request = $this->contractsGetBigMapByNameRequest($address, $name, $micheline);
+        $request = $this->contractsGetBigMapByNameRequest($address, $name, $micheline, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1172,6 +1380,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1196,6 +1411,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMap' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1210,6 +1428,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1240,14 +1461,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetBigMapByNameAsync($address, $name, $micheline = null)
+    public function contractsGetBigMapByNameAsync($address, $name, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByName'][0])
     {
-        return $this->contractsGetBigMapByNameAsyncWithHttpInfo($address, $name, $micheline)
+        return $this->contractsGetBigMapByNameAsyncWithHttpInfo($address, $name, $micheline, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1262,15 +1484,16 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetBigMapByNameAsyncWithHttpInfo($address, $name, $micheline = null)
+    public function contractsGetBigMapByNameAsyncWithHttpInfo($address, $name, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByName'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BigMap';
-        $request = $this->contractsGetBigMapByNameRequest($address, $name, $micheline);
+        $request = $this->contractsGetBigMapByNameRequest($address, $name, $micheline, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1280,6 +1503,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1310,25 +1536,30 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetBigMapByNameRequest($address, $name, $micheline = null)
+    public function contractsGetBigMapByNameRequest($address, $name, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByName'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetBigMapByName'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $name when calling contractsGetBigMapByName'
             );
         }
+
+
 
         $resourcePath = '/v1/contracts/{address}/bigmaps/{name}';
         $formParams = [];
@@ -1338,16 +1569,14 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'OneOfMichelineFormat', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -1368,16 +1597,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1395,12 +1619,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1416,10 +1640,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1433,22 +1658,23 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_level Filters bigmap keys by the last update level. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $last_level Filters bigmap keys by the last update level. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByNameKeys'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BigMapKey[]
      */
-    public function contractsGetBigMapByNameKeys($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapByNameKeys($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByNameKeys'][0])
     {
-        list($response) = $this->contractsGetBigMapByNameKeysWithHttpInfo($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline);
+        list($response) = $this->contractsGetBigMapByNameKeysWithHttpInfo($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline, $contentType);
         return $response;
     }
 
@@ -1460,22 +1686,23 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_level Filters bigmap keys by the last update level. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $last_level Filters bigmap keys by the last update level. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByNameKeys'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BigMapKey[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetBigMapByNameKeysWithHttpInfo($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapByNameKeysWithHttpInfo($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByNameKeys'][0])
     {
-        $request = $this->contractsGetBigMapByNameKeysRequest($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline);
+        $request = $this->contractsGetBigMapByNameKeysRequest($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1487,6 +1714,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1511,6 +1745,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMapKey[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1525,6 +1762,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1556,21 +1796,22 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_level Filters bigmap keys by the last update level. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $last_level Filters bigmap keys by the last update level. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByNameKeys'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetBigMapByNameKeysAsync($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapByNameKeysAsync($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByNameKeys'][0])
     {
-        return $this->contractsGetBigMapByNameKeysAsyncWithHttpInfo($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline)
+        return $this->contractsGetBigMapByNameKeysAsyncWithHttpInfo($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1586,22 +1827,23 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_level Filters bigmap keys by the last update level. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $last_level Filters bigmap keys by the last update level. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByNameKeys'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetBigMapByNameKeysAsyncWithHttpInfo($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapByNameKeysAsyncWithHttpInfo($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByNameKeys'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BigMapKey[]';
-        $request = $this->contractsGetBigMapByNameKeysRequest($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline);
+        $request = $this->contractsGetBigMapByNameKeysRequest($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1611,6 +1853,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1642,38 +1887,50 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfInt32Parameter $last_level Filters bigmap keys by the last update level. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $last_level Filters bigmap keys by the last update level. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMapByNameKeys'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetBigMapByNameKeysRequest($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapByNameKeysRequest($address, $name, $active = null, $key = null, $value = null, $last_level = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMapByNameKeys'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetBigMapByNameKeys'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $name when calling contractsGetBigMapByNameKeys'
             );
         }
+
+
+
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetBigMapByNameKeys, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetBigMapByNameKeys, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/contracts/{address}/bigmaps/{name}/keys';
@@ -1684,104 +1941,86 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($active !== null) {
-            if('form' === 'form' && is_array($active)) {
-                foreach($active as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['active'] = $active;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $active,
+            'active', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($key !== null) {
-            if('form' === 'form' && is_array($key)) {
-                foreach($key as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['key'] = $key;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $key,
+            'key', // param base name
+            'OneOfJsonParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($value !== null) {
-            if('form' === 'form' && is_array($value)) {
-                foreach($value as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['value'] = $value;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $value,
+            'value', // param base name
+            'OneOfJsonParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($last_level !== null) {
-            if('form' === 'form' && is_array($last_level)) {
-                foreach($last_level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['lastLevel'] = $last_level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_level,
+            'lastLevel', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'OneOfMichelineFormat', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -1802,16 +2041,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1829,12 +2063,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1850,10 +2084,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1865,20 +2100,21 @@ class ContractsApi
      * Get contract bigmaps
      *
      * @param  string $address Contract address (required)
-     * @param  OneOfBigMapTagsParameter $tags Filters bigmaps tags (&#x60;token_metadata&#x60; - tzip-12, &#x60;metadata&#x60; - tzip-16). (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters bigmaps tags (&#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60;). (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMaps'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BigMap[]
      */
-    public function contractsGetBigMaps($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMaps($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMaps'][0])
     {
-        list($response) = $this->contractsGetBigMapsWithHttpInfo($address, $tags, $select, $sort, $offset, $limit, $micheline);
+        list($response) = $this->contractsGetBigMapsWithHttpInfo($address, $tags, $select, $sort, $offset, $limit, $micheline, $contentType);
         return $response;
     }
 
@@ -1888,20 +2124,21 @@ class ContractsApi
      * Get contract bigmaps
      *
      * @param  string $address Contract address (required)
-     * @param  OneOfBigMapTagsParameter $tags Filters bigmaps tags (&#x60;token_metadata&#x60; - tzip-12, &#x60;metadata&#x60; - tzip-16). (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters bigmaps tags (&#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60;). (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMaps'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BigMap[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetBigMapsWithHttpInfo($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapsWithHttpInfo($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMaps'][0])
     {
-        $request = $this->contractsGetBigMapsRequest($address, $tags, $select, $sort, $offset, $limit, $micheline);
+        $request = $this->contractsGetBigMapsRequest($address, $tags, $select, $sort, $offset, $limit, $micheline, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1913,6 +2150,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1937,6 +2181,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMap[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1951,6 +2198,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1980,19 +2230,20 @@ class ContractsApi
      * Get contract bigmaps
      *
      * @param  string $address Contract address (required)
-     * @param  OneOfBigMapTagsParameter $tags Filters bigmaps tags (&#x60;token_metadata&#x60; - tzip-12, &#x60;metadata&#x60; - tzip-16). (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters bigmaps tags (&#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60;). (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMaps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetBigMapsAsync($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapsAsync($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMaps'][0])
     {
-        return $this->contractsGetBigMapsAsyncWithHttpInfo($address, $tags, $select, $sort, $offset, $limit, $micheline)
+        return $this->contractsGetBigMapsAsyncWithHttpInfo($address, $tags, $select, $sort, $offset, $limit, $micheline, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2006,20 +2257,21 @@ class ContractsApi
      * Get contract bigmaps
      *
      * @param  string $address Contract address (required)
-     * @param  OneOfBigMapTagsParameter $tags Filters bigmaps tags (&#x60;token_metadata&#x60; - tzip-12, &#x60;metadata&#x60; - tzip-16). (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters bigmaps tags (&#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60;). (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMaps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetBigMapsAsyncWithHttpInfo($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapsAsyncWithHttpInfo($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMaps'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BigMap[]';
-        $request = $this->contractsGetBigMapsRequest($address, $tags, $select, $sort, $offset, $limit, $micheline);
+        $request = $this->contractsGetBigMapsRequest($address, $tags, $select, $sort, $offset, $limit, $micheline, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2029,6 +2281,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2058,30 +2313,38 @@ class ContractsApi
      * Create request for operation 'contractsGetBigMaps'
      *
      * @param  string $address Contract address (required)
-     * @param  OneOfBigMapTagsParameter $tags Filters bigmaps tags (&#x60;token_metadata&#x60; - tzip-12, &#x60;metadata&#x60; - tzip-16). (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters bigmaps tags (&#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60;). (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetBigMaps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetBigMapsRequest($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetBigMapsRequest($address, $tags = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetBigMaps'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetBigMaps'
             );
         }
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetBigMaps, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetBigMaps, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/contracts/{address}/bigmaps';
@@ -2092,71 +2355,59 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($tags !== null) {
-            if('form' === 'form' && is_array($tags)) {
-                foreach($tags as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['tags'] = $tags;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $tags,
+            'tags', // param base name
+            'OneOfBigMapTagsParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'OneOfMichelineFormat', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -2169,16 +2420,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -2196,12 +2442,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -2217,10 +2463,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -2232,14 +2479,15 @@ class ContractsApi
      * Get contract by address
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetByAddress'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Contract
      */
-    public function contractsGetByAddress($address)
+    public function contractsGetByAddress($address, string $contentType = self::contentTypes['contractsGetByAddress'][0])
     {
-        list($response) = $this->contractsGetByAddressWithHttpInfo($address);
+        list($response) = $this->contractsGetByAddressWithHttpInfo($address, $contentType);
         return $response;
     }
 
@@ -2249,14 +2497,15 @@ class ContractsApi
      * Get contract by address
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetByAddress'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Contract, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetByAddressWithHttpInfo($address)
+    public function contractsGetByAddressWithHttpInfo($address, string $contentType = self::contentTypes['contractsGetByAddress'][0])
     {
-        $request = $this->contractsGetByAddressRequest($address);
+        $request = $this->contractsGetByAddressRequest($address, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2268,6 +2517,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2292,6 +2548,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Contract' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2306,6 +2565,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2335,13 +2597,14 @@ class ContractsApi
      * Get contract by address
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetByAddress'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetByAddressAsync($address)
+    public function contractsGetByAddressAsync($address, string $contentType = self::contentTypes['contractsGetByAddress'][0])
     {
-        return $this->contractsGetByAddressAsyncWithHttpInfo($address)
+        return $this->contractsGetByAddressAsyncWithHttpInfo($address, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2355,14 +2618,15 @@ class ContractsApi
      * Get contract by address
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetByAddress'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetByAddressAsyncWithHttpInfo($address)
+    public function contractsGetByAddressAsyncWithHttpInfo($address, string $contentType = self::contentTypes['contractsGetByAddress'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Contract';
-        $request = $this->contractsGetByAddressRequest($address);
+        $request = $this->contractsGetByAddressRequest($address, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2372,6 +2636,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2401,18 +2668,21 @@ class ContractsApi
      * Create request for operation 'contractsGetByAddress'
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetByAddress'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetByAddressRequest($address)
+    public function contractsGetByAddressRequest($address, string $contentType = self::contentTypes['contractsGetByAddress'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetByAddress'
             );
         }
+
 
         $resourcePath = '/v1/contracts/{address}';
         $formParams = [];
@@ -2433,16 +2703,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -2460,12 +2725,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -2481,10 +2746,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -2496,15 +2762,17 @@ class ContractsApi
      * Get contract code
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  int $level Level at which contract code should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  int $format Code format (&#x60;0&#x60; - micheline, &#x60;1&#x60; - michelson, &#x60;2&#x60; - bytes (base64)) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCode'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function contractsGetCode($address, $format = 0)
+    public function contractsGetCode($address, $level = 0, $format = 0, string $contentType = self::contentTypes['contractsGetCode'][0])
     {
-        list($response) = $this->contractsGetCodeWithHttpInfo($address, $format);
+        list($response) = $this->contractsGetCodeWithHttpInfo($address, $level, $format, $contentType);
         return $response;
     }
 
@@ -2514,15 +2782,17 @@ class ContractsApi
      * Get contract code
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  int $level Level at which contract code should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  int $format Code format (&#x60;0&#x60; - micheline, &#x60;1&#x60; - michelson, &#x60;2&#x60; - bytes (base64)) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCode'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetCodeWithHttpInfo($address, $format = 0)
+    public function contractsGetCodeWithHttpInfo($address, $level = 0, $format = 0, string $contentType = self::contentTypes['contractsGetCode'][0])
     {
-        $request = $this->contractsGetCodeRequest($address, $format);
+        $request = $this->contractsGetCodeRequest($address, $level, $format, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2534,6 +2804,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2558,6 +2835,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2572,6 +2852,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2601,14 +2884,16 @@ class ContractsApi
      * Get contract code
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  int $level Level at which contract code should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  int $format Code format (&#x60;0&#x60; - micheline, &#x60;1&#x60; - michelson, &#x60;2&#x60; - bytes (base64)) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetCodeAsync($address, $format = 0)
+    public function contractsGetCodeAsync($address, $level = 0, $format = 0, string $contentType = self::contentTypes['contractsGetCode'][0])
     {
-        return $this->contractsGetCodeAsyncWithHttpInfo($address, $format)
+        return $this->contractsGetCodeAsyncWithHttpInfo($address, $level, $format, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2622,15 +2907,17 @@ class ContractsApi
      * Get contract code
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  int $level Level at which contract code should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  int $format Code format (&#x60;0&#x60; - micheline, &#x60;1&#x60; - michelson, &#x60;2&#x60; - bytes (base64)) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetCodeAsyncWithHttpInfo($address, $format = 0)
+    public function contractsGetCodeAsyncWithHttpInfo($address, $level = 0, $format = 0, string $contentType = self::contentTypes['contractsGetCode'][0])
     {
         $returnType = '\SplFileObject';
-        $request = $this->contractsGetCodeRequest($address, $format);
+        $request = $this->contractsGetCodeRequest($address, $level, $format, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2640,6 +2927,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2669,26 +2959,31 @@ class ContractsApi
      * Create request for operation 'contractsGetCode'
      *
      * @param  string $address Contract address (starting with KT) (required)
+     * @param  int $level Level at which contract code should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  int $format Code format (&#x60;0&#x60; - micheline, &#x60;1&#x60; - michelson, &#x60;2&#x60; - bytes (base64)) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetCodeRequest($address, $format = 0)
+    public function contractsGetCodeRequest($address, $level = 0, $format = 0, string $contentType = self::contentTypes['contractsGetCode'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetCode'
             );
         }
+
+
         if ($format !== null && $format > 2) {
             throw new \InvalidArgumentException('invalid value for "$format" when calling ContractsApi.contractsGetCode, must be smaller than or equal to 2.');
         }
         if ($format !== null && $format < 0) {
             throw new \InvalidArgumentException('invalid value for "$format" when calling ContractsApi.contractsGetCode, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/contracts/{address}/code';
         $formParams = [];
@@ -2698,16 +2993,23 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($format !== null) {
-            if('form' === 'form' && is_array($format)) {
-                foreach($format as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['format'] = $format;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $format,
+            'format', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -2720,16 +3022,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/octet-stream']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/octet-stream'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/octet-stream', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -2747,12 +3044,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -2768,46 +3065,57 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
     }
 
     /**
-     * Operation contractsGetCount
+     * Operation contractsGetContractViewByName
      *
-     * Get contracts count
+     * Get view by name
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $name View name (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViewByName'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return int
+     * @return \Bzzhh\Tzkt\Model\ContractView
      */
-    public function contractsGetCount($kind = null)
+    public function contractsGetContractViewByName($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViewByName'][0])
     {
-        list($response) = $this->contractsGetCountWithHttpInfo($kind);
+        list($response) = $this->contractsGetContractViewByNameWithHttpInfo($address, $name, $json, $micheline, $michelson, $contentType);
         return $response;
     }
 
     /**
-     * Operation contractsGetCountWithHttpInfo
+     * Operation contractsGetContractViewByNameWithHttpInfo
      *
-     * Get contracts count
+     * Get view by name
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $name View name (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViewByName'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of int, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Bzzhh\Tzkt\Model\ContractView, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetCountWithHttpInfo($kind = null)
+    public function contractsGetContractViewByNameWithHttpInfo($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViewByName'][0])
     {
-        $request = $this->contractsGetCountRequest($kind);
+        $request = $this->contractsGetContractViewByNameRequest($address, $name, $json, $micheline, $michelson, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2819,6 +3127,681 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\ContractView' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\ContractView' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\ContractView', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\ContractView';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\ContractView',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation contractsGetContractViewByNameAsync
+     *
+     * Get view by name
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $name View name (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViewByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function contractsGetContractViewByNameAsync($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViewByName'][0])
+    {
+        return $this->contractsGetContractViewByNameAsyncWithHttpInfo($address, $name, $json, $micheline, $michelson, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation contractsGetContractViewByNameAsyncWithHttpInfo
+     *
+     * Get view by name
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $name View name (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViewByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function contractsGetContractViewByNameAsyncWithHttpInfo($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViewByName'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\ContractView';
+        $request = $this->contractsGetContractViewByNameRequest($address, $name, $json, $micheline, $michelson, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'contractsGetContractViewByName'
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  string $name View name (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViewByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function contractsGetContractViewByNameRequest($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViewByName'][0])
+    {
+
+        // verify the required parameter 'address' is set
+        if ($address === null || (is_array($address) && count($address) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $address when calling contractsGetContractViewByName'
+            );
+        }
+
+        // verify the required parameter 'name' is set
+        if ($name === null || (is_array($name) && count($name) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling contractsGetContractViewByName'
+            );
+        }
+
+
+
+
+
+        $resourcePath = '/v1/contracts/{address}/views/{name}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $json,
+            'json', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $michelson,
+            'michelson', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($address !== null) {
+            $resourcePath = str_replace(
+                '{' . 'address' . '}',
+                ObjectSerializer::toPathValue($address),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation contractsGetContractViews
+     *
+     * Get contract views
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViews'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\ContractView[]
+     */
+    public function contractsGetContractViews($address, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViews'][0])
+    {
+        list($response) = $this->contractsGetContractViewsWithHttpInfo($address, $json, $micheline, $michelson, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation contractsGetContractViewsWithHttpInfo
+     *
+     * Get contract views
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViews'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\ContractView[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function contractsGetContractViewsWithHttpInfo($address, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViews'][0])
+    {
+        $request = $this->contractsGetContractViewsRequest($address, $json, $micheline, $michelson, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\ContractView[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\ContractView[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\ContractView[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\ContractView[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\ContractView[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation contractsGetContractViewsAsync
+     *
+     * Get contract views
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViews'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function contractsGetContractViewsAsync($address, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViews'][0])
+    {
+        return $this->contractsGetContractViewsAsyncWithHttpInfo($address, $json, $micheline, $michelson, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation contractsGetContractViewsAsyncWithHttpInfo
+     *
+     * Get contract views
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViews'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function contractsGetContractViewsAsyncWithHttpInfo($address, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViews'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\ContractView[]';
+        $request = $this->contractsGetContractViewsRequest($address, $json, $micheline, $michelson, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'contractsGetContractViews'
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  bool $json Include parameter and return types in human-readable JSON format (optional, default to true)
+     * @param  bool $micheline Include parameter and return types in micheline format (optional, default to false)
+     * @param  bool $michelson Include parameter and return types in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetContractViews'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function contractsGetContractViewsRequest($address, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetContractViews'][0])
+    {
+
+        // verify the required parameter 'address' is set
+        if ($address === null || (is_array($address) && count($address) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $address when calling contractsGetContractViews'
+            );
+        }
+
+
+
+
+
+        $resourcePath = '/v1/contracts/{address}/views';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $json,
+            'json', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $michelson,
+            'michelson', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($address !== null) {
+            $resourcePath = str_replace(
+                '{' . 'address' . '}',
+                ObjectSerializer::toPathValue($address),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation contractsGetCount
+     *
+     * Get contracts count
+     *
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return int
+     */
+    public function contractsGetCount($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
+    {
+        list($response) = $this->contractsGetCountWithHttpInfo($kind, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation contractsGetCountWithHttpInfo
+     *
+     * Get contracts count
+     *
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of int, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function contractsGetCountWithHttpInfo($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
+    {
+        $request = $this->contractsGetCountRequest($kind, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2843,6 +3826,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2857,6 +3843,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2885,14 +3874,15 @@ class ContractsApi
      *
      * Get contracts count
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetCountAsync($kind = null)
+    public function contractsGetCountAsync($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
     {
-        return $this->contractsGetCountAsyncWithHttpInfo($kind)
+        return $this->contractsGetCountAsyncWithHttpInfo($kind, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2905,15 +3895,16 @@ class ContractsApi
      *
      * Get contracts count
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetCountAsyncWithHttpInfo($kind = null)
+    public function contractsGetCountAsyncWithHttpInfo($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
     {
         $returnType = 'int';
-        $request = $this->contractsGetCountRequest($kind);
+        $request = $this->contractsGetCountRequest($kind, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2923,6 +3914,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2951,13 +3945,16 @@ class ContractsApi
     /**
      * Create request for operation 'contractsGetCount'
      *
-     * @param  OneOfContractKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetCountRequest($kind = null)
+    public function contractsGetCountRequest($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
     {
+
+
 
         $resourcePath = '/v1/contracts/count';
         $formParams = [];
@@ -2967,30 +3964,23 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($kind !== null) {
-            if('form' === 'form' && is_array($kind)) {
-                foreach($kind as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['kind'] = $kind;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $kind,
+            'kind', // param base name
+            'OneOfContractKindParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -3008,12 +3998,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -3029,10 +4019,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -3048,14 +4039,15 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypointByName'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Entrypoint
      */
-    public function contractsGetEntrypointByName($address, $name, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointByName($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypointByName'][0])
     {
-        list($response) = $this->contractsGetEntrypointByNameWithHttpInfo($address, $name, $json, $micheline, $michelson);
+        list($response) = $this->contractsGetEntrypointByNameWithHttpInfo($address, $name, $json, $micheline, $michelson, $contentType);
         return $response;
     }
 
@@ -3069,14 +4061,15 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypointByName'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Entrypoint, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetEntrypointByNameWithHttpInfo($address, $name, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointByNameWithHttpInfo($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypointByName'][0])
     {
-        $request = $this->contractsGetEntrypointByNameRequest($address, $name, $json, $micheline, $michelson);
+        $request = $this->contractsGetEntrypointByNameRequest($address, $name, $json, $micheline, $michelson, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3088,6 +4081,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -3112,6 +4112,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Entrypoint' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3126,6 +4129,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -3159,13 +4165,14 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypointByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetEntrypointByNameAsync($address, $name, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointByNameAsync($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypointByName'][0])
     {
-        return $this->contractsGetEntrypointByNameAsyncWithHttpInfo($address, $name, $json, $micheline, $michelson)
+        return $this->contractsGetEntrypointByNameAsyncWithHttpInfo($address, $name, $json, $micheline, $michelson, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3183,14 +4190,15 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypointByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetEntrypointByNameAsyncWithHttpInfo($address, $name, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointByNameAsyncWithHttpInfo($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypointByName'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Entrypoint';
-        $request = $this->contractsGetEntrypointByNameRequest($address, $name, $json, $micheline, $michelson);
+        $request = $this->contractsGetEntrypointByNameRequest($address, $name, $json, $micheline, $michelson, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3200,6 +4208,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3233,24 +4244,31 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypointByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetEntrypointByNameRequest($address, $name, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointByNameRequest($address, $name, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypointByName'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetEntrypointByName'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $name when calling contractsGetEntrypointByName'
             );
         }
+
+
+
+
 
         $resourcePath = '/v1/contracts/{address}/entrypoints/{name}';
         $formParams = [];
@@ -3260,38 +4278,32 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($json !== null) {
-            if('form' === 'form' && is_array($json)) {
-                foreach($json as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['json'] = $json;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $json,
+            'json', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($michelson !== null) {
-            if('form' === 'form' && is_array($michelson)) {
-                foreach($michelson as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['michelson'] = $michelson;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $michelson,
+            'michelson', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -3312,16 +4324,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -3339,12 +4346,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -3360,10 +4367,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -3379,14 +4387,15 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypoints'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Entrypoint[]
      */
-    public function contractsGetEntrypoints($address, $all = false, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypoints($address, $all = false, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypoints'][0])
     {
-        list($response) = $this->contractsGetEntrypointsWithHttpInfo($address, $all, $json, $micheline, $michelson);
+        list($response) = $this->contractsGetEntrypointsWithHttpInfo($address, $all, $json, $micheline, $michelson, $contentType);
         return $response;
     }
 
@@ -3400,14 +4409,15 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypoints'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Entrypoint[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetEntrypointsWithHttpInfo($address, $all = false, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointsWithHttpInfo($address, $all = false, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypoints'][0])
     {
-        $request = $this->contractsGetEntrypointsRequest($address, $all, $json, $micheline, $michelson);
+        $request = $this->contractsGetEntrypointsRequest($address, $all, $json, $micheline, $michelson, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3419,6 +4429,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -3443,6 +4460,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Entrypoint[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3457,6 +4477,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -3490,13 +4513,14 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypoints'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetEntrypointsAsync($address, $all = false, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointsAsync($address, $all = false, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypoints'][0])
     {
-        return $this->contractsGetEntrypointsAsyncWithHttpInfo($address, $all, $json, $micheline, $michelson)
+        return $this->contractsGetEntrypointsAsyncWithHttpInfo($address, $all, $json, $micheline, $michelson, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3514,14 +4538,15 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypoints'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetEntrypointsAsyncWithHttpInfo($address, $all = false, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointsAsyncWithHttpInfo($address, $all = false, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypoints'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Entrypoint[]';
-        $request = $this->contractsGetEntrypointsRequest($address, $all, $json, $micheline, $michelson);
+        $request = $this->contractsGetEntrypointsRequest($address, $all, $json, $micheline, $michelson, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3531,6 +4556,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3564,18 +4592,25 @@ class ContractsApi
      * @param  bool $json Include parameters schema in human-readable JSON format (optional, default to true)
      * @param  bool $micheline Include parameters schema in micheline format (optional, default to false)
      * @param  bool $michelson Include parameters schema in michelson format (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetEntrypoints'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetEntrypointsRequest($address, $all = false, $json = true, $micheline = false, $michelson = false)
+    public function contractsGetEntrypointsRequest($address, $all = false, $json = true, $micheline = false, $michelson = false, string $contentType = self::contentTypes['contractsGetEntrypoints'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetEntrypoints'
             );
         }
+
+
+
+
+
 
         $resourcePath = '/v1/contracts/{address}/entrypoints';
         $formParams = [];
@@ -3585,49 +4620,41 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($all !== null) {
-            if('form' === 'form' && is_array($all)) {
-                foreach($all as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['all'] = $all;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $all,
+            'all', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($json !== null) {
-            if('form' === 'form' && is_array($json)) {
-                foreach($json as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['json'] = $json;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $json,
+            'json', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($michelson !== null) {
-            if('form' === 'form' && is_array($michelson)) {
-                foreach($michelson as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['michelson'] = $michelson;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $michelson,
+            'michelson', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -3640,16 +4667,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -3667,12 +4689,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -3688,10 +4710,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -3706,21 +4729,22 @@ class ContractsApi
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap keys (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetHistoricalKeys'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BigMapKeyHistorical[]
      */
-    public function contractsGetHistoricalKeys($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetHistoricalKeys($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetHistoricalKeys'][0])
     {
-        list($response) = $this->contractsGetHistoricalKeysWithHttpInfo($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline);
+        list($response) = $this->contractsGetHistoricalKeysWithHttpInfo($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline, $contentType);
         return $response;
     }
 
@@ -3733,21 +4757,22 @@ class ContractsApi
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap keys (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetHistoricalKeys'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BigMapKeyHistorical[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetHistoricalKeysWithHttpInfo($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetHistoricalKeysWithHttpInfo($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetHistoricalKeys'][0])
     {
-        $request = $this->contractsGetHistoricalKeysRequest($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline);
+        $request = $this->contractsGetHistoricalKeysRequest($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3759,6 +4784,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -3783,6 +4815,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMapKeyHistorical[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3797,6 +4832,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -3829,20 +4867,21 @@ class ContractsApi
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap keys (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetHistoricalKeys'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetHistoricalKeysAsync($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetHistoricalKeysAsync($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetHistoricalKeys'][0])
     {
-        return $this->contractsGetHistoricalKeysAsyncWithHttpInfo($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline)
+        return $this->contractsGetHistoricalKeysAsyncWithHttpInfo($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3859,21 +4898,22 @@ class ContractsApi
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap keys (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetHistoricalKeys'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetHistoricalKeysAsyncWithHttpInfo($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetHistoricalKeysAsyncWithHttpInfo($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetHistoricalKeys'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BigMapKeyHistorical[]';
-        $request = $this->contractsGetHistoricalKeysRequest($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline);
+        $request = $this->contractsGetHistoricalKeysRequest($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3883,6 +4923,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3915,43 +4958,55 @@ class ContractsApi
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap keys (required)
      * @param  bool $active Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
-     * @param  OneOfJsonParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
-     * @param  OneOfJsonParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetHistoricalKeys'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetHistoricalKeysRequest($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetHistoricalKeysRequest($address, $name, $level, $active = null, $key = null, $value = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetHistoricalKeys'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetHistoricalKeys'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $name when calling contractsGetHistoricalKeys'
             );
         }
+
         // verify the required parameter 'level' is set
         if ($level === null || (is_array($level) && count($level) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $level when calling contractsGetHistoricalKeys'
             );
         }
+
+
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetHistoricalKeys, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetHistoricalKeys, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/contracts/{address}/bigmaps/{name}/historical_keys/{level}';
@@ -3962,93 +5017,77 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($active !== null) {
-            if('form' === 'form' && is_array($active)) {
-                foreach($active as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['active'] = $active;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $active,
+            'active', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($key !== null) {
-            if('form' === 'form' && is_array($key)) {
-                foreach($key as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['key'] = $key;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $key,
+            'key', // param base name
+            'OneOfJsonParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($value !== null) {
-            if('form' === 'form' && is_array($value)) {
-                foreach($value as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['value'] = $value;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $value,
+            'value', // param base name
+            'OneOfJsonParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'OneOfMichelineFormat', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -4077,16 +5116,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -4104,12 +5138,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -4125,10 +5159,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -4140,14 +5175,15 @@ class ContractsApi
      * Get JSON Schema [2020-12] interface for the contract
      *
      * @param  string $address Contract address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetInterface'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\ContractInterface
      */
-    public function contractsGetInterface($address)
+    public function contractsGetInterface($address, string $contentType = self::contentTypes['contractsGetInterface'][0])
     {
-        list($response) = $this->contractsGetInterfaceWithHttpInfo($address);
+        list($response) = $this->contractsGetInterfaceWithHttpInfo($address, $contentType);
         return $response;
     }
 
@@ -4157,14 +5193,15 @@ class ContractsApi
      * Get JSON Schema [2020-12] interface for the contract
      *
      * @param  string $address Contract address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetInterface'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\ContractInterface, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetInterfaceWithHttpInfo($address)
+    public function contractsGetInterfaceWithHttpInfo($address, string $contentType = self::contentTypes['contractsGetInterface'][0])
     {
-        $request = $this->contractsGetInterfaceRequest($address);
+        $request = $this->contractsGetInterfaceRequest($address, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4176,6 +5213,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -4200,6 +5244,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\ContractInterface' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -4214,6 +5261,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -4243,13 +5293,14 @@ class ContractsApi
      * Get JSON Schema [2020-12] interface for the contract
      *
      * @param  string $address Contract address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetInterface'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetInterfaceAsync($address)
+    public function contractsGetInterfaceAsync($address, string $contentType = self::contentTypes['contractsGetInterface'][0])
     {
-        return $this->contractsGetInterfaceAsyncWithHttpInfo($address)
+        return $this->contractsGetInterfaceAsyncWithHttpInfo($address, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4263,14 +5314,15 @@ class ContractsApi
      * Get JSON Schema [2020-12] interface for the contract
      *
      * @param  string $address Contract address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetInterface'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetInterfaceAsyncWithHttpInfo($address)
+    public function contractsGetInterfaceAsyncWithHttpInfo($address, string $contentType = self::contentTypes['contractsGetInterface'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\ContractInterface';
-        $request = $this->contractsGetInterfaceRequest($address);
+        $request = $this->contractsGetInterfaceRequest($address, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4280,6 +5332,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -4309,18 +5364,21 @@ class ContractsApi
      * Create request for operation 'contractsGetInterface'
      *
      * @param  string $address Contract address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetInterface'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetInterfaceRequest($address)
+    public function contractsGetInterfaceRequest($address, string $contentType = self::contentTypes['contractsGetInterface'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetInterface'
             );
         }
+
 
         $resourcePath = '/v1/contracts/{address}/interface';
         $formParams = [];
@@ -4341,16 +5399,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -4368,12 +5421,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -4389,10 +5442,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -4405,16 +5459,17 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BigMapKey
      */
-    public function contractsGetKey($address, $name, $key, $micheline = null)
+    public function contractsGetKey($address, $name, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey'][0])
     {
-        list($response) = $this->contractsGetKeyWithHttpInfo($address, $name, $key, $micheline);
+        list($response) = $this->contractsGetKeyWithHttpInfo($address, $name, $key, $micheline, $contentType);
         return $response;
     }
 
@@ -4425,16 +5480,17 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BigMapKey, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetKeyWithHttpInfo($address, $name, $key, $micheline = null)
+    public function contractsGetKeyWithHttpInfo($address, $name, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey'][0])
     {
-        $request = $this->contractsGetKeyRequest($address, $name, $key, $micheline);
+        $request = $this->contractsGetKeyRequest($address, $name, $key, $micheline, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4446,6 +5502,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -4470,6 +5533,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMapKey' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -4484,6 +5550,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -4514,15 +5583,16 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetKeyAsync($address, $name, $key, $micheline = null)
+    public function contractsGetKeyAsync($address, $name, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey'][0])
     {
-        return $this->contractsGetKeyAsyncWithHttpInfo($address, $name, $key, $micheline)
+        return $this->contractsGetKeyAsyncWithHttpInfo($address, $name, $key, $micheline, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4537,16 +5607,17 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetKeyAsyncWithHttpInfo($address, $name, $key, $micheline = null)
+    public function contractsGetKeyAsyncWithHttpInfo($address, $name, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BigMapKey';
-        $request = $this->contractsGetKeyRequest($address, $name, $key, $micheline);
+        $request = $this->contractsGetKeyRequest($address, $name, $key, $micheline, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4556,6 +5627,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -4586,32 +5660,38 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetKeyRequest($address, $name, $key, $micheline = null)
+    public function contractsGetKeyRequest($address, $name, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetKey'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $name when calling contractsGetKey'
             );
         }
+
         // verify the required parameter 'key' is set
         if ($key === null || (is_array($key) && count($key) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $key when calling contractsGetKey'
             );
         }
+
+
 
         $resourcePath = '/v1/contracts/{address}/bigmaps/{name}/keys/{key}';
         $formParams = [];
@@ -4621,16 +5701,14 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'OneOfMichelineFormat', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -4659,16 +5737,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -4686,12 +5759,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -4707,10 +5780,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -4724,16 +5798,17 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap key (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey2'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BigMapKeyHistorical
      */
-    public function contractsGetKey2($address, $name, $level, $key, $micheline = null)
+    public function contractsGetKey2($address, $name, $level, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey2'][0])
     {
-        list($response) = $this->contractsGetKey2WithHttpInfo($address, $name, $level, $key, $micheline);
+        list($response) = $this->contractsGetKey2WithHttpInfo($address, $name, $level, $key, $micheline, $contentType);
         return $response;
     }
 
@@ -4745,16 +5820,17 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap key (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey2'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BigMapKeyHistorical, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetKey2WithHttpInfo($address, $name, $level, $key, $micheline = null)
+    public function contractsGetKey2WithHttpInfo($address, $name, $level, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey2'][0])
     {
-        $request = $this->contractsGetKey2Request($address, $name, $level, $key, $micheline);
+        $request = $this->contractsGetKey2Request($address, $name, $level, $key, $micheline, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4766,6 +5842,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -4790,6 +5873,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMapKeyHistorical' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -4804,6 +5890,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -4835,15 +5924,16 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap key (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetKey2Async($address, $name, $level, $key, $micheline = null)
+    public function contractsGetKey2Async($address, $name, $level, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey2'][0])
     {
-        return $this->contractsGetKey2AsyncWithHttpInfo($address, $name, $level, $key, $micheline)
+        return $this->contractsGetKey2AsyncWithHttpInfo($address, $name, $level, $key, $micheline, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4859,16 +5949,17 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap key (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetKey2AsyncWithHttpInfo($address, $name, $level, $key, $micheline = null)
+    public function contractsGetKey2AsyncWithHttpInfo($address, $name, $level, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey2'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BigMapKeyHistorical';
-        $request = $this->contractsGetKey2Request($address, $name, $level, $key, $micheline);
+        $request = $this->contractsGetKey2Request($address, $name, $level, $key, $micheline, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4878,6 +5969,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -4909,38 +6003,45 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
      * @param  int $level Level of the block at which you want to get bigmap key (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfMichelineFormat $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKey2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetKey2Request($address, $name, $level, $key, $micheline = null)
+    public function contractsGetKey2Request($address, $name, $level, $key, $micheline = null, string $contentType = self::contentTypes['contractsGetKey2'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetKey2'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $name when calling contractsGetKey2'
             );
         }
+
         // verify the required parameter 'level' is set
         if ($level === null || (is_array($level) && count($level) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $level when calling contractsGetKey2'
             );
         }
+
         // verify the required parameter 'key' is set
         if ($key === null || (is_array($key) && count($key) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $key when calling contractsGetKey2'
             );
         }
+
+
 
         $resourcePath = '/v1/contracts/{address}/bigmaps/{name}/historical_keys/{level}/{key}';
         $formParams = [];
@@ -4950,16 +6051,14 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'OneOfMichelineFormat', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -4996,16 +6095,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -5023,12 +6117,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -5044,10 +6138,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -5060,19 +6155,20 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKeyUpdates'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BigMapKeyUpdate[]
      */
-    public function contractsGetKeyUpdates($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetKeyUpdates($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetKeyUpdates'][0])
     {
-        list($response) = $this->contractsGetKeyUpdatesWithHttpInfo($address, $name, $key, $sort, $offset, $limit, $micheline);
+        list($response) = $this->contractsGetKeyUpdatesWithHttpInfo($address, $name, $key, $sort, $offset, $limit, $micheline, $contentType);
         return $response;
     }
 
@@ -5083,19 +6179,20 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKeyUpdates'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BigMapKeyUpdate[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetKeyUpdatesWithHttpInfo($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetKeyUpdatesWithHttpInfo($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetKeyUpdates'][0])
     {
-        $request = $this->contractsGetKeyUpdatesRequest($address, $name, $key, $sort, $offset, $limit, $micheline);
+        $request = $this->contractsGetKeyUpdatesRequest($address, $name, $key, $sort, $offset, $limit, $micheline, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5107,6 +6204,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -5131,6 +6235,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMapKeyUpdate[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -5145,6 +6252,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -5175,18 +6285,19 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKeyUpdates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetKeyUpdatesAsync($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetKeyUpdatesAsync($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetKeyUpdates'][0])
     {
-        return $this->contractsGetKeyUpdatesAsyncWithHttpInfo($address, $name, $key, $sort, $offset, $limit, $micheline)
+        return $this->contractsGetKeyUpdatesAsyncWithHttpInfo($address, $name, $key, $sort, $offset, $limit, $micheline, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5201,19 +6312,20 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKeyUpdates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetKeyUpdatesAsyncWithHttpInfo($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetKeyUpdatesAsyncWithHttpInfo($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetKeyUpdates'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BigMapKeyUpdate[]';
-        $request = $this->contractsGetKeyUpdatesRequest($address, $name, $key, $sort, $offset, $limit, $micheline);
+        $request = $this->contractsGetKeyUpdatesRequest($address, $name, $key, $sort, $offset, $limit, $micheline, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5223,6 +6335,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -5253,41 +6368,49 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  string $name Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. (required)
-     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. (required)
-     * @param  OneOfSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  string $key Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. (required)
+     * @param  AccountsGetSortParameter $sort Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfMichelineFormat $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetKeyUpdates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetKeyUpdatesRequest($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null)
+    public function contractsGetKeyUpdatesRequest($address, $name, $key, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['contractsGetKeyUpdates'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetKeyUpdates'
             );
         }
+
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $name when calling contractsGetKeyUpdates'
             );
         }
+
         // verify the required parameter 'key' is set
         if ($key === null || (is_array($key) && count($key) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $key when calling contractsGetKeyUpdates'
             );
         }
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetKeyUpdates, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetKeyUpdates, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/contracts/{address}/bigmaps/{name}/keys/{key}/updates';
@@ -5298,49 +6421,41 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($micheline !== null) {
-            if('form' === 'form' && is_array($micheline)) {
-                foreach($micheline as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['micheline'] = $micheline;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'OneOfMichelineFormat', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -5369,16 +6484,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -5396,12 +6506,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -5417,10 +6527,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -5433,14 +6544,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorage'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\IMicheline
      */
-    public function contractsGetRawStorage($address, $level = 0)
+    public function contractsGetRawStorage($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorage'][0])
     {
-        list($response) = $this->contractsGetRawStorageWithHttpInfo($address, $level);
+        list($response) = $this->contractsGetRawStorageWithHttpInfo($address, $level, $contentType);
         return $response;
     }
 
@@ -5451,14 +6563,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorage'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\IMicheline, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetRawStorageWithHttpInfo($address, $level = 0)
+    public function contractsGetRawStorageWithHttpInfo($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorage'][0])
     {
-        $request = $this->contractsGetRawStorageRequest($address, $level);
+        $request = $this->contractsGetRawStorageRequest($address, $level, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5470,6 +6583,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -5494,6 +6614,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\IMicheline' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -5508,6 +6631,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -5538,13 +6664,14 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetRawStorageAsync($address, $level = 0)
+    public function contractsGetRawStorageAsync($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorage'][0])
     {
-        return $this->contractsGetRawStorageAsyncWithHttpInfo($address, $level)
+        return $this->contractsGetRawStorageAsyncWithHttpInfo($address, $level, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5559,14 +6686,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetRawStorageAsyncWithHttpInfo($address, $level = 0)
+    public function contractsGetRawStorageAsyncWithHttpInfo($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorage'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\IMicheline';
-        $request = $this->contractsGetRawStorageRequest($address, $level);
+        $request = $this->contractsGetRawStorageRequest($address, $level, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5576,6 +6704,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -5606,18 +6737,22 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetRawStorageRequest($address, $level = 0)
+    public function contractsGetRawStorageRequest($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorage'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetRawStorage'
             );
         }
+
+
 
         $resourcePath = '/v1/contracts/{address}/storage/raw';
         $formParams = [];
@@ -5627,16 +6762,14 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($level !== null) {
-            if('form' === 'form' && is_array($level)) {
-                foreach($level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['level'] = $level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -5649,16 +6782,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -5676,12 +6804,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -5697,10 +6825,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -5714,14 +6843,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageHistory'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\StorageRecord[]
      */
-    public function contractsGetRawStorageHistory($address, $last_id = 0, $limit = 10)
+    public function contractsGetRawStorageHistory($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetRawStorageHistory'][0])
     {
-        list($response) = $this->contractsGetRawStorageHistoryWithHttpInfo($address, $last_id, $limit);
+        list($response) = $this->contractsGetRawStorageHistoryWithHttpInfo($address, $last_id, $limit, $contentType);
         return $response;
     }
 
@@ -5733,14 +6863,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageHistory'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\StorageRecord[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetRawStorageHistoryWithHttpInfo($address, $last_id = 0, $limit = 10)
+    public function contractsGetRawStorageHistoryWithHttpInfo($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetRawStorageHistory'][0])
     {
-        $request = $this->contractsGetRawStorageHistoryRequest($address, $last_id, $limit);
+        $request = $this->contractsGetRawStorageHistoryRequest($address, $last_id, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5752,6 +6883,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -5776,6 +6914,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\StorageRecord[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -5790,6 +6931,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -5821,13 +6965,14 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetRawStorageHistoryAsync($address, $last_id = 0, $limit = 10)
+    public function contractsGetRawStorageHistoryAsync($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetRawStorageHistory'][0])
     {
-        return $this->contractsGetRawStorageHistoryAsyncWithHttpInfo($address, $last_id, $limit)
+        return $this->contractsGetRawStorageHistoryAsyncWithHttpInfo($address, $last_id, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5843,14 +6988,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetRawStorageHistoryAsyncWithHttpInfo($address, $last_id = 0, $limit = 10)
+    public function contractsGetRawStorageHistoryAsyncWithHttpInfo($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetRawStorageHistory'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\StorageRecord[]';
-        $request = $this->contractsGetRawStorageHistoryRequest($address, $last_id, $limit);
+        $request = $this->contractsGetRawStorageHistoryRequest($address, $last_id, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5860,6 +7006,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -5891,25 +7040,29 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetRawStorageHistoryRequest($address, $last_id = 0, $limit = 10)
+    public function contractsGetRawStorageHistoryRequest($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetRawStorageHistory'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetRawStorageHistory'
             );
         }
+
+
         if ($limit !== null && $limit > 1000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetRawStorageHistory, must be smaller than or equal to 1000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetRawStorageHistory, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/contracts/{address}/storage/raw/history';
         $formParams = [];
@@ -5919,27 +7072,23 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($last_id !== null) {
-            if('form' === 'form' && is_array($last_id)) {
-                foreach($last_id as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['lastId'] = $last_id;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_id,
+            'lastId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -5952,16 +7101,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -5979,12 +7123,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -6000,10 +7144,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -6016,14 +7161,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageSchema'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\IMicheline
      */
-    public function contractsGetRawStorageSchema($address, $level = 0)
+    public function contractsGetRawStorageSchema($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorageSchema'][0])
     {
-        list($response) = $this->contractsGetRawStorageSchemaWithHttpInfo($address, $level);
+        list($response) = $this->contractsGetRawStorageSchemaWithHttpInfo($address, $level, $contentType);
         return $response;
     }
 
@@ -6034,14 +7180,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageSchema'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\IMicheline, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetRawStorageSchemaWithHttpInfo($address, $level = 0)
+    public function contractsGetRawStorageSchemaWithHttpInfo($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorageSchema'][0])
     {
-        $request = $this->contractsGetRawStorageSchemaRequest($address, $level);
+        $request = $this->contractsGetRawStorageSchemaRequest($address, $level, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6053,6 +7200,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -6077,6 +7231,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\IMicheline' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -6091,6 +7248,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -6121,13 +7281,14 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageSchema'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetRawStorageSchemaAsync($address, $level = 0)
+    public function contractsGetRawStorageSchemaAsync($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorageSchema'][0])
     {
-        return $this->contractsGetRawStorageSchemaAsyncWithHttpInfo($address, $level)
+        return $this->contractsGetRawStorageSchemaAsyncWithHttpInfo($address, $level, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -6142,14 +7303,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageSchema'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetRawStorageSchemaAsyncWithHttpInfo($address, $level = 0)
+    public function contractsGetRawStorageSchemaAsyncWithHttpInfo($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorageSchema'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\IMicheline';
-        $request = $this->contractsGetRawStorageSchemaRequest($address, $level);
+        $request = $this->contractsGetRawStorageSchemaRequest($address, $level, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6159,6 +7321,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -6189,18 +7354,22 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetRawStorageSchema'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetRawStorageSchemaRequest($address, $level = 0)
+    public function contractsGetRawStorageSchemaRequest($address, $level = 0, string $contentType = self::contentTypes['contractsGetRawStorageSchema'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetRawStorageSchema'
             );
         }
+
+
 
         $resourcePath = '/v1/contracts/{address}/storage/raw/schema';
         $formParams = [];
@@ -6210,16 +7379,14 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($level !== null) {
-            if('form' === 'form' && is_array($level)) {
-                foreach($level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['level'] = $level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -6232,16 +7399,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -6259,12 +7421,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -6280,10 +7442,739 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation contractsGetSame
+     *
+     * Get same contracts
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\Contract[]
+     */
+    public function contractsGetSame($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    {
+        list($response) = $this->contractsGetSameWithHttpInfo($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation contractsGetSameWithHttpInfo
+     *
+     * Get same contracts
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\Contract[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function contractsGetSameWithHttpInfo($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    {
+        $request = $this->contractsGetSameRequest($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\Contract[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Contract[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\Contract[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\Contract[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\Contract[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation contractsGetSameAsync
+     *
+     * Get same contracts
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function contractsGetSameAsync($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    {
+        return $this->contractsGetSameAsyncWithHttpInfo($address, $select, $sort, $offset, $limit, $include_storage, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation contractsGetSameAsyncWithHttpInfo
+     *
+     * Get same contracts
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function contractsGetSameAsyncWithHttpInfo($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\Contract[]';
+        $request = $this->contractsGetSameRequest($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'contractsGetSame'
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function contractsGetSameRequest($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    {
+
+        // verify the required parameter 'address' is set
+        if ($address === null || (is_array($address) && count($address) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $address when calling contractsGetSame'
+            );
+        }
+
+
+
+
+        if ($limit !== null && $limit > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetSame, must be smaller than or equal to 10000.');
+        }
+        if ($limit !== null && $limit < 0) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetSame, must be bigger than or equal to 0.');
+        }
+        
+
+
+        $resourcePath = '/v1/contracts/{address}/same';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_storage,
+            'includeStorage', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($address !== null) {
+            $resourcePath = str_replace(
+                '{' . 'address' . '}',
+                ObjectSerializer::toPathValue($address),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation contractsGetSimilar
+     *
+     * Get similar contracts
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\Contract[]
+     */
+    public function contractsGetSimilar($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    {
+        list($response) = $this->contractsGetSimilarWithHttpInfo($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation contractsGetSimilarWithHttpInfo
+     *
+     * Get similar contracts
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\Contract[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function contractsGetSimilarWithHttpInfo($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    {
+        $request = $this->contractsGetSimilarRequest($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\Contract[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Contract[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\Contract[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\Contract[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\Contract[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation contractsGetSimilarAsync
+     *
+     * Get similar contracts
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function contractsGetSimilarAsync($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    {
+        return $this->contractsGetSimilarAsyncWithHttpInfo($address, $select, $sort, $offset, $limit, $include_storage, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation contractsGetSimilarAsyncWithHttpInfo
+     *
+     * Get similar contracts
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function contractsGetSimilarAsyncWithHttpInfo($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\Contract[]';
+        $request = $this->contractsGetSimilarRequest($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'contractsGetSimilar'
+     *
+     * @param  string $address Contract address (starting with KT) (required)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function contractsGetSimilarRequest($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    {
+
+        // verify the required parameter 'address' is set
+        if ($address === null || (is_array($address) && count($address) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $address when calling contractsGetSimilar'
+            );
+        }
+
+
+
+
+        if ($limit !== null && $limit > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetSimilar, must be smaller than or equal to 10000.');
+        }
+        if ($limit !== null && $limit < 0) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetSimilar, must be bigger than or equal to 0.');
+        }
+        
+
+
+        $resourcePath = '/v1/contracts/{address}/similar';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_storage,
+            'includeStorage', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($address !== null) {
+            $resourcePath = str_replace(
+                '{' . 'address' . '}',
+                ObjectSerializer::toPathValue($address),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -6297,14 +8188,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  string $path Path in the JSON value (point-separated list of field names, e.g. &#x60;path&#x3D;settings.refund_time&#x60; to return (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorage'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function contractsGetStorage($address, $level = 0, $path = null)
+    public function contractsGetStorage($address, $level = 0, $path = null, string $contentType = self::contentTypes['contractsGetStorage'][0])
     {
-        list($response) = $this->contractsGetStorageWithHttpInfo($address, $level, $path);
+        list($response) = $this->contractsGetStorageWithHttpInfo($address, $level, $path, $contentType);
         return $response;
     }
 
@@ -6316,14 +8208,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  string $path Path in the JSON value (point-separated list of field names, e.g. &#x60;path&#x3D;settings.refund_time&#x60; to return (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorage'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetStorageWithHttpInfo($address, $level = 0, $path = null)
+    public function contractsGetStorageWithHttpInfo($address, $level = 0, $path = null, string $contentType = self::contentTypes['contractsGetStorage'][0])
     {
-        $request = $this->contractsGetStorageRequest($address, $level, $path);
+        $request = $this->contractsGetStorageRequest($address, $level, $path, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6335,6 +8228,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -6359,6 +8259,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -6373,6 +8276,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -6404,13 +8310,14 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  string $path Path in the JSON value (point-separated list of field names, e.g. &#x60;path&#x3D;settings.refund_time&#x60; to return (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetStorageAsync($address, $level = 0, $path = null)
+    public function contractsGetStorageAsync($address, $level = 0, $path = null, string $contentType = self::contentTypes['contractsGetStorage'][0])
     {
-        return $this->contractsGetStorageAsyncWithHttpInfo($address, $level, $path)
+        return $this->contractsGetStorageAsyncWithHttpInfo($address, $level, $path, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -6426,14 +8333,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  string $path Path in the JSON value (point-separated list of field names, e.g. &#x60;path&#x3D;settings.refund_time&#x60; to return (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetStorageAsyncWithHttpInfo($address, $level = 0, $path = null)
+    public function contractsGetStorageAsyncWithHttpInfo($address, $level = 0, $path = null, string $contentType = self::contentTypes['contractsGetStorage'][0])
     {
         $returnType = '\SplFileObject';
-        $request = $this->contractsGetStorageRequest($address, $level, $path);
+        $request = $this->contractsGetStorageRequest($address, $level, $path, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6443,6 +8351,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -6474,18 +8385,23 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. (optional, default to 0)
      * @param  string $path Path in the JSON value (point-separated list of field names, e.g. &#x60;path&#x3D;settings.refund_time&#x60; to return (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetStorageRequest($address, $level = 0, $path = null)
+    public function contractsGetStorageRequest($address, $level = 0, $path = null, string $contentType = self::contentTypes['contractsGetStorage'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetStorage'
             );
         }
+
+
+
 
         $resourcePath = '/v1/contracts/{address}/storage';
         $formParams = [];
@@ -6495,27 +8411,23 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($level !== null) {
-            if('form' === 'form' && is_array($level)) {
-                foreach($level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['level'] = $level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($path !== null) {
-            if('form' === 'form' && is_array($path)) {
-                foreach($path as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['path'] = $path;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $path,
+            'path', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -6528,16 +8440,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/octet-stream']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/octet-stream'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/octet-stream', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -6555,12 +8462,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -6576,10 +8483,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -6593,14 +8501,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageHistory'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\StorageRecord[]
      */
-    public function contractsGetStorageHistory($address, $last_id = 0, $limit = 10)
+    public function contractsGetStorageHistory($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetStorageHistory'][0])
     {
-        list($response) = $this->contractsGetStorageHistoryWithHttpInfo($address, $last_id, $limit);
+        list($response) = $this->contractsGetStorageHistoryWithHttpInfo($address, $last_id, $limit, $contentType);
         return $response;
     }
 
@@ -6612,14 +8521,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageHistory'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\StorageRecord[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetStorageHistoryWithHttpInfo($address, $last_id = 0, $limit = 10)
+    public function contractsGetStorageHistoryWithHttpInfo($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetStorageHistory'][0])
     {
-        $request = $this->contractsGetStorageHistoryRequest($address, $last_id, $limit);
+        $request = $this->contractsGetStorageHistoryRequest($address, $last_id, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6631,6 +8541,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -6655,6 +8572,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\StorageRecord[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -6669,6 +8589,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -6700,13 +8623,14 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetStorageHistoryAsync($address, $last_id = 0, $limit = 10)
+    public function contractsGetStorageHistoryAsync($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetStorageHistory'][0])
     {
-        return $this->contractsGetStorageHistoryAsyncWithHttpInfo($address, $last_id, $limit)
+        return $this->contractsGetStorageHistoryAsyncWithHttpInfo($address, $last_id, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -6722,14 +8646,15 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetStorageHistoryAsyncWithHttpInfo($address, $last_id = 0, $limit = 10)
+    public function contractsGetStorageHistoryAsyncWithHttpInfo($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetStorageHistory'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\StorageRecord[]';
-        $request = $this->contractsGetStorageHistoryRequest($address, $last_id, $limit);
+        $request = $this->contractsGetStorageHistoryRequest($address, $last_id, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6739,6 +8664,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -6770,25 +8698,29 @@ class ContractsApi
      * @param  string $address Contract address (required)
      * @param  int $last_id Id of the last item received (for pagination) (optional, default to 0)
      * @param  int $limit Maximum number of items to return (optional, default to 10)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetStorageHistoryRequest($address, $last_id = 0, $limit = 10)
+    public function contractsGetStorageHistoryRequest($address, $last_id = 0, $limit = 10, string $contentType = self::contentTypes['contractsGetStorageHistory'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetStorageHistory'
             );
         }
+
+
         if ($limit !== null && $limit > 1000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetStorageHistory, must be smaller than or equal to 1000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling ContractsApi.contractsGetStorageHistory, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/contracts/{address}/storage/history';
         $formParams = [];
@@ -6798,27 +8730,23 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($last_id !== null) {
-            if('form' === 'form' && is_array($last_id)) {
-                foreach($last_id as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['lastId'] = $last_id;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_id,
+            'lastId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -6831,16 +8759,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -6858,12 +8781,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -6879,10 +8802,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -6895,14 +8819,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageSchema'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function contractsGetStorageSchema($address, $level = 0)
+    public function contractsGetStorageSchema($address, $level = 0, string $contentType = self::contentTypes['contractsGetStorageSchema'][0])
     {
-        list($response) = $this->contractsGetStorageSchemaWithHttpInfo($address, $level);
+        list($response) = $this->contractsGetStorageSchemaWithHttpInfo($address, $level, $contentType);
         return $response;
     }
 
@@ -6913,14 +8838,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageSchema'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetStorageSchemaWithHttpInfo($address, $level = 0)
+    public function contractsGetStorageSchemaWithHttpInfo($address, $level = 0, string $contentType = self::contentTypes['contractsGetStorageSchema'][0])
     {
-        $request = $this->contractsGetStorageSchemaRequest($address, $level);
+        $request = $this->contractsGetStorageSchemaRequest($address, $level, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6932,6 +8858,13 @@ class ContractsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -6956,6 +8889,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -6970,6 +8906,9 @@ class ContractsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -7000,13 +8939,14 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageSchema'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetStorageSchemaAsync($address, $level = 0)
+    public function contractsGetStorageSchemaAsync($address, $level = 0, string $contentType = self::contentTypes['contractsGetStorageSchema'][0])
     {
-        return $this->contractsGetStorageSchemaAsyncWithHttpInfo($address, $level)
+        return $this->contractsGetStorageSchemaAsyncWithHttpInfo($address, $level, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -7021,14 +8961,15 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageSchema'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetStorageSchemaAsyncWithHttpInfo($address, $level = 0)
+    public function contractsGetStorageSchemaAsyncWithHttpInfo($address, $level = 0, string $contentType = self::contentTypes['contractsGetStorageSchema'][0])
     {
         $returnType = '\SplFileObject';
-        $request = $this->contractsGetStorageSchemaRequest($address, $level);
+        $request = $this->contractsGetStorageSchemaRequest($address, $level, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -7038,6 +8979,9 @@ class ContractsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -7068,18 +9012,22 @@ class ContractsApi
      *
      * @param  string $address Contract address (required)
      * @param  int $level Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetStorageSchema'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetStorageSchemaRequest($address, $level = 0)
+    public function contractsGetStorageSchemaRequest($address, $level = 0, string $contentType = self::contentTypes['contractsGetStorageSchema'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling contractsGetStorageSchema'
             );
         }
+
+
 
         $resourcePath = '/v1/contracts/{address}/storage/schema';
         $formParams = [];
@@ -7089,16 +9037,14 @@ class ContractsApi
         $multipart = false;
 
         // query params
-        if ($level !== null) {
-            if('form' === 'form' && is_array($level)) {
-                foreach($level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['level'] = $level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -7111,16 +9057,11 @@ class ContractsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/octet-stream']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/octet-stream'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/octet-stream', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -7138,12 +9079,12 @@ class ContractsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -7159,10 +9100,11 @@ class ContractsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

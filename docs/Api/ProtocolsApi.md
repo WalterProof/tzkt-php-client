@@ -1,15 +1,15 @@
 # Bzzhh\Tzkt\ProtocolsApi
 
-All URIs are relative to https://api.tzkt.io.
+All URIs are relative to https://api.tzkt.io, except if the operation defines another base path.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**protocolsGet()**](ProtocolsApi.md#protocolsGet) | **GET** /v1/protocols | Get protocols
-[**protocolsGetByCode()**](ProtocolsApi.md#protocolsGetByCode) | **GET** /v1/protocols/{code} | Get protocol by code
-[**protocolsGetByCycle()**](ProtocolsApi.md#protocolsGetByCycle) | **GET** /v1/protocols/cycles/{cycle} | Get protocol by cycle
-[**protocolsGetByHash()**](ProtocolsApi.md#protocolsGetByHash) | **GET** /v1/protocols/{hash} | Get protocol by hash
-[**protocolsGetCount()**](ProtocolsApi.md#protocolsGetCount) | **GET** /v1/protocols/count | Get protocols count
-[**protocolsGetCurrent()**](ProtocolsApi.md#protocolsGetCurrent) | **GET** /v1/protocols/current | Get current protocol
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**protocolsGet()**](ProtocolsApi.md#protocolsGet) | **GET** /v1/protocols | Get protocols |
+| [**protocolsGetByCode()**](ProtocolsApi.md#protocolsGetByCode) | **GET** /v1/protocols/{code} | Get protocol by code |
+| [**protocolsGetByCycle()**](ProtocolsApi.md#protocolsGetByCycle) | **GET** /v1/protocols/cycles/{cycle} | Get protocol by cycle |
+| [**protocolsGetByHash()**](ProtocolsApi.md#protocolsGetByHash) | **GET** /v1/protocols/{hash} | Get protocol by hash |
+| [**protocolsGetCount()**](ProtocolsApi.md#protocolsGetCount) | **GET** /v1/protocols/count | Get protocols count |
+| [**protocolsGetCurrent()**](ProtocolsApi.md#protocolsGetCurrent) | **GET** /v1/protocols/current | Get current protocol |
 
 
 ## `protocolsGet()`
@@ -35,8 +35,8 @@ $apiInstance = new Bzzhh\Tzkt\Api\ProtocolsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts protocols by specified field. Supported fields: `id` (default), `code`, `firstLevel`, `lastLevel`.
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts protocols by specified field. Supported fields: `code` (default), `firstLevel`, `lastLevel`.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
 
 try {
@@ -49,11 +49,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts protocols by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;code&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts protocols by specified field. Supported fields: &#x60;code&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
 
 ### Return type
 
@@ -107,9 +107,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **code** | **int**| Protocol code (e.g. 4 for Athens, 5 for Babylon, etc) |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **code** | **int**| Protocol code (e.g. 4 for Athens, 5 for Babylon, etc) | |
 
 ### Return type
 
@@ -163,9 +163,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cycle** | **int**| Cycle index |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **cycle** | **int**| Cycle index | |
 
 ### Return type
 
@@ -219,9 +219,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **hash** | **string**| Protocol hash |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **hash** | **string**| Protocol hash | |
 
 ### Return type
 

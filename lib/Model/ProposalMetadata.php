@@ -2,7 +2,7 @@
 /**
  * ProposalMetadata
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -36,12 +36,11 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * ProposalMetadata Class Doc Comment
  *
  * @category Class
+ * @description Offchain metadata
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -52,7 +51,7 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ProposalMetadata';
+    protected static $openAPIModelName = 'Proposal_metadata';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +59,8 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'hash' => 'string',
         'alias' => 'string',
+        'hash' => 'string',
         'agora' => 'string',
         'invoice' => 'int'
     ];
@@ -74,11 +73,30 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'hash' => null,
         'alias' => null,
+        'hash' => null,
         'agora' => null,
         'invoice' => 'int64'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'alias' => true,
+		'hash' => true,
+		'agora' => true,
+		'invoice' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -101,14 +119,66 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
      * @var string[]
      */
     protected static $attributeMap = [
-        'hash' => 'hash',
         'alias' => 'alias',
+        'hash' => 'hash',
         'agora' => 'agora',
         'invoice' => 'invoice'
     ];
@@ -119,8 +189,8 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'hash' => 'setHash',
         'alias' => 'setAlias',
+        'hash' => 'setHash',
         'agora' => 'setAgora',
         'invoice' => 'setInvoice'
     ];
@@ -131,8 +201,8 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'hash' => 'getHash',
         'alias' => 'getAlias',
+        'hash' => 'getHash',
         'agora' => 'getAgora',
         'invoice' => 'getInvoice'
     ];
@@ -194,10 +264,28 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['hash'] = $data['hash'] ?? null;
-        $this->container['alias'] = $data['alias'] ?? null;
-        $this->container['agora'] = $data['agora'] ?? null;
-        $this->container['invoice'] = $data['invoice'] ?? null;
+        $this->setIfExists('alias', $data ?? [], null);
+        $this->setIfExists('hash', $data ?? [], null);
+        $this->setIfExists('agora', $data ?? [], null);
+        $this->setIfExists('invoice', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -225,30 +313,6 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets hash
-     *
-     * @return string|null
-     */
-    public function getHash()
-    {
-        return $this->container['hash'];
-    }
-
-    /**
-     * Sets hash
-     *
-     * @param string|null $hash hash
-     *
-     * @return self
-     */
-    public function setHash($hash)
-    {
-        $this->container['hash'] = $hash;
-
-        return $this;
-    }
-
-    /**
      * Gets alias
      *
      * @return string|null
@@ -261,13 +325,61 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets alias
      *
-     * @param string|null $alias alias
+     * @param string|null $alias Alias name of the proposal
      *
      * @return self
      */
     public function setAlias($alias)
     {
+
+        if (is_null($alias)) {
+            array_push($this->openAPINullablesSetToNull, 'alias');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('alias', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['alias'] = $alias;
+
+        return $this;
+    }
+
+    /**
+     * Gets hash
+     *
+     * @return string|null
+     */
+    public function getHash()
+    {
+        return $this->container['hash'];
+    }
+
+    /**
+     * Sets hash
+     *
+     * @param string|null $hash Hash of the proposal, which representing a tarball of concatenated .ml/.mli source files
+     *
+     * @return self
+     */
+    public function setHash($hash)
+    {
+
+        if (is_null($hash)) {
+            array_push($this->openAPINullablesSetToNull, 'hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['hash'] = $hash;
 
         return $this;
     }
@@ -285,12 +397,24 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets agora
      *
-     * @param string|null $agora agora
+     * @param string|null $agora Link to the proposal on Tezos Agora portall with full details
      *
      * @return self
      */
     public function setAgora($agora)
     {
+
+        if (is_null($agora)) {
+            array_push($this->openAPINullablesSetToNull, 'agora');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('agora', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['agora'] = $agora;
 
         return $this;
@@ -309,12 +433,17 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets invoice
      *
-     * @param int|null $invoice invoice
+     * @param int|null $invoice Reward for the proposal developers, that will be generated if the proposal is accepted
      *
      * @return self
      */
     public function setInvoice($invoice)
     {
+
+        if (is_null($invoice)) {
+            throw new \InvalidArgumentException('non-nullable invoice cannot be null');
+        }
+
         $this->container['invoice'] = $invoice;
 
         return $this;
@@ -326,7 +455,7 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -338,6 +467,7 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -351,7 +481,7 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -367,7 +497,7 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -379,6 +509,7 @@ class ProposalMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

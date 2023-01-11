@@ -1,7 +1,7 @@
 <?php
 /**
  * OperationsApiTest
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -121,6 +121,18 @@ class OperationsApiTest extends TestCase
     }
 
     /**
+     * Test case for operationsGetBakingById
+     *
+     * Get baking by id.
+     *
+     */
+    public function testOperationsGetBakingById()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for operationsGetBakingCount
      *
      * Get baking count.
@@ -211,6 +223,18 @@ class OperationsApiTest extends TestCase
      *
      */
     public function testOperationsGetDelegationByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetDelegationStatus
+     *
+     * Get delegation status.
+     *
+     */
+    public function testOperationsGetDelegationStatus()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -313,6 +337,78 @@ class OperationsApiTest extends TestCase
     }
 
     /**
+     * Test case for operationsGetDoublePreendorsing
+     *
+     * Get double preendorsing.
+     *
+     */
+    public function testOperationsGetDoublePreendorsing()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetDoublePreendorsingByHash
+     *
+     * Get double preendorsing by hash.
+     *
+     */
+    public function testOperationsGetDoublePreendorsingByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetDoublePreendorsingCount
+     *
+     * Get double preendorsing count.
+     *
+     */
+    public function testOperationsGetDoublePreendorsingCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetDrainDelegateByHash
+     *
+     * Get drain delegate by hash.
+     *
+     */
+    public function testOperationsGetDrainDelegateByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetDrainDelegateOps
+     *
+     * Get drain delegate.
+     *
+     */
+    public function testOperationsGetDrainDelegateOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetDrainDelegateOpsCount
+     *
+     * Get drain delegate count.
+     *
+     */
+    public function testOperationsGetDrainDelegateOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for operationsGetEndorsementByHash
      *
      * Get endorsement by hash.
@@ -343,6 +439,90 @@ class OperationsApiTest extends TestCase
      *
      */
     public function testOperationsGetEndorsementsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetEndorsingRewardById
+     *
+     * Get endorsing reward by id.
+     *
+     */
+    public function testOperationsGetEndorsingRewardById()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetEndorsingRewards
+     *
+     * Get endorsing rewards.
+     *
+     */
+    public function testOperationsGetEndorsingRewards()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetEndorsingRewardsCount
+     *
+     * Get endorsing rewards count.
+     *
+     */
+    public function testOperationsGetEndorsingRewardsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetIncreasePaidStorageByHash
+     *
+     * Get increase paid storage by hash.
+     *
+     */
+    public function testOperationsGetIncreasePaidStorageByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetIncreasePaidStorageCount
+     *
+     * Get increase paid storage count.
+     *
+     */
+    public function testOperationsGetIncreasePaidStorageCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetIncreasePaidStorageOps
+     *
+     * Get increase paid storage.
+     *
+     */
+    public function testOperationsGetIncreasePaidStorageOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetMigrationById
+     *
+     * Get migration by id.
+     *
+     */
+    public function testOperationsGetMigrationById()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -421,6 +601,18 @@ class OperationsApiTest extends TestCase
     }
 
     /**
+     * Test case for operationsGetOriginationStatus
+     *
+     * Get origination status.
+     *
+     */
+    public function testOperationsGetOriginationStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for operationsGetOriginations
      *
      * Get originations.
@@ -439,6 +631,42 @@ class OperationsApiTest extends TestCase
      *
      */
     public function testOperationsGetOriginationsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetPreendorsementByHash
+     *
+     * Get preendorsement by hash.
+     *
+     */
+    public function testOperationsGetPreendorsementByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetPreendorsements
+     *
+     * Get preendorsements.
+     *
+     */
+    public function testOperationsGetPreendorsements()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetPreendorsementsCount
+     *
+     * Get preendorsements count.
+     *
+     */
+    public function testOperationsGetPreendorsementsCount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -481,12 +709,72 @@ class OperationsApiTest extends TestCase
     }
 
     /**
+     * Test case for operationsGetRegisterConstantByHash
+     *
+     * Get register constant by hash.
+     *
+     */
+    public function testOperationsGetRegisterConstantByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetRegisterConstantStatus
+     *
+     * Get register constant status.
+     *
+     */
+    public function testOperationsGetRegisterConstantStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetRegisterConstants
+     *
+     * Get register constants.
+     *
+     */
+    public function testOperationsGetRegisterConstants()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetRegisterConstantsCount
+     *
+     * Get register constants count.
+     *
+     */
+    public function testOperationsGetRegisterConstantsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for operationsGetRevealByHash
      *
      * Get reveal by hash.
      *
      */
     public function testOperationsGetRevealByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetRevealStatus
+     *
+     * Get reveal status.
+     *
+     */
+    public function testOperationsGetRevealStatus()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -541,6 +829,78 @@ class OperationsApiTest extends TestCase
     }
 
     /**
+     * Test case for operationsGetRevelationPenaltyById
+     *
+     * Get revelation penalty by id.
+     *
+     */
+    public function testOperationsGetRevelationPenaltyById()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetSetDepositsLimitByHash
+     *
+     * Get set deposits limit by hash.
+     *
+     */
+    public function testOperationsGetSetDepositsLimitByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetSetDepositsLimitStatus
+     *
+     * Get set deposits limit status.
+     *
+     */
+    public function testOperationsGetSetDepositsLimitStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetSetDepositsLimits
+     *
+     * Get set deposits limits.
+     *
+     */
+    public function testOperationsGetSetDepositsLimits()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetSetDepositsLimitsCount
+     *
+     * Get set deposits limits count.
+     *
+     */
+    public function testOperationsGetSetDepositsLimitsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetStatus
+     *
+     * Get operation status.
+     *
+     */
+    public function testOperationsGetStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for operationsGetTransactionByHash
      *
      * Get transaction by hash.
@@ -577,6 +937,18 @@ class OperationsApiTest extends TestCase
     }
 
     /**
+     * Test case for operationsGetTransactionStatus
+     *
+     * Get transaction status.
+     *
+     */
+    public function testOperationsGetTransactionStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for operationsGetTransactions
      *
      * Get transactions.
@@ -595,6 +967,510 @@ class OperationsApiTest extends TestCase
      *
      */
     public function testOperationsGetTransactionsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTransferTicketOps
+     *
+     * Get transfer ticket.
+     *
+     */
+    public function testOperationsGetTransferTicketOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTransferTicketOpsByHash
+     *
+     * Get transfer ticket by hash.
+     *
+     */
+    public function testOperationsGetTransferTicketOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTransferTicketOpsCount
+     *
+     * Get transfer ticket count.
+     *
+     */
+    public function testOperationsGetTransferTicketOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTransferTicketStatus
+     *
+     * Get transfer ticket status.
+     *
+     */
+    public function testOperationsGetTransferTicketStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupCommitOps
+     *
+     * Get tx rollup commit.
+     *
+     */
+    public function testOperationsGetTxRollupCommitOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupCommitOpsByHash
+     *
+     * Get tx rollup commit by hash.
+     *
+     */
+    public function testOperationsGetTxRollupCommitOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupCommitOpsCount
+     *
+     * Get tx rollup commit count.
+     *
+     */
+    public function testOperationsGetTxRollupCommitOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupCommitStatus
+     *
+     * Get tx rollup commit status.
+     *
+     */
+    public function testOperationsGetTxRollupCommitStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupDispatchTicketsOps
+     *
+     * Get tx rollup dispatch tickets.
+     *
+     */
+    public function testOperationsGetTxRollupDispatchTicketsOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupDispatchTicketsOpsByHash
+     *
+     * Get tx rollup dispatch tickets by hash.
+     *
+     */
+    public function testOperationsGetTxRollupDispatchTicketsOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupDispatchTicketsOpsCount
+     *
+     * Get tx rollup dispatch tickets count.
+     *
+     */
+    public function testOperationsGetTxRollupDispatchTicketsOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupDispatchTicketsStatus
+     *
+     * Get tx rollup dispatch tickets status.
+     *
+     */
+    public function testOperationsGetTxRollupDispatchTicketsStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupFinalizeCommitmentOps
+     *
+     * Get tx rollup finalize commitment.
+     *
+     */
+    public function testOperationsGetTxRollupFinalizeCommitmentOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupFinalizeCommitmentOpsByHash
+     *
+     * Get tx rollup finalize commitment by hash.
+     *
+     */
+    public function testOperationsGetTxRollupFinalizeCommitmentOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupFinalizeCommitmentOpsCount
+     *
+     * Get tx rollup finalize commitment count.
+     *
+     */
+    public function testOperationsGetTxRollupFinalizeCommitmentOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupFinalizeCommitmentStatus
+     *
+     * Get tx rollup finalize commitment status.
+     *
+     */
+    public function testOperationsGetTxRollupFinalizeCommitmentStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupOriginationOps
+     *
+     * Get tx rollup origination.
+     *
+     */
+    public function testOperationsGetTxRollupOriginationOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupOriginationOpsByHash
+     *
+     * Get tx rollup origination by hash.
+     *
+     */
+    public function testOperationsGetTxRollupOriginationOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupOriginationOpsCount
+     *
+     * Get tx rollup origination count.
+     *
+     */
+    public function testOperationsGetTxRollupOriginationOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupOriginationStatus
+     *
+     * Get tx rollup origination status.
+     *
+     */
+    public function testOperationsGetTxRollupOriginationStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupRejectionOps
+     *
+     * Get tx rollup rejection.
+     *
+     */
+    public function testOperationsGetTxRollupRejectionOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupRejectionOpsByHash
+     *
+     * Get tx rollup rejection by hash.
+     *
+     */
+    public function testOperationsGetTxRollupRejectionOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupRejectionOpsCount
+     *
+     * Get tx rollup rejection count.
+     *
+     */
+    public function testOperationsGetTxRollupRejectionOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupRejectionStatus
+     *
+     * Get tx rollup rejection status.
+     *
+     */
+    public function testOperationsGetTxRollupRejectionStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupRemoveCommitmentOps
+     *
+     * Get tx rollup remove commitment.
+     *
+     */
+    public function testOperationsGetTxRollupRemoveCommitmentOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupRemoveCommitmentOpsByHash
+     *
+     * Get tx rollup remove commitment by hash.
+     *
+     */
+    public function testOperationsGetTxRollupRemoveCommitmentOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupRemoveCommitmentOpsCount
+     *
+     * Get tx rollup remove commitment count.
+     *
+     */
+    public function testOperationsGetTxRollupRemoveCommitmentOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupRemoveCommitmentStatus
+     *
+     * Get tx rollup remove commitment status.
+     *
+     */
+    public function testOperationsGetTxRollupRemoveCommitmentStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupReturnBondOps
+     *
+     * Get tx rollup return bond.
+     *
+     */
+    public function testOperationsGetTxRollupReturnBondOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupReturnBondOpsByHash
+     *
+     * Get tx rollup return bond by hash.
+     *
+     */
+    public function testOperationsGetTxRollupReturnBondOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupReturnBondOpsCount
+     *
+     * Get tx rollup return bond count.
+     *
+     */
+    public function testOperationsGetTxRollupReturnBondOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupReturnBondStatus
+     *
+     * Get tx rollup return bond status.
+     *
+     */
+    public function testOperationsGetTxRollupReturnBondStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupSubmitBatchOps
+     *
+     * Get tx rollup submit batch.
+     *
+     */
+    public function testOperationsGetTxRollupSubmitBatchOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupSubmitBatchOpsByHash
+     *
+     * Get tx rollup submit batch by hash.
+     *
+     */
+    public function testOperationsGetTxRollupSubmitBatchOpsByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupSubmitBatchOpsCount
+     *
+     * Get tx rollup submit batch count.
+     *
+     */
+    public function testOperationsGetTxRollupSubmitBatchOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetTxRollupSubmitBatchStatus
+     *
+     * Get tx rollup submit batch status.
+     *
+     */
+    public function testOperationsGetTxRollupSubmitBatchStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetUpdateConsensusKeyByHash
+     *
+     * Get update consensus key by hash.
+     *
+     */
+    public function testOperationsGetUpdateConsensusKeyByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetUpdateConsensusKeyOps
+     *
+     * Get update consensus key.
+     *
+     */
+    public function testOperationsGetUpdateConsensusKeyOps()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetUpdateConsensusKeyOpsCount
+     *
+     * Get update consensus key count.
+     *
+     */
+    public function testOperationsGetUpdateConsensusKeyOpsCount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetVdfRevelationByHash
+     *
+     * Get vdf revelation by hash.
+     *
+     */
+    public function testOperationsGetVdfRevelationByHash()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetVdfRevelations
+     *
+     * Get vdf revelations.
+     *
+     */
+    public function testOperationsGetVdfRevelations()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for operationsGetVdfRevelationsCount
+     *
+     * Get vdf revelations count.
+     *
+     */
+    public function testOperationsGetVdfRevelationsCount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

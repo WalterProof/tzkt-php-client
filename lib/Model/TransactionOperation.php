@@ -2,7 +2,7 @@
 /**
  * TransactionOperation
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -37,9 +37,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class TransactionOperation extends Operation
 {
@@ -67,6 +65,7 @@ class TransactionOperation extends Operation
         'counter' => 'int',
         'initiator' => 'OneOfAlias',
         'sender' => 'OneOfAlias',
+        'sender_code_hash' => 'int',
         'nonce' => 'int',
         'gas_limit' => 'int',
         'gas_used' => 'int',
@@ -76,6 +75,7 @@ class TransactionOperation extends Operation
         'storage_fee' => 'int',
         'allocation_fee' => 'int',
         'target' => 'OneOfAlias',
+        'target_code_hash' => 'int',
         'amount' => 'int',
         'parameter' => 'OneOfTxParameter',
         'storage' => 'mixed',
@@ -83,8 +83,9 @@ class TransactionOperation extends Operation
         'status' => 'string',
         'errors' => '\Bzzhh\Tzkt\Model\OperationError[]',
         'has_internals' => 'bool',
-        'quote' => 'OneOfQuoteShort',
-        'parameters' => 'string'
+        'token_transfers_count' => 'int',
+        'events_count' => 'int',
+        'quote' => 'OneOfQuoteShort'
     ];
 
     /**
@@ -96,7 +97,7 @@ class TransactionOperation extends Operation
       */
     protected static $openAPIFormats = [
         'type' => null,
-        'id' => 'int32',
+        'id' => 'int64',
         'level' => 'int32',
         'timestamp' => 'date-time',
         'block' => null,
@@ -104,6 +105,7 @@ class TransactionOperation extends Operation
         'counter' => 'int32',
         'initiator' => null,
         'sender' => null,
+        'sender_code_hash' => 'int32',
         'nonce' => 'int32',
         'gas_limit' => 'int32',
         'gas_used' => 'int32',
@@ -113,6 +115,7 @@ class TransactionOperation extends Operation
         'storage_fee' => 'int64',
         'allocation_fee' => 'int64',
         'target' => null,
+        'target_code_hash' => 'int32',
         'amount' => 'int64',
         'parameter' => null,
         'storage' => null,
@@ -120,9 +123,55 @@ class TransactionOperation extends Operation
         'status' => null,
         'errors' => null,
         'has_internals' => null,
-        'quote' => null,
-        'parameters' => null
+        'token_transfers_count' => 'int32',
+        'events_count' => 'int32',
+        'quote' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'type' => true,
+		'id' => false,
+		'level' => false,
+		'timestamp' => false,
+		'block' => true,
+		'hash' => true,
+		'counter' => false,
+		'initiator' => true,
+		'sender' => true,
+		'sender_code_hash' => true,
+		'nonce' => true,
+		'gas_limit' => false,
+		'gas_used' => false,
+		'storage_limit' => false,
+		'storage_used' => false,
+		'baker_fee' => false,
+		'storage_fee' => false,
+		'allocation_fee' => false,
+		'target' => true,
+		'target_code_hash' => true,
+		'amount' => false,
+		'parameter' => true,
+		'storage' => true,
+		'diffs' => true,
+		'status' => true,
+		'errors' => true,
+		'has_internals' => false,
+		'token_transfers_count' => true,
+		'events_count' => true,
+		'quote' => true
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -145,6 +194,58 @@ class TransactionOperation extends Operation
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables + parent::openAPINullables();
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -160,6 +261,7 @@ class TransactionOperation extends Operation
         'counter' => 'counter',
         'initiator' => 'initiator',
         'sender' => 'sender',
+        'sender_code_hash' => 'senderCodeHash',
         'nonce' => 'nonce',
         'gas_limit' => 'gasLimit',
         'gas_used' => 'gasUsed',
@@ -169,6 +271,7 @@ class TransactionOperation extends Operation
         'storage_fee' => 'storageFee',
         'allocation_fee' => 'allocationFee',
         'target' => 'target',
+        'target_code_hash' => 'targetCodeHash',
         'amount' => 'amount',
         'parameter' => 'parameter',
         'storage' => 'storage',
@@ -176,8 +279,9 @@ class TransactionOperation extends Operation
         'status' => 'status',
         'errors' => 'errors',
         'has_internals' => 'hasInternals',
-        'quote' => 'quote',
-        'parameters' => 'parameters'
+        'token_transfers_count' => 'tokenTransfersCount',
+        'events_count' => 'eventsCount',
+        'quote' => 'quote'
     ];
 
     /**
@@ -195,6 +299,7 @@ class TransactionOperation extends Operation
         'counter' => 'setCounter',
         'initiator' => 'setInitiator',
         'sender' => 'setSender',
+        'sender_code_hash' => 'setSenderCodeHash',
         'nonce' => 'setNonce',
         'gas_limit' => 'setGasLimit',
         'gas_used' => 'setGasUsed',
@@ -204,6 +309,7 @@ class TransactionOperation extends Operation
         'storage_fee' => 'setStorageFee',
         'allocation_fee' => 'setAllocationFee',
         'target' => 'setTarget',
+        'target_code_hash' => 'setTargetCodeHash',
         'amount' => 'setAmount',
         'parameter' => 'setParameter',
         'storage' => 'setStorage',
@@ -211,8 +317,9 @@ class TransactionOperation extends Operation
         'status' => 'setStatus',
         'errors' => 'setErrors',
         'has_internals' => 'setHasInternals',
-        'quote' => 'setQuote',
-        'parameters' => 'setParameters'
+        'token_transfers_count' => 'setTokenTransfersCount',
+        'events_count' => 'setEventsCount',
+        'quote' => 'setQuote'
     ];
 
     /**
@@ -230,6 +337,7 @@ class TransactionOperation extends Operation
         'counter' => 'getCounter',
         'initiator' => 'getInitiator',
         'sender' => 'getSender',
+        'sender_code_hash' => 'getSenderCodeHash',
         'nonce' => 'getNonce',
         'gas_limit' => 'getGasLimit',
         'gas_used' => 'getGasUsed',
@@ -239,6 +347,7 @@ class TransactionOperation extends Operation
         'storage_fee' => 'getStorageFee',
         'allocation_fee' => 'getAllocationFee',
         'target' => 'getTarget',
+        'target_code_hash' => 'getTargetCodeHash',
         'amount' => 'getAmount',
         'parameter' => 'getParameter',
         'storage' => 'getStorage',
@@ -246,8 +355,9 @@ class TransactionOperation extends Operation
         'status' => 'getStatus',
         'errors' => 'getErrors',
         'has_internals' => 'getHasInternals',
-        'quote' => 'getQuote',
-        'parameters' => 'getParameters'
+        'token_transfers_count' => 'getTokenTransfersCount',
+        'events_count' => 'getEventsCount',
+        'quote' => 'getQuote'
     ];
 
     /**
@@ -303,33 +413,54 @@ class TransactionOperation extends Operation
     {
         parent::__construct($data);
 
-        $this->container['type'] = $data['type'] ?? null;
-        $this->container['id'] = $data['id'] ?? null;
-        $this->container['level'] = $data['level'] ?? null;
-        $this->container['timestamp'] = $data['timestamp'] ?? null;
-        $this->container['block'] = $data['block'] ?? null;
-        $this->container['hash'] = $data['hash'] ?? null;
-        $this->container['counter'] = $data['counter'] ?? null;
-        $this->container['initiator'] = $data['initiator'] ?? null;
-        $this->container['sender'] = $data['sender'] ?? null;
-        $this->container['nonce'] = $data['nonce'] ?? null;
-        $this->container['gas_limit'] = $data['gas_limit'] ?? null;
-        $this->container['gas_used'] = $data['gas_used'] ?? null;
-        $this->container['storage_limit'] = $data['storage_limit'] ?? null;
-        $this->container['storage_used'] = $data['storage_used'] ?? null;
-        $this->container['baker_fee'] = $data['baker_fee'] ?? null;
-        $this->container['storage_fee'] = $data['storage_fee'] ?? null;
-        $this->container['allocation_fee'] = $data['allocation_fee'] ?? null;
-        $this->container['target'] = $data['target'] ?? null;
-        $this->container['amount'] = $data['amount'] ?? null;
-        $this->container['parameter'] = $data['parameter'] ?? null;
-        $this->container['storage'] = $data['storage'] ?? null;
-        $this->container['diffs'] = $data['diffs'] ?? null;
-        $this->container['status'] = $data['status'] ?? null;
-        $this->container['errors'] = $data['errors'] ?? null;
-        $this->container['has_internals'] = $data['has_internals'] ?? null;
-        $this->container['quote'] = $data['quote'] ?? null;
-        $this->container['parameters'] = $data['parameters'] ?? null;
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('block', $data ?? [], null);
+        $this->setIfExists('hash', $data ?? [], null);
+        $this->setIfExists('counter', $data ?? [], null);
+        $this->setIfExists('initiator', $data ?? [], null);
+        $this->setIfExists('sender', $data ?? [], null);
+        $this->setIfExists('sender_code_hash', $data ?? [], null);
+        $this->setIfExists('nonce', $data ?? [], null);
+        $this->setIfExists('gas_limit', $data ?? [], null);
+        $this->setIfExists('gas_used', $data ?? [], null);
+        $this->setIfExists('storage_limit', $data ?? [], null);
+        $this->setIfExists('storage_used', $data ?? [], null);
+        $this->setIfExists('baker_fee', $data ?? [], null);
+        $this->setIfExists('storage_fee', $data ?? [], null);
+        $this->setIfExists('allocation_fee', $data ?? [], null);
+        $this->setIfExists('target', $data ?? [], null);
+        $this->setIfExists('target_code_hash', $data ?? [], null);
+        $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('parameter', $data ?? [], null);
+        $this->setIfExists('storage', $data ?? [], null);
+        $this->setIfExists('diffs', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('errors', $data ?? [], null);
+        $this->setIfExists('has_internals', $data ?? [], null);
+        $this->setIfExists('token_transfers_count', $data ?? [], null);
+        $this->setIfExists('events_count', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -341,9 +472,6 @@ class TransactionOperation extends Operation
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -362,7 +490,7 @@ class TransactionOperation extends Operation
     /**
      * Gets type
      *
-     * @return string
+     * @return string|null
      */
     public function getType()
     {
@@ -372,12 +500,24 @@ class TransactionOperation extends Operation
     /**
      * Sets type
      *
-     * @param string $type Type of the operation, `transaction` - is a standard operation used to transfer tezos tokens to an account
+     * @param string|null $type Type of the operation, `transaction` - is a standard operation used to transfer tezos tokens to an account
      *
      * @return self
      */
     public function setType($type)
     {
+
+        if (is_null($type)) {
+            array_push($this->openAPINullablesSetToNull, 'type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['type'] = $type;
 
         return $this;
@@ -402,6 +542,11 @@ class TransactionOperation extends Operation
      */
     public function setId($id)
     {
+
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+
         $this->container['id'] = $id;
 
         return $this;
@@ -426,6 +571,11 @@ class TransactionOperation extends Operation
      */
     public function setLevel($level)
     {
+
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
+        }
+
         $this->container['level'] = $level;
 
         return $this;
@@ -450,6 +600,11 @@ class TransactionOperation extends Operation
      */
     public function setTimestamp($timestamp)
     {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
         $this->container['timestamp'] = $timestamp;
 
         return $this;
@@ -474,6 +629,18 @@ class TransactionOperation extends Operation
      */
     public function setBlock($block)
     {
+
+        if (is_null($block)) {
+            array_push($this->openAPINullablesSetToNull, 'block');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('block', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['block'] = $block;
 
         return $this;
@@ -498,6 +665,18 @@ class TransactionOperation extends Operation
      */
     public function setHash($hash)
     {
+
+        if (is_null($hash)) {
+            array_push($this->openAPINullablesSetToNull, 'hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['hash'] = $hash;
 
         return $this;
@@ -522,6 +701,11 @@ class TransactionOperation extends Operation
      */
     public function setCounter($counter)
     {
+
+        if (is_null($counter)) {
+            throw new \InvalidArgumentException('non-nullable counter cannot be null');
+        }
+
         $this->container['counter'] = $counter;
 
         return $this;
@@ -546,6 +730,18 @@ class TransactionOperation extends Operation
      */
     public function setInitiator($initiator)
     {
+
+        if (is_null($initiator)) {
+            array_push($this->openAPINullablesSetToNull, 'initiator');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('initiator', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['initiator'] = $initiator;
 
         return $this;
@@ -570,7 +766,55 @@ class TransactionOperation extends Operation
      */
     public function setSender($sender)
     {
+
+        if (is_null($sender)) {
+            array_push($this->openAPINullablesSetToNull, 'sender');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sender', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['sender'] = $sender;
+
+        return $this;
+    }
+
+    /**
+     * Gets sender_code_hash
+     *
+     * @return int|null
+     */
+    public function getSenderCodeHash()
+    {
+        return $this->container['sender_code_hash'];
+    }
+
+    /**
+     * Sets sender_code_hash
+     *
+     * @param int|null $sender_code_hash Hash of the sender contract code, or `null` is the sender is not a contract
+     *
+     * @return self
+     */
+    public function setSenderCodeHash($sender_code_hash)
+    {
+
+        if (is_null($sender_code_hash)) {
+            array_push($this->openAPINullablesSetToNull, 'sender_code_hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sender_code_hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['sender_code_hash'] = $sender_code_hash;
 
         return $this;
     }
@@ -594,6 +838,18 @@ class TransactionOperation extends Operation
      */
     public function setNonce($nonce)
     {
+
+        if (is_null($nonce)) {
+            array_push($this->openAPINullablesSetToNull, 'nonce');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('nonce', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['nonce'] = $nonce;
 
         return $this;
@@ -618,6 +874,11 @@ class TransactionOperation extends Operation
      */
     public function setGasLimit($gas_limit)
     {
+
+        if (is_null($gas_limit)) {
+            throw new \InvalidArgumentException('non-nullable gas_limit cannot be null');
+        }
+
         $this->container['gas_limit'] = $gas_limit;
 
         return $this;
@@ -642,6 +903,11 @@ class TransactionOperation extends Operation
      */
     public function setGasUsed($gas_used)
     {
+
+        if (is_null($gas_used)) {
+            throw new \InvalidArgumentException('non-nullable gas_used cannot be null');
+        }
+
         $this->container['gas_used'] = $gas_used;
 
         return $this;
@@ -666,6 +932,11 @@ class TransactionOperation extends Operation
      */
     public function setStorageLimit($storage_limit)
     {
+
+        if (is_null($storage_limit)) {
+            throw new \InvalidArgumentException('non-nullable storage_limit cannot be null');
+        }
+
         $this->container['storage_limit'] = $storage_limit;
 
         return $this;
@@ -690,6 +961,11 @@ class TransactionOperation extends Operation
      */
     public function setStorageUsed($storage_used)
     {
+
+        if (is_null($storage_used)) {
+            throw new \InvalidArgumentException('non-nullable storage_used cannot be null');
+        }
+
         $this->container['storage_used'] = $storage_used;
 
         return $this;
@@ -714,6 +990,11 @@ class TransactionOperation extends Operation
      */
     public function setBakerFee($baker_fee)
     {
+
+        if (is_null($baker_fee)) {
+            throw new \InvalidArgumentException('non-nullable baker_fee cannot be null');
+        }
+
         $this->container['baker_fee'] = $baker_fee;
 
         return $this;
@@ -738,6 +1019,11 @@ class TransactionOperation extends Operation
      */
     public function setStorageFee($storage_fee)
     {
+
+        if (is_null($storage_fee)) {
+            throw new \InvalidArgumentException('non-nullable storage_fee cannot be null');
+        }
+
         $this->container['storage_fee'] = $storage_fee;
 
         return $this;
@@ -762,6 +1048,11 @@ class TransactionOperation extends Operation
      */
     public function setAllocationFee($allocation_fee)
     {
+
+        if (is_null($allocation_fee)) {
+            throw new \InvalidArgumentException('non-nullable allocation_fee cannot be null');
+        }
+
         $this->container['allocation_fee'] = $allocation_fee;
 
         return $this;
@@ -786,7 +1077,55 @@ class TransactionOperation extends Operation
      */
     public function setTarget($target)
     {
+
+        if (is_null($target)) {
+            array_push($this->openAPINullablesSetToNull, 'target');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('target', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['target'] = $target;
+
+        return $this;
+    }
+
+    /**
+     * Gets target_code_hash
+     *
+     * @return int|null
+     */
+    public function getTargetCodeHash()
+    {
+        return $this->container['target_code_hash'];
+    }
+
+    /**
+     * Sets target_code_hash
+     *
+     * @param int|null $target_code_hash Hash of the target contract code, or `null` is the target is not a contract
+     *
+     * @return self
+     */
+    public function setTargetCodeHash($target_code_hash)
+    {
+
+        if (is_null($target_code_hash)) {
+            array_push($this->openAPINullablesSetToNull, 'target_code_hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('target_code_hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['target_code_hash'] = $target_code_hash;
 
         return $this;
     }
@@ -810,6 +1149,11 @@ class TransactionOperation extends Operation
      */
     public function setAmount($amount)
     {
+
+        if (is_null($amount)) {
+            throw new \InvalidArgumentException('non-nullable amount cannot be null');
+        }
+
         $this->container['amount'] = $amount;
 
         return $this;
@@ -834,6 +1178,18 @@ class TransactionOperation extends Operation
      */
     public function setParameter($parameter)
     {
+
+        if (is_null($parameter)) {
+            array_push($this->openAPINullablesSetToNull, 'parameter');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('parameter', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['parameter'] = $parameter;
 
         return $this;
@@ -858,6 +1214,18 @@ class TransactionOperation extends Operation
      */
     public function setStorage($storage)
     {
+
+        if (is_null($storage)) {
+            array_push($this->openAPINullablesSetToNull, 'storage');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('storage', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['storage'] = $storage;
 
         return $this;
@@ -882,6 +1250,18 @@ class TransactionOperation extends Operation
      */
     public function setDiffs($diffs)
     {
+
+        if (is_null($diffs)) {
+            array_push($this->openAPINullablesSetToNull, 'diffs');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('diffs', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['diffs'] = $diffs;
 
         return $this;
@@ -906,6 +1286,18 @@ class TransactionOperation extends Operation
      */
     public function setStatus($status)
     {
+
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['status'] = $status;
 
         return $this;
@@ -930,6 +1322,18 @@ class TransactionOperation extends Operation
      */
     public function setErrors($errors)
     {
+
+        if (is_null($errors)) {
+            array_push($this->openAPINullablesSetToNull, 'errors');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('errors', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['errors'] = $errors;
 
         return $this;
@@ -954,7 +1358,84 @@ class TransactionOperation extends Operation
      */
     public function setHasInternals($has_internals)
     {
+
+        if (is_null($has_internals)) {
+            throw new \InvalidArgumentException('non-nullable has_internals cannot be null');
+        }
+
         $this->container['has_internals'] = $has_internals;
+
+        return $this;
+    }
+
+    /**
+     * Gets token_transfers_count
+     *
+     * @return int|null
+     */
+    public function getTokenTransfersCount()
+    {
+        return $this->container['token_transfers_count'];
+    }
+
+    /**
+     * Sets token_transfers_count
+     *
+     * @param int|null $token_transfers_count Number of token transfers produced by the operation, or `null` if there are no transfers
+     *
+     * @return self
+     */
+    public function setTokenTransfersCount($token_transfers_count)
+    {
+
+        if (is_null($token_transfers_count)) {
+            array_push($this->openAPINullablesSetToNull, 'token_transfers_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('token_transfers_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['token_transfers_count'] = $token_transfers_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets events_count
+     *
+     * @return int|null
+     */
+    public function getEventsCount()
+    {
+        return $this->container['events_count'];
+    }
+
+    /**
+     * Sets events_count
+     *
+     * @param int|null $events_count Number of events produced by the operation, or `null` if there are no events
+     *
+     * @return self
+     */
+    public function setEventsCount($events_count)
+    {
+
+        if (is_null($events_count)) {
+            array_push($this->openAPINullablesSetToNull, 'events_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('events_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['events_count'] = $events_count;
 
         return $this;
     }
@@ -978,31 +1459,19 @@ class TransactionOperation extends Operation
      */
     public function setQuote($quote)
     {
+
+        if (is_null($quote)) {
+            array_push($this->openAPINullablesSetToNull, 'quote');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['quote'] = $quote;
-
-        return $this;
-    }
-
-    /**
-     * Gets parameters
-     *
-     * @return string|null
-     */
-    public function getParameters()
-    {
-        return $this->container['parameters'];
-    }
-
-    /**
-     * Sets parameters
-     *
-     * @param string|null $parameters **DEPRECATED**. Use `entrypoint` and `parameter` instead.
-     *
-     * @return self
-     */
-    public function setParameters($parameters)
-    {
-        $this->container['parameters'] = $parameters;
 
         return $this;
     }
@@ -1013,7 +1482,7 @@ class TransactionOperation extends Operation
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -1025,6 +1494,7 @@ class TransactionOperation extends Operation
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -1038,7 +1508,7 @@ class TransactionOperation extends Operation
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -1054,7 +1524,7 @@ class TransactionOperation extends Operation
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -1066,6 +1536,7 @@ class TransactionOperation extends Operation
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

@@ -2,7 +2,7 @@
 /**
  * RevelationPenaltyOperation
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -37,9 +37,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class RevelationPenaltyOperation extends Operation
 {
@@ -65,9 +63,10 @@ class RevelationPenaltyOperation extends Operation
         'block' => 'string',
         'baker' => 'OneOfAlias',
         'missed_level' => 'int',
+        'loss' => 'int',
+        'quote' => 'OneOfQuoteShort',
         'lost_reward' => 'int',
-        'lost_fees' => 'int',
-        'quote' => 'OneOfQuoteShort'
+        'lost_fees' => 'int'
     ];
 
     /**
@@ -79,16 +78,43 @@ class RevelationPenaltyOperation extends Operation
       */
     protected static $openAPIFormats = [
         'type' => null,
-        'id' => 'int32',
+        'id' => 'int64',
         'level' => 'int32',
         'timestamp' => 'date-time',
         'block' => null,
         'baker' => null,
         'missed_level' => 'int32',
+        'loss' => 'int64',
+        'quote' => null,
         'lost_reward' => 'int64',
-        'lost_fees' => 'int64',
-        'quote' => null
+        'lost_fees' => 'int64'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'type' => true,
+		'id' => false,
+		'level' => false,
+		'timestamp' => false,
+		'block' => true,
+		'baker' => true,
+		'missed_level' => false,
+		'loss' => false,
+		'quote' => true,
+		'lost_reward' => false,
+		'lost_fees' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -111,6 +137,58 @@ class RevelationPenaltyOperation extends Operation
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables + parent::openAPINullables();
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -124,9 +202,10 @@ class RevelationPenaltyOperation extends Operation
         'block' => 'block',
         'baker' => 'baker',
         'missed_level' => 'missedLevel',
+        'loss' => 'loss',
+        'quote' => 'quote',
         'lost_reward' => 'lostReward',
-        'lost_fees' => 'lostFees',
-        'quote' => 'quote'
+        'lost_fees' => 'lostFees'
     ];
 
     /**
@@ -142,9 +221,10 @@ class RevelationPenaltyOperation extends Operation
         'block' => 'setBlock',
         'baker' => 'setBaker',
         'missed_level' => 'setMissedLevel',
+        'loss' => 'setLoss',
+        'quote' => 'setQuote',
         'lost_reward' => 'setLostReward',
-        'lost_fees' => 'setLostFees',
-        'quote' => 'setQuote'
+        'lost_fees' => 'setLostFees'
     ];
 
     /**
@@ -160,9 +240,10 @@ class RevelationPenaltyOperation extends Operation
         'block' => 'getBlock',
         'baker' => 'getBaker',
         'missed_level' => 'getMissedLevel',
+        'loss' => 'getLoss',
+        'quote' => 'getQuote',
         'lost_reward' => 'getLostReward',
-        'lost_fees' => 'getLostFees',
-        'quote' => 'getQuote'
+        'lost_fees' => 'getLostFees'
     ];
 
     /**
@@ -218,16 +299,35 @@ class RevelationPenaltyOperation extends Operation
     {
         parent::__construct($data);
 
-        $this->container['type'] = $data['type'] ?? null;
-        $this->container['id'] = $data['id'] ?? null;
-        $this->container['level'] = $data['level'] ?? null;
-        $this->container['timestamp'] = $data['timestamp'] ?? null;
-        $this->container['block'] = $data['block'] ?? null;
-        $this->container['baker'] = $data['baker'] ?? null;
-        $this->container['missed_level'] = $data['missed_level'] ?? null;
-        $this->container['lost_reward'] = $data['lost_reward'] ?? null;
-        $this->container['lost_fees'] = $data['lost_fees'] ?? null;
-        $this->container['quote'] = $data['quote'] ?? null;
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('block', $data ?? [], null);
+        $this->setIfExists('baker', $data ?? [], null);
+        $this->setIfExists('missed_level', $data ?? [], null);
+        $this->setIfExists('loss', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('lost_reward', $data ?? [], null);
+        $this->setIfExists('lost_fees', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -239,9 +339,6 @@ class RevelationPenaltyOperation extends Operation
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -260,7 +357,7 @@ class RevelationPenaltyOperation extends Operation
     /**
      * Gets type
      *
-     * @return string
+     * @return string|null
      */
     public function getType()
     {
@@ -270,12 +367,24 @@ class RevelationPenaltyOperation extends Operation
     /**
      * Sets type
      *
-     * @param string $type Type of the operation, `revelation_penalty` - is operation, in which rewards were lost due to unrevealed seed nonces by the delegate (synthetic type)
+     * @param string|null $type Type of the operation, `revelation_penalty` - is operation, in which rewards were lost due to unrevealed seed nonces by the delegate (synthetic type)
      *
      * @return self
      */
     public function setType($type)
     {
+
+        if (is_null($type)) {
+            array_push($this->openAPINullablesSetToNull, 'type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['type'] = $type;
 
         return $this;
@@ -300,6 +409,11 @@ class RevelationPenaltyOperation extends Operation
      */
     public function setId($id)
     {
+
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+
         $this->container['id'] = $id;
 
         return $this;
@@ -324,6 +438,11 @@ class RevelationPenaltyOperation extends Operation
      */
     public function setLevel($level)
     {
+
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
+        }
+
         $this->container['level'] = $level;
 
         return $this;
@@ -348,6 +467,11 @@ class RevelationPenaltyOperation extends Operation
      */
     public function setTimestamp($timestamp)
     {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
         $this->container['timestamp'] = $timestamp;
 
         return $this;
@@ -372,6 +496,18 @@ class RevelationPenaltyOperation extends Operation
      */
     public function setBlock($block)
     {
+
+        if (is_null($block)) {
+            array_push($this->openAPINullablesSetToNull, 'block');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('block', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['block'] = $block;
 
         return $this;
@@ -396,6 +532,18 @@ class RevelationPenaltyOperation extends Operation
      */
     public function setBaker($baker)
     {
+
+        if (is_null($baker)) {
+            array_push($this->openAPINullablesSetToNull, 'baker');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('baker', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['baker'] = $baker;
 
         return $this;
@@ -420,55 +568,41 @@ class RevelationPenaltyOperation extends Operation
      */
     public function setMissedLevel($missed_level)
     {
+
+        if (is_null($missed_level)) {
+            throw new \InvalidArgumentException('non-nullable missed_level cannot be null');
+        }
+
         $this->container['missed_level'] = $missed_level;
 
         return $this;
     }
 
     /**
-     * Gets lost_reward
+     * Gets loss
      *
      * @return int|null
      */
-    public function getLostReward()
+    public function getLoss()
     {
-        return $this->container['lost_reward'];
+        return $this->container['loss'];
     }
 
     /**
-     * Sets lost_reward
+     * Sets loss
      *
-     * @param int|null $lost_reward Reward for baking the block, which was lost due to unrevealed seed nonces (micro tez)
+     * @param int|null $loss Reward for baking and gathered fees from the block, which were lost due to unrevealed seed nonces (micro tez)
      *
      * @return self
      */
-    public function setLostReward($lost_reward)
+    public function setLoss($loss)
     {
-        $this->container['lost_reward'] = $lost_reward;
 
-        return $this;
-    }
+        if (is_null($loss)) {
+            throw new \InvalidArgumentException('non-nullable loss cannot be null');
+        }
 
-    /**
-     * Gets lost_fees
-     *
-     * @return int|null
-     */
-    public function getLostFees()
-    {
-        return $this->container['lost_fees'];
-    }
-
-    /**
-     * Sets lost_fees
-     *
-     * @param int|null $lost_fees Lost due to unrevealed seed nonce total fee paid by all operations, included in the block, which was to be revealed (micro tez)
-     *
-     * @return self
-     */
-    public function setLostFees($lost_fees)
-    {
-        $this->container['lost_fees'] = $lost_fees;
+        $this->container['loss'] = $loss;
 
         return $this;
     }
@@ -492,7 +626,77 @@ class RevelationPenaltyOperation extends Operation
      */
     public function setQuote($quote)
     {
+
+        if (is_null($quote)) {
+            array_push($this->openAPINullablesSetToNull, 'quote');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets lost_reward
+     *
+     * @return int|null
+     */
+    public function getLostReward()
+    {
+        return $this->container['lost_reward'];
+    }
+
+    /**
+     * Sets lost_reward
+     *
+     * @param int|null $lost_reward [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setLostReward($lost_reward)
+    {
+
+        if (is_null($lost_reward)) {
+            throw new \InvalidArgumentException('non-nullable lost_reward cannot be null');
+        }
+
+        $this->container['lost_reward'] = $lost_reward;
+
+        return $this;
+    }
+
+    /**
+     * Gets lost_fees
+     *
+     * @return int|null
+     */
+    public function getLostFees()
+    {
+        return $this->container['lost_fees'];
+    }
+
+    /**
+     * Sets lost_fees
+     *
+     * @param int|null $lost_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setLostFees($lost_fees)
+    {
+
+        if (is_null($lost_fees)) {
+            throw new \InvalidArgumentException('non-nullable lost_fees cannot be null');
+        }
+
+        $this->container['lost_fees'] = $lost_fees;
 
         return $this;
     }
@@ -503,7 +707,7 @@ class RevelationPenaltyOperation extends Operation
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -515,6 +719,7 @@ class RevelationPenaltyOperation extends Operation
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -528,7 +733,7 @@ class RevelationPenaltyOperation extends Operation
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -544,7 +749,7 @@ class RevelationPenaltyOperation extends Operation
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -556,6 +761,7 @@ class RevelationPenaltyOperation extends Operation
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

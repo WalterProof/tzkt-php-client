@@ -2,7 +2,7 @@
 /**
  * Statistics
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -71,9 +69,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'total_activated' => 'int',
         'total_created' => 'int',
         'total_burned' => 'int',
-        'total_vested' => 'int',
+        'total_banished' => 'int',
         'total_frozen' => 'int',
-        'quote' => 'OneOfQuoteShort'
+        'total_rollup_bonds' => 'int',
+        'quote' => '\Bzzhh\Tzkt\Model\StatisticsQuote',
+        'total_vested' => 'int'
     ];
 
     /**
@@ -95,10 +95,43 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'total_activated' => 'int64',
         'total_created' => 'int64',
         'total_burned' => 'int64',
-        'total_vested' => 'int64',
+        'total_banished' => 'int64',
         'total_frozen' => 'int64',
-        'quote' => null
+        'total_rollup_bonds' => 'int64',
+        'quote' => null,
+        'total_vested' => 'int64'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'cycle' => true,
+		'date' => true,
+		'level' => false,
+		'timestamp' => false,
+		'total_supply' => false,
+		'circulating_supply' => false,
+		'total_bootstrapped' => false,
+		'total_commitments' => false,
+		'total_activated' => false,
+		'total_created' => false,
+		'total_burned' => false,
+		'total_banished' => false,
+		'total_frozen' => false,
+		'total_rollup_bonds' => false,
+		'quote' => true,
+		'total_vested' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -121,6 +154,58 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -138,9 +223,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'total_activated' => 'totalActivated',
         'total_created' => 'totalCreated',
         'total_burned' => 'totalBurned',
-        'total_vested' => 'totalVested',
+        'total_banished' => 'totalBanished',
         'total_frozen' => 'totalFrozen',
-        'quote' => 'quote'
+        'total_rollup_bonds' => 'totalRollupBonds',
+        'quote' => 'quote',
+        'total_vested' => 'totalVested'
     ];
 
     /**
@@ -160,9 +247,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'total_activated' => 'setTotalActivated',
         'total_created' => 'setTotalCreated',
         'total_burned' => 'setTotalBurned',
-        'total_vested' => 'setTotalVested',
+        'total_banished' => 'setTotalBanished',
         'total_frozen' => 'setTotalFrozen',
-        'quote' => 'setQuote'
+        'total_rollup_bonds' => 'setTotalRollupBonds',
+        'quote' => 'setQuote',
+        'total_vested' => 'setTotalVested'
     ];
 
     /**
@@ -182,9 +271,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'total_activated' => 'getTotalActivated',
         'total_created' => 'getTotalCreated',
         'total_burned' => 'getTotalBurned',
-        'total_vested' => 'getTotalVested',
+        'total_banished' => 'getTotalBanished',
         'total_frozen' => 'getTotalFrozen',
-        'quote' => 'getQuote'
+        'total_rollup_bonds' => 'getTotalRollupBonds',
+        'quote' => 'getQuote',
+        'total_vested' => 'getTotalVested'
     ];
 
     /**
@@ -244,20 +335,40 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['cycle'] = $data['cycle'] ?? null;
-        $this->container['date'] = $data['date'] ?? null;
-        $this->container['level'] = $data['level'] ?? null;
-        $this->container['timestamp'] = $data['timestamp'] ?? null;
-        $this->container['total_supply'] = $data['total_supply'] ?? null;
-        $this->container['circulating_supply'] = $data['circulating_supply'] ?? null;
-        $this->container['total_bootstrapped'] = $data['total_bootstrapped'] ?? null;
-        $this->container['total_commitments'] = $data['total_commitments'] ?? null;
-        $this->container['total_activated'] = $data['total_activated'] ?? null;
-        $this->container['total_created'] = $data['total_created'] ?? null;
-        $this->container['total_burned'] = $data['total_burned'] ?? null;
-        $this->container['total_vested'] = $data['total_vested'] ?? null;
-        $this->container['total_frozen'] = $data['total_frozen'] ?? null;
-        $this->container['quote'] = $data['quote'] ?? null;
+        $this->setIfExists('cycle', $data ?? [], null);
+        $this->setIfExists('date', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('total_supply', $data ?? [], null);
+        $this->setIfExists('circulating_supply', $data ?? [], null);
+        $this->setIfExists('total_bootstrapped', $data ?? [], null);
+        $this->setIfExists('total_commitments', $data ?? [], null);
+        $this->setIfExists('total_activated', $data ?? [], null);
+        $this->setIfExists('total_created', $data ?? [], null);
+        $this->setIfExists('total_burned', $data ?? [], null);
+        $this->setIfExists('total_banished', $data ?? [], null);
+        $this->setIfExists('total_frozen', $data ?? [], null);
+        $this->setIfExists('total_rollup_bonds', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('total_vested', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -303,6 +414,18 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setCycle($cycle)
     {
+
+        if (is_null($cycle)) {
+            array_push($this->openAPINullablesSetToNull, 'cycle');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cycle', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['cycle'] = $cycle;
 
         return $this;
@@ -327,6 +450,18 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDate($date)
     {
+
+        if (is_null($date)) {
+            array_push($this->openAPINullablesSetToNull, 'date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['date'] = $date;
 
         return $this;
@@ -351,6 +486,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLevel($level)
     {
+
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
+        }
+
         $this->container['level'] = $level;
 
         return $this;
@@ -375,6 +515,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTimestamp($timestamp)
     {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
         $this->container['timestamp'] = $timestamp;
 
         return $this;
@@ -399,6 +544,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalSupply($total_supply)
     {
+
+        if (is_null($total_supply)) {
+            throw new \InvalidArgumentException('non-nullable total_supply cannot be null');
+        }
+
         $this->container['total_supply'] = $total_supply;
 
         return $this;
@@ -423,6 +573,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setCirculatingSupply($circulating_supply)
     {
+
+        if (is_null($circulating_supply)) {
+            throw new \InvalidArgumentException('non-nullable circulating_supply cannot be null');
+        }
+
         $this->container['circulating_supply'] = $circulating_supply;
 
         return $this;
@@ -447,6 +602,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalBootstrapped($total_bootstrapped)
     {
+
+        if (is_null($total_bootstrapped)) {
+            throw new \InvalidArgumentException('non-nullable total_bootstrapped cannot be null');
+        }
+
         $this->container['total_bootstrapped'] = $total_bootstrapped;
 
         return $this;
@@ -471,6 +631,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalCommitments($total_commitments)
     {
+
+        if (is_null($total_commitments)) {
+            throw new \InvalidArgumentException('non-nullable total_commitments cannot be null');
+        }
+
         $this->container['total_commitments'] = $total_commitments;
 
         return $this;
@@ -495,6 +660,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalActivated($total_activated)
     {
+
+        if (is_null($total_activated)) {
+            throw new \InvalidArgumentException('non-nullable total_activated cannot be null');
+        }
+
         $this->container['total_activated'] = $total_activated;
 
         return $this;
@@ -519,6 +689,11 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalCreated($total_created)
     {
+
+        if (is_null($total_created)) {
+            throw new \InvalidArgumentException('non-nullable total_created cannot be null');
+        }
+
         $this->container['total_created'] = $total_created;
 
         return $this;
@@ -543,31 +718,41 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalBurned($total_burned)
     {
+
+        if (is_null($total_burned)) {
+            throw new \InvalidArgumentException('non-nullable total_burned cannot be null');
+        }
+
         $this->container['total_burned'] = $total_burned;
 
         return $this;
     }
 
     /**
-     * Gets total_vested
+     * Gets total_banished
      *
      * @return int|null
      */
-    public function getTotalVested()
+    public function getTotalBanished()
     {
-        return $this->container['total_vested'];
+        return $this->container['total_banished'];
     }
 
     /**
-     * Sets total_vested
+     * Sets total_banished
      *
-     * @param int|null $total_vested Total amount of tokens locked on vested contracts
+     * @param int|null $total_banished Total amount of tokens sent to the null-address, which is equivalent to burning
      *
      * @return self
      */
-    public function setTotalVested($total_vested)
+    public function setTotalBanished($total_banished)
     {
-        $this->container['total_vested'] = $total_vested;
+
+        if (is_null($total_banished)) {
+            throw new \InvalidArgumentException('non-nullable total_banished cannot be null');
+        }
+
+        $this->container['total_banished'] = $total_banished;
 
         return $this;
     }
@@ -591,7 +776,41 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalFrozen($total_frozen)
     {
+
+        if (is_null($total_frozen)) {
+            throw new \InvalidArgumentException('non-nullable total_frozen cannot be null');
+        }
+
         $this->container['total_frozen'] = $total_frozen;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_rollup_bonds
+     *
+     * @return int|null
+     */
+    public function getTotalRollupBonds()
+    {
+        return $this->container['total_rollup_bonds'];
+    }
+
+    /**
+     * Sets total_rollup_bonds
+     *
+     * @param int|null $total_rollup_bonds Total amount of tokens locked as rollup bonds
+     *
+     * @return self
+     */
+    public function setTotalRollupBonds($total_rollup_bonds)
+    {
+
+        if (is_null($total_rollup_bonds)) {
+            throw new \InvalidArgumentException('non-nullable total_rollup_bonds cannot be null');
+        }
+
+        $this->container['total_rollup_bonds'] = $total_rollup_bonds;
 
         return $this;
     }
@@ -599,7 +818,7 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote
      *
-     * @return OneOfQuoteShort|null
+     * @return \Bzzhh\Tzkt\Model\StatisticsQuote|null
      */
     public function getQuote()
     {
@@ -609,13 +828,54 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote
      *
-     * @param OneOfQuoteShort|null $quote Injected historical quote at the time of the block at which the statistics has been calculated
+     * @param \Bzzhh\Tzkt\Model\StatisticsQuote|null $quote quote
      *
      * @return self
      */
     public function setQuote($quote)
     {
+
+        if (is_null($quote)) {
+            array_push($this->openAPINullablesSetToNull, 'quote');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_vested
+     *
+     * @return int|null
+     */
+    public function getTotalVested()
+    {
+        return $this->container['total_vested'];
+    }
+
+    /**
+     * Sets total_vested
+     *
+     * @param int|null $total_vested [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setTotalVested($total_vested)
+    {
+
+        if (is_null($total_vested)) {
+            throw new \InvalidArgumentException('non-nullable total_vested cannot be null');
+        }
+
+        $this->container['total_vested'] = $total_vested;
 
         return $this;
     }
@@ -626,7 +886,7 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -638,6 +898,7 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -651,7 +912,7 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -667,7 +928,7 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -679,6 +940,7 @@ class Statistics implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

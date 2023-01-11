@@ -2,7 +2,7 @@
 /**
  * Block
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class Block implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -60,30 +58,60 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'cycle' => 'int',
         'level' => 'int',
         'hash' => 'string',
         'timestamp' => '\DateTime',
         'proto' => 'int',
-        'priority' => 'int',
+        'payload_round' => 'int',
+        'block_round' => 'int',
         'validations' => 'int',
         'deposit' => 'int',
         'reward' => 'int',
+        'bonus' => 'int',
         'fees' => 'int',
         'nonce_revealed' => 'bool',
-        'baker' => 'OneOfAlias',
-        'software' => 'OneOfSoftwareAlias',
+        'proposer' => '\Bzzhh\Tzkt\Model\BlockProposer',
+        'producer' => '\Bzzhh\Tzkt\Model\BlockProducer',
+        'software' => '\Bzzhh\Tzkt\Model\BlockSoftware',
+        'lb_toggle' => 'bool',
+        'lb_toggle_ema' => 'int',
         'endorsements' => '\Bzzhh\Tzkt\Model\EndorsementOperation[]',
+        'preendorsements' => '\Bzzhh\Tzkt\Model\PreendorsementOperation[]',
         'proposals' => '\Bzzhh\Tzkt\Model\ProposalOperation[]',
         'ballots' => '\Bzzhh\Tzkt\Model\BallotOperation[]',
         'activations' => '\Bzzhh\Tzkt\Model\ActivationOperation[]',
         'double_baking' => '\Bzzhh\Tzkt\Model\DoubleBakingOperation[]',
         'double_endorsing' => '\Bzzhh\Tzkt\Model\DoubleEndorsingOperation[]',
+        'double_preendorsing' => '\Bzzhh\Tzkt\Model\DoublePreendorsingOperation[]',
         'nonce_revelations' => '\Bzzhh\Tzkt\Model\NonceRevelationOperation[]',
+        'vdf_revelations' => '\Bzzhh\Tzkt\Model\VdfRevelationOperation[]',
         'delegations' => '\Bzzhh\Tzkt\Model\DelegationOperation[]',
         'originations' => '\Bzzhh\Tzkt\Model\OriginationOperation[]',
         'transactions' => '\Bzzhh\Tzkt\Model\TransactionOperation[]',
         'reveals' => '\Bzzhh\Tzkt\Model\RevealOperation[]',
-        'quote' => 'OneOfQuoteShort'
+        'register_constants' => '\Bzzhh\Tzkt\Model\RegisterConstantOperation[]',
+        'set_deposits_limits' => '\Bzzhh\Tzkt\Model\SetDepositsLimitOperation[]',
+        'transfer_ticket_ops' => '\Bzzhh\Tzkt\Model\TransferTicketOperation[]',
+        'tx_rollup_commit_ops' => '\Bzzhh\Tzkt\Model\TxRollupCommitOperation[]',
+        'tx_rollup_dispatch_tickets_ops' => '\Bzzhh\Tzkt\Model\TxRollupDispatchTicketsOperation[]',
+        'tx_rollup_finalize_commitment_ops' => '\Bzzhh\Tzkt\Model\TxRollupFinalizeCommitmentOperation[]',
+        'tx_rollup_origination_ops' => '\Bzzhh\Tzkt\Model\TxRollupOriginationOperation[]',
+        'tx_rollup_rejection_ops' => '\Bzzhh\Tzkt\Model\TxRollupRejectionOperation[]',
+        'tx_rollup_remove_commitment_ops' => '\Bzzhh\Tzkt\Model\TxRollupRemoveCommitmentOperation[]',
+        'tx_rollup_return_bond_ops' => '\Bzzhh\Tzkt\Model\TxRollupReturnBondOperation[]',
+        'tx_rollup_submit_batch_ops' => '\Bzzhh\Tzkt\Model\TxRollupSubmitBatchOperation[]',
+        'increase_paid_storage_ops' => '\Bzzhh\Tzkt\Model\IncreasePaidStorageOperation[]',
+        'update_consensus_key_ops' => '\Bzzhh\Tzkt\Model\UpdateConsensusKeyOperation[]',
+        'drain_delegate_ops' => '\Bzzhh\Tzkt\Model\DrainDelegateOperation[]',
+        'migrations' => '\Bzzhh\Tzkt\Model\MigrationOperation[]',
+        'revelation_penalties' => '\Bzzhh\Tzkt\Model\RevelationPenaltyOperation[]',
+        'endorsing_rewards' => '\Bzzhh\Tzkt\Model\EndorsingRewardOperation[]',
+        'quote' => '\Bzzhh\Tzkt\Model\BlockQuote',
+        'priority' => 'int',
+        'baker' => '\Bzzhh\Tzkt\Model\BlockBaker',
+        'lb_escape_vote' => 'bool',
+        'lb_escape_ema' => 'int'
     ];
 
     /**
@@ -94,31 +122,130 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'cycle' => 'int32',
         'level' => 'int32',
         'hash' => null,
         'timestamp' => 'date-time',
         'proto' => 'int32',
-        'priority' => 'int32',
+        'payload_round' => 'int32',
+        'block_round' => 'int32',
         'validations' => 'int32',
         'deposit' => 'int64',
         'reward' => 'int64',
+        'bonus' => 'int64',
         'fees' => 'int64',
         'nonce_revealed' => null,
-        'baker' => null,
+        'proposer' => null,
+        'producer' => null,
         'software' => null,
+        'lb_toggle' => null,
+        'lb_toggle_ema' => 'int32',
         'endorsements' => null,
+        'preendorsements' => null,
         'proposals' => null,
         'ballots' => null,
         'activations' => null,
         'double_baking' => null,
         'double_endorsing' => null,
+        'double_preendorsing' => null,
         'nonce_revelations' => null,
+        'vdf_revelations' => null,
         'delegations' => null,
         'originations' => null,
         'transactions' => null,
         'reveals' => null,
-        'quote' => null
+        'register_constants' => null,
+        'set_deposits_limits' => null,
+        'transfer_ticket_ops' => null,
+        'tx_rollup_commit_ops' => null,
+        'tx_rollup_dispatch_tickets_ops' => null,
+        'tx_rollup_finalize_commitment_ops' => null,
+        'tx_rollup_origination_ops' => null,
+        'tx_rollup_rejection_ops' => null,
+        'tx_rollup_remove_commitment_ops' => null,
+        'tx_rollup_return_bond_ops' => null,
+        'tx_rollup_submit_batch_ops' => null,
+        'increase_paid_storage_ops' => null,
+        'update_consensus_key_ops' => null,
+        'drain_delegate_ops' => null,
+        'migrations' => null,
+        'revelation_penalties' => null,
+        'endorsing_rewards' => null,
+        'quote' => null,
+        'priority' => 'int32',
+        'baker' => null,
+        'lb_escape_vote' => null,
+        'lb_escape_ema' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'cycle' => false,
+		'level' => false,
+		'hash' => true,
+		'timestamp' => false,
+		'proto' => false,
+		'payload_round' => false,
+		'block_round' => false,
+		'validations' => false,
+		'deposit' => false,
+		'reward' => false,
+		'bonus' => false,
+		'fees' => false,
+		'nonce_revealed' => false,
+		'proposer' => true,
+		'producer' => true,
+		'software' => true,
+		'lb_toggle' => true,
+		'lb_toggle_ema' => false,
+		'endorsements' => true,
+		'preendorsements' => true,
+		'proposals' => true,
+		'ballots' => true,
+		'activations' => true,
+		'double_baking' => true,
+		'double_endorsing' => true,
+		'double_preendorsing' => true,
+		'nonce_revelations' => true,
+		'vdf_revelations' => true,
+		'delegations' => true,
+		'originations' => true,
+		'transactions' => true,
+		'reveals' => true,
+		'register_constants' => true,
+		'set_deposits_limits' => true,
+		'transfer_ticket_ops' => true,
+		'tx_rollup_commit_ops' => true,
+		'tx_rollup_dispatch_tickets_ops' => true,
+		'tx_rollup_finalize_commitment_ops' => true,
+		'tx_rollup_origination_ops' => true,
+		'tx_rollup_rejection_ops' => true,
+		'tx_rollup_remove_commitment_ops' => true,
+		'tx_rollup_return_bond_ops' => true,
+		'tx_rollup_submit_batch_ops' => true,
+		'increase_paid_storage_ops' => true,
+		'update_consensus_key_ops' => true,
+		'drain_delegate_ops' => true,
+		'migrations' => true,
+		'revelation_penalties' => true,
+		'endorsing_rewards' => true,
+		'quote' => true,
+		'priority' => false,
+		'baker' => true,
+		'lb_escape_vote' => false,
+		'lb_escape_ema' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -141,36 +268,118 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
      * @var string[]
      */
     protected static $attributeMap = [
+        'cycle' => 'cycle',
         'level' => 'level',
         'hash' => 'hash',
         'timestamp' => 'timestamp',
         'proto' => 'proto',
-        'priority' => 'priority',
+        'payload_round' => 'payloadRound',
+        'block_round' => 'blockRound',
         'validations' => 'validations',
         'deposit' => 'deposit',
         'reward' => 'reward',
+        'bonus' => 'bonus',
         'fees' => 'fees',
         'nonce_revealed' => 'nonceRevealed',
-        'baker' => 'baker',
+        'proposer' => 'proposer',
+        'producer' => 'producer',
         'software' => 'software',
+        'lb_toggle' => 'lbToggle',
+        'lb_toggle_ema' => 'lbToggleEma',
         'endorsements' => 'endorsements',
+        'preendorsements' => 'preendorsements',
         'proposals' => 'proposals',
         'ballots' => 'ballots',
         'activations' => 'activations',
         'double_baking' => 'doubleBaking',
         'double_endorsing' => 'doubleEndorsing',
+        'double_preendorsing' => 'doublePreendorsing',
         'nonce_revelations' => 'nonceRevelations',
+        'vdf_revelations' => 'vdfRevelations',
         'delegations' => 'delegations',
         'originations' => 'originations',
         'transactions' => 'transactions',
         'reveals' => 'reveals',
-        'quote' => 'quote'
+        'register_constants' => 'registerConstants',
+        'set_deposits_limits' => 'setDepositsLimits',
+        'transfer_ticket_ops' => 'transferTicketOps',
+        'tx_rollup_commit_ops' => 'txRollupCommitOps',
+        'tx_rollup_dispatch_tickets_ops' => 'txRollupDispatchTicketsOps',
+        'tx_rollup_finalize_commitment_ops' => 'txRollupFinalizeCommitmentOps',
+        'tx_rollup_origination_ops' => 'txRollupOriginationOps',
+        'tx_rollup_rejection_ops' => 'txRollupRejectionOps',
+        'tx_rollup_remove_commitment_ops' => 'txRollupRemoveCommitmentOps',
+        'tx_rollup_return_bond_ops' => 'txRollupReturnBondOps',
+        'tx_rollup_submit_batch_ops' => 'txRollupSubmitBatchOps',
+        'increase_paid_storage_ops' => 'increasePaidStorageOps',
+        'update_consensus_key_ops' => 'updateConsensusKeyOps',
+        'drain_delegate_ops' => 'drainDelegateOps',
+        'migrations' => 'migrations',
+        'revelation_penalties' => 'revelationPenalties',
+        'endorsing_rewards' => 'endorsingRewards',
+        'quote' => 'quote',
+        'priority' => 'priority',
+        'baker' => 'baker',
+        'lb_escape_vote' => 'lbEscapeVote',
+        'lb_escape_ema' => 'lbEscapeEma'
     ];
 
     /**
@@ -179,30 +388,60 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'cycle' => 'setCycle',
         'level' => 'setLevel',
         'hash' => 'setHash',
         'timestamp' => 'setTimestamp',
         'proto' => 'setProto',
-        'priority' => 'setPriority',
+        'payload_round' => 'setPayloadRound',
+        'block_round' => 'setBlockRound',
         'validations' => 'setValidations',
         'deposit' => 'setDeposit',
         'reward' => 'setReward',
+        'bonus' => 'setBonus',
         'fees' => 'setFees',
         'nonce_revealed' => 'setNonceRevealed',
-        'baker' => 'setBaker',
+        'proposer' => 'setProposer',
+        'producer' => 'setProducer',
         'software' => 'setSoftware',
+        'lb_toggle' => 'setLbToggle',
+        'lb_toggle_ema' => 'setLbToggleEma',
         'endorsements' => 'setEndorsements',
+        'preendorsements' => 'setPreendorsements',
         'proposals' => 'setProposals',
         'ballots' => 'setBallots',
         'activations' => 'setActivations',
         'double_baking' => 'setDoubleBaking',
         'double_endorsing' => 'setDoubleEndorsing',
+        'double_preendorsing' => 'setDoublePreendorsing',
         'nonce_revelations' => 'setNonceRevelations',
+        'vdf_revelations' => 'setVdfRevelations',
         'delegations' => 'setDelegations',
         'originations' => 'setOriginations',
         'transactions' => 'setTransactions',
         'reveals' => 'setReveals',
-        'quote' => 'setQuote'
+        'register_constants' => 'setRegisterConstants',
+        'set_deposits_limits' => 'setSetDepositsLimits',
+        'transfer_ticket_ops' => 'setTransferTicketOps',
+        'tx_rollup_commit_ops' => 'setTxRollupCommitOps',
+        'tx_rollup_dispatch_tickets_ops' => 'setTxRollupDispatchTicketsOps',
+        'tx_rollup_finalize_commitment_ops' => 'setTxRollupFinalizeCommitmentOps',
+        'tx_rollup_origination_ops' => 'setTxRollupOriginationOps',
+        'tx_rollup_rejection_ops' => 'setTxRollupRejectionOps',
+        'tx_rollup_remove_commitment_ops' => 'setTxRollupRemoveCommitmentOps',
+        'tx_rollup_return_bond_ops' => 'setTxRollupReturnBondOps',
+        'tx_rollup_submit_batch_ops' => 'setTxRollupSubmitBatchOps',
+        'increase_paid_storage_ops' => 'setIncreasePaidStorageOps',
+        'update_consensus_key_ops' => 'setUpdateConsensusKeyOps',
+        'drain_delegate_ops' => 'setDrainDelegateOps',
+        'migrations' => 'setMigrations',
+        'revelation_penalties' => 'setRevelationPenalties',
+        'endorsing_rewards' => 'setEndorsingRewards',
+        'quote' => 'setQuote',
+        'priority' => 'setPriority',
+        'baker' => 'setBaker',
+        'lb_escape_vote' => 'setLbEscapeVote',
+        'lb_escape_ema' => 'setLbEscapeEma'
     ];
 
     /**
@@ -211,30 +450,60 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'cycle' => 'getCycle',
         'level' => 'getLevel',
         'hash' => 'getHash',
         'timestamp' => 'getTimestamp',
         'proto' => 'getProto',
-        'priority' => 'getPriority',
+        'payload_round' => 'getPayloadRound',
+        'block_round' => 'getBlockRound',
         'validations' => 'getValidations',
         'deposit' => 'getDeposit',
         'reward' => 'getReward',
+        'bonus' => 'getBonus',
         'fees' => 'getFees',
         'nonce_revealed' => 'getNonceRevealed',
-        'baker' => 'getBaker',
+        'proposer' => 'getProposer',
+        'producer' => 'getProducer',
         'software' => 'getSoftware',
+        'lb_toggle' => 'getLbToggle',
+        'lb_toggle_ema' => 'getLbToggleEma',
         'endorsements' => 'getEndorsements',
+        'preendorsements' => 'getPreendorsements',
         'proposals' => 'getProposals',
         'ballots' => 'getBallots',
         'activations' => 'getActivations',
         'double_baking' => 'getDoubleBaking',
         'double_endorsing' => 'getDoubleEndorsing',
+        'double_preendorsing' => 'getDoublePreendorsing',
         'nonce_revelations' => 'getNonceRevelations',
+        'vdf_revelations' => 'getVdfRevelations',
         'delegations' => 'getDelegations',
         'originations' => 'getOriginations',
         'transactions' => 'getTransactions',
         'reveals' => 'getReveals',
-        'quote' => 'getQuote'
+        'register_constants' => 'getRegisterConstants',
+        'set_deposits_limits' => 'getSetDepositsLimits',
+        'transfer_ticket_ops' => 'getTransferTicketOps',
+        'tx_rollup_commit_ops' => 'getTxRollupCommitOps',
+        'tx_rollup_dispatch_tickets_ops' => 'getTxRollupDispatchTicketsOps',
+        'tx_rollup_finalize_commitment_ops' => 'getTxRollupFinalizeCommitmentOps',
+        'tx_rollup_origination_ops' => 'getTxRollupOriginationOps',
+        'tx_rollup_rejection_ops' => 'getTxRollupRejectionOps',
+        'tx_rollup_remove_commitment_ops' => 'getTxRollupRemoveCommitmentOps',
+        'tx_rollup_return_bond_ops' => 'getTxRollupReturnBondOps',
+        'tx_rollup_submit_batch_ops' => 'getTxRollupSubmitBatchOps',
+        'increase_paid_storage_ops' => 'getIncreasePaidStorageOps',
+        'update_consensus_key_ops' => 'getUpdateConsensusKeyOps',
+        'drain_delegate_ops' => 'getDrainDelegateOps',
+        'migrations' => 'getMigrations',
+        'revelation_penalties' => 'getRevelationPenalties',
+        'endorsing_rewards' => 'getEndorsingRewards',
+        'quote' => 'getQuote',
+        'priority' => 'getPriority',
+        'baker' => 'getBaker',
+        'lb_escape_vote' => 'getLbEscapeVote',
+        'lb_escape_ema' => 'getLbEscapeEma'
     ];
 
     /**
@@ -294,30 +563,78 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['level'] = $data['level'] ?? null;
-        $this->container['hash'] = $data['hash'] ?? null;
-        $this->container['timestamp'] = $data['timestamp'] ?? null;
-        $this->container['proto'] = $data['proto'] ?? null;
-        $this->container['priority'] = $data['priority'] ?? null;
-        $this->container['validations'] = $data['validations'] ?? null;
-        $this->container['deposit'] = $data['deposit'] ?? null;
-        $this->container['reward'] = $data['reward'] ?? null;
-        $this->container['fees'] = $data['fees'] ?? null;
-        $this->container['nonce_revealed'] = $data['nonce_revealed'] ?? null;
-        $this->container['baker'] = $data['baker'] ?? null;
-        $this->container['software'] = $data['software'] ?? null;
-        $this->container['endorsements'] = $data['endorsements'] ?? null;
-        $this->container['proposals'] = $data['proposals'] ?? null;
-        $this->container['ballots'] = $data['ballots'] ?? null;
-        $this->container['activations'] = $data['activations'] ?? null;
-        $this->container['double_baking'] = $data['double_baking'] ?? null;
-        $this->container['double_endorsing'] = $data['double_endorsing'] ?? null;
-        $this->container['nonce_revelations'] = $data['nonce_revelations'] ?? null;
-        $this->container['delegations'] = $data['delegations'] ?? null;
-        $this->container['originations'] = $data['originations'] ?? null;
-        $this->container['transactions'] = $data['transactions'] ?? null;
-        $this->container['reveals'] = $data['reveals'] ?? null;
-        $this->container['quote'] = $data['quote'] ?? null;
+        $this->setIfExists('cycle', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('hash', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('proto', $data ?? [], null);
+        $this->setIfExists('payload_round', $data ?? [], null);
+        $this->setIfExists('block_round', $data ?? [], null);
+        $this->setIfExists('validations', $data ?? [], null);
+        $this->setIfExists('deposit', $data ?? [], null);
+        $this->setIfExists('reward', $data ?? [], null);
+        $this->setIfExists('bonus', $data ?? [], null);
+        $this->setIfExists('fees', $data ?? [], null);
+        $this->setIfExists('nonce_revealed', $data ?? [], null);
+        $this->setIfExists('proposer', $data ?? [], null);
+        $this->setIfExists('producer', $data ?? [], null);
+        $this->setIfExists('software', $data ?? [], null);
+        $this->setIfExists('lb_toggle', $data ?? [], null);
+        $this->setIfExists('lb_toggle_ema', $data ?? [], null);
+        $this->setIfExists('endorsements', $data ?? [], null);
+        $this->setIfExists('preendorsements', $data ?? [], null);
+        $this->setIfExists('proposals', $data ?? [], null);
+        $this->setIfExists('ballots', $data ?? [], null);
+        $this->setIfExists('activations', $data ?? [], null);
+        $this->setIfExists('double_baking', $data ?? [], null);
+        $this->setIfExists('double_endorsing', $data ?? [], null);
+        $this->setIfExists('double_preendorsing', $data ?? [], null);
+        $this->setIfExists('nonce_revelations', $data ?? [], null);
+        $this->setIfExists('vdf_revelations', $data ?? [], null);
+        $this->setIfExists('delegations', $data ?? [], null);
+        $this->setIfExists('originations', $data ?? [], null);
+        $this->setIfExists('transactions', $data ?? [], null);
+        $this->setIfExists('reveals', $data ?? [], null);
+        $this->setIfExists('register_constants', $data ?? [], null);
+        $this->setIfExists('set_deposits_limits', $data ?? [], null);
+        $this->setIfExists('transfer_ticket_ops', $data ?? [], null);
+        $this->setIfExists('tx_rollup_commit_ops', $data ?? [], null);
+        $this->setIfExists('tx_rollup_dispatch_tickets_ops', $data ?? [], null);
+        $this->setIfExists('tx_rollup_finalize_commitment_ops', $data ?? [], null);
+        $this->setIfExists('tx_rollup_origination_ops', $data ?? [], null);
+        $this->setIfExists('tx_rollup_rejection_ops', $data ?? [], null);
+        $this->setIfExists('tx_rollup_remove_commitment_ops', $data ?? [], null);
+        $this->setIfExists('tx_rollup_return_bond_ops', $data ?? [], null);
+        $this->setIfExists('tx_rollup_submit_batch_ops', $data ?? [], null);
+        $this->setIfExists('increase_paid_storage_ops', $data ?? [], null);
+        $this->setIfExists('update_consensus_key_ops', $data ?? [], null);
+        $this->setIfExists('drain_delegate_ops', $data ?? [], null);
+        $this->setIfExists('migrations', $data ?? [], null);
+        $this->setIfExists('revelation_penalties', $data ?? [], null);
+        $this->setIfExists('endorsing_rewards', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('priority', $data ?? [], null);
+        $this->setIfExists('baker', $data ?? [], null);
+        $this->setIfExists('lb_escape_vote', $data ?? [], null);
+        $this->setIfExists('lb_escape_ema', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -345,6 +662,35 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
+     * Gets cycle
+     *
+     * @return int|null
+     */
+    public function getCycle()
+    {
+        return $this->container['cycle'];
+    }
+
+    /**
+     * Sets cycle
+     *
+     * @param int|null $cycle Index of the cycle
+     *
+     * @return self
+     */
+    public function setCycle($cycle)
+    {
+
+        if (is_null($cycle)) {
+            throw new \InvalidArgumentException('non-nullable cycle cannot be null');
+        }
+
+        $this->container['cycle'] = $cycle;
+
+        return $this;
+    }
+
+    /**
      * Gets level
      *
      * @return int|null
@@ -357,12 +703,17 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets level
      *
-     * @param int|null $level The height of the block from the genesis block
+     * @param int|null $level Height of the block from the genesis
      *
      * @return self
      */
     public function setLevel($level)
     {
+
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
+        }
+
         $this->container['level'] = $level;
 
         return $this;
@@ -387,6 +738,18 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setHash($hash)
     {
+
+        if (is_null($hash)) {
+            array_push($this->openAPINullablesSetToNull, 'hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['hash'] = $hash;
 
         return $this;
@@ -405,12 +768,17 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets timestamp
      *
-     * @param \DateTime|null $timestamp The datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+     * @param \DateTime|null $timestamp Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
      *
      * @return self
      */
     public function setTimestamp($timestamp)
     {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
         $this->container['timestamp'] = $timestamp;
 
         return $this;
@@ -435,31 +803,70 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setProto($proto)
     {
+
+        if (is_null($proto)) {
+            throw new \InvalidArgumentException('non-nullable proto cannot be null');
+        }
+
         $this->container['proto'] = $proto;
 
         return $this;
     }
 
     /**
-     * Gets priority
+     * Gets payload_round
      *
      * @return int|null
      */
-    public function getPriority()
+    public function getPayloadRound()
     {
-        return $this->container['priority'];
+        return $this->container['payload_round'];
     }
 
     /**
-     * Sets priority
+     * Sets payload_round
      *
-     * @param int|null $priority The position in the priority list of delegates at which the block was baked
+     * @param int|null $payload_round Round at which the block payload was proposed
      *
      * @return self
      */
-    public function setPriority($priority)
+    public function setPayloadRound($payload_round)
     {
-        $this->container['priority'] = $priority;
+
+        if (is_null($payload_round)) {
+            throw new \InvalidArgumentException('non-nullable payload_round cannot be null');
+        }
+
+        $this->container['payload_round'] = $payload_round;
+
+        return $this;
+    }
+
+    /**
+     * Gets block_round
+     *
+     * @return int|null
+     */
+    public function getBlockRound()
+    {
+        return $this->container['block_round'];
+    }
+
+    /**
+     * Sets block_round
+     *
+     * @param int|null $block_round Round at which the block was produced
+     *
+     * @return self
+     */
+    public function setBlockRound($block_round)
+    {
+
+        if (is_null($block_round)) {
+            throw new \InvalidArgumentException('non-nullable block_round cannot be null');
+        }
+
+        $this->container['block_round'] = $block_round;
 
         return $this;
     }
@@ -477,12 +884,17 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets validations
      *
-     * @param int|null $validations Number of endorsements, confirmed the block
+     * @param int|null $validations Number of endorsements (slots), included into the block
      *
      * @return self
      */
     public function setValidations($validations)
     {
+
+        if (is_null($validations)) {
+            throw new \InvalidArgumentException('non-nullable validations cannot be null');
+        }
+
         $this->container['validations'] = $validations;
 
         return $this;
@@ -507,6 +919,11 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDeposit($deposit)
     {
+
+        if (is_null($deposit)) {
+            throw new \InvalidArgumentException('non-nullable deposit cannot be null');
+        }
+
         $this->container['deposit'] = $deposit;
 
         return $this;
@@ -525,13 +942,47 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets reward
      *
-     * @param int|null $reward Reward of the baker for producing the block (micro tez)
+     * @param int|null $reward Fixed reward paid to the payload proposer (micro tez)
      *
      * @return self
      */
     public function setReward($reward)
     {
+
+        if (is_null($reward)) {
+            throw new \InvalidArgumentException('non-nullable reward cannot be null');
+        }
+
         $this->container['reward'] = $reward;
+
+        return $this;
+    }
+
+    /**
+     * Gets bonus
+     *
+     * @return int|null
+     */
+    public function getBonus()
+    {
+        return $this->container['bonus'];
+    }
+
+    /**
+     * Sets bonus
+     *
+     * @param int|null $bonus Bonus reward paid to the block producer (micro tez)
+     *
+     * @return self
+     */
+    public function setBonus($bonus)
+    {
+
+        if (is_null($bonus)) {
+            throw new \InvalidArgumentException('non-nullable bonus cannot be null');
+        }
+
+        $this->container['bonus'] = $bonus;
 
         return $this;
     }
@@ -549,12 +1000,17 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets fees
      *
-     * @param int|null $fees Total fee paid by all operations, included in the block
+     * @param int|null $fees Total fee gathered from operations, included into the block
      *
      * @return self
      */
     public function setFees($fees)
     {
+
+        if (is_null($fees)) {
+            throw new \InvalidArgumentException('non-nullable fees cannot be null');
+        }
+
         $this->container['fees'] = $fees;
 
         return $this;
@@ -579,31 +1035,84 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setNonceRevealed($nonce_revealed)
     {
+
+        if (is_null($nonce_revealed)) {
+            throw new \InvalidArgumentException('non-nullable nonce_revealed cannot be null');
+        }
+
         $this->container['nonce_revealed'] = $nonce_revealed;
 
         return $this;
     }
 
     /**
-     * Gets baker
+     * Gets proposer
      *
-     * @return OneOfAlias|null
+     * @return \Bzzhh\Tzkt\Model\BlockProposer|null
      */
-    public function getBaker()
+    public function getProposer()
     {
-        return $this->container['baker'];
+        return $this->container['proposer'];
     }
 
     /**
-     * Sets baker
+     * Sets proposer
      *
-     * @param OneOfAlias|null $baker Information about a delegate (baker), produced the block
+     * @param \Bzzhh\Tzkt\Model\BlockProposer|null $proposer proposer
      *
      * @return self
      */
-    public function setBaker($baker)
+    public function setProposer($proposer)
     {
-        $this->container['baker'] = $baker;
+
+        if (is_null($proposer)) {
+            array_push($this->openAPINullablesSetToNull, 'proposer');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('proposer', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['proposer'] = $proposer;
+
+        return $this;
+    }
+
+    /**
+     * Gets producer
+     *
+     * @return \Bzzhh\Tzkt\Model\BlockProducer|null
+     */
+    public function getProducer()
+    {
+        return $this->container['producer'];
+    }
+
+    /**
+     * Sets producer
+     *
+     * @param \Bzzhh\Tzkt\Model\BlockProducer|null $producer producer
+     *
+     * @return self
+     */
+    public function setProducer($producer)
+    {
+
+        if (is_null($producer)) {
+            array_push($this->openAPINullablesSetToNull, 'producer');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('producer', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['producer'] = $producer;
 
         return $this;
     }
@@ -611,7 +1120,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets software
      *
-     * @return OneOfSoftwareAlias|null
+     * @return \Bzzhh\Tzkt\Model\BlockSoftware|null
      */
     public function getSoftware()
     {
@@ -621,13 +1130,90 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets software
      *
-     * @param OneOfSoftwareAlias|null $software Information about baker's software
+     * @param \Bzzhh\Tzkt\Model\BlockSoftware|null $software software
      *
      * @return self
      */
     public function setSoftware($software)
     {
+
+        if (is_null($software)) {
+            array_push($this->openAPINullablesSetToNull, 'software');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('software', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['software'] = $software;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_toggle
+     *
+     * @return bool|null
+     */
+    public function getLbToggle()
+    {
+        return $this->container['lb_toggle'];
+    }
+
+    /**
+     * Sets lb_toggle
+     *
+     * @param bool|null $lb_toggle Liquidity baking toggle (`true` if enabled, `false` if disabled, or `null` if the baker says 'pass')
+     *
+     * @return self
+     */
+    public function setLbToggle($lb_toggle)
+    {
+
+        if (is_null($lb_toggle)) {
+            array_push($this->openAPINullablesSetToNull, 'lb_toggle');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('lb_toggle', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['lb_toggle'] = $lb_toggle;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_toggle_ema
+     *
+     * @return int|null
+     */
+    public function getLbToggleEma()
+    {
+        return $this->container['lb_toggle_ema'];
+    }
+
+    /**
+     * Sets lb_toggle_ema
+     *
+     * @param int|null $lb_toggle_ema Liquidity baking escape EMA value with precision of 1000000 for integer computation
+     *
+     * @return self
+     */
+    public function setLbToggleEma($lb_toggle_ema)
+    {
+
+        if (is_null($lb_toggle_ema)) {
+            throw new \InvalidArgumentException('non-nullable lb_toggle_ema cannot be null');
+        }
+
+        $this->container['lb_toggle_ema'] = $lb_toggle_ema;
 
         return $this;
     }
@@ -651,7 +1237,55 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setEndorsements($endorsements)
     {
+
+        if (is_null($endorsements)) {
+            array_push($this->openAPINullablesSetToNull, 'endorsements');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('endorsements', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['endorsements'] = $endorsements;
+
+        return $this;
+    }
+
+    /**
+     * Gets preendorsements
+     *
+     * @return \Bzzhh\Tzkt\Model\PreendorsementOperation[]|null
+     */
+    public function getPreendorsements()
+    {
+        return $this->container['preendorsements'];
+    }
+
+    /**
+     * Sets preendorsements
+     *
+     * @param \Bzzhh\Tzkt\Model\PreendorsementOperation[]|null $preendorsements List of preendorsement operations, included in the block
+     *
+     * @return self
+     */
+    public function setPreendorsements($preendorsements)
+    {
+
+        if (is_null($preendorsements)) {
+            array_push($this->openAPINullablesSetToNull, 'preendorsements');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('preendorsements', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['preendorsements'] = $preendorsements;
 
         return $this;
     }
@@ -675,6 +1309,18 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setProposals($proposals)
     {
+
+        if (is_null($proposals)) {
+            array_push($this->openAPINullablesSetToNull, 'proposals');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('proposals', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['proposals'] = $proposals;
 
         return $this;
@@ -699,6 +1345,18 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setBallots($ballots)
     {
+
+        if (is_null($ballots)) {
+            array_push($this->openAPINullablesSetToNull, 'ballots');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ballots', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['ballots'] = $ballots;
 
         return $this;
@@ -723,6 +1381,18 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setActivations($activations)
     {
+
+        if (is_null($activations)) {
+            array_push($this->openAPINullablesSetToNull, 'activations');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('activations', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['activations'] = $activations;
 
         return $this;
@@ -747,6 +1417,18 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDoubleBaking($double_baking)
     {
+
+        if (is_null($double_baking)) {
+            array_push($this->openAPINullablesSetToNull, 'double_baking');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('double_baking', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['double_baking'] = $double_baking;
 
         return $this;
@@ -771,7 +1453,55 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDoubleEndorsing($double_endorsing)
     {
+
+        if (is_null($double_endorsing)) {
+            array_push($this->openAPINullablesSetToNull, 'double_endorsing');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('double_endorsing', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['double_endorsing'] = $double_endorsing;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_preendorsing
+     *
+     * @return \Bzzhh\Tzkt\Model\DoublePreendorsingOperation[]|null
+     */
+    public function getDoublePreendorsing()
+    {
+        return $this->container['double_preendorsing'];
+    }
+
+    /**
+     * Sets double_preendorsing
+     *
+     * @param \Bzzhh\Tzkt\Model\DoublePreendorsingOperation[]|null $double_preendorsing List of double preendorsement evidence operations, included in the block
+     *
+     * @return self
+     */
+    public function setDoublePreendorsing($double_preendorsing)
+    {
+
+        if (is_null($double_preendorsing)) {
+            array_push($this->openAPINullablesSetToNull, 'double_preendorsing');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('double_preendorsing', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['double_preendorsing'] = $double_preendorsing;
 
         return $this;
     }
@@ -789,13 +1519,61 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets nonce_revelations
      *
-     * @param \Bzzhh\Tzkt\Model\NonceRevelationOperation[]|null $nonce_revelations List of nonce revelation (are used by the blockchain to create randomness) operations, included in the block
+     * @param \Bzzhh\Tzkt\Model\NonceRevelationOperation[]|null $nonce_revelations List of nonce revelation (used by the blockchain to create randomness) operations, included in the block
      *
      * @return self
      */
     public function setNonceRevelations($nonce_revelations)
     {
+
+        if (is_null($nonce_revelations)) {
+            array_push($this->openAPINullablesSetToNull, 'nonce_revelations');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('nonce_revelations', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['nonce_revelations'] = $nonce_revelations;
+
+        return $this;
+    }
+
+    /**
+     * Gets vdf_revelations
+     *
+     * @return \Bzzhh\Tzkt\Model\VdfRevelationOperation[]|null
+     */
+    public function getVdfRevelations()
+    {
+        return $this->container['vdf_revelations'];
+    }
+
+    /**
+     * Sets vdf_revelations
+     *
+     * @param \Bzzhh\Tzkt\Model\VdfRevelationOperation[]|null $vdf_revelations List of vdf revelation (used by the blockchain to create randomness) operations, included in the block
+     *
+     * @return self
+     */
+    public function setVdfRevelations($vdf_revelations)
+    {
+
+        if (is_null($vdf_revelations)) {
+            array_push($this->openAPINullablesSetToNull, 'vdf_revelations');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('vdf_revelations', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['vdf_revelations'] = $vdf_revelations;
 
         return $this;
     }
@@ -819,6 +1597,18 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDelegations($delegations)
     {
+
+        if (is_null($delegations)) {
+            array_push($this->openAPINullablesSetToNull, 'delegations');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('delegations', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['delegations'] = $delegations;
 
         return $this;
@@ -843,6 +1633,18 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setOriginations($originations)
     {
+
+        if (is_null($originations)) {
+            array_push($this->openAPINullablesSetToNull, 'originations');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('originations', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['originations'] = $originations;
 
         return $this;
@@ -867,6 +1669,18 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTransactions($transactions)
     {
+
+        if (is_null($transactions)) {
+            array_push($this->openAPINullablesSetToNull, 'transactions');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('transactions', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['transactions'] = $transactions;
 
         return $this;
@@ -891,7 +1705,631 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setReveals($reveals)
     {
+
+        if (is_null($reveals)) {
+            array_push($this->openAPINullablesSetToNull, 'reveals');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('reveals', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['reveals'] = $reveals;
+
+        return $this;
+    }
+
+    /**
+     * Gets register_constants
+     *
+     * @return \Bzzhh\Tzkt\Model\RegisterConstantOperation[]|null
+     */
+    public function getRegisterConstants()
+    {
+        return $this->container['register_constants'];
+    }
+
+    /**
+     * Sets register_constants
+     *
+     * @param \Bzzhh\Tzkt\Model\RegisterConstantOperation[]|null $register_constants List of register global constant operations, included in the block
+     *
+     * @return self
+     */
+    public function setRegisterConstants($register_constants)
+    {
+
+        if (is_null($register_constants)) {
+            array_push($this->openAPINullablesSetToNull, 'register_constants');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('register_constants', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['register_constants'] = $register_constants;
+
+        return $this;
+    }
+
+    /**
+     * Gets set_deposits_limits
+     *
+     * @return \Bzzhh\Tzkt\Model\SetDepositsLimitOperation[]|null
+     */
+    public function getSetDepositsLimits()
+    {
+        return $this->container['set_deposits_limits'];
+    }
+
+    /**
+     * Sets set_deposits_limits
+     *
+     * @param \Bzzhh\Tzkt\Model\SetDepositsLimitOperation[]|null $set_deposits_limits List of set deposits limit operations, included in the block
+     *
+     * @return self
+     */
+    public function setSetDepositsLimits($set_deposits_limits)
+    {
+
+        if (is_null($set_deposits_limits)) {
+            array_push($this->openAPINullablesSetToNull, 'set_deposits_limits');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('set_deposits_limits', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['set_deposits_limits'] = $set_deposits_limits;
+
+        return $this;
+    }
+
+    /**
+     * Gets transfer_ticket_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TransferTicketOperation[]|null
+     */
+    public function getTransferTicketOps()
+    {
+        return $this->container['transfer_ticket_ops'];
+    }
+
+    /**
+     * Sets transfer_ticket_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TransferTicketOperation[]|null $transfer_ticket_ops List of transfer ticket operations, included in the block
+     *
+     * @return self
+     */
+    public function setTransferTicketOps($transfer_ticket_ops)
+    {
+
+        if (is_null($transfer_ticket_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'transfer_ticket_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('transfer_ticket_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['transfer_ticket_ops'] = $transfer_ticket_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_commit_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TxRollupCommitOperation[]|null
+     */
+    public function getTxRollupCommitOps()
+    {
+        return $this->container['tx_rollup_commit_ops'];
+    }
+
+    /**
+     * Sets tx_rollup_commit_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TxRollupCommitOperation[]|null $tx_rollup_commit_ops List of tx rollup commit operations, included in the block
+     *
+     * @return self
+     */
+    public function setTxRollupCommitOps($tx_rollup_commit_ops)
+    {
+
+        if (is_null($tx_rollup_commit_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'tx_rollup_commit_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tx_rollup_commit_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tx_rollup_commit_ops'] = $tx_rollup_commit_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_dispatch_tickets_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TxRollupDispatchTicketsOperation[]|null
+     */
+    public function getTxRollupDispatchTicketsOps()
+    {
+        return $this->container['tx_rollup_dispatch_tickets_ops'];
+    }
+
+    /**
+     * Sets tx_rollup_dispatch_tickets_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TxRollupDispatchTicketsOperation[]|null $tx_rollup_dispatch_tickets_ops List of tx rollup dispatch tickets operations, included in the block
+     *
+     * @return self
+     */
+    public function setTxRollupDispatchTicketsOps($tx_rollup_dispatch_tickets_ops)
+    {
+
+        if (is_null($tx_rollup_dispatch_tickets_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'tx_rollup_dispatch_tickets_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tx_rollup_dispatch_tickets_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tx_rollup_dispatch_tickets_ops'] = $tx_rollup_dispatch_tickets_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_finalize_commitment_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TxRollupFinalizeCommitmentOperation[]|null
+     */
+    public function getTxRollupFinalizeCommitmentOps()
+    {
+        return $this->container['tx_rollup_finalize_commitment_ops'];
+    }
+
+    /**
+     * Sets tx_rollup_finalize_commitment_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TxRollupFinalizeCommitmentOperation[]|null $tx_rollup_finalize_commitment_ops List of tx rollup finalize commitment operations, included in the block
+     *
+     * @return self
+     */
+    public function setTxRollupFinalizeCommitmentOps($tx_rollup_finalize_commitment_ops)
+    {
+
+        if (is_null($tx_rollup_finalize_commitment_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'tx_rollup_finalize_commitment_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tx_rollup_finalize_commitment_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tx_rollup_finalize_commitment_ops'] = $tx_rollup_finalize_commitment_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_origination_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TxRollupOriginationOperation[]|null
+     */
+    public function getTxRollupOriginationOps()
+    {
+        return $this->container['tx_rollup_origination_ops'];
+    }
+
+    /**
+     * Sets tx_rollup_origination_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TxRollupOriginationOperation[]|null $tx_rollup_origination_ops List of tx rollup origination operations, included in the block
+     *
+     * @return self
+     */
+    public function setTxRollupOriginationOps($tx_rollup_origination_ops)
+    {
+
+        if (is_null($tx_rollup_origination_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'tx_rollup_origination_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tx_rollup_origination_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tx_rollup_origination_ops'] = $tx_rollup_origination_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_rejection_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TxRollupRejectionOperation[]|null
+     */
+    public function getTxRollupRejectionOps()
+    {
+        return $this->container['tx_rollup_rejection_ops'];
+    }
+
+    /**
+     * Sets tx_rollup_rejection_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TxRollupRejectionOperation[]|null $tx_rollup_rejection_ops List of tx rollup rejection operations, included in the block
+     *
+     * @return self
+     */
+    public function setTxRollupRejectionOps($tx_rollup_rejection_ops)
+    {
+
+        if (is_null($tx_rollup_rejection_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'tx_rollup_rejection_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tx_rollup_rejection_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tx_rollup_rejection_ops'] = $tx_rollup_rejection_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_remove_commitment_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TxRollupRemoveCommitmentOperation[]|null
+     */
+    public function getTxRollupRemoveCommitmentOps()
+    {
+        return $this->container['tx_rollup_remove_commitment_ops'];
+    }
+
+    /**
+     * Sets tx_rollup_remove_commitment_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TxRollupRemoveCommitmentOperation[]|null $tx_rollup_remove_commitment_ops List of tx rollup remove commitment operations, included in the block
+     *
+     * @return self
+     */
+    public function setTxRollupRemoveCommitmentOps($tx_rollup_remove_commitment_ops)
+    {
+
+        if (is_null($tx_rollup_remove_commitment_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'tx_rollup_remove_commitment_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tx_rollup_remove_commitment_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tx_rollup_remove_commitment_ops'] = $tx_rollup_remove_commitment_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_return_bond_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TxRollupReturnBondOperation[]|null
+     */
+    public function getTxRollupReturnBondOps()
+    {
+        return $this->container['tx_rollup_return_bond_ops'];
+    }
+
+    /**
+     * Sets tx_rollup_return_bond_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TxRollupReturnBondOperation[]|null $tx_rollup_return_bond_ops List of tx rollup return bond operations, included in the block
+     *
+     * @return self
+     */
+    public function setTxRollupReturnBondOps($tx_rollup_return_bond_ops)
+    {
+
+        if (is_null($tx_rollup_return_bond_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'tx_rollup_return_bond_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tx_rollup_return_bond_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tx_rollup_return_bond_ops'] = $tx_rollup_return_bond_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_submit_batch_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\TxRollupSubmitBatchOperation[]|null
+     */
+    public function getTxRollupSubmitBatchOps()
+    {
+        return $this->container['tx_rollup_submit_batch_ops'];
+    }
+
+    /**
+     * Sets tx_rollup_submit_batch_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\TxRollupSubmitBatchOperation[]|null $tx_rollup_submit_batch_ops List of tx rollup submit batch operations, included in the block
+     *
+     * @return self
+     */
+    public function setTxRollupSubmitBatchOps($tx_rollup_submit_batch_ops)
+    {
+
+        if (is_null($tx_rollup_submit_batch_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'tx_rollup_submit_batch_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tx_rollup_submit_batch_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tx_rollup_submit_batch_ops'] = $tx_rollup_submit_batch_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets increase_paid_storage_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\IncreasePaidStorageOperation[]|null
+     */
+    public function getIncreasePaidStorageOps()
+    {
+        return $this->container['increase_paid_storage_ops'];
+    }
+
+    /**
+     * Sets increase_paid_storage_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\IncreasePaidStorageOperation[]|null $increase_paid_storage_ops List of increase paid storage operations, included in the block
+     *
+     * @return self
+     */
+    public function setIncreasePaidStorageOps($increase_paid_storage_ops)
+    {
+
+        if (is_null($increase_paid_storage_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'increase_paid_storage_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('increase_paid_storage_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['increase_paid_storage_ops'] = $increase_paid_storage_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets update_consensus_key_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\UpdateConsensusKeyOperation[]|null
+     */
+    public function getUpdateConsensusKeyOps()
+    {
+        return $this->container['update_consensus_key_ops'];
+    }
+
+    /**
+     * Sets update_consensus_key_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\UpdateConsensusKeyOperation[]|null $update_consensus_key_ops List of update consensus key operations, included in the block
+     *
+     * @return self
+     */
+    public function setUpdateConsensusKeyOps($update_consensus_key_ops)
+    {
+
+        if (is_null($update_consensus_key_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'update_consensus_key_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('update_consensus_key_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['update_consensus_key_ops'] = $update_consensus_key_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets drain_delegate_ops
+     *
+     * @return \Bzzhh\Tzkt\Model\DrainDelegateOperation[]|null
+     */
+    public function getDrainDelegateOps()
+    {
+        return $this->container['drain_delegate_ops'];
+    }
+
+    /**
+     * Sets drain_delegate_ops
+     *
+     * @param \Bzzhh\Tzkt\Model\DrainDelegateOperation[]|null $drain_delegate_ops List of drain delegate operations, included in the block
+     *
+     * @return self
+     */
+    public function setDrainDelegateOps($drain_delegate_ops)
+    {
+
+        if (is_null($drain_delegate_ops)) {
+            array_push($this->openAPINullablesSetToNull, 'drain_delegate_ops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('drain_delegate_ops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['drain_delegate_ops'] = $drain_delegate_ops;
+
+        return $this;
+    }
+
+    /**
+     * Gets migrations
+     *
+     * @return \Bzzhh\Tzkt\Model\MigrationOperation[]|null
+     */
+    public function getMigrations()
+    {
+        return $this->container['migrations'];
+    }
+
+    /**
+     * Sets migrations
+     *
+     * @param \Bzzhh\Tzkt\Model\MigrationOperation[]|null $migrations List of migration operations, implicitly applied at the end of the block
+     *
+     * @return self
+     */
+    public function setMigrations($migrations)
+    {
+
+        if (is_null($migrations)) {
+            array_push($this->openAPINullablesSetToNull, 'migrations');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('migrations', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['migrations'] = $migrations;
+
+        return $this;
+    }
+
+    /**
+     * Gets revelation_penalties
+     *
+     * @return \Bzzhh\Tzkt\Model\RevelationPenaltyOperation[]|null
+     */
+    public function getRevelationPenalties()
+    {
+        return $this->container['revelation_penalties'];
+    }
+
+    /**
+     * Sets revelation_penalties
+     *
+     * @param \Bzzhh\Tzkt\Model\RevelationPenaltyOperation[]|null $revelation_penalties List of revelation penalty operations, implicitly applied at the end of the block
+     *
+     * @return self
+     */
+    public function setRevelationPenalties($revelation_penalties)
+    {
+
+        if (is_null($revelation_penalties)) {
+            array_push($this->openAPINullablesSetToNull, 'revelation_penalties');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('revelation_penalties', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['revelation_penalties'] = $revelation_penalties;
+
+        return $this;
+    }
+
+    /**
+     * Gets endorsing_rewards
+     *
+     * @return \Bzzhh\Tzkt\Model\EndorsingRewardOperation[]|null
+     */
+    public function getEndorsingRewards()
+    {
+        return $this->container['endorsing_rewards'];
+    }
+
+    /**
+     * Sets endorsing_rewards
+     *
+     * @param \Bzzhh\Tzkt\Model\EndorsingRewardOperation[]|null $endorsing_rewards List of endorsing rewards, implicitly applied at the end of the block
+     *
+     * @return self
+     */
+    public function setEndorsingRewards($endorsing_rewards)
+    {
+
+        if (is_null($endorsing_rewards)) {
+            array_push($this->openAPINullablesSetToNull, 'endorsing_rewards');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('endorsing_rewards', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['endorsing_rewards'] = $endorsing_rewards;
 
         return $this;
     }
@@ -899,7 +2337,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote
      *
-     * @return OneOfQuoteShort|null
+     * @return \Bzzhh\Tzkt\Model\BlockQuote|null
      */
     public function getQuote()
     {
@@ -909,13 +2347,148 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote
      *
-     * @param OneOfQuoteShort|null $quote Injected historical quote at the time of block
+     * @param \Bzzhh\Tzkt\Model\BlockQuote|null $quote quote
      *
      * @return self
      */
     public function setQuote($quote)
     {
+
+        if (is_null($quote)) {
+            array_push($this->openAPINullablesSetToNull, 'quote');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets priority
+     *
+     * @return int|null
+     */
+    public function getPriority()
+    {
+        return $this->container['priority'];
+    }
+
+    /**
+     * Sets priority
+     *
+     * @param int|null $priority [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setPriority($priority)
+    {
+
+        if (is_null($priority)) {
+            throw new \InvalidArgumentException('non-nullable priority cannot be null');
+        }
+
+        $this->container['priority'] = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Gets baker
+     *
+     * @return \Bzzhh\Tzkt\Model\BlockBaker|null
+     */
+    public function getBaker()
+    {
+        return $this->container['baker'];
+    }
+
+    /**
+     * Sets baker
+     *
+     * @param \Bzzhh\Tzkt\Model\BlockBaker|null $baker baker
+     *
+     * @return self
+     */
+    public function setBaker($baker)
+    {
+
+        if (is_null($baker)) {
+            array_push($this->openAPINullablesSetToNull, 'baker');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('baker', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['baker'] = $baker;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_escape_vote
+     *
+     * @return bool|null
+     */
+    public function getLbEscapeVote()
+    {
+        return $this->container['lb_escape_vote'];
+    }
+
+    /**
+     * Sets lb_escape_vote
+     *
+     * @param bool|null $lb_escape_vote [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setLbEscapeVote($lb_escape_vote)
+    {
+
+        if (is_null($lb_escape_vote)) {
+            throw new \InvalidArgumentException('non-nullable lb_escape_vote cannot be null');
+        }
+
+        $this->container['lb_escape_vote'] = $lb_escape_vote;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_escape_ema
+     *
+     * @return int|null
+     */
+    public function getLbEscapeEma()
+    {
+        return $this->container['lb_escape_ema'];
+    }
+
+    /**
+     * Sets lb_escape_ema
+     *
+     * @param int|null $lb_escape_ema [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setLbEscapeEma($lb_escape_ema)
+    {
+
+        if (is_null($lb_escape_ema)) {
+            throw new \InvalidArgumentException('non-nullable lb_escape_ema cannot be null');
+        }
+
+        $this->container['lb_escape_ema'] = $lb_escape_ema;
 
         return $this;
     }
@@ -926,7 +2499,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -938,6 +2511,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -951,7 +2525,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -967,7 +2541,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -979,6 +2553,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

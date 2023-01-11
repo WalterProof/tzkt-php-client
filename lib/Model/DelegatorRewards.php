@@ -2,7 +2,7 @@
 /**
  * DelegatorRewards
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -62,31 +60,48 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'cycle' => 'int',
         'balance' => 'int',
-        'baker' => 'OneOfAlias',
+        'baker' => '\Bzzhh\Tzkt\Model\DelegatorRewardsBaker',
         'staking_balance' => 'int',
-        'expected_blocks' => 'double',
-        'expected_endorsements' => 'double',
+        'active_stake' => 'int',
+        'selected_stake' => 'int',
+        'expected_blocks' => 'float',
+        'expected_endorsements' => 'float',
         'future_blocks' => 'int',
         'future_block_rewards' => 'int',
-        'own_blocks' => 'int',
-        'own_block_rewards' => 'int',
-        'extra_blocks' => 'int',
-        'extra_block_rewards' => 'int',
-        'missed_own_blocks' => 'int',
-        'missed_own_block_rewards' => 'int',
-        'missed_extra_blocks' => 'int',
-        'missed_extra_block_rewards' => 'int',
-        'uncovered_own_blocks' => 'int',
-        'uncovered_own_block_rewards' => 'int',
-        'uncovered_extra_blocks' => 'int',
-        'uncovered_extra_block_rewards' => 'int',
+        'blocks' => 'int',
+        'block_rewards' => 'int',
+        'missed_blocks' => 'int',
+        'missed_block_rewards' => 'int',
         'future_endorsements' => 'int',
         'future_endorsement_rewards' => 'int',
         'endorsements' => 'int',
         'endorsement_rewards' => 'int',
         'missed_endorsements' => 'int',
         'missed_endorsement_rewards' => 'int',
+        'block_fees' => 'int',
+        'missed_block_fees' => 'int',
+        'double_baking_rewards' => 'int',
+        'double_baking_losses' => 'int',
+        'double_endorsing_rewards' => 'int',
+        'double_endorsing_losses' => 'int',
+        'double_preendorsing_rewards' => 'int',
+        'double_preendorsing_losses' => 'int',
+        'revelation_rewards' => 'int',
+        'revelation_losses' => 'int',
+        'quote' => '\Bzzhh\Tzkt\Model\CycleQuote',
+        'own_blocks' => 'int',
+        'extra_blocks' => 'int',
+        'missed_own_blocks' => 'int',
+        'missed_extra_blocks' => 'int',
+        'uncovered_own_blocks' => 'int',
+        'uncovered_extra_blocks' => 'int',
         'uncovered_endorsements' => 'int',
+        'own_block_rewards' => 'int',
+        'extra_block_rewards' => 'int',
+        'missed_own_block_rewards' => 'int',
+        'missed_extra_block_rewards' => 'int',
+        'uncovered_own_block_rewards' => 'int',
+        'uncovered_extra_block_rewards' => 'int',
         'uncovered_endorsement_rewards' => 'int',
         'own_block_fees' => 'int',
         'extra_block_fees' => 'int',
@@ -94,18 +109,14 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'missed_extra_block_fees' => 'int',
         'uncovered_own_block_fees' => 'int',
         'uncovered_extra_block_fees' => 'int',
-        'double_baking_rewards' => 'int',
         'double_baking_lost_deposits' => 'int',
         'double_baking_lost_rewards' => 'int',
         'double_baking_lost_fees' => 'int',
-        'double_endorsing_rewards' => 'int',
         'double_endorsing_lost_deposits' => 'int',
         'double_endorsing_lost_rewards' => 'int',
         'double_endorsing_lost_fees' => 'int',
-        'revelation_rewards' => 'int',
         'revelation_lost_rewards' => 'int',
-        'revelation_lost_fees' => 'int',
-        'quote' => 'OneOfQuoteShort'
+        'revelation_lost_fees' => 'int'
     ];
 
     /**
@@ -120,29 +131,46 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => 'int64',
         'baker' => null,
         'staking_balance' => 'int64',
+        'active_stake' => 'int64',
+        'selected_stake' => 'int64',
         'expected_blocks' => 'double',
         'expected_endorsements' => 'double',
         'future_blocks' => 'int32',
         'future_block_rewards' => 'int64',
-        'own_blocks' => 'int32',
-        'own_block_rewards' => 'int64',
-        'extra_blocks' => 'int32',
-        'extra_block_rewards' => 'int64',
-        'missed_own_blocks' => 'int32',
-        'missed_own_block_rewards' => 'int64',
-        'missed_extra_blocks' => 'int32',
-        'missed_extra_block_rewards' => 'int64',
-        'uncovered_own_blocks' => 'int32',
-        'uncovered_own_block_rewards' => 'int64',
-        'uncovered_extra_blocks' => 'int32',
-        'uncovered_extra_block_rewards' => 'int64',
+        'blocks' => 'int32',
+        'block_rewards' => 'int64',
+        'missed_blocks' => 'int32',
+        'missed_block_rewards' => 'int64',
         'future_endorsements' => 'int32',
         'future_endorsement_rewards' => 'int64',
         'endorsements' => 'int32',
         'endorsement_rewards' => 'int64',
         'missed_endorsements' => 'int32',
         'missed_endorsement_rewards' => 'int64',
+        'block_fees' => 'int64',
+        'missed_block_fees' => 'int64',
+        'double_baking_rewards' => 'int64',
+        'double_baking_losses' => 'int64',
+        'double_endorsing_rewards' => 'int64',
+        'double_endorsing_losses' => 'int64',
+        'double_preendorsing_rewards' => 'int64',
+        'double_preendorsing_losses' => 'int64',
+        'revelation_rewards' => 'int64',
+        'revelation_losses' => 'int64',
+        'quote' => null,
+        'own_blocks' => 'int32',
+        'extra_blocks' => 'int32',
+        'missed_own_blocks' => 'int32',
+        'missed_extra_blocks' => 'int32',
+        'uncovered_own_blocks' => 'int32',
+        'uncovered_extra_blocks' => 'int32',
         'uncovered_endorsements' => 'int32',
+        'own_block_rewards' => 'int64',
+        'extra_block_rewards' => 'int64',
+        'missed_own_block_rewards' => 'int64',
+        'missed_extra_block_rewards' => 'int64',
+        'uncovered_own_block_rewards' => 'int64',
+        'uncovered_extra_block_rewards' => 'int64',
         'uncovered_endorsement_rewards' => 'int64',
         'own_block_fees' => 'int64',
         'extra_block_fees' => 'int64',
@@ -150,19 +178,89 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'missed_extra_block_fees' => 'int64',
         'uncovered_own_block_fees' => 'int64',
         'uncovered_extra_block_fees' => 'int64',
-        'double_baking_rewards' => 'int64',
         'double_baking_lost_deposits' => 'int64',
         'double_baking_lost_rewards' => 'int64',
         'double_baking_lost_fees' => 'int64',
-        'double_endorsing_rewards' => 'int64',
         'double_endorsing_lost_deposits' => 'int64',
         'double_endorsing_lost_rewards' => 'int64',
         'double_endorsing_lost_fees' => 'int64',
-        'revelation_rewards' => 'int64',
         'revelation_lost_rewards' => 'int64',
-        'revelation_lost_fees' => 'int64',
-        'quote' => null
+        'revelation_lost_fees' => 'int64'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'cycle' => false,
+		'balance' => false,
+		'baker' => true,
+		'staking_balance' => false,
+		'active_stake' => false,
+		'selected_stake' => false,
+		'expected_blocks' => false,
+		'expected_endorsements' => false,
+		'future_blocks' => false,
+		'future_block_rewards' => false,
+		'blocks' => false,
+		'block_rewards' => false,
+		'missed_blocks' => false,
+		'missed_block_rewards' => false,
+		'future_endorsements' => false,
+		'future_endorsement_rewards' => false,
+		'endorsements' => false,
+		'endorsement_rewards' => false,
+		'missed_endorsements' => false,
+		'missed_endorsement_rewards' => false,
+		'block_fees' => false,
+		'missed_block_fees' => false,
+		'double_baking_rewards' => false,
+		'double_baking_losses' => false,
+		'double_endorsing_rewards' => false,
+		'double_endorsing_losses' => false,
+		'double_preendorsing_rewards' => false,
+		'double_preendorsing_losses' => false,
+		'revelation_rewards' => false,
+		'revelation_losses' => false,
+		'quote' => true,
+		'own_blocks' => false,
+		'extra_blocks' => false,
+		'missed_own_blocks' => false,
+		'missed_extra_blocks' => false,
+		'uncovered_own_blocks' => false,
+		'uncovered_extra_blocks' => false,
+		'uncovered_endorsements' => false,
+		'own_block_rewards' => false,
+		'extra_block_rewards' => false,
+		'missed_own_block_rewards' => false,
+		'missed_extra_block_rewards' => false,
+		'uncovered_own_block_rewards' => false,
+		'uncovered_extra_block_rewards' => false,
+		'uncovered_endorsement_rewards' => false,
+		'own_block_fees' => false,
+		'extra_block_fees' => false,
+		'missed_own_block_fees' => false,
+		'missed_extra_block_fees' => false,
+		'uncovered_own_block_fees' => false,
+		'uncovered_extra_block_fees' => false,
+		'double_baking_lost_deposits' => false,
+		'double_baking_lost_rewards' => false,
+		'double_baking_lost_fees' => false,
+		'double_endorsing_lost_deposits' => false,
+		'double_endorsing_lost_rewards' => false,
+		'double_endorsing_lost_fees' => false,
+		'revelation_lost_rewards' => false,
+		'revelation_lost_fees' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -185,6 +283,58 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -195,29 +345,46 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => 'balance',
         'baker' => 'baker',
         'staking_balance' => 'stakingBalance',
+        'active_stake' => 'activeStake',
+        'selected_stake' => 'selectedStake',
         'expected_blocks' => 'expectedBlocks',
         'expected_endorsements' => 'expectedEndorsements',
         'future_blocks' => 'futureBlocks',
         'future_block_rewards' => 'futureBlockRewards',
-        'own_blocks' => 'ownBlocks',
-        'own_block_rewards' => 'ownBlockRewards',
-        'extra_blocks' => 'extraBlocks',
-        'extra_block_rewards' => 'extraBlockRewards',
-        'missed_own_blocks' => 'missedOwnBlocks',
-        'missed_own_block_rewards' => 'missedOwnBlockRewards',
-        'missed_extra_blocks' => 'missedExtraBlocks',
-        'missed_extra_block_rewards' => 'missedExtraBlockRewards',
-        'uncovered_own_blocks' => 'uncoveredOwnBlocks',
-        'uncovered_own_block_rewards' => 'uncoveredOwnBlockRewards',
-        'uncovered_extra_blocks' => 'uncoveredExtraBlocks',
-        'uncovered_extra_block_rewards' => 'uncoveredExtraBlockRewards',
+        'blocks' => 'blocks',
+        'block_rewards' => 'blockRewards',
+        'missed_blocks' => 'missedBlocks',
+        'missed_block_rewards' => 'missedBlockRewards',
         'future_endorsements' => 'futureEndorsements',
         'future_endorsement_rewards' => 'futureEndorsementRewards',
         'endorsements' => 'endorsements',
         'endorsement_rewards' => 'endorsementRewards',
         'missed_endorsements' => 'missedEndorsements',
         'missed_endorsement_rewards' => 'missedEndorsementRewards',
+        'block_fees' => 'blockFees',
+        'missed_block_fees' => 'missedBlockFees',
+        'double_baking_rewards' => 'doubleBakingRewards',
+        'double_baking_losses' => 'doubleBakingLosses',
+        'double_endorsing_rewards' => 'doubleEndorsingRewards',
+        'double_endorsing_losses' => 'doubleEndorsingLosses',
+        'double_preendorsing_rewards' => 'doublePreendorsingRewards',
+        'double_preendorsing_losses' => 'doublePreendorsingLosses',
+        'revelation_rewards' => 'revelationRewards',
+        'revelation_losses' => 'revelationLosses',
+        'quote' => 'quote',
+        'own_blocks' => 'ownBlocks',
+        'extra_blocks' => 'extraBlocks',
+        'missed_own_blocks' => 'missedOwnBlocks',
+        'missed_extra_blocks' => 'missedExtraBlocks',
+        'uncovered_own_blocks' => 'uncoveredOwnBlocks',
+        'uncovered_extra_blocks' => 'uncoveredExtraBlocks',
         'uncovered_endorsements' => 'uncoveredEndorsements',
+        'own_block_rewards' => 'ownBlockRewards',
+        'extra_block_rewards' => 'extraBlockRewards',
+        'missed_own_block_rewards' => 'missedOwnBlockRewards',
+        'missed_extra_block_rewards' => 'missedExtraBlockRewards',
+        'uncovered_own_block_rewards' => 'uncoveredOwnBlockRewards',
+        'uncovered_extra_block_rewards' => 'uncoveredExtraBlockRewards',
         'uncovered_endorsement_rewards' => 'uncoveredEndorsementRewards',
         'own_block_fees' => 'ownBlockFees',
         'extra_block_fees' => 'extraBlockFees',
@@ -225,18 +392,14 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'missed_extra_block_fees' => 'missedExtraBlockFees',
         'uncovered_own_block_fees' => 'uncoveredOwnBlockFees',
         'uncovered_extra_block_fees' => 'uncoveredExtraBlockFees',
-        'double_baking_rewards' => 'doubleBakingRewards',
         'double_baking_lost_deposits' => 'doubleBakingLostDeposits',
         'double_baking_lost_rewards' => 'doubleBakingLostRewards',
         'double_baking_lost_fees' => 'doubleBakingLostFees',
-        'double_endorsing_rewards' => 'doubleEndorsingRewards',
         'double_endorsing_lost_deposits' => 'doubleEndorsingLostDeposits',
         'double_endorsing_lost_rewards' => 'doubleEndorsingLostRewards',
         'double_endorsing_lost_fees' => 'doubleEndorsingLostFees',
-        'revelation_rewards' => 'revelationRewards',
         'revelation_lost_rewards' => 'revelationLostRewards',
-        'revelation_lost_fees' => 'revelationLostFees',
-        'quote' => 'quote'
+        'revelation_lost_fees' => 'revelationLostFees'
     ];
 
     /**
@@ -249,29 +412,46 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => 'setBalance',
         'baker' => 'setBaker',
         'staking_balance' => 'setStakingBalance',
+        'active_stake' => 'setActiveStake',
+        'selected_stake' => 'setSelectedStake',
         'expected_blocks' => 'setExpectedBlocks',
         'expected_endorsements' => 'setExpectedEndorsements',
         'future_blocks' => 'setFutureBlocks',
         'future_block_rewards' => 'setFutureBlockRewards',
-        'own_blocks' => 'setOwnBlocks',
-        'own_block_rewards' => 'setOwnBlockRewards',
-        'extra_blocks' => 'setExtraBlocks',
-        'extra_block_rewards' => 'setExtraBlockRewards',
-        'missed_own_blocks' => 'setMissedOwnBlocks',
-        'missed_own_block_rewards' => 'setMissedOwnBlockRewards',
-        'missed_extra_blocks' => 'setMissedExtraBlocks',
-        'missed_extra_block_rewards' => 'setMissedExtraBlockRewards',
-        'uncovered_own_blocks' => 'setUncoveredOwnBlocks',
-        'uncovered_own_block_rewards' => 'setUncoveredOwnBlockRewards',
-        'uncovered_extra_blocks' => 'setUncoveredExtraBlocks',
-        'uncovered_extra_block_rewards' => 'setUncoveredExtraBlockRewards',
+        'blocks' => 'setBlocks',
+        'block_rewards' => 'setBlockRewards',
+        'missed_blocks' => 'setMissedBlocks',
+        'missed_block_rewards' => 'setMissedBlockRewards',
         'future_endorsements' => 'setFutureEndorsements',
         'future_endorsement_rewards' => 'setFutureEndorsementRewards',
         'endorsements' => 'setEndorsements',
         'endorsement_rewards' => 'setEndorsementRewards',
         'missed_endorsements' => 'setMissedEndorsements',
         'missed_endorsement_rewards' => 'setMissedEndorsementRewards',
+        'block_fees' => 'setBlockFees',
+        'missed_block_fees' => 'setMissedBlockFees',
+        'double_baking_rewards' => 'setDoubleBakingRewards',
+        'double_baking_losses' => 'setDoubleBakingLosses',
+        'double_endorsing_rewards' => 'setDoubleEndorsingRewards',
+        'double_endorsing_losses' => 'setDoubleEndorsingLosses',
+        'double_preendorsing_rewards' => 'setDoublePreendorsingRewards',
+        'double_preendorsing_losses' => 'setDoublePreendorsingLosses',
+        'revelation_rewards' => 'setRevelationRewards',
+        'revelation_losses' => 'setRevelationLosses',
+        'quote' => 'setQuote',
+        'own_blocks' => 'setOwnBlocks',
+        'extra_blocks' => 'setExtraBlocks',
+        'missed_own_blocks' => 'setMissedOwnBlocks',
+        'missed_extra_blocks' => 'setMissedExtraBlocks',
+        'uncovered_own_blocks' => 'setUncoveredOwnBlocks',
+        'uncovered_extra_blocks' => 'setUncoveredExtraBlocks',
         'uncovered_endorsements' => 'setUncoveredEndorsements',
+        'own_block_rewards' => 'setOwnBlockRewards',
+        'extra_block_rewards' => 'setExtraBlockRewards',
+        'missed_own_block_rewards' => 'setMissedOwnBlockRewards',
+        'missed_extra_block_rewards' => 'setMissedExtraBlockRewards',
+        'uncovered_own_block_rewards' => 'setUncoveredOwnBlockRewards',
+        'uncovered_extra_block_rewards' => 'setUncoveredExtraBlockRewards',
         'uncovered_endorsement_rewards' => 'setUncoveredEndorsementRewards',
         'own_block_fees' => 'setOwnBlockFees',
         'extra_block_fees' => 'setExtraBlockFees',
@@ -279,18 +459,14 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'missed_extra_block_fees' => 'setMissedExtraBlockFees',
         'uncovered_own_block_fees' => 'setUncoveredOwnBlockFees',
         'uncovered_extra_block_fees' => 'setUncoveredExtraBlockFees',
-        'double_baking_rewards' => 'setDoubleBakingRewards',
         'double_baking_lost_deposits' => 'setDoubleBakingLostDeposits',
         'double_baking_lost_rewards' => 'setDoubleBakingLostRewards',
         'double_baking_lost_fees' => 'setDoubleBakingLostFees',
-        'double_endorsing_rewards' => 'setDoubleEndorsingRewards',
         'double_endorsing_lost_deposits' => 'setDoubleEndorsingLostDeposits',
         'double_endorsing_lost_rewards' => 'setDoubleEndorsingLostRewards',
         'double_endorsing_lost_fees' => 'setDoubleEndorsingLostFees',
-        'revelation_rewards' => 'setRevelationRewards',
         'revelation_lost_rewards' => 'setRevelationLostRewards',
-        'revelation_lost_fees' => 'setRevelationLostFees',
-        'quote' => 'setQuote'
+        'revelation_lost_fees' => 'setRevelationLostFees'
     ];
 
     /**
@@ -303,29 +479,46 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => 'getBalance',
         'baker' => 'getBaker',
         'staking_balance' => 'getStakingBalance',
+        'active_stake' => 'getActiveStake',
+        'selected_stake' => 'getSelectedStake',
         'expected_blocks' => 'getExpectedBlocks',
         'expected_endorsements' => 'getExpectedEndorsements',
         'future_blocks' => 'getFutureBlocks',
         'future_block_rewards' => 'getFutureBlockRewards',
-        'own_blocks' => 'getOwnBlocks',
-        'own_block_rewards' => 'getOwnBlockRewards',
-        'extra_blocks' => 'getExtraBlocks',
-        'extra_block_rewards' => 'getExtraBlockRewards',
-        'missed_own_blocks' => 'getMissedOwnBlocks',
-        'missed_own_block_rewards' => 'getMissedOwnBlockRewards',
-        'missed_extra_blocks' => 'getMissedExtraBlocks',
-        'missed_extra_block_rewards' => 'getMissedExtraBlockRewards',
-        'uncovered_own_blocks' => 'getUncoveredOwnBlocks',
-        'uncovered_own_block_rewards' => 'getUncoveredOwnBlockRewards',
-        'uncovered_extra_blocks' => 'getUncoveredExtraBlocks',
-        'uncovered_extra_block_rewards' => 'getUncoveredExtraBlockRewards',
+        'blocks' => 'getBlocks',
+        'block_rewards' => 'getBlockRewards',
+        'missed_blocks' => 'getMissedBlocks',
+        'missed_block_rewards' => 'getMissedBlockRewards',
         'future_endorsements' => 'getFutureEndorsements',
         'future_endorsement_rewards' => 'getFutureEndorsementRewards',
         'endorsements' => 'getEndorsements',
         'endorsement_rewards' => 'getEndorsementRewards',
         'missed_endorsements' => 'getMissedEndorsements',
         'missed_endorsement_rewards' => 'getMissedEndorsementRewards',
+        'block_fees' => 'getBlockFees',
+        'missed_block_fees' => 'getMissedBlockFees',
+        'double_baking_rewards' => 'getDoubleBakingRewards',
+        'double_baking_losses' => 'getDoubleBakingLosses',
+        'double_endorsing_rewards' => 'getDoubleEndorsingRewards',
+        'double_endorsing_losses' => 'getDoubleEndorsingLosses',
+        'double_preendorsing_rewards' => 'getDoublePreendorsingRewards',
+        'double_preendorsing_losses' => 'getDoublePreendorsingLosses',
+        'revelation_rewards' => 'getRevelationRewards',
+        'revelation_losses' => 'getRevelationLosses',
+        'quote' => 'getQuote',
+        'own_blocks' => 'getOwnBlocks',
+        'extra_blocks' => 'getExtraBlocks',
+        'missed_own_blocks' => 'getMissedOwnBlocks',
+        'missed_extra_blocks' => 'getMissedExtraBlocks',
+        'uncovered_own_blocks' => 'getUncoveredOwnBlocks',
+        'uncovered_extra_blocks' => 'getUncoveredExtraBlocks',
         'uncovered_endorsements' => 'getUncoveredEndorsements',
+        'own_block_rewards' => 'getOwnBlockRewards',
+        'extra_block_rewards' => 'getExtraBlockRewards',
+        'missed_own_block_rewards' => 'getMissedOwnBlockRewards',
+        'missed_extra_block_rewards' => 'getMissedExtraBlockRewards',
+        'uncovered_own_block_rewards' => 'getUncoveredOwnBlockRewards',
+        'uncovered_extra_block_rewards' => 'getUncoveredExtraBlockRewards',
         'uncovered_endorsement_rewards' => 'getUncoveredEndorsementRewards',
         'own_block_fees' => 'getOwnBlockFees',
         'extra_block_fees' => 'getExtraBlockFees',
@@ -333,18 +526,14 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
         'missed_extra_block_fees' => 'getMissedExtraBlockFees',
         'uncovered_own_block_fees' => 'getUncoveredOwnBlockFees',
         'uncovered_extra_block_fees' => 'getUncoveredExtraBlockFees',
-        'double_baking_rewards' => 'getDoubleBakingRewards',
         'double_baking_lost_deposits' => 'getDoubleBakingLostDeposits',
         'double_baking_lost_rewards' => 'getDoubleBakingLostRewards',
         'double_baking_lost_fees' => 'getDoubleBakingLostFees',
-        'double_endorsing_rewards' => 'getDoubleEndorsingRewards',
         'double_endorsing_lost_deposits' => 'getDoubleEndorsingLostDeposits',
         'double_endorsing_lost_rewards' => 'getDoubleEndorsingLostRewards',
         'double_endorsing_lost_fees' => 'getDoubleEndorsingLostFees',
-        'revelation_rewards' => 'getRevelationRewards',
         'revelation_lost_rewards' => 'getRevelationLostRewards',
-        'revelation_lost_fees' => 'getRevelationLostFees',
-        'quote' => 'getQuote'
+        'revelation_lost_fees' => 'getRevelationLostFees'
     ];
 
     /**
@@ -404,52 +593,83 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['cycle'] = $data['cycle'] ?? null;
-        $this->container['balance'] = $data['balance'] ?? null;
-        $this->container['baker'] = $data['baker'] ?? null;
-        $this->container['staking_balance'] = $data['staking_balance'] ?? null;
-        $this->container['expected_blocks'] = $data['expected_blocks'] ?? null;
-        $this->container['expected_endorsements'] = $data['expected_endorsements'] ?? null;
-        $this->container['future_blocks'] = $data['future_blocks'] ?? null;
-        $this->container['future_block_rewards'] = $data['future_block_rewards'] ?? null;
-        $this->container['own_blocks'] = $data['own_blocks'] ?? null;
-        $this->container['own_block_rewards'] = $data['own_block_rewards'] ?? null;
-        $this->container['extra_blocks'] = $data['extra_blocks'] ?? null;
-        $this->container['extra_block_rewards'] = $data['extra_block_rewards'] ?? null;
-        $this->container['missed_own_blocks'] = $data['missed_own_blocks'] ?? null;
-        $this->container['missed_own_block_rewards'] = $data['missed_own_block_rewards'] ?? null;
-        $this->container['missed_extra_blocks'] = $data['missed_extra_blocks'] ?? null;
-        $this->container['missed_extra_block_rewards'] = $data['missed_extra_block_rewards'] ?? null;
-        $this->container['uncovered_own_blocks'] = $data['uncovered_own_blocks'] ?? null;
-        $this->container['uncovered_own_block_rewards'] = $data['uncovered_own_block_rewards'] ?? null;
-        $this->container['uncovered_extra_blocks'] = $data['uncovered_extra_blocks'] ?? null;
-        $this->container['uncovered_extra_block_rewards'] = $data['uncovered_extra_block_rewards'] ?? null;
-        $this->container['future_endorsements'] = $data['future_endorsements'] ?? null;
-        $this->container['future_endorsement_rewards'] = $data['future_endorsement_rewards'] ?? null;
-        $this->container['endorsements'] = $data['endorsements'] ?? null;
-        $this->container['endorsement_rewards'] = $data['endorsement_rewards'] ?? null;
-        $this->container['missed_endorsements'] = $data['missed_endorsements'] ?? null;
-        $this->container['missed_endorsement_rewards'] = $data['missed_endorsement_rewards'] ?? null;
-        $this->container['uncovered_endorsements'] = $data['uncovered_endorsements'] ?? null;
-        $this->container['uncovered_endorsement_rewards'] = $data['uncovered_endorsement_rewards'] ?? null;
-        $this->container['own_block_fees'] = $data['own_block_fees'] ?? null;
-        $this->container['extra_block_fees'] = $data['extra_block_fees'] ?? null;
-        $this->container['missed_own_block_fees'] = $data['missed_own_block_fees'] ?? null;
-        $this->container['missed_extra_block_fees'] = $data['missed_extra_block_fees'] ?? null;
-        $this->container['uncovered_own_block_fees'] = $data['uncovered_own_block_fees'] ?? null;
-        $this->container['uncovered_extra_block_fees'] = $data['uncovered_extra_block_fees'] ?? null;
-        $this->container['double_baking_rewards'] = $data['double_baking_rewards'] ?? null;
-        $this->container['double_baking_lost_deposits'] = $data['double_baking_lost_deposits'] ?? null;
-        $this->container['double_baking_lost_rewards'] = $data['double_baking_lost_rewards'] ?? null;
-        $this->container['double_baking_lost_fees'] = $data['double_baking_lost_fees'] ?? null;
-        $this->container['double_endorsing_rewards'] = $data['double_endorsing_rewards'] ?? null;
-        $this->container['double_endorsing_lost_deposits'] = $data['double_endorsing_lost_deposits'] ?? null;
-        $this->container['double_endorsing_lost_rewards'] = $data['double_endorsing_lost_rewards'] ?? null;
-        $this->container['double_endorsing_lost_fees'] = $data['double_endorsing_lost_fees'] ?? null;
-        $this->container['revelation_rewards'] = $data['revelation_rewards'] ?? null;
-        $this->container['revelation_lost_rewards'] = $data['revelation_lost_rewards'] ?? null;
-        $this->container['revelation_lost_fees'] = $data['revelation_lost_fees'] ?? null;
-        $this->container['quote'] = $data['quote'] ?? null;
+        $this->setIfExists('cycle', $data ?? [], null);
+        $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('baker', $data ?? [], null);
+        $this->setIfExists('staking_balance', $data ?? [], null);
+        $this->setIfExists('active_stake', $data ?? [], null);
+        $this->setIfExists('selected_stake', $data ?? [], null);
+        $this->setIfExists('expected_blocks', $data ?? [], null);
+        $this->setIfExists('expected_endorsements', $data ?? [], null);
+        $this->setIfExists('future_blocks', $data ?? [], null);
+        $this->setIfExists('future_block_rewards', $data ?? [], null);
+        $this->setIfExists('blocks', $data ?? [], null);
+        $this->setIfExists('block_rewards', $data ?? [], null);
+        $this->setIfExists('missed_blocks', $data ?? [], null);
+        $this->setIfExists('missed_block_rewards', $data ?? [], null);
+        $this->setIfExists('future_endorsements', $data ?? [], null);
+        $this->setIfExists('future_endorsement_rewards', $data ?? [], null);
+        $this->setIfExists('endorsements', $data ?? [], null);
+        $this->setIfExists('endorsement_rewards', $data ?? [], null);
+        $this->setIfExists('missed_endorsements', $data ?? [], null);
+        $this->setIfExists('missed_endorsement_rewards', $data ?? [], null);
+        $this->setIfExists('block_fees', $data ?? [], null);
+        $this->setIfExists('missed_block_fees', $data ?? [], null);
+        $this->setIfExists('double_baking_rewards', $data ?? [], null);
+        $this->setIfExists('double_baking_losses', $data ?? [], null);
+        $this->setIfExists('double_endorsing_rewards', $data ?? [], null);
+        $this->setIfExists('double_endorsing_losses', $data ?? [], null);
+        $this->setIfExists('double_preendorsing_rewards', $data ?? [], null);
+        $this->setIfExists('double_preendorsing_losses', $data ?? [], null);
+        $this->setIfExists('revelation_rewards', $data ?? [], null);
+        $this->setIfExists('revelation_losses', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('own_blocks', $data ?? [], null);
+        $this->setIfExists('extra_blocks', $data ?? [], null);
+        $this->setIfExists('missed_own_blocks', $data ?? [], null);
+        $this->setIfExists('missed_extra_blocks', $data ?? [], null);
+        $this->setIfExists('uncovered_own_blocks', $data ?? [], null);
+        $this->setIfExists('uncovered_extra_blocks', $data ?? [], null);
+        $this->setIfExists('uncovered_endorsements', $data ?? [], null);
+        $this->setIfExists('own_block_rewards', $data ?? [], null);
+        $this->setIfExists('extra_block_rewards', $data ?? [], null);
+        $this->setIfExists('missed_own_block_rewards', $data ?? [], null);
+        $this->setIfExists('missed_extra_block_rewards', $data ?? [], null);
+        $this->setIfExists('uncovered_own_block_rewards', $data ?? [], null);
+        $this->setIfExists('uncovered_extra_block_rewards', $data ?? [], null);
+        $this->setIfExists('uncovered_endorsement_rewards', $data ?? [], null);
+        $this->setIfExists('own_block_fees', $data ?? [], null);
+        $this->setIfExists('extra_block_fees', $data ?? [], null);
+        $this->setIfExists('missed_own_block_fees', $data ?? [], null);
+        $this->setIfExists('missed_extra_block_fees', $data ?? [], null);
+        $this->setIfExists('uncovered_own_block_fees', $data ?? [], null);
+        $this->setIfExists('uncovered_extra_block_fees', $data ?? [], null);
+        $this->setIfExists('double_baking_lost_deposits', $data ?? [], null);
+        $this->setIfExists('double_baking_lost_rewards', $data ?? [], null);
+        $this->setIfExists('double_baking_lost_fees', $data ?? [], null);
+        $this->setIfExists('double_endorsing_lost_deposits', $data ?? [], null);
+        $this->setIfExists('double_endorsing_lost_rewards', $data ?? [], null);
+        $this->setIfExists('double_endorsing_lost_fees', $data ?? [], null);
+        $this->setIfExists('revelation_lost_rewards', $data ?? [], null);
+        $this->setIfExists('revelation_lost_fees', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -489,12 +709,17 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cycle
      *
-     * @param int|null $cycle Cycle in which rewards have been or will be earned.
+     * @param int|null $cycle Cycle in which rewards were or will be earned.
      *
      * @return self
      */
     public function setCycle($cycle)
     {
+
+        if (is_null($cycle)) {
+            throw new \InvalidArgumentException('non-nullable cycle cannot be null');
+        }
+
         $this->container['cycle'] = $cycle;
 
         return $this;
@@ -519,6 +744,11 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setBalance($balance)
     {
+
+        if (is_null($balance)) {
+            throw new \InvalidArgumentException('non-nullable balance cannot be null');
+        }
+
         $this->container['balance'] = $balance;
 
         return $this;
@@ -527,7 +757,7 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets baker
      *
-     * @return OneOfAlias|null
+     * @return \Bzzhh\Tzkt\Model\DelegatorRewardsBaker|null
      */
     public function getBaker()
     {
@@ -537,12 +767,24 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets baker
      *
-     * @param OneOfAlias|null $baker Baker at the snapshot time.
+     * @param \Bzzhh\Tzkt\Model\DelegatorRewardsBaker|null $baker baker
      *
      * @return self
      */
     public function setBaker($baker)
     {
+
+        if (is_null($baker)) {
+            array_push($this->openAPINullablesSetToNull, 'baker');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('baker', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['baker'] = $baker;
 
         return $this;
@@ -567,7 +809,70 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setStakingBalance($staking_balance)
     {
+
+        if (is_null($staking_balance)) {
+            throw new \InvalidArgumentException('non-nullable staking_balance cannot be null');
+        }
+
         $this->container['staking_balance'] = $staking_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets active_stake
+     *
+     * @return int|null
+     */
+    public function getActiveStake()
+    {
+        return $this->container['active_stake'];
+    }
+
+    /**
+     * Sets active_stake
+     *
+     * @param int|null $active_stake Active stake of the baker participating in rights distribution.
+     *
+     * @return self
+     */
+    public function setActiveStake($active_stake)
+    {
+
+        if (is_null($active_stake)) {
+            throw new \InvalidArgumentException('non-nullable active_stake cannot be null');
+        }
+
+        $this->container['active_stake'] = $active_stake;
+
+        return $this;
+    }
+
+    /**
+     * Gets selected_stake
+     *
+     * @return int|null
+     */
+    public function getSelectedStake()
+    {
+        return $this->container['selected_stake'];
+    }
+
+    /**
+     * Sets selected_stake
+     *
+     * @param int|null $selected_stake Total active stake among all selected bakers.
+     *
+     * @return self
+     */
+    public function setSelectedStake($selected_stake)
+    {
+
+        if (is_null($selected_stake)) {
+            throw new \InvalidArgumentException('non-nullable selected_stake cannot be null');
+        }
+
+        $this->container['selected_stake'] = $selected_stake;
 
         return $this;
     }
@@ -575,7 +880,7 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets expected_blocks
      *
-     * @return double|null
+     * @return float|null
      */
     public function getExpectedBlocks()
     {
@@ -585,12 +890,17 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expected_blocks
      *
-     * @param double|null $expected_blocks Expected value of how many blocks baker should produce based on baker's rolls, total rolls and blocks per cycle.
+     * @param float|null $expected_blocks Expected value of how many blocks baker should produce based on baker's active stake, selected stake and blocks per cycle.
      *
      * @return self
      */
     public function setExpectedBlocks($expected_blocks)
     {
+
+        if (is_null($expected_blocks)) {
+            throw new \InvalidArgumentException('non-nullable expected_blocks cannot be null');
+        }
+
         $this->container['expected_blocks'] = $expected_blocks;
 
         return $this;
@@ -599,7 +909,7 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets expected_endorsements
      *
-     * @return double|null
+     * @return float|null
      */
     public function getExpectedEndorsements()
     {
@@ -609,12 +919,17 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expected_endorsements
      *
-     * @param double|null $expected_endorsements Expected value of how many slots baker should validate based on baker's rolls, total rolls and endorsing slots per cycle.
+     * @param float|null $expected_endorsements Expected value of how many slots baker should validate based on baker's active stake, selected stake and endorsing slots per cycle.
      *
      * @return self
      */
     public function setExpectedEndorsements($expected_endorsements)
     {
+
+        if (is_null($expected_endorsements)) {
+            throw new \InvalidArgumentException('non-nullable expected_endorsements cannot be null');
+        }
+
         $this->container['expected_endorsements'] = $expected_endorsements;
 
         return $this;
@@ -639,6 +954,11 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFutureBlocks($future_blocks)
     {
+
+        if (is_null($future_blocks)) {
+            throw new \InvalidArgumentException('non-nullable future_blocks cannot be null');
+        }
+
         $this->container['future_blocks'] = $future_blocks;
 
         return $this;
@@ -663,295 +983,128 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFutureBlockRewards($future_block_rewards)
     {
+
+        if (is_null($future_block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable future_block_rewards cannot be null');
+        }
+
         $this->container['future_block_rewards'] = $future_block_rewards;
 
         return $this;
     }
 
     /**
-     * Gets own_blocks
+     * Gets blocks
      *
      * @return int|null
      */
-    public function getOwnBlocks()
+    public function getBlocks()
     {
-        return $this->container['own_blocks'];
+        return $this->container['blocks'];
     }
 
     /**
-     * Sets own_blocks
+     * Sets blocks
      *
-     * @param int|null $own_blocks Number of successfully baked blocks with priority `0`.
+     * @param int|null $blocks Number of successfully baked blocks (both proposed and re-proposed blocks).
      *
      * @return self
      */
-    public function setOwnBlocks($own_blocks)
+    public function setBlocks($blocks)
     {
-        $this->container['own_blocks'] = $own_blocks;
+
+        if (is_null($blocks)) {
+            throw new \InvalidArgumentException('non-nullable blocks cannot be null');
+        }
+
+        $this->container['blocks'] = $blocks;
 
         return $this;
     }
 
     /**
-     * Gets own_block_rewards
+     * Gets block_rewards
      *
      * @return int|null
      */
-    public function getOwnBlockRewards()
+    public function getBlockRewards()
     {
-        return $this->container['own_block_rewards'];
+        return $this->container['block_rewards'];
     }
 
     /**
-     * Sets own_block_rewards
+     * Sets block_rewards
      *
-     * @param int|null $own_block_rewards Rewards received for blocks baked with priority `0`.
+     * @param int|null $block_rewards Rewards received for baked blocks (both proposed and re-proposed blocks).
      *
      * @return self
      */
-    public function setOwnBlockRewards($own_block_rewards)
+    public function setBlockRewards($block_rewards)
     {
-        $this->container['own_block_rewards'] = $own_block_rewards;
+
+        if (is_null($block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable block_rewards cannot be null');
+        }
+
+        $this->container['block_rewards'] = $block_rewards;
 
         return $this;
     }
 
     /**
-     * Gets extra_blocks
+     * Gets missed_blocks
      *
      * @return int|null
      */
-    public function getExtraBlocks()
+    public function getMissedBlocks()
     {
-        return $this->container['extra_blocks'];
+        return $this->container['missed_blocks'];
     }
 
     /**
-     * Sets extra_blocks
+     * Sets missed_blocks
      *
-     * @param int|null $extra_blocks Number of successfully baked blocks with priority `1+`.
+     * @param int|null $missed_blocks Number of missed opportunities to bake block.
      *
      * @return self
      */
-    public function setExtraBlocks($extra_blocks)
+    public function setMissedBlocks($missed_blocks)
     {
-        $this->container['extra_blocks'] = $extra_blocks;
+
+        if (is_null($missed_blocks)) {
+            throw new \InvalidArgumentException('non-nullable missed_blocks cannot be null');
+        }
+
+        $this->container['missed_blocks'] = $missed_blocks;
 
         return $this;
     }
 
     /**
-     * Gets extra_block_rewards
+     * Gets missed_block_rewards
      *
      * @return int|null
      */
-    public function getExtraBlockRewards()
+    public function getMissedBlockRewards()
     {
-        return $this->container['extra_block_rewards'];
+        return $this->container['missed_block_rewards'];
     }
 
     /**
-     * Sets extra_block_rewards
+     * Sets missed_block_rewards
      *
-     * @param int|null $extra_block_rewards Rewards received for blocks baked with priority `1+`.
+     * @param int|null $missed_block_rewards Rewards which were not received due to missing blocks.
      *
      * @return self
      */
-    public function setExtraBlockRewards($extra_block_rewards)
+    public function setMissedBlockRewards($missed_block_rewards)
     {
-        $this->container['extra_block_rewards'] = $extra_block_rewards;
 
-        return $this;
-    }
+        if (is_null($missed_block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable missed_block_rewards cannot be null');
+        }
 
-    /**
-     * Gets missed_own_blocks
-     *
-     * @return int|null
-     */
-    public function getMissedOwnBlocks()
-    {
-        return $this->container['missed_own_blocks'];
-    }
-
-    /**
-     * Sets missed_own_blocks
-     *
-     * @param int|null $missed_own_blocks Number of blocks which were missed at priority `0` for no apparent reason (usually due to issues with network or node).
-     *
-     * @return self
-     */
-    public function setMissedOwnBlocks($missed_own_blocks)
-    {
-        $this->container['missed_own_blocks'] = $missed_own_blocks;
-
-        return $this;
-    }
-
-    /**
-     * Gets missed_own_block_rewards
-     *
-     * @return int|null
-     */
-    public function getMissedOwnBlockRewards()
-    {
-        return $this->container['missed_own_block_rewards'];
-    }
-
-    /**
-     * Sets missed_own_block_rewards
-     *
-     * @param int|null $missed_own_block_rewards Rewards which were not received due to missing own blocks.
-     *
-     * @return self
-     */
-    public function setMissedOwnBlockRewards($missed_own_block_rewards)
-    {
-        $this->container['missed_own_block_rewards'] = $missed_own_block_rewards;
-
-        return $this;
-    }
-
-    /**
-     * Gets missed_extra_blocks
-     *
-     * @return int|null
-     */
-    public function getMissedExtraBlocks()
-    {
-        return $this->container['missed_extra_blocks'];
-    }
-
-    /**
-     * Sets missed_extra_blocks
-     *
-     * @param int|null $missed_extra_blocks Number of blocks which were missed at priority `1+` for no apparent reason (usually due to issues with network or node).
-     *
-     * @return self
-     */
-    public function setMissedExtraBlocks($missed_extra_blocks)
-    {
-        $this->container['missed_extra_blocks'] = $missed_extra_blocks;
-
-        return $this;
-    }
-
-    /**
-     * Gets missed_extra_block_rewards
-     *
-     * @return int|null
-     */
-    public function getMissedExtraBlockRewards()
-    {
-        return $this->container['missed_extra_block_rewards'];
-    }
-
-    /**
-     * Sets missed_extra_block_rewards
-     *
-     * @param int|null $missed_extra_block_rewards Rewards which were not received due to missing extra blocks.
-     *
-     * @return self
-     */
-    public function setMissedExtraBlockRewards($missed_extra_block_rewards)
-    {
-        $this->container['missed_extra_block_rewards'] = $missed_extra_block_rewards;
-
-        return $this;
-    }
-
-    /**
-     * Gets uncovered_own_blocks
-     *
-     * @return int|null
-     */
-    public function getUncoveredOwnBlocks()
-    {
-        return $this->container['uncovered_own_blocks'];
-    }
-
-    /**
-     * Sets uncovered_own_blocks
-     *
-     * @param int|null $uncovered_own_blocks Number of blocks which were missed at priority `0` due to lack of bonds (for example, when a baker is overdelegated).
-     *
-     * @return self
-     */
-    public function setUncoveredOwnBlocks($uncovered_own_blocks)
-    {
-        $this->container['uncovered_own_blocks'] = $uncovered_own_blocks;
-
-        return $this;
-    }
-
-    /**
-     * Gets uncovered_own_block_rewards
-     *
-     * @return int|null
-     */
-    public function getUncoveredOwnBlockRewards()
-    {
-        return $this->container['uncovered_own_block_rewards'];
-    }
-
-    /**
-     * Sets uncovered_own_block_rewards
-     *
-     * @param int|null $uncovered_own_block_rewards Rewards which were not received due to missing own blocks due to lack of bonds.
-     *
-     * @return self
-     */
-    public function setUncoveredOwnBlockRewards($uncovered_own_block_rewards)
-    {
-        $this->container['uncovered_own_block_rewards'] = $uncovered_own_block_rewards;
-
-        return $this;
-    }
-
-    /**
-     * Gets uncovered_extra_blocks
-     *
-     * @return int|null
-     */
-    public function getUncoveredExtraBlocks()
-    {
-        return $this->container['uncovered_extra_blocks'];
-    }
-
-    /**
-     * Sets uncovered_extra_blocks
-     *
-     * @param int|null $uncovered_extra_blocks Number of blocks which were missed at priority `1+` due to lack of bonds (for example, when a baker is overdelegated).
-     *
-     * @return self
-     */
-    public function setUncoveredExtraBlocks($uncovered_extra_blocks)
-    {
-        $this->container['uncovered_extra_blocks'] = $uncovered_extra_blocks;
-
-        return $this;
-    }
-
-    /**
-     * Gets uncovered_extra_block_rewards
-     *
-     * @return int|null
-     */
-    public function getUncoveredExtraBlockRewards()
-    {
-        return $this->container['uncovered_extra_block_rewards'];
-    }
-
-    /**
-     * Sets uncovered_extra_block_rewards
-     *
-     * @param int|null $uncovered_extra_block_rewards Rewards which were not received due to missing extra blocks due to lack of bonds.
-     *
-     * @return self
-     */
-    public function setUncoveredExtraBlockRewards($uncovered_extra_block_rewards)
-    {
-        $this->container['uncovered_extra_block_rewards'] = $uncovered_extra_block_rewards;
+        $this->container['missed_block_rewards'] = $missed_block_rewards;
 
         return $this;
     }
@@ -975,6 +1128,11 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFutureEndorsements($future_endorsements)
     {
+
+        if (is_null($future_endorsements)) {
+            throw new \InvalidArgumentException('non-nullable future_endorsements cannot be null');
+        }
+
         $this->container['future_endorsements'] = $future_endorsements;
 
         return $this;
@@ -999,6 +1157,11 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFutureEndorsementRewards($future_endorsement_rewards)
     {
+
+        if (is_null($future_endorsement_rewards)) {
+            throw new \InvalidArgumentException('non-nullable future_endorsement_rewards cannot be null');
+        }
+
         $this->container['future_endorsement_rewards'] = $future_endorsement_rewards;
 
         return $this;
@@ -1023,6 +1186,11 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setEndorsements($endorsements)
     {
+
+        if (is_null($endorsements)) {
+            throw new \InvalidArgumentException('non-nullable endorsements cannot be null');
+        }
+
         $this->container['endorsements'] = $endorsements;
 
         return $this;
@@ -1047,6 +1215,11 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setEndorsementRewards($endorsement_rewards)
     {
+
+        if (is_null($endorsement_rewards)) {
+            throw new \InvalidArgumentException('non-nullable endorsement_rewards cannot be null');
+        }
+
         $this->container['endorsement_rewards'] = $endorsement_rewards;
 
         return $this;
@@ -1065,12 +1238,17 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets missed_endorsements
      *
-     * @param int|null $missed_endorsements Number of endorsing slots which were missed for no apparent reason (usually due to issues with network or node).
+     * @param int|null $missed_endorsements Number of not endorsed (missed) slots.
      *
      * @return self
      */
     public function setMissedEndorsements($missed_endorsements)
     {
+
+        if (is_null($missed_endorsements)) {
+            throw new \InvalidArgumentException('non-nullable missed_endorsements cannot be null');
+        }
+
         $this->container['missed_endorsements'] = $missed_endorsements;
 
         return $this;
@@ -1095,199 +1273,70 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setMissedEndorsementRewards($missed_endorsement_rewards)
     {
+
+        if (is_null($missed_endorsement_rewards)) {
+            throw new \InvalidArgumentException('non-nullable missed_endorsement_rewards cannot be null');
+        }
+
         $this->container['missed_endorsement_rewards'] = $missed_endorsement_rewards;
 
         return $this;
     }
 
     /**
-     * Gets uncovered_endorsements
+     * Gets block_fees
      *
      * @return int|null
      */
-    public function getUncoveredEndorsements()
+    public function getBlockFees()
     {
-        return $this->container['uncovered_endorsements'];
+        return $this->container['block_fees'];
     }
 
     /**
-     * Sets uncovered_endorsements
+     * Sets block_fees
      *
-     * @param int|null $uncovered_endorsements Number of endorsing slots which were missed due to lack of bonds (for example, when a baker is overdelegated).
+     * @param int|null $block_fees Operation fees which were harvested from successfully baked blocks.
      *
      * @return self
      */
-    public function setUncoveredEndorsements($uncovered_endorsements)
+    public function setBlockFees($block_fees)
     {
-        $this->container['uncovered_endorsements'] = $uncovered_endorsements;
+
+        if (is_null($block_fees)) {
+            throw new \InvalidArgumentException('non-nullable block_fees cannot be null');
+        }
+
+        $this->container['block_fees'] = $block_fees;
 
         return $this;
     }
 
     /**
-     * Gets uncovered_endorsement_rewards
+     * Gets missed_block_fees
      *
      * @return int|null
      */
-    public function getUncoveredEndorsementRewards()
+    public function getMissedBlockFees()
     {
-        return $this->container['uncovered_endorsement_rewards'];
+        return $this->container['missed_block_fees'];
     }
 
     /**
-     * Sets uncovered_endorsement_rewards
+     * Sets missed_block_fees
      *
-     * @param int|null $uncovered_endorsement_rewards Rewards which were not received due to missing endorsements due to lack of bonds.
+     * @param int|null $missed_block_fees Operation fees which were not received due to missing blocks.
      *
      * @return self
      */
-    public function setUncoveredEndorsementRewards($uncovered_endorsement_rewards)
+    public function setMissedBlockFees($missed_block_fees)
     {
-        $this->container['uncovered_endorsement_rewards'] = $uncovered_endorsement_rewards;
 
-        return $this;
-    }
+        if (is_null($missed_block_fees)) {
+            throw new \InvalidArgumentException('non-nullable missed_block_fees cannot be null');
+        }
 
-    /**
-     * Gets own_block_fees
-     *
-     * @return int|null
-     */
-    public function getOwnBlockFees()
-    {
-        return $this->container['own_block_fees'];
-    }
-
-    /**
-     * Sets own_block_fees
-     *
-     * @param int|null $own_block_fees Operation fees which were harvested from successfully baked blocks with priority `0`.
-     *
-     * @return self
-     */
-    public function setOwnBlockFees($own_block_fees)
-    {
-        $this->container['own_block_fees'] = $own_block_fees;
-
-        return $this;
-    }
-
-    /**
-     * Gets extra_block_fees
-     *
-     * @return int|null
-     */
-    public function getExtraBlockFees()
-    {
-        return $this->container['extra_block_fees'];
-    }
-
-    /**
-     * Sets extra_block_fees
-     *
-     * @param int|null $extra_block_fees Operation fees which were harvested from successfully baked blocks with priority `1+`.
-     *
-     * @return self
-     */
-    public function setExtraBlockFees($extra_block_fees)
-    {
-        $this->container['extra_block_fees'] = $extra_block_fees;
-
-        return $this;
-    }
-
-    /**
-     * Gets missed_own_block_fees
-     *
-     * @return int|null
-     */
-    public function getMissedOwnBlockFees()
-    {
-        return $this->container['missed_own_block_fees'];
-    }
-
-    /**
-     * Sets missed_own_block_fees
-     *
-     * @param int|null $missed_own_block_fees Operation fees which were not received due to missing own blocks.
-     *
-     * @return self
-     */
-    public function setMissedOwnBlockFees($missed_own_block_fees)
-    {
-        $this->container['missed_own_block_fees'] = $missed_own_block_fees;
-
-        return $this;
-    }
-
-    /**
-     * Gets missed_extra_block_fees
-     *
-     * @return int|null
-     */
-    public function getMissedExtraBlockFees()
-    {
-        return $this->container['missed_extra_block_fees'];
-    }
-
-    /**
-     * Sets missed_extra_block_fees
-     *
-     * @param int|null $missed_extra_block_fees Operation fees which were not received due to missing extra blocks.
-     *
-     * @return self
-     */
-    public function setMissedExtraBlockFees($missed_extra_block_fees)
-    {
-        $this->container['missed_extra_block_fees'] = $missed_extra_block_fees;
-
-        return $this;
-    }
-
-    /**
-     * Gets uncovered_own_block_fees
-     *
-     * @return int|null
-     */
-    public function getUncoveredOwnBlockFees()
-    {
-        return $this->container['uncovered_own_block_fees'];
-    }
-
-    /**
-     * Sets uncovered_own_block_fees
-     *
-     * @param int|null $uncovered_own_block_fees Operation fees which were not received due to missing own blocks (due to lack of bonds).
-     *
-     * @return self
-     */
-    public function setUncoveredOwnBlockFees($uncovered_own_block_fees)
-    {
-        $this->container['uncovered_own_block_fees'] = $uncovered_own_block_fees;
-
-        return $this;
-    }
-
-    /**
-     * Gets uncovered_extra_block_fees
-     *
-     * @return int|null
-     */
-    public function getUncoveredExtraBlockFees()
-    {
-        return $this->container['uncovered_extra_block_fees'];
-    }
-
-    /**
-     * Sets uncovered_extra_block_fees
-     *
-     * @param int|null $uncovered_extra_block_fees Operation fees which were not received due to missing extra blocks (due to lack of bonds).
-     *
-     * @return self
-     */
-    public function setUncoveredExtraBlockFees($uncovered_extra_block_fees)
-    {
-        $this->container['uncovered_extra_block_fees'] = $uncovered_extra_block_fees;
+        $this->container['missed_block_fees'] = $missed_block_fees;
 
         return $this;
     }
@@ -1311,79 +1360,41 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDoubleBakingRewards($double_baking_rewards)
     {
+
+        if (is_null($double_baking_rewards)) {
+            throw new \InvalidArgumentException('non-nullable double_baking_rewards cannot be null');
+        }
+
         $this->container['double_baking_rewards'] = $double_baking_rewards;
 
         return $this;
     }
 
     /**
-     * Gets double_baking_lost_deposits
+     * Gets double_baking_losses
      *
      * @return int|null
      */
-    public function getDoubleBakingLostDeposits()
+    public function getDoubleBakingLosses()
     {
-        return $this->container['double_baking_lost_deposits'];
+        return $this->container['double_baking_losses'];
     }
 
     /**
-     * Sets double_baking_lost_deposits
+     * Sets double_baking_losses
      *
-     * @param int|null $double_baking_lost_deposits Bonds lost due to double baking
+     * @param int|null $double_baking_losses Amount of frozen deposits lost due to double baking
      *
      * @return self
      */
-    public function setDoubleBakingLostDeposits($double_baking_lost_deposits)
+    public function setDoubleBakingLosses($double_baking_losses)
     {
-        $this->container['double_baking_lost_deposits'] = $double_baking_lost_deposits;
 
-        return $this;
-    }
+        if (is_null($double_baking_losses)) {
+            throw new \InvalidArgumentException('non-nullable double_baking_losses cannot be null');
+        }
 
-    /**
-     * Gets double_baking_lost_rewards
-     *
-     * @return int|null
-     */
-    public function getDoubleBakingLostRewards()
-    {
-        return $this->container['double_baking_lost_rewards'];
-    }
-
-    /**
-     * Sets double_baking_lost_rewards
-     *
-     * @param int|null $double_baking_lost_rewards Rewards lost due to double baking
-     *
-     * @return self
-     */
-    public function setDoubleBakingLostRewards($double_baking_lost_rewards)
-    {
-        $this->container['double_baking_lost_rewards'] = $double_baking_lost_rewards;
-
-        return $this;
-    }
-
-    /**
-     * Gets double_baking_lost_fees
-     *
-     * @return int|null
-     */
-    public function getDoubleBakingLostFees()
-    {
-        return $this->container['double_baking_lost_fees'];
-    }
-
-    /**
-     * Sets double_baking_lost_fees
-     *
-     * @param int|null $double_baking_lost_fees Fees lost due to double baking
-     *
-     * @return self
-     */
-    public function setDoubleBakingLostFees($double_baking_lost_fees)
-    {
-        $this->container['double_baking_lost_fees'] = $double_baking_lost_fees;
+        $this->container['double_baking_losses'] = $double_baking_losses;
 
         return $this;
     }
@@ -1407,79 +1418,99 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDoubleEndorsingRewards($double_endorsing_rewards)
     {
+
+        if (is_null($double_endorsing_rewards)) {
+            throw new \InvalidArgumentException('non-nullable double_endorsing_rewards cannot be null');
+        }
+
         $this->container['double_endorsing_rewards'] = $double_endorsing_rewards;
 
         return $this;
     }
 
     /**
-     * Gets double_endorsing_lost_deposits
+     * Gets double_endorsing_losses
      *
      * @return int|null
      */
-    public function getDoubleEndorsingLostDeposits()
+    public function getDoubleEndorsingLosses()
     {
-        return $this->container['double_endorsing_lost_deposits'];
+        return $this->container['double_endorsing_losses'];
     }
 
     /**
-     * Sets double_endorsing_lost_deposits
+     * Sets double_endorsing_losses
      *
-     * @param int|null $double_endorsing_lost_deposits Bonds lost due to double endorsing
+     * @param int|null $double_endorsing_losses Amount of frozen deposits lost due to double endorsing
      *
      * @return self
      */
-    public function setDoubleEndorsingLostDeposits($double_endorsing_lost_deposits)
+    public function setDoubleEndorsingLosses($double_endorsing_losses)
     {
-        $this->container['double_endorsing_lost_deposits'] = $double_endorsing_lost_deposits;
+
+        if (is_null($double_endorsing_losses)) {
+            throw new \InvalidArgumentException('non-nullable double_endorsing_losses cannot be null');
+        }
+
+        $this->container['double_endorsing_losses'] = $double_endorsing_losses;
 
         return $this;
     }
 
     /**
-     * Gets double_endorsing_lost_rewards
+     * Gets double_preendorsing_rewards
      *
      * @return int|null
      */
-    public function getDoubleEndorsingLostRewards()
+    public function getDoublePreendorsingRewards()
     {
-        return $this->container['double_endorsing_lost_rewards'];
+        return $this->container['double_preendorsing_rewards'];
     }
 
     /**
-     * Sets double_endorsing_lost_rewards
+     * Sets double_preendorsing_rewards
      *
-     * @param int|null $double_endorsing_lost_rewards Rewards lost due to double endorsing
+     * @param int|null $double_preendorsing_rewards Rewards for detecting double preendorsing (accusing someone of prevalidating two different blocks at the same level).
      *
      * @return self
      */
-    public function setDoubleEndorsingLostRewards($double_endorsing_lost_rewards)
+    public function setDoublePreendorsingRewards($double_preendorsing_rewards)
     {
-        $this->container['double_endorsing_lost_rewards'] = $double_endorsing_lost_rewards;
+
+        if (is_null($double_preendorsing_rewards)) {
+            throw new \InvalidArgumentException('non-nullable double_preendorsing_rewards cannot be null');
+        }
+
+        $this->container['double_preendorsing_rewards'] = $double_preendorsing_rewards;
 
         return $this;
     }
 
     /**
-     * Gets double_endorsing_lost_fees
+     * Gets double_preendorsing_losses
      *
      * @return int|null
      */
-    public function getDoubleEndorsingLostFees()
+    public function getDoublePreendorsingLosses()
     {
-        return $this->container['double_endorsing_lost_fees'];
+        return $this->container['double_preendorsing_losses'];
     }
 
     /**
-     * Sets double_endorsing_lost_fees
+     * Sets double_preendorsing_losses
      *
-     * @param int|null $double_endorsing_lost_fees Fees lost due to double endorsing
+     * @param int|null $double_preendorsing_losses Amount of frozen deposits lost due to double preendorsing
      *
      * @return self
      */
-    public function setDoubleEndorsingLostFees($double_endorsing_lost_fees)
+    public function setDoublePreendorsingLosses($double_preendorsing_losses)
     {
-        $this->container['double_endorsing_lost_fees'] = $double_endorsing_lost_fees;
+
+        if (is_null($double_preendorsing_losses)) {
+            throw new \InvalidArgumentException('non-nullable double_preendorsing_losses cannot be null');
+        }
+
+        $this->container['double_preendorsing_losses'] = $double_preendorsing_losses;
 
         return $this;
     }
@@ -1503,7 +1534,831 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setRevelationRewards($revelation_rewards)
     {
+
+        if (is_null($revelation_rewards)) {
+            throw new \InvalidArgumentException('non-nullable revelation_rewards cannot be null');
+        }
+
         $this->container['revelation_rewards'] = $revelation_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets revelation_losses
+     *
+     * @return int|null
+     */
+    public function getRevelationLosses()
+    {
+        return $this->container['revelation_losses'];
+    }
+
+    /**
+     * Sets revelation_losses
+     *
+     * @param int|null $revelation_losses Amount of frozen deposits lost due to missing seed nonce revelation (always zero after Ithaca).
+     *
+     * @return self
+     */
+    public function setRevelationLosses($revelation_losses)
+    {
+
+        if (is_null($revelation_losses)) {
+            throw new \InvalidArgumentException('non-nullable revelation_losses cannot be null');
+        }
+
+        $this->container['revelation_losses'] = $revelation_losses;
+
+        return $this;
+    }
+
+    /**
+     * Gets quote
+     *
+     * @return \Bzzhh\Tzkt\Model\CycleQuote|null
+     */
+    public function getQuote()
+    {
+        return $this->container['quote'];
+    }
+
+    /**
+     * Sets quote
+     *
+     * @param \Bzzhh\Tzkt\Model\CycleQuote|null $quote quote
+     *
+     * @return self
+     */
+    public function setQuote($quote)
+    {
+
+        if (is_null($quote)) {
+            array_push($this->openAPINullablesSetToNull, 'quote');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets own_blocks
+     *
+     * @return int|null
+     */
+    public function getOwnBlocks()
+    {
+        return $this->container['own_blocks'];
+    }
+
+    /**
+     * Sets own_blocks
+     *
+     * @param int|null $own_blocks [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setOwnBlocks($own_blocks)
+    {
+
+        if (is_null($own_blocks)) {
+            throw new \InvalidArgumentException('non-nullable own_blocks cannot be null');
+        }
+
+        $this->container['own_blocks'] = $own_blocks;
+
+        return $this;
+    }
+
+    /**
+     * Gets extra_blocks
+     *
+     * @return int|null
+     */
+    public function getExtraBlocks()
+    {
+        return $this->container['extra_blocks'];
+    }
+
+    /**
+     * Sets extra_blocks
+     *
+     * @param int|null $extra_blocks [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setExtraBlocks($extra_blocks)
+    {
+
+        if (is_null($extra_blocks)) {
+            throw new \InvalidArgumentException('non-nullable extra_blocks cannot be null');
+        }
+
+        $this->container['extra_blocks'] = $extra_blocks;
+
+        return $this;
+    }
+
+    /**
+     * Gets missed_own_blocks
+     *
+     * @return int|null
+     */
+    public function getMissedOwnBlocks()
+    {
+        return $this->container['missed_own_blocks'];
+    }
+
+    /**
+     * Sets missed_own_blocks
+     *
+     * @param int|null $missed_own_blocks [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setMissedOwnBlocks($missed_own_blocks)
+    {
+
+        if (is_null($missed_own_blocks)) {
+            throw new \InvalidArgumentException('non-nullable missed_own_blocks cannot be null');
+        }
+
+        $this->container['missed_own_blocks'] = $missed_own_blocks;
+
+        return $this;
+    }
+
+    /**
+     * Gets missed_extra_blocks
+     *
+     * @return int|null
+     */
+    public function getMissedExtraBlocks()
+    {
+        return $this->container['missed_extra_blocks'];
+    }
+
+    /**
+     * Sets missed_extra_blocks
+     *
+     * @param int|null $missed_extra_blocks [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setMissedExtraBlocks($missed_extra_blocks)
+    {
+
+        if (is_null($missed_extra_blocks)) {
+            throw new \InvalidArgumentException('non-nullable missed_extra_blocks cannot be null');
+        }
+
+        $this->container['missed_extra_blocks'] = $missed_extra_blocks;
+
+        return $this;
+    }
+
+    /**
+     * Gets uncovered_own_blocks
+     *
+     * @return int|null
+     */
+    public function getUncoveredOwnBlocks()
+    {
+        return $this->container['uncovered_own_blocks'];
+    }
+
+    /**
+     * Sets uncovered_own_blocks
+     *
+     * @param int|null $uncovered_own_blocks [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setUncoveredOwnBlocks($uncovered_own_blocks)
+    {
+
+        if (is_null($uncovered_own_blocks)) {
+            throw new \InvalidArgumentException('non-nullable uncovered_own_blocks cannot be null');
+        }
+
+        $this->container['uncovered_own_blocks'] = $uncovered_own_blocks;
+
+        return $this;
+    }
+
+    /**
+     * Gets uncovered_extra_blocks
+     *
+     * @return int|null
+     */
+    public function getUncoveredExtraBlocks()
+    {
+        return $this->container['uncovered_extra_blocks'];
+    }
+
+    /**
+     * Sets uncovered_extra_blocks
+     *
+     * @param int|null $uncovered_extra_blocks [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setUncoveredExtraBlocks($uncovered_extra_blocks)
+    {
+
+        if (is_null($uncovered_extra_blocks)) {
+            throw new \InvalidArgumentException('non-nullable uncovered_extra_blocks cannot be null');
+        }
+
+        $this->container['uncovered_extra_blocks'] = $uncovered_extra_blocks;
+
+        return $this;
+    }
+
+    /**
+     * Gets uncovered_endorsements
+     *
+     * @return int|null
+     */
+    public function getUncoveredEndorsements()
+    {
+        return $this->container['uncovered_endorsements'];
+    }
+
+    /**
+     * Sets uncovered_endorsements
+     *
+     * @param int|null $uncovered_endorsements [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setUncoveredEndorsements($uncovered_endorsements)
+    {
+
+        if (is_null($uncovered_endorsements)) {
+            throw new \InvalidArgumentException('non-nullable uncovered_endorsements cannot be null');
+        }
+
+        $this->container['uncovered_endorsements'] = $uncovered_endorsements;
+
+        return $this;
+    }
+
+    /**
+     * Gets own_block_rewards
+     *
+     * @return int|null
+     */
+    public function getOwnBlockRewards()
+    {
+        return $this->container['own_block_rewards'];
+    }
+
+    /**
+     * Sets own_block_rewards
+     *
+     * @param int|null $own_block_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setOwnBlockRewards($own_block_rewards)
+    {
+
+        if (is_null($own_block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable own_block_rewards cannot be null');
+        }
+
+        $this->container['own_block_rewards'] = $own_block_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets extra_block_rewards
+     *
+     * @return int|null
+     */
+    public function getExtraBlockRewards()
+    {
+        return $this->container['extra_block_rewards'];
+    }
+
+    /**
+     * Sets extra_block_rewards
+     *
+     * @param int|null $extra_block_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setExtraBlockRewards($extra_block_rewards)
+    {
+
+        if (is_null($extra_block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable extra_block_rewards cannot be null');
+        }
+
+        $this->container['extra_block_rewards'] = $extra_block_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets missed_own_block_rewards
+     *
+     * @return int|null
+     */
+    public function getMissedOwnBlockRewards()
+    {
+        return $this->container['missed_own_block_rewards'];
+    }
+
+    /**
+     * Sets missed_own_block_rewards
+     *
+     * @param int|null $missed_own_block_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setMissedOwnBlockRewards($missed_own_block_rewards)
+    {
+
+        if (is_null($missed_own_block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable missed_own_block_rewards cannot be null');
+        }
+
+        $this->container['missed_own_block_rewards'] = $missed_own_block_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets missed_extra_block_rewards
+     *
+     * @return int|null
+     */
+    public function getMissedExtraBlockRewards()
+    {
+        return $this->container['missed_extra_block_rewards'];
+    }
+
+    /**
+     * Sets missed_extra_block_rewards
+     *
+     * @param int|null $missed_extra_block_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setMissedExtraBlockRewards($missed_extra_block_rewards)
+    {
+
+        if (is_null($missed_extra_block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable missed_extra_block_rewards cannot be null');
+        }
+
+        $this->container['missed_extra_block_rewards'] = $missed_extra_block_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets uncovered_own_block_rewards
+     *
+     * @return int|null
+     */
+    public function getUncoveredOwnBlockRewards()
+    {
+        return $this->container['uncovered_own_block_rewards'];
+    }
+
+    /**
+     * Sets uncovered_own_block_rewards
+     *
+     * @param int|null $uncovered_own_block_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setUncoveredOwnBlockRewards($uncovered_own_block_rewards)
+    {
+
+        if (is_null($uncovered_own_block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable uncovered_own_block_rewards cannot be null');
+        }
+
+        $this->container['uncovered_own_block_rewards'] = $uncovered_own_block_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets uncovered_extra_block_rewards
+     *
+     * @return int|null
+     */
+    public function getUncoveredExtraBlockRewards()
+    {
+        return $this->container['uncovered_extra_block_rewards'];
+    }
+
+    /**
+     * Sets uncovered_extra_block_rewards
+     *
+     * @param int|null $uncovered_extra_block_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setUncoveredExtraBlockRewards($uncovered_extra_block_rewards)
+    {
+
+        if (is_null($uncovered_extra_block_rewards)) {
+            throw new \InvalidArgumentException('non-nullable uncovered_extra_block_rewards cannot be null');
+        }
+
+        $this->container['uncovered_extra_block_rewards'] = $uncovered_extra_block_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets uncovered_endorsement_rewards
+     *
+     * @return int|null
+     */
+    public function getUncoveredEndorsementRewards()
+    {
+        return $this->container['uncovered_endorsement_rewards'];
+    }
+
+    /**
+     * Sets uncovered_endorsement_rewards
+     *
+     * @param int|null $uncovered_endorsement_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setUncoveredEndorsementRewards($uncovered_endorsement_rewards)
+    {
+
+        if (is_null($uncovered_endorsement_rewards)) {
+            throw new \InvalidArgumentException('non-nullable uncovered_endorsement_rewards cannot be null');
+        }
+
+        $this->container['uncovered_endorsement_rewards'] = $uncovered_endorsement_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets own_block_fees
+     *
+     * @return int|null
+     */
+    public function getOwnBlockFees()
+    {
+        return $this->container['own_block_fees'];
+    }
+
+    /**
+     * Sets own_block_fees
+     *
+     * @param int|null $own_block_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setOwnBlockFees($own_block_fees)
+    {
+
+        if (is_null($own_block_fees)) {
+            throw new \InvalidArgumentException('non-nullable own_block_fees cannot be null');
+        }
+
+        $this->container['own_block_fees'] = $own_block_fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets extra_block_fees
+     *
+     * @return int|null
+     */
+    public function getExtraBlockFees()
+    {
+        return $this->container['extra_block_fees'];
+    }
+
+    /**
+     * Sets extra_block_fees
+     *
+     * @param int|null $extra_block_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setExtraBlockFees($extra_block_fees)
+    {
+
+        if (is_null($extra_block_fees)) {
+            throw new \InvalidArgumentException('non-nullable extra_block_fees cannot be null');
+        }
+
+        $this->container['extra_block_fees'] = $extra_block_fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets missed_own_block_fees
+     *
+     * @return int|null
+     */
+    public function getMissedOwnBlockFees()
+    {
+        return $this->container['missed_own_block_fees'];
+    }
+
+    /**
+     * Sets missed_own_block_fees
+     *
+     * @param int|null $missed_own_block_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setMissedOwnBlockFees($missed_own_block_fees)
+    {
+
+        if (is_null($missed_own_block_fees)) {
+            throw new \InvalidArgumentException('non-nullable missed_own_block_fees cannot be null');
+        }
+
+        $this->container['missed_own_block_fees'] = $missed_own_block_fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets missed_extra_block_fees
+     *
+     * @return int|null
+     */
+    public function getMissedExtraBlockFees()
+    {
+        return $this->container['missed_extra_block_fees'];
+    }
+
+    /**
+     * Sets missed_extra_block_fees
+     *
+     * @param int|null $missed_extra_block_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setMissedExtraBlockFees($missed_extra_block_fees)
+    {
+
+        if (is_null($missed_extra_block_fees)) {
+            throw new \InvalidArgumentException('non-nullable missed_extra_block_fees cannot be null');
+        }
+
+        $this->container['missed_extra_block_fees'] = $missed_extra_block_fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets uncovered_own_block_fees
+     *
+     * @return int|null
+     */
+    public function getUncoveredOwnBlockFees()
+    {
+        return $this->container['uncovered_own_block_fees'];
+    }
+
+    /**
+     * Sets uncovered_own_block_fees
+     *
+     * @param int|null $uncovered_own_block_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setUncoveredOwnBlockFees($uncovered_own_block_fees)
+    {
+
+        if (is_null($uncovered_own_block_fees)) {
+            throw new \InvalidArgumentException('non-nullable uncovered_own_block_fees cannot be null');
+        }
+
+        $this->container['uncovered_own_block_fees'] = $uncovered_own_block_fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets uncovered_extra_block_fees
+     *
+     * @return int|null
+     */
+    public function getUncoveredExtraBlockFees()
+    {
+        return $this->container['uncovered_extra_block_fees'];
+    }
+
+    /**
+     * Sets uncovered_extra_block_fees
+     *
+     * @param int|null $uncovered_extra_block_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setUncoveredExtraBlockFees($uncovered_extra_block_fees)
+    {
+
+        if (is_null($uncovered_extra_block_fees)) {
+            throw new \InvalidArgumentException('non-nullable uncovered_extra_block_fees cannot be null');
+        }
+
+        $this->container['uncovered_extra_block_fees'] = $uncovered_extra_block_fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_baking_lost_deposits
+     *
+     * @return int|null
+     */
+    public function getDoubleBakingLostDeposits()
+    {
+        return $this->container['double_baking_lost_deposits'];
+    }
+
+    /**
+     * Sets double_baking_lost_deposits
+     *
+     * @param int|null $double_baking_lost_deposits [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setDoubleBakingLostDeposits($double_baking_lost_deposits)
+    {
+
+        if (is_null($double_baking_lost_deposits)) {
+            throw new \InvalidArgumentException('non-nullable double_baking_lost_deposits cannot be null');
+        }
+
+        $this->container['double_baking_lost_deposits'] = $double_baking_lost_deposits;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_baking_lost_rewards
+     *
+     * @return int|null
+     */
+    public function getDoubleBakingLostRewards()
+    {
+        return $this->container['double_baking_lost_rewards'];
+    }
+
+    /**
+     * Sets double_baking_lost_rewards
+     *
+     * @param int|null $double_baking_lost_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setDoubleBakingLostRewards($double_baking_lost_rewards)
+    {
+
+        if (is_null($double_baking_lost_rewards)) {
+            throw new \InvalidArgumentException('non-nullable double_baking_lost_rewards cannot be null');
+        }
+
+        $this->container['double_baking_lost_rewards'] = $double_baking_lost_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_baking_lost_fees
+     *
+     * @return int|null
+     */
+    public function getDoubleBakingLostFees()
+    {
+        return $this->container['double_baking_lost_fees'];
+    }
+
+    /**
+     * Sets double_baking_lost_fees
+     *
+     * @param int|null $double_baking_lost_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setDoubleBakingLostFees($double_baking_lost_fees)
+    {
+
+        if (is_null($double_baking_lost_fees)) {
+            throw new \InvalidArgumentException('non-nullable double_baking_lost_fees cannot be null');
+        }
+
+        $this->container['double_baking_lost_fees'] = $double_baking_lost_fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_endorsing_lost_deposits
+     *
+     * @return int|null
+     */
+    public function getDoubleEndorsingLostDeposits()
+    {
+        return $this->container['double_endorsing_lost_deposits'];
+    }
+
+    /**
+     * Sets double_endorsing_lost_deposits
+     *
+     * @param int|null $double_endorsing_lost_deposits [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setDoubleEndorsingLostDeposits($double_endorsing_lost_deposits)
+    {
+
+        if (is_null($double_endorsing_lost_deposits)) {
+            throw new \InvalidArgumentException('non-nullable double_endorsing_lost_deposits cannot be null');
+        }
+
+        $this->container['double_endorsing_lost_deposits'] = $double_endorsing_lost_deposits;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_endorsing_lost_rewards
+     *
+     * @return int|null
+     */
+    public function getDoubleEndorsingLostRewards()
+    {
+        return $this->container['double_endorsing_lost_rewards'];
+    }
+
+    /**
+     * Sets double_endorsing_lost_rewards
+     *
+     * @param int|null $double_endorsing_lost_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setDoubleEndorsingLostRewards($double_endorsing_lost_rewards)
+    {
+
+        if (is_null($double_endorsing_lost_rewards)) {
+            throw new \InvalidArgumentException('non-nullable double_endorsing_lost_rewards cannot be null');
+        }
+
+        $this->container['double_endorsing_lost_rewards'] = $double_endorsing_lost_rewards;
+
+        return $this;
+    }
+
+    /**
+     * Gets double_endorsing_lost_fees
+     *
+     * @return int|null
+     */
+    public function getDoubleEndorsingLostFees()
+    {
+        return $this->container['double_endorsing_lost_fees'];
+    }
+
+    /**
+     * Sets double_endorsing_lost_fees
+     *
+     * @param int|null $double_endorsing_lost_fees [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setDoubleEndorsingLostFees($double_endorsing_lost_fees)
+    {
+
+        if (is_null($double_endorsing_lost_fees)) {
+            throw new \InvalidArgumentException('non-nullable double_endorsing_lost_fees cannot be null');
+        }
+
+        $this->container['double_endorsing_lost_fees'] = $double_endorsing_lost_fees;
 
         return $this;
     }
@@ -1521,12 +2376,17 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets revelation_lost_rewards
      *
-     * @param int|null $revelation_lost_rewards Rewards lost due to missing seed nonce revelation.
+     * @param int|null $revelation_lost_rewards [DEPRECATED]
      *
      * @return self
      */
     public function setRevelationLostRewards($revelation_lost_rewards)
     {
+
+        if (is_null($revelation_lost_rewards)) {
+            throw new \InvalidArgumentException('non-nullable revelation_lost_rewards cannot be null');
+        }
+
         $this->container['revelation_lost_rewards'] = $revelation_lost_rewards;
 
         return $this;
@@ -1545,37 +2405,18 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets revelation_lost_fees
      *
-     * @param int|null $revelation_lost_fees Fees lost due to missing seed nonce revelation.
+     * @param int|null $revelation_lost_fees [DEPRECATED]
      *
      * @return self
      */
     public function setRevelationLostFees($revelation_lost_fees)
     {
+
+        if (is_null($revelation_lost_fees)) {
+            throw new \InvalidArgumentException('non-nullable revelation_lost_fees cannot be null');
+        }
+
         $this->container['revelation_lost_fees'] = $revelation_lost_fees;
-
-        return $this;
-    }
-
-    /**
-     * Gets quote
-     *
-     * @return OneOfQuoteShort|null
-     */
-    public function getQuote()
-    {
-        return $this->container['quote'];
-    }
-
-    /**
-     * Sets quote
-     *
-     * @param OneOfQuoteShort|null $quote Injected historical quote at the end of the cycle
-     *
-     * @return self
-     */
-    public function setQuote($quote)
-    {
-        $this->container['quote'] = $quote;
 
         return $this;
     }
@@ -1586,7 +2427,7 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -1598,6 +2439,7 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -1611,7 +2453,7 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -1627,7 +2469,7 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -1639,6 +2481,7 @@ class DelegatorRewards implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

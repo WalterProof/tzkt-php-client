@@ -1,7 +1,7 @@
 <?php
 /**
  * CyclesApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,20 @@ class CyclesApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'cyclesGet' => [
+            'application/json',
+        ],
+        'cyclesGetByIndex' => [
+            'application/json',
+        ],
+        'cyclesGetCount' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -120,20 +134,21 @@ class CyclesApi
      *
      * Get cycles
      *
-     * @param  OneOfInt32Parameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Cycle[]
      */
-    public function cyclesGet($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function cyclesGet($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['cyclesGet'][0])
     {
-        list($response) = $this->cyclesGetWithHttpInfo($snapshot_index, $select, $sort, $offset, $limit, $quote);
+        list($response) = $this->cyclesGetWithHttpInfo($snapshot_index, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -142,20 +157,21 @@ class CyclesApi
      *
      * Get cycles
      *
-     * @param  OneOfInt32Parameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Cycle[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function cyclesGetWithHttpInfo($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function cyclesGetWithHttpInfo($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['cyclesGet'][0])
     {
-        $request = $this->cyclesGetRequest($snapshot_index, $select, $sort, $offset, $limit, $quote);
+        $request = $this->cyclesGetRequest($snapshot_index, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -167,6 +183,13 @@ class CyclesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -191,6 +214,9 @@ class CyclesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Cycle[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -205,6 +231,9 @@ class CyclesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -233,19 +262,20 @@ class CyclesApi
      *
      * Get cycles
      *
-     * @param  OneOfInt32Parameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cyclesGetAsync($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function cyclesGetAsync($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['cyclesGet'][0])
     {
-        return $this->cyclesGetAsyncWithHttpInfo($snapshot_index, $select, $sort, $offset, $limit, $quote)
+        return $this->cyclesGetAsyncWithHttpInfo($snapshot_index, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -258,20 +288,21 @@ class CyclesApi
      *
      * Get cycles
      *
-     * @param  OneOfInt32Parameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cyclesGetAsyncWithHttpInfo($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function cyclesGetAsyncWithHttpInfo($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['cyclesGet'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Cycle[]';
-        $request = $this->cyclesGetRequest($snapshot_index, $select, $sort, $offset, $limit, $quote);
+        $request = $this->cyclesGetRequest($snapshot_index, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -281,6 +312,9 @@ class CyclesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -309,24 +343,31 @@ class CyclesApi
     /**
      * Create request for operation 'cyclesGet'
      *
-     * @param  OneOfInt32Parameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $snapshot_index Filters cycles by snapshot index (0..15) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function cyclesGetRequest($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function cyclesGetRequest($snapshot_index = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['cyclesGet'][0])
     {
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling CyclesApi.cyclesGet, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling CyclesApi.cyclesGet, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/cycles';
@@ -337,85 +378,68 @@ class CyclesApi
         $multipart = false;
 
         // query params
-        if ($snapshot_index !== null) {
-            if('form' === 'form' && is_array($snapshot_index)) {
-                foreach($snapshot_index as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['snapshotIndex'] = $snapshot_index;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $snapshot_index,
+            'snapshotIndex', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -433,12 +457,12 @@ class CyclesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -454,10 +478,11 @@ class CyclesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -469,15 +494,16 @@ class CyclesApi
      * Get cycle by index
      *
      * @param  int $index Cycle index starting from zero (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetByIndex'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Cycle
      */
-    public function cyclesGetByIndex($index, $quote = null)
+    public function cyclesGetByIndex($index, $quote = null, string $contentType = self::contentTypes['cyclesGetByIndex'][0])
     {
-        list($response) = $this->cyclesGetByIndexWithHttpInfo($index, $quote);
+        list($response) = $this->cyclesGetByIndexWithHttpInfo($index, $quote, $contentType);
         return $response;
     }
 
@@ -487,15 +513,16 @@ class CyclesApi
      * Get cycle by index
      *
      * @param  int $index Cycle index starting from zero (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetByIndex'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Cycle, HTTP status code, HTTP response headers (array of strings)
      */
-    public function cyclesGetByIndexWithHttpInfo($index, $quote = null)
+    public function cyclesGetByIndexWithHttpInfo($index, $quote = null, string $contentType = self::contentTypes['cyclesGetByIndex'][0])
     {
-        $request = $this->cyclesGetByIndexRequest($index, $quote);
+        $request = $this->cyclesGetByIndexRequest($index, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -507,6 +534,13 @@ class CyclesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -531,6 +565,9 @@ class CyclesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Cycle' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -545,6 +582,9 @@ class CyclesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -574,14 +614,15 @@ class CyclesApi
      * Get cycle by index
      *
      * @param  int $index Cycle index starting from zero (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetByIndex'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cyclesGetByIndexAsync($index, $quote = null)
+    public function cyclesGetByIndexAsync($index, $quote = null, string $contentType = self::contentTypes['cyclesGetByIndex'][0])
     {
-        return $this->cyclesGetByIndexAsyncWithHttpInfo($index, $quote)
+        return $this->cyclesGetByIndexAsyncWithHttpInfo($index, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -595,15 +636,16 @@ class CyclesApi
      * Get cycle by index
      *
      * @param  int $index Cycle index starting from zero (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetByIndex'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cyclesGetByIndexAsyncWithHttpInfo($index, $quote = null)
+    public function cyclesGetByIndexAsyncWithHttpInfo($index, $quote = null, string $contentType = self::contentTypes['cyclesGetByIndex'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Cycle';
-        $request = $this->cyclesGetByIndexRequest($index, $quote);
+        $request = $this->cyclesGetByIndexRequest($index, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -613,6 +655,9 @@ class CyclesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -642,19 +687,23 @@ class CyclesApi
      * Create request for operation 'cyclesGetByIndex'
      *
      * @param  int $index Cycle index starting from zero (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetByIndex'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function cyclesGetByIndexRequest($index, $quote = null)
+    public function cyclesGetByIndexRequest($index, $quote = null, string $contentType = self::contentTypes['cyclesGetByIndex'][0])
     {
+
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $index when calling cyclesGetByIndex'
             );
         }
+
+
 
         $resourcePath = '/v1/cycles/{index}';
         $formParams = [];
@@ -664,16 +713,14 @@ class CyclesApi
         $multipart = false;
 
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -686,16 +733,11 @@ class CyclesApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -713,12 +755,12 @@ class CyclesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -734,10 +776,11 @@ class CyclesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -748,14 +791,15 @@ class CyclesApi
      *
      * Get cycles count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function cyclesGetCount()
+    public function cyclesGetCount(string $contentType = self::contentTypes['cyclesGetCount'][0])
     {
-        list($response) = $this->cyclesGetCountWithHttpInfo();
+        list($response) = $this->cyclesGetCountWithHttpInfo($contentType);
         return $response;
     }
 
@@ -764,14 +808,15 @@ class CyclesApi
      *
      * Get cycles count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function cyclesGetCountWithHttpInfo()
+    public function cyclesGetCountWithHttpInfo(string $contentType = self::contentTypes['cyclesGetCount'][0])
     {
-        $request = $this->cyclesGetCountRequest();
+        $request = $this->cyclesGetCountRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -783,6 +828,13 @@ class CyclesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -807,6 +859,9 @@ class CyclesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -821,6 +876,9 @@ class CyclesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -849,13 +907,14 @@ class CyclesApi
      *
      * Get cycles count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cyclesGetCountAsync()
+    public function cyclesGetCountAsync(string $contentType = self::contentTypes['cyclesGetCount'][0])
     {
-        return $this->cyclesGetCountAsyncWithHttpInfo()
+        return $this->cyclesGetCountAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -868,14 +927,15 @@ class CyclesApi
      *
      * Get cycles count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cyclesGetCountAsyncWithHttpInfo()
+    public function cyclesGetCountAsyncWithHttpInfo(string $contentType = self::contentTypes['cyclesGetCount'][0])
     {
         $returnType = 'int';
-        $request = $this->cyclesGetCountRequest();
+        $request = $this->cyclesGetCountRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -885,6 +945,9 @@ class CyclesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -913,12 +976,14 @@ class CyclesApi
     /**
      * Create request for operation 'cyclesGetCount'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cyclesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function cyclesGetCountRequest()
+    public function cyclesGetCountRequest(string $contentType = self::contentTypes['cyclesGetCount'][0])
     {
+
 
         $resourcePath = '/v1/cycles/count';
         $formParams = [];
@@ -931,16 +996,11 @@ class CyclesApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -958,12 +1018,12 @@ class CyclesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -979,10 +1039,11 @@ class CyclesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

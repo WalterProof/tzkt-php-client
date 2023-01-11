@@ -1,17 +1,17 @@
 # Bzzhh\Tzkt\RewardsApi
 
-All URIs are relative to https://api.tzkt.io.
+All URIs are relative to https://api.tzkt.io, except if the operation defines another base path.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**rewardsGetBakerRewards()**](RewardsApi.md#rewardsGetBakerRewards) | **GET** /v1/rewards/bakers/{address} | Get baker cycle rewards
-[**rewardsGetBakerRewardsByCycle()**](RewardsApi.md#rewardsGetBakerRewardsByCycle) | **GET** /v1/rewards/bakers/{address}/{cycle} | Get baker cycle rewards by cycle
-[**rewardsGetBakerRewardsCount()**](RewardsApi.md#rewardsGetBakerRewardsCount) | **GET** /v1/rewards/bakers/{address}/count | Get baker cycle rewards count
-[**rewardsGetDelegatorRewards()**](RewardsApi.md#rewardsGetDelegatorRewards) | **GET** /v1/rewards/delegators/{address} | Get delegator cycle rewards
-[**rewardsGetDelegatorRewardsByCycle()**](RewardsApi.md#rewardsGetDelegatorRewardsByCycle) | **GET** /v1/rewards/delegators/{address}/{cycle} | Get delegator cycle rewards by cycle
-[**rewardsGetDelegatorRewardsCount()**](RewardsApi.md#rewardsGetDelegatorRewardsCount) | **GET** /v1/rewards/delegators/{address}/count | Get delegator cycle rewards count
-[**rewardsGetRewardSplit()**](RewardsApi.md#rewardsGetRewardSplit) | **GET** /v1/rewards/split/{address}/{cycle} | Get reward split
-[**rewardsGetRewardSplitDelegator()**](RewardsApi.md#rewardsGetRewardSplitDelegator) | **GET** /v1/rewards/split/{baker}/{cycle}/{delegator} | Get reward split delegator
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**rewardsGetBakerRewards()**](RewardsApi.md#rewardsGetBakerRewards) | **GET** /v1/rewards/bakers/{address} | Get baker cycle rewards |
+| [**rewardsGetBakerRewardsByCycle()**](RewardsApi.md#rewardsGetBakerRewardsByCycle) | **GET** /v1/rewards/bakers/{address}/{cycle} | Get baker cycle rewards by cycle |
+| [**rewardsGetBakerRewardsCount()**](RewardsApi.md#rewardsGetBakerRewardsCount) | **GET** /v1/rewards/bakers/{address}/count | Get baker cycle rewards count |
+| [**rewardsGetDelegatorRewards()**](RewardsApi.md#rewardsGetDelegatorRewards) | **GET** /v1/rewards/delegators/{address} | Get delegator cycle rewards |
+| [**rewardsGetDelegatorRewardsByCycle()**](RewardsApi.md#rewardsGetDelegatorRewardsByCycle) | **GET** /v1/rewards/delegators/{address}/{cycle} | Get delegator cycle rewards by cycle |
+| [**rewardsGetDelegatorRewardsCount()**](RewardsApi.md#rewardsGetDelegatorRewardsCount) | **GET** /v1/rewards/delegators/{address}/count | Get delegator cycle rewards count |
+| [**rewardsGetRewardSplit()**](RewardsApi.md#rewardsGetRewardSplit) | **GET** /v1/rewards/split/{baker}/{cycle} | Get reward split |
+| [**rewardsGetRewardSplitDelegator()**](RewardsApi.md#rewardsGetRewardSplitDelegator) | **GET** /v1/rewards/split/{baker}/{cycle}/{delegator} | Get reward split delegator |
 
 
 ## `rewardsGetBakerRewards()`
@@ -38,12 +38,12 @@ $apiInstance = new Bzzhh\Tzkt\Api\RewardsApi(
     new GuzzleHttp\Client()
 );
 $address = 'address_example'; // string | Baker address.
-$cycle = new \Bzzhh\Tzkt\Model\OneOfInt32Parameter(); // OneOfInt32Parameter | Filters rewards by cycle.
-$select = new \Bzzhh\Tzkt\Model\OneOfSelectParameter(); // OneOfSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts cycle rewards by specified field. Supported fields: `cycle` (default, desc).
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$cycle = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters rewards by cycle.
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts cycle rewards by specified field. Supported fields: `cycle` (default, desc).
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
-$quote = new \Bzzhh\Tzkt\Model\OneOfSymbols(); // OneOfSymbols | Comma-separated list of ticker symbols to inject historical prices into response
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
 
 try {
     $result = $apiInstance->rewardsGetBakerRewards($address, $cycle, $select, $sort, $offset, $limit, $quote);
@@ -55,15 +55,15 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Baker address. |
- **cycle** | [**OneOfInt32Parameter**](../Model/.md)| Filters rewards by cycle. | [optional]
- **select** | [**OneOfSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional]
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
- **quote** | [**OneOfSymbols**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Baker address. | |
+| **cycle** | [**AccountsGetIdParameter**](../Model/.md)| Filters rewards by cycle. | [optional] |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
 
 ### Return type
 
@@ -107,7 +107,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\RewardsApi(
 );
 $address = 'address_example'; // string | Baker address
 $cycle = 56; // int | Rewards cycle
-$quote = new \Bzzhh\Tzkt\Model\OneOfSymbols(); // OneOfSymbols | Comma-separated list of ticker symbols to inject historical prices into response
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
 
 try {
     $result = $apiInstance->rewardsGetBakerRewardsByCycle($address, $cycle, $quote);
@@ -119,11 +119,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Baker address |
- **cycle** | **int**| Rewards cycle |
- **quote** | [**OneOfSymbols**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Baker address | |
+| **cycle** | **int**| Rewards cycle | |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
 
 ### Return type
 
@@ -177,9 +177,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Baker address |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Baker address | |
 
 ### Return type
 
@@ -222,12 +222,12 @@ $apiInstance = new Bzzhh\Tzkt\Api\RewardsApi(
     new GuzzleHttp\Client()
 );
 $address = 'address_example'; // string | Delegator address.
-$cycle = new \Bzzhh\Tzkt\Model\OneOfInt32Parameter(); // OneOfInt32Parameter | Filters rewards by cycle.
-$select = new \Bzzhh\Tzkt\Model\OneOfSelectParameter(); // OneOfSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts cycle rewards by specified field. Supported fields: `cycle` (default, desc).
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$cycle = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters rewards by cycle.
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts cycle rewards by specified field. Supported fields: `cycle` (default, desc).
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
-$quote = new \Bzzhh\Tzkt\Model\OneOfSymbols(); // OneOfSymbols | Comma-separated list of ticker symbols to inject historical prices into response
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
 
 try {
     $result = $apiInstance->rewardsGetDelegatorRewards($address, $cycle, $select, $sort, $offset, $limit, $quote);
@@ -239,15 +239,15 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Delegator address. |
- **cycle** | [**OneOfInt32Parameter**](../Model/.md)| Filters rewards by cycle. | [optional]
- **select** | [**OneOfSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional]
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
- **quote** | [**OneOfSymbols**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Delegator address. | |
+| **cycle** | [**AccountsGetIdParameter**](../Model/.md)| Filters rewards by cycle. | [optional] |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
 
 ### Return type
 
@@ -291,7 +291,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\RewardsApi(
 );
 $address = 'address_example'; // string | Delegator address
 $cycle = 56; // int | Rewards cycle
-$quote = new \Bzzhh\Tzkt\Model\OneOfSymbols(); // OneOfSymbols | Comma-separated list of ticker symbols to inject historical prices into response
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
 
 try {
     $result = $apiInstance->rewardsGetDelegatorRewardsByCycle($address, $cycle, $quote);
@@ -303,11 +303,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Delegator address |
- **cycle** | **int**| Rewards cycle |
- **quote** | [**OneOfSymbols**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Delegator address | |
+| **cycle** | **int**| Rewards cycle | |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
 
 ### Return type
 
@@ -361,9 +361,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Delegator address |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Delegator address | |
 
 ### Return type
 
@@ -385,7 +385,7 @@ No authorization required
 ## `rewardsGetRewardSplit()`
 
 ```php
-rewardsGetRewardSplit($address, $cycle, $offset, $limit): \Bzzhh\Tzkt\Model\RewardSplit
+rewardsGetRewardSplit($baker, $cycle, $offset, $limit): \Bzzhh\Tzkt\Model\RewardSplit
 ```
 
 Get reward split
@@ -405,13 +405,13 @@ $apiInstance = new Bzzhh\Tzkt\Api\RewardsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$address = 'address_example'; // string | Baker address
+$baker = 'baker_example'; // string | Baker address
 $cycle = 56; // int | Rewards cycle
 $offset = 0; // int | Specifies how many delegators in the reward split should be skipped
 $limit = 100; // int | Maximum number of delegators to return
 
 try {
-    $result = $apiInstance->rewardsGetRewardSplit($address, $cycle, $offset, $limit);
+    $result = $apiInstance->rewardsGetRewardSplit($baker, $cycle, $offset, $limit);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling RewardsApi->rewardsGetRewardSplit: ', $e->getMessage(), PHP_EOL;
@@ -420,12 +420,12 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Baker address |
- **cycle** | **int**| Rewards cycle |
- **offset** | **int**| Specifies how many delegators in the reward split should be skipped | [optional] [default to 0]
- **limit** | **int**| Maximum number of delegators to return | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **baker** | **string**| Baker address | |
+| **cycle** | **int**| Rewards cycle | |
+| **offset** | **int**| Specifies how many delegators in the reward split should be skipped | [optional] [default to 0] |
+| **limit** | **int**| Maximum number of delegators to return | [optional] [default to 100] |
 
 ### Return type
 
@@ -481,11 +481,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **baker** | **string**| Baker address |
- **cycle** | **int**| Reward split cycle |
- **delegator** | **string**| Delegator address |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **baker** | **string**| Baker address | |
+| **cycle** | **int**| Reward split cycle | |
+| **delegator** | **string**| Delegator address | |
 
 ### Return type
 

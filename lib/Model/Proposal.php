@@ -2,7 +2,7 @@
 /**
  * Proposal
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -61,15 +59,15 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'hash' => 'string',
-        'initiator' => 'OneOfAlias',
+        'initiator' => '\Bzzhh\Tzkt\Model\ProposalInitiator',
         'first_period' => 'int',
         'last_period' => 'int',
         'epoch' => 'int',
         'upvotes' => 'int',
-        'rolls' => 'int',
+        'voting_power' => 'int',
         'status' => 'string',
-        'metadata' => 'OneOfProposalMetadata',
-        'period' => 'int'
+        'metadata' => '\Bzzhh\Tzkt\Model\ProposalMetadata',
+        'rolls' => 'int'
     ];
 
     /**
@@ -86,11 +84,36 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_period' => 'int32',
         'epoch' => 'int32',
         'upvotes' => 'int32',
-        'rolls' => 'int32',
+        'voting_power' => 'int64',
         'status' => null,
         'metadata' => null,
-        'period' => 'int32'
+        'rolls' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'hash' => true,
+		'initiator' => true,
+		'first_period' => false,
+		'last_period' => false,
+		'epoch' => false,
+		'upvotes' => false,
+		'voting_power' => false,
+		'status' => true,
+		'metadata' => true,
+		'rolls' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -113,6 +136,58 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -125,10 +200,10 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_period' => 'lastPeriod',
         'epoch' => 'epoch',
         'upvotes' => 'upvotes',
-        'rolls' => 'rolls',
+        'voting_power' => 'votingPower',
         'status' => 'status',
         'metadata' => 'metadata',
-        'period' => 'period'
+        'rolls' => 'rolls'
     ];
 
     /**
@@ -143,10 +218,10 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_period' => 'setLastPeriod',
         'epoch' => 'setEpoch',
         'upvotes' => 'setUpvotes',
-        'rolls' => 'setRolls',
+        'voting_power' => 'setVotingPower',
         'status' => 'setStatus',
         'metadata' => 'setMetadata',
-        'period' => 'setPeriod'
+        'rolls' => 'setRolls'
     ];
 
     /**
@@ -161,10 +236,10 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_period' => 'getLastPeriod',
         'epoch' => 'getEpoch',
         'upvotes' => 'getUpvotes',
-        'rolls' => 'getRolls',
+        'voting_power' => 'getVotingPower',
         'status' => 'getStatus',
         'metadata' => 'getMetadata',
-        'period' => 'getPeriod'
+        'rolls' => 'getRolls'
     ];
 
     /**
@@ -224,16 +299,34 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['hash'] = $data['hash'] ?? null;
-        $this->container['initiator'] = $data['initiator'] ?? null;
-        $this->container['first_period'] = $data['first_period'] ?? null;
-        $this->container['last_period'] = $data['last_period'] ?? null;
-        $this->container['epoch'] = $data['epoch'] ?? null;
-        $this->container['upvotes'] = $data['upvotes'] ?? null;
-        $this->container['rolls'] = $data['rolls'] ?? null;
-        $this->container['status'] = $data['status'] ?? null;
-        $this->container['metadata'] = $data['metadata'] ?? null;
-        $this->container['period'] = $data['period'] ?? null;
+        $this->setIfExists('hash', $data ?? [], null);
+        $this->setIfExists('initiator', $data ?? [], null);
+        $this->setIfExists('first_period', $data ?? [], null);
+        $this->setIfExists('last_period', $data ?? [], null);
+        $this->setIfExists('epoch', $data ?? [], null);
+        $this->setIfExists('upvotes', $data ?? [], null);
+        $this->setIfExists('voting_power', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('metadata', $data ?? [], null);
+        $this->setIfExists('rolls', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -279,6 +372,18 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setHash($hash)
     {
+
+        if (is_null($hash)) {
+            array_push($this->openAPINullablesSetToNull, 'hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['hash'] = $hash;
 
         return $this;
@@ -287,7 +392,7 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets initiator
      *
-     * @return OneOfAlias|null
+     * @return \Bzzhh\Tzkt\Model\ProposalInitiator|null
      */
     public function getInitiator()
     {
@@ -297,12 +402,24 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets initiator
      *
-     * @param OneOfAlias|null $initiator Information about the baker (delegate) submitted the proposal
+     * @param \Bzzhh\Tzkt\Model\ProposalInitiator|null $initiator initiator
      *
      * @return self
      */
     public function setInitiator($initiator)
     {
+
+        if (is_null($initiator)) {
+            array_push($this->openAPINullablesSetToNull, 'initiator');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('initiator', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['initiator'] = $initiator;
 
         return $this;
@@ -327,6 +444,11 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFirstPeriod($first_period)
     {
+
+        if (is_null($first_period)) {
+            throw new \InvalidArgumentException('non-nullable first_period cannot be null');
+        }
+
         $this->container['first_period'] = $first_period;
 
         return $this;
@@ -351,6 +473,11 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLastPeriod($last_period)
     {
+
+        if (is_null($last_period)) {
+            throw new \InvalidArgumentException('non-nullable last_period cannot be null');
+        }
+
         $this->container['last_period'] = $last_period;
 
         return $this;
@@ -375,6 +502,11 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setEpoch($epoch)
     {
+
+        if (is_null($epoch)) {
+            throw new \InvalidArgumentException('non-nullable epoch cannot be null');
+        }
+
         $this->container['epoch'] = $epoch;
 
         return $this;
@@ -399,31 +531,41 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setUpvotes($upvotes)
     {
+
+        if (is_null($upvotes)) {
+            throw new \InvalidArgumentException('non-nullable upvotes cannot be null');
+        }
+
         $this->container['upvotes'] = $upvotes;
 
         return $this;
     }
 
     /**
-     * Gets rolls
+     * Gets voting_power
      *
      * @return int|null
      */
-    public function getRolls()
+    public function getVotingPower()
     {
-        return $this->container['rolls'];
+        return $this->container['voting_power'];
     }
 
     /**
-     * Sets rolls
+     * Sets voting_power
      *
-     * @param int|null $rolls The total number of rolls, upvoted the proposal
+     * @param int|null $voting_power The total voting power of bakers, upvoted the proposal
      *
      * @return self
      */
-    public function setRolls($rolls)
+    public function setVotingPower($voting_power)
     {
-        $this->container['rolls'] = $rolls;
+
+        if (is_null($voting_power)) {
+            throw new \InvalidArgumentException('non-nullable voting_power cannot be null');
+        }
+
+        $this->container['voting_power'] = $voting_power;
 
         return $this;
     }
@@ -447,6 +589,18 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setStatus($status)
     {
+
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['status'] = $status;
 
         return $this;
@@ -455,7 +609,7 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets metadata
      *
-     * @return OneOfProposalMetadata|null
+     * @return \Bzzhh\Tzkt\Model\ProposalMetadata|null
      */
     public function getMetadata()
     {
@@ -465,37 +619,54 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param OneOfProposalMetadata|null $metadata Information about the proposal
+     * @param \Bzzhh\Tzkt\Model\ProposalMetadata|null $metadata metadata
      *
      * @return self
      */
     public function setMetadata($metadata)
     {
+
+        if (is_null($metadata)) {
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['metadata'] = $metadata;
 
         return $this;
     }
 
     /**
-     * Gets period
+     * Gets rolls
      *
      * @return int|null
      */
-    public function getPeriod()
+    public function getRolls()
     {
-        return $this->container['period'];
+        return $this->container['rolls'];
     }
 
     /**
-     * Sets period
+     * Sets rolls
      *
-     * @param int|null $period **DEPRECATED**. Use `firstPeriod` instead.
+     * @param int|null $rolls [DEPRECATED]
      *
      * @return self
      */
-    public function setPeriod($period)
+    public function setRolls($rolls)
     {
-        $this->container['period'] = $period;
+
+        if (is_null($rolls)) {
+            throw new \InvalidArgumentException('non-nullable rolls cannot be null');
+        }
+
+        $this->container['rolls'] = $rolls;
 
         return $this;
     }
@@ -506,7 +677,7 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -518,6 +689,7 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -531,7 +703,7 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -547,7 +719,7 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -559,6 +731,7 @@ class Proposal implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

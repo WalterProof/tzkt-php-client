@@ -2,7 +2,7 @@
 /**
  * BakingRight
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -64,10 +62,11 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
         'cycle' => 'int',
         'level' => 'int',
         'timestamp' => '\DateTime',
-        'priority' => 'int',
+        'round' => 'int',
         'slots' => 'int',
-        'baker' => 'OneOfAlias',
-        'status' => 'string'
+        'baker' => '\Bzzhh\Tzkt\Model\BakingRightBaker',
+        'status' => 'string',
+        'priority' => 'int'
     ];
 
     /**
@@ -82,11 +81,36 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
         'cycle' => 'int32',
         'level' => 'int32',
         'timestamp' => 'date-time',
-        'priority' => 'int32',
+        'round' => 'int32',
         'slots' => 'int32',
         'baker' => null,
-        'status' => null
+        'status' => null,
+        'priority' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'type' => true,
+		'cycle' => false,
+		'level' => false,
+		'timestamp' => false,
+		'round' => true,
+		'slots' => true,
+		'baker' => true,
+		'status' => true,
+		'priority' => true
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -109,6 +133,58 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -119,10 +195,11 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
         'cycle' => 'cycle',
         'level' => 'level',
         'timestamp' => 'timestamp',
-        'priority' => 'priority',
+        'round' => 'round',
         'slots' => 'slots',
         'baker' => 'baker',
-        'status' => 'status'
+        'status' => 'status',
+        'priority' => 'priority'
     ];
 
     /**
@@ -135,10 +212,11 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
         'cycle' => 'setCycle',
         'level' => 'setLevel',
         'timestamp' => 'setTimestamp',
-        'priority' => 'setPriority',
+        'round' => 'setRound',
         'slots' => 'setSlots',
         'baker' => 'setBaker',
-        'status' => 'setStatus'
+        'status' => 'setStatus',
+        'priority' => 'setPriority'
     ];
 
     /**
@@ -151,10 +229,11 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
         'cycle' => 'getCycle',
         'level' => 'getLevel',
         'timestamp' => 'getTimestamp',
-        'priority' => 'getPriority',
+        'round' => 'getRound',
         'slots' => 'getSlots',
         'baker' => 'getBaker',
-        'status' => 'getStatus'
+        'status' => 'getStatus',
+        'priority' => 'getPriority'
     ];
 
     /**
@@ -214,14 +293,33 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['type'] = $data['type'] ?? null;
-        $this->container['cycle'] = $data['cycle'] ?? null;
-        $this->container['level'] = $data['level'] ?? null;
-        $this->container['timestamp'] = $data['timestamp'] ?? null;
-        $this->container['priority'] = $data['priority'] ?? null;
-        $this->container['slots'] = $data['slots'] ?? null;
-        $this->container['baker'] = $data['baker'] ?? null;
-        $this->container['status'] = $data['status'] ?? null;
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('cycle', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('round', $data ?? [], null);
+        $this->setIfExists('slots', $data ?? [], null);
+        $this->setIfExists('baker', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('priority', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -267,6 +365,18 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setType($type)
     {
+
+        if (is_null($type)) {
+            array_push($this->openAPINullablesSetToNull, 'type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['type'] = $type;
 
         return $this;
@@ -291,6 +401,11 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setCycle($cycle)
     {
+
+        if (is_null($cycle)) {
+            throw new \InvalidArgumentException('non-nullable cycle cannot be null');
+        }
+
         $this->container['cycle'] = $cycle;
 
         return $this;
@@ -315,6 +430,11 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLevel($level)
     {
+
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
+        }
+
         $this->container['level'] = $level;
 
         return $this;
@@ -339,31 +459,48 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTimestamp($timestamp)
     {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
         $this->container['timestamp'] = $timestamp;
 
         return $this;
     }
 
     /**
-     * Gets priority
+     * Gets round
      *
      * @return int|null
      */
-    public function getPriority()
+    public function getRound()
     {
-        return $this->container['priority'];
+        return $this->container['round'];
     }
 
     /**
-     * Sets priority
+     * Sets round
      *
-     * @param int|null $priority Priority (0 - ∞) with which baker can produce a block. If a baker with priority `0` doesn't produce a block within a given time interval, then the right goes to a baker with priority` 1`, etc. For `endorsing` rights this field is always `null`.
+     * @param int|null $round Round (0 - ∞) at which the baker can propose/produce a block. If a baker at round  `0` doesn't produce a block within the given time interval, then the right goes to a baker at round` 1`, etc. For `endorsing` rights this field is always `null`.
      *
      * @return self
      */
-    public function setPriority($priority)
+    public function setRound($round)
     {
-        $this->container['priority'] = $priority;
+
+        if (is_null($round)) {
+            array_push($this->openAPINullablesSetToNull, 'round');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('round', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['round'] = $round;
 
         return $this;
     }
@@ -387,6 +524,18 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setSlots($slots)
     {
+
+        if (is_null($slots)) {
+            array_push($this->openAPINullablesSetToNull, 'slots');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('slots', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['slots'] = $slots;
 
         return $this;
@@ -395,7 +544,7 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets baker
      *
-     * @return OneOfAlias|null
+     * @return \Bzzhh\Tzkt\Model\BakingRightBaker|null
      */
     public function getBaker()
     {
@@ -405,12 +554,24 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets baker
      *
-     * @param OneOfAlias|null $baker Baker to which baking or endorsing right has been given.
+     * @param \Bzzhh\Tzkt\Model\BakingRightBaker|null $baker baker
      *
      * @return self
      */
     public function setBaker($baker)
     {
+
+        if (is_null($baker)) {
+            array_push($this->openAPINullablesSetToNull, 'baker');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('baker', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['baker'] = $baker;
 
         return $this;
@@ -429,13 +590,61 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status Status of the baking or endorsing right: - `future` - the right is not realized yet; - `realized` - the right was successfully realized; - `uncovered` - the right was not realized due to lack of bonds (for example, when a baker is overdelegated); - `missed` - the right was not realized for no apparent reason (usually due to issues with network or node).
+     * @param string|null $status Status of the baking or endorsing right: - `future` - the right is not realized yet; - `realized` - the right was successfully realized; - `missed` - the right was not realized.
      *
      * @return self
      */
     public function setStatus($status)
     {
+
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets priority
+     *
+     * @return int|null
+     */
+    public function getPriority()
+    {
+        return $this->container['priority'];
+    }
+
+    /**
+     * Sets priority
+     *
+     * @param int|null $priority [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setPriority($priority)
+    {
+
+        if (is_null($priority)) {
+            array_push($this->openAPINullablesSetToNull, 'priority');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('priority', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['priority'] = $priority;
 
         return $this;
     }
@@ -446,7 +655,7 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -458,6 +667,7 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -471,7 +681,7 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -487,7 +697,7 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -499,6 +709,7 @@ class BakingRight implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

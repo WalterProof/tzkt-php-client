@@ -1,7 +1,7 @@
 <?php
 /**
  * RightsApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,17 @@ class RightsApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'rightsGet' => [
+            'application/json',
+        ],
+        'rightsGetCount' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -120,25 +131,27 @@ class RightsApi
      *
      * Get rights
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BakingRight[]
      */
-    public function rightsGet($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function rightsGet($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['rightsGet'][0])
     {
-        list($response) = $this->rightsGetWithHttpInfo($type, $baker, $cycle, $level, $slots, $priority, $status, $select, $sort, $offset, $limit);
+        list($response) = $this->rightsGetWithHttpInfo($type, $baker, $cycle, $level, $slots, $round, $priority, $status, $select, $sort, $offset, $limit, $contentType);
         return $response;
     }
 
@@ -147,25 +160,27 @@ class RightsApi
      *
      * Get rights
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BakingRight[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function rightsGetWithHttpInfo($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function rightsGetWithHttpInfo($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['rightsGet'][0])
     {
-        $request = $this->rightsGetRequest($type, $baker, $cycle, $level, $slots, $priority, $status, $select, $sort, $offset, $limit);
+        $request = $this->rightsGetRequest($type, $baker, $cycle, $level, $slots, $round, $priority, $status, $select, $sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -177,6 +192,13 @@ class RightsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -201,6 +223,9 @@ class RightsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BakingRight[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -215,6 +240,9 @@ class RightsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -243,24 +271,26 @@ class RightsApi
      *
      * Get rights
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rightsGetAsync($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function rightsGetAsync($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['rightsGet'][0])
     {
-        return $this->rightsGetAsyncWithHttpInfo($type, $baker, $cycle, $level, $slots, $priority, $status, $select, $sort, $offset, $limit)
+        return $this->rightsGetAsyncWithHttpInfo($type, $baker, $cycle, $level, $slots, $round, $priority, $status, $select, $sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -273,25 +303,27 @@ class RightsApi
      *
      * Get rights
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rightsGetAsyncWithHttpInfo($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function rightsGetAsyncWithHttpInfo($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['rightsGet'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BakingRight[]';
-        $request = $this->rightsGetRequest($type, $baker, $cycle, $level, $slots, $priority, $status, $select, $sort, $offset, $limit);
+        $request = $this->rightsGetRequest($type, $baker, $cycle, $level, $slots, $round, $priority, $status, $select, $sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -301,6 +333,9 @@ class RightsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -329,30 +364,44 @@ class RightsApi
     /**
      * Create request for operation 'rightsGet'
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts rights by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rightsGetRequest($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function rightsGetRequest($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['rightsGet'][0])
     {
+
+
+
+
+
+
+
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RightsApi.rightsGet, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RightsApi.rightsGet, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/rights';
         $formParams = [];
@@ -362,140 +411,122 @@ class RightsApi
         $multipart = false;
 
         // query params
-        if ($type !== null) {
-            if('form' === 'form' && is_array($type)) {
-                foreach($type as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['type'] = $type;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $type,
+            'type', // param base name
+            'OneOfBakingRightTypeParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($baker !== null) {
-            if('form' === 'form' && is_array($baker)) {
-                foreach($baker as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['baker'] = $baker;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $baker,
+            'baker', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($cycle !== null) {
-            if('form' === 'form' && is_array($cycle)) {
-                foreach($cycle as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['cycle'] = $cycle;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $cycle,
+            'cycle', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($level !== null) {
-            if('form' === 'form' && is_array($level)) {
-                foreach($level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['level'] = $level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($slots !== null) {
-            if('form' === 'form' && is_array($slots)) {
-                foreach($slots as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['slots'] = $slots;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $slots,
+            'slots', // param base name
+            'OneOfInt32NullParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($priority !== null) {
-            if('form' === 'form' && is_array($priority)) {
-                foreach($priority as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['priority'] = $priority;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $round,
+            'round', // param base name
+            'OneOfInt32NullParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($status !== null) {
-            if('form' === 'form' && is_array($status)) {
-                foreach($status as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['status'] = $status;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $priority,
+            'priority', // param base name
+            'OneOfInt32NullParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfBakingRightStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -513,12 +544,12 @@ class RightsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -534,10 +565,11 @@ class RightsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -548,21 +580,23 @@ class RightsApi
      *
      * Get rights count
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function rightsGetCount($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null)
+    public function rightsGetCount($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, string $contentType = self::contentTypes['rightsGetCount'][0])
     {
-        list($response) = $this->rightsGetCountWithHttpInfo($type, $baker, $cycle, $level, $slots, $priority, $status);
+        list($response) = $this->rightsGetCountWithHttpInfo($type, $baker, $cycle, $level, $slots, $round, $priority, $status, $contentType);
         return $response;
     }
 
@@ -571,21 +605,23 @@ class RightsApi
      *
      * Get rights count
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function rightsGetCountWithHttpInfo($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null)
+    public function rightsGetCountWithHttpInfo($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, string $contentType = self::contentTypes['rightsGetCount'][0])
     {
-        $request = $this->rightsGetCountRequest($type, $baker, $cycle, $level, $slots, $priority, $status);
+        $request = $this->rightsGetCountRequest($type, $baker, $cycle, $level, $slots, $round, $priority, $status, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -597,6 +633,13 @@ class RightsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -621,6 +664,9 @@ class RightsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -635,6 +681,9 @@ class RightsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -663,20 +712,22 @@ class RightsApi
      *
      * Get rights count
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rightsGetCountAsync($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null)
+    public function rightsGetCountAsync($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, string $contentType = self::contentTypes['rightsGetCount'][0])
     {
-        return $this->rightsGetCountAsyncWithHttpInfo($type, $baker, $cycle, $level, $slots, $priority, $status)
+        return $this->rightsGetCountAsyncWithHttpInfo($type, $baker, $cycle, $level, $slots, $round, $priority, $status, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -689,21 +740,23 @@ class RightsApi
      *
      * Get rights count
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rightsGetCountAsyncWithHttpInfo($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null)
+    public function rightsGetCountAsyncWithHttpInfo($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, string $contentType = self::contentTypes['rightsGetCount'][0])
     {
         $returnType = 'int';
-        $request = $this->rightsGetCountRequest($type, $baker, $cycle, $level, $slots, $priority, $status);
+        $request = $this->rightsGetCountRequest($type, $baker, $cycle, $level, $slots, $round, $priority, $status, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -713,6 +766,9 @@ class RightsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -741,19 +797,30 @@ class RightsApi
     /**
      * Create request for operation 'rightsGetCount'
      *
-     * @param  OneOfBakingRightTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
-     * @param  OneOfAccountParameter $baker Filters rights by baker (optional)
-     * @param  OneOfInt32Parameter $cycle Filters rights by cycle (optional)
-     * @param  OneOfInt32Parameter $level Filters rights by level (optional)
-     * @param  OneOfInt32NullParameter $slots Filters rights by slots (optional)
-     * @param  OneOfInt32NullParameter $priority Filters rights by priority (optional)
-     * @param  OneOfBakingRightStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;uncovered&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  RightsGetCountTypeParameter $type Filters rights by type (&#x60;baking&#x60;, &#x60;endorsing&#x60;) (optional)
+     * @param  AccountsGetDelegateParameter $baker Filters rights by baker (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rights by cycle (optional)
+     * @param  AccountsGetIdParameter $level Filters rights by level (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $slots Filters rights by slots (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $round Filters rights by round (optional)
+     * @param  CommitmentsGetAllActivationLevelParameter $priority [DEPRECATED] (optional)
+     * @param  RightsGetCountStatusParameter $status Filters rights by status (&#x60;future&#x60;, &#x60;realized&#x60;, &#x60;missed&#x60;) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rightsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rightsGetCountRequest($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $priority = null, $status = null)
+    public function rightsGetCountRequest($type = null, $baker = null, $cycle = null, $level = null, $slots = null, $round = null, $priority = null, $status = null, string $contentType = self::contentTypes['rightsGetCount'][0])
     {
+
+
+
+
+
+
+
+
+
 
         $resourcePath = '/v1/rights/count';
         $formParams = [];
@@ -763,96 +830,86 @@ class RightsApi
         $multipart = false;
 
         // query params
-        if ($type !== null) {
-            if('form' === 'form' && is_array($type)) {
-                foreach($type as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['type'] = $type;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $type,
+            'type', // param base name
+            'OneOfBakingRightTypeParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($baker !== null) {
-            if('form' === 'form' && is_array($baker)) {
-                foreach($baker as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['baker'] = $baker;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $baker,
+            'baker', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($cycle !== null) {
-            if('form' === 'form' && is_array($cycle)) {
-                foreach($cycle as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['cycle'] = $cycle;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $cycle,
+            'cycle', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($level !== null) {
-            if('form' === 'form' && is_array($level)) {
-                foreach($level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['level'] = $level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($slots !== null) {
-            if('form' === 'form' && is_array($slots)) {
-                foreach($slots as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['slots'] = $slots;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $slots,
+            'slots', // param base name
+            'OneOfInt32NullParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($priority !== null) {
-            if('form' === 'form' && is_array($priority)) {
-                foreach($priority as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['priority'] = $priority;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $round,
+            'round', // param base name
+            'OneOfInt32NullParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($status !== null) {
-            if('form' === 'form' && is_array($status)) {
-                foreach($status as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['status'] = $status;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $priority,
+            'priority', // param base name
+            'OneOfInt32NullParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfBakingRightStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -870,12 +927,12 @@ class RightsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -891,10 +948,11 @@ class RightsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

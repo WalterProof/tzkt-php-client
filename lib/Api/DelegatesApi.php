@@ -1,7 +1,7 @@
 <?php
 /**
  * DelegatesApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,20 @@ class DelegatesApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'delegatesGet' => [
+            'application/json',
+        ],
+        'delegatesGetByAddress' => [
+            'application/json',
+        ],
+        'delegatesGetCount' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -120,20 +134,21 @@ class DelegatesApi
      *
      * Get delegates
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Delegate[]
      */
-    public function delegatesGet($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function delegatesGet($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['delegatesGet'][0])
     {
-        list($response) = $this->delegatesGetWithHttpInfo($active, $last_activity, $select, $sort, $offset, $limit);
+        list($response) = $this->delegatesGetWithHttpInfo($active, $last_activity, $select, $sort, $offset, $limit, $contentType);
         return $response;
     }
 
@@ -142,20 +157,21 @@ class DelegatesApi
      *
      * Get delegates
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Delegate[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function delegatesGetWithHttpInfo($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function delegatesGetWithHttpInfo($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['delegatesGet'][0])
     {
-        $request = $this->delegatesGetRequest($active, $last_activity, $select, $sort, $offset, $limit);
+        $request = $this->delegatesGetRequest($active, $last_activity, $select, $sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -167,6 +183,13 @@ class DelegatesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -191,6 +214,9 @@ class DelegatesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Delegate[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -205,6 +231,9 @@ class DelegatesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -233,19 +262,20 @@ class DelegatesApi
      *
      * Get delegates
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function delegatesGetAsync($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function delegatesGetAsync($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['delegatesGet'][0])
     {
-        return $this->delegatesGetAsyncWithHttpInfo($active, $last_activity, $select, $sort, $offset, $limit)
+        return $this->delegatesGetAsyncWithHttpInfo($active, $last_activity, $select, $sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -258,20 +288,21 @@ class DelegatesApi
      *
      * Get delegates
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function delegatesGetAsyncWithHttpInfo($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function delegatesGetAsyncWithHttpInfo($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['delegatesGet'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Delegate[]';
-        $request = $this->delegatesGetRequest($active, $last_activity, $select, $sort, $offset, $limit);
+        $request = $this->delegatesGetRequest($active, $last_activity, $select, $sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -281,6 +312,9 @@ class DelegatesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -309,25 +343,32 @@ class DelegatesApi
     /**
      * Create request for operation 'delegatesGet'
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
-     * @param  OneOfInt32Parameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetIdParameter $last_activity Filters delegates by last activity level (where the delegate was updated) (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;activationLevel&#x60;, &#x60;deactivationLevel&#x60;, &#x60;stakingBalance&#x60;, &#x60;balance&#x60;, &#x60;numDelegators&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function delegatesGetRequest($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function delegatesGetRequest($active = null, $last_activity = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['delegatesGet'][0])
     {
+
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling DelegatesApi.delegatesGet, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling DelegatesApi.delegatesGet, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/delegates';
         $formParams = [];
@@ -337,85 +378,68 @@ class DelegatesApi
         $multipart = false;
 
         // query params
-        if ($active !== null) {
-            if('form' === 'form' && is_array($active)) {
-                foreach($active as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['active'] = $active;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $active,
+            'active', // param base name
+            'OneOfBoolParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($last_activity !== null) {
-            if('form' === 'form' && is_array($last_activity)) {
-                foreach($last_activity as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['lastActivity'] = $last_activity;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_activity,
+            'lastActivity', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -433,12 +457,12 @@ class DelegatesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -454,10 +478,11 @@ class DelegatesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -469,14 +494,15 @@ class DelegatesApi
      * Get delegate by address
      *
      * @param  string $address Delegate address (starting with tz) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetByAddress'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Delegate
      */
-    public function delegatesGetByAddress($address)
+    public function delegatesGetByAddress($address, string $contentType = self::contentTypes['delegatesGetByAddress'][0])
     {
-        list($response) = $this->delegatesGetByAddressWithHttpInfo($address);
+        list($response) = $this->delegatesGetByAddressWithHttpInfo($address, $contentType);
         return $response;
     }
 
@@ -486,14 +512,15 @@ class DelegatesApi
      * Get delegate by address
      *
      * @param  string $address Delegate address (starting with tz) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetByAddress'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Delegate, HTTP status code, HTTP response headers (array of strings)
      */
-    public function delegatesGetByAddressWithHttpInfo($address)
+    public function delegatesGetByAddressWithHttpInfo($address, string $contentType = self::contentTypes['delegatesGetByAddress'][0])
     {
-        $request = $this->delegatesGetByAddressRequest($address);
+        $request = $this->delegatesGetByAddressRequest($address, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -505,6 +532,13 @@ class DelegatesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -529,6 +563,9 @@ class DelegatesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Delegate' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -543,6 +580,9 @@ class DelegatesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -572,13 +612,14 @@ class DelegatesApi
      * Get delegate by address
      *
      * @param  string $address Delegate address (starting with tz) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetByAddress'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function delegatesGetByAddressAsync($address)
+    public function delegatesGetByAddressAsync($address, string $contentType = self::contentTypes['delegatesGetByAddress'][0])
     {
-        return $this->delegatesGetByAddressAsyncWithHttpInfo($address)
+        return $this->delegatesGetByAddressAsyncWithHttpInfo($address, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -592,14 +633,15 @@ class DelegatesApi
      * Get delegate by address
      *
      * @param  string $address Delegate address (starting with tz) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetByAddress'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function delegatesGetByAddressAsyncWithHttpInfo($address)
+    public function delegatesGetByAddressAsyncWithHttpInfo($address, string $contentType = self::contentTypes['delegatesGetByAddress'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Delegate';
-        $request = $this->delegatesGetByAddressRequest($address);
+        $request = $this->delegatesGetByAddressRequest($address, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -609,6 +651,9 @@ class DelegatesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -638,18 +683,21 @@ class DelegatesApi
      * Create request for operation 'delegatesGetByAddress'
      *
      * @param  string $address Delegate address (starting with tz) (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetByAddress'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function delegatesGetByAddressRequest($address)
+    public function delegatesGetByAddressRequest($address, string $contentType = self::contentTypes['delegatesGetByAddress'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling delegatesGetByAddress'
             );
         }
+
 
         $resourcePath = '/v1/delegates/{address}';
         $formParams = [];
@@ -670,16 +718,11 @@ class DelegatesApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -697,12 +740,12 @@ class DelegatesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -718,10 +761,11 @@ class DelegatesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -732,15 +776,16 @@ class DelegatesApi
      *
      * Get delegates count
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function delegatesGetCount($active = null)
+    public function delegatesGetCount($active = null, string $contentType = self::contentTypes['delegatesGetCount'][0])
     {
-        list($response) = $this->delegatesGetCountWithHttpInfo($active);
+        list($response) = $this->delegatesGetCountWithHttpInfo($active, $contentType);
         return $response;
     }
 
@@ -749,15 +794,16 @@ class DelegatesApi
      *
      * Get delegates count
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function delegatesGetCountWithHttpInfo($active = null)
+    public function delegatesGetCountWithHttpInfo($active = null, string $contentType = self::contentTypes['delegatesGetCount'][0])
     {
-        $request = $this->delegatesGetCountRequest($active);
+        $request = $this->delegatesGetCountRequest($active, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -769,6 +815,13 @@ class DelegatesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -793,6 +846,9 @@ class DelegatesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -807,6 +863,9 @@ class DelegatesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -835,14 +894,15 @@ class DelegatesApi
      *
      * Get delegates count
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function delegatesGetCountAsync($active = null)
+    public function delegatesGetCountAsync($active = null, string $contentType = self::contentTypes['delegatesGetCount'][0])
     {
-        return $this->delegatesGetCountAsyncWithHttpInfo($active)
+        return $this->delegatesGetCountAsyncWithHttpInfo($active, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -855,15 +915,16 @@ class DelegatesApi
      *
      * Get delegates count
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function delegatesGetCountAsyncWithHttpInfo($active = null)
+    public function delegatesGetCountAsyncWithHttpInfo($active = null, string $contentType = self::contentTypes['delegatesGetCount'][0])
     {
         $returnType = 'int';
-        $request = $this->delegatesGetCountRequest($active);
+        $request = $this->delegatesGetCountRequest($active, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -873,6 +934,9 @@ class DelegatesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -901,13 +965,16 @@ class DelegatesApi
     /**
      * Create request for operation 'delegatesGetCount'
      *
-     * @param  OneOfBoolParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  AccountsGetStakedParameter $active Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates) (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['delegatesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function delegatesGetCountRequest($active = null)
+    public function delegatesGetCountRequest($active = null, string $contentType = self::contentTypes['delegatesGetCount'][0])
     {
+
+
 
         $resourcePath = '/v1/delegates/count';
         $formParams = [];
@@ -917,30 +984,23 @@ class DelegatesApi
         $multipart = false;
 
         // query params
-        if ($active !== null) {
-            if('form' === 'form' && is_array($active)) {
-                foreach($active as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['active'] = $active;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $active,
+            'active', // param base name
+            'OneOfBoolParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -958,12 +1018,12 @@ class DelegatesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -979,10 +1039,11 @@ class DelegatesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

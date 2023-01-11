@@ -2,7 +2,7 @@
 /**
  * State
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class State implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -60,10 +58,13 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'chain' => 'string',
+        'chain_id' => 'string',
         'cycle' => 'int',
         'level' => 'int',
         'hash' => 'string',
         'protocol' => 'string',
+        'next_protocol' => 'string',
         'timestamp' => '\DateTime',
         'voting_epoch' => 'int',
         'voting_period' => 'int',
@@ -71,13 +72,14 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_sync' => '\DateTime',
         'synced' => 'bool',
         'quote_level' => 'int',
-        'quote_btc' => 'double',
-        'quote_eur' => 'double',
-        'quote_usd' => 'double',
-        'quote_cny' => 'double',
-        'quote_jpy' => 'double',
-        'quote_krw' => 'double',
-        'quote_eth' => 'double'
+        'quote_btc' => 'float',
+        'quote_eur' => 'float',
+        'quote_usd' => 'float',
+        'quote_cny' => 'float',
+        'quote_jpy' => 'float',
+        'quote_krw' => 'float',
+        'quote_eth' => 'float',
+        'quote_gbp' => 'float'
     ];
 
     /**
@@ -88,10 +90,13 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'chain' => null,
+        'chain_id' => null,
         'cycle' => 'int32',
         'level' => 'int32',
         'hash' => null,
         'protocol' => null,
+        'next_protocol' => null,
         'timestamp' => 'date-time',
         'voting_epoch' => 'int32',
         'voting_period' => 'int32',
@@ -105,8 +110,46 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
         'quote_cny' => 'double',
         'quote_jpy' => 'double',
         'quote_krw' => 'double',
-        'quote_eth' => 'double'
+        'quote_eth' => 'double',
+        'quote_gbp' => 'double'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'chain' => true,
+		'chain_id' => true,
+		'cycle' => false,
+		'level' => false,
+		'hash' => true,
+		'protocol' => true,
+		'next_protocol' => true,
+		'timestamp' => false,
+		'voting_epoch' => false,
+		'voting_period' => false,
+		'known_level' => false,
+		'last_sync' => false,
+		'synced' => false,
+		'quote_level' => false,
+		'quote_btc' => false,
+		'quote_eur' => false,
+		'quote_usd' => false,
+		'quote_cny' => false,
+		'quote_jpy' => false,
+		'quote_krw' => false,
+		'quote_eth' => false,
+		'quote_gbp' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -129,16 +172,71 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
      * @var string[]
      */
     protected static $attributeMap = [
+        'chain' => 'chain',
+        'chain_id' => 'chainId',
         'cycle' => 'cycle',
         'level' => 'level',
         'hash' => 'hash',
         'protocol' => 'protocol',
+        'next_protocol' => 'nextProtocol',
         'timestamp' => 'timestamp',
         'voting_epoch' => 'votingEpoch',
         'voting_period' => 'votingPeriod',
@@ -152,7 +250,8 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
         'quote_cny' => 'quoteCny',
         'quote_jpy' => 'quoteJpy',
         'quote_krw' => 'quoteKrw',
-        'quote_eth' => 'quoteEth'
+        'quote_eth' => 'quoteEth',
+        'quote_gbp' => 'quoteGbp'
     ];
 
     /**
@@ -161,10 +260,13 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'chain' => 'setChain',
+        'chain_id' => 'setChainId',
         'cycle' => 'setCycle',
         'level' => 'setLevel',
         'hash' => 'setHash',
         'protocol' => 'setProtocol',
+        'next_protocol' => 'setNextProtocol',
         'timestamp' => 'setTimestamp',
         'voting_epoch' => 'setVotingEpoch',
         'voting_period' => 'setVotingPeriod',
@@ -178,7 +280,8 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
         'quote_cny' => 'setQuoteCny',
         'quote_jpy' => 'setQuoteJpy',
         'quote_krw' => 'setQuoteKrw',
-        'quote_eth' => 'setQuoteEth'
+        'quote_eth' => 'setQuoteEth',
+        'quote_gbp' => 'setQuoteGbp'
     ];
 
     /**
@@ -187,10 +290,13 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'chain' => 'getChain',
+        'chain_id' => 'getChainId',
         'cycle' => 'getCycle',
         'level' => 'getLevel',
         'hash' => 'getHash',
         'protocol' => 'getProtocol',
+        'next_protocol' => 'getNextProtocol',
         'timestamp' => 'getTimestamp',
         'voting_epoch' => 'getVotingEpoch',
         'voting_period' => 'getVotingPeriod',
@@ -204,7 +310,8 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
         'quote_cny' => 'getQuoteCny',
         'quote_jpy' => 'getQuoteJpy',
         'quote_krw' => 'getQuoteKrw',
-        'quote_eth' => 'getQuoteEth'
+        'quote_eth' => 'getQuoteEth',
+        'quote_gbp' => 'getQuoteGbp'
     ];
 
     /**
@@ -264,24 +371,46 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['cycle'] = $data['cycle'] ?? null;
-        $this->container['level'] = $data['level'] ?? null;
-        $this->container['hash'] = $data['hash'] ?? null;
-        $this->container['protocol'] = $data['protocol'] ?? null;
-        $this->container['timestamp'] = $data['timestamp'] ?? null;
-        $this->container['voting_epoch'] = $data['voting_epoch'] ?? null;
-        $this->container['voting_period'] = $data['voting_period'] ?? null;
-        $this->container['known_level'] = $data['known_level'] ?? null;
-        $this->container['last_sync'] = $data['last_sync'] ?? null;
-        $this->container['synced'] = $data['synced'] ?? null;
-        $this->container['quote_level'] = $data['quote_level'] ?? null;
-        $this->container['quote_btc'] = $data['quote_btc'] ?? null;
-        $this->container['quote_eur'] = $data['quote_eur'] ?? null;
-        $this->container['quote_usd'] = $data['quote_usd'] ?? null;
-        $this->container['quote_cny'] = $data['quote_cny'] ?? null;
-        $this->container['quote_jpy'] = $data['quote_jpy'] ?? null;
-        $this->container['quote_krw'] = $data['quote_krw'] ?? null;
-        $this->container['quote_eth'] = $data['quote_eth'] ?? null;
+        $this->setIfExists('chain', $data ?? [], null);
+        $this->setIfExists('chain_id', $data ?? [], null);
+        $this->setIfExists('cycle', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('hash', $data ?? [], null);
+        $this->setIfExists('protocol', $data ?? [], null);
+        $this->setIfExists('next_protocol', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('voting_epoch', $data ?? [], null);
+        $this->setIfExists('voting_period', $data ?? [], null);
+        $this->setIfExists('known_level', $data ?? [], null);
+        $this->setIfExists('last_sync', $data ?? [], null);
+        $this->setIfExists('synced', $data ?? [], null);
+        $this->setIfExists('quote_level', $data ?? [], null);
+        $this->setIfExists('quote_btc', $data ?? [], null);
+        $this->setIfExists('quote_eur', $data ?? [], null);
+        $this->setIfExists('quote_usd', $data ?? [], null);
+        $this->setIfExists('quote_cny', $data ?? [], null);
+        $this->setIfExists('quote_jpy', $data ?? [], null);
+        $this->setIfExists('quote_krw', $data ?? [], null);
+        $this->setIfExists('quote_eth', $data ?? [], null);
+        $this->setIfExists('quote_gbp', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -309,6 +438,78 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
+     * Gets chain
+     *
+     * @return string|null
+     */
+    public function getChain()
+    {
+        return $this->container['chain'];
+    }
+
+    /**
+     * Sets chain
+     *
+     * @param string|null $chain Alias name of the chain (or \"private\" if it's not on the list of known chains)
+     *
+     * @return self
+     */
+    public function setChain($chain)
+    {
+
+        if (is_null($chain)) {
+            array_push($this->openAPINullablesSetToNull, 'chain');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('chain', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['chain'] = $chain;
+
+        return $this;
+    }
+
+    /**
+     * Gets chain_id
+     *
+     * @return string|null
+     */
+    public function getChainId()
+    {
+        return $this->container['chain_id'];
+    }
+
+    /**
+     * Sets chain_id
+     *
+     * @param string|null $chain_id Unique identifier of the chain
+     *
+     * @return self
+     */
+    public function setChainId($chain_id)
+    {
+
+        if (is_null($chain_id)) {
+            array_push($this->openAPINullablesSetToNull, 'chain_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('chain_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['chain_id'] = $chain_id;
+
+        return $this;
+    }
+
+    /**
      * Gets cycle
      *
      * @return int|null
@@ -327,6 +528,11 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setCycle($cycle)
     {
+
+        if (is_null($cycle)) {
+            throw new \InvalidArgumentException('non-nullable cycle cannot be null');
+        }
+
         $this->container['cycle'] = $cycle;
 
         return $this;
@@ -351,6 +557,11 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLevel($level)
     {
+
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
+        }
+
         $this->container['level'] = $level;
 
         return $this;
@@ -375,6 +586,18 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setHash($hash)
     {
+
+        if (is_null($hash)) {
+            array_push($this->openAPINullablesSetToNull, 'hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['hash'] = $hash;
 
         return $this;
@@ -399,7 +622,55 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setProtocol($protocol)
     {
+
+        if (is_null($protocol)) {
+            array_push($this->openAPINullablesSetToNull, 'protocol');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('protocol', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['protocol'] = $protocol;
+
+        return $this;
+    }
+
+    /**
+     * Gets next_protocol
+     *
+     * @return string|null
+     */
+    public function getNextProtocol()
+    {
+        return $this->container['next_protocol'];
+    }
+
+    /**
+     * Sets next_protocol
+     *
+     * @param string|null $next_protocol Next block protocol hash
+     *
+     * @return self
+     */
+    public function setNextProtocol($next_protocol)
+    {
+
+        if (is_null($next_protocol)) {
+            array_push($this->openAPINullablesSetToNull, 'next_protocol');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('next_protocol', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['next_protocol'] = $next_protocol;
 
         return $this;
     }
@@ -423,6 +694,11 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTimestamp($timestamp)
     {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
         $this->container['timestamp'] = $timestamp;
 
         return $this;
@@ -441,12 +717,17 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets voting_epoch
      *
-     * @param int|null $voting_epoch Current voring epoch index, starting from zero
+     * @param int|null $voting_epoch Current voting epoch index, starting from zero
      *
      * @return self
      */
     public function setVotingEpoch($voting_epoch)
     {
+
+        if (is_null($voting_epoch)) {
+            throw new \InvalidArgumentException('non-nullable voting_epoch cannot be null');
+        }
+
         $this->container['voting_epoch'] = $voting_epoch;
 
         return $this;
@@ -471,6 +752,11 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setVotingPeriod($voting_period)
     {
+
+        if (is_null($voting_period)) {
+            throw new \InvalidArgumentException('non-nullable voting_period cannot be null');
+        }
+
         $this->container['voting_period'] = $voting_period;
 
         return $this;
@@ -495,6 +781,11 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setKnownLevel($known_level)
     {
+
+        if (is_null($known_level)) {
+            throw new \InvalidArgumentException('non-nullable known_level cannot be null');
+        }
+
         $this->container['known_level'] = $known_level;
 
         return $this;
@@ -519,6 +810,11 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLastSync($last_sync)
     {
+
+        if (is_null($last_sync)) {
+            throw new \InvalidArgumentException('non-nullable last_sync cannot be null');
+        }
+
         $this->container['last_sync'] = $last_sync;
 
         return $this;
@@ -543,6 +839,11 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setSynced($synced)
     {
+
+        if (is_null($synced)) {
+            throw new \InvalidArgumentException('non-nullable synced cannot be null');
+        }
+
         $this->container['synced'] = $synced;
 
         return $this;
@@ -567,6 +868,11 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setQuoteLevel($quote_level)
     {
+
+        if (is_null($quote_level)) {
+            throw new \InvalidArgumentException('non-nullable quote_level cannot be null');
+        }
+
         $this->container['quote_level'] = $quote_level;
 
         return $this;
@@ -575,7 +881,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote_btc
      *
-     * @return double|null
+     * @return float|null
      */
     public function getQuoteBtc()
     {
@@ -585,12 +891,17 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote_btc
      *
-     * @param double|null $quote_btc Last known XTZ/BTC price
+     * @param float|null $quote_btc Last known XTZ/BTC price
      *
      * @return self
      */
     public function setQuoteBtc($quote_btc)
     {
+
+        if (is_null($quote_btc)) {
+            throw new \InvalidArgumentException('non-nullable quote_btc cannot be null');
+        }
+
         $this->container['quote_btc'] = $quote_btc;
 
         return $this;
@@ -599,7 +910,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote_eur
      *
-     * @return double|null
+     * @return float|null
      */
     public function getQuoteEur()
     {
@@ -609,12 +920,17 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote_eur
      *
-     * @param double|null $quote_eur Last known XTZ/EUR price
+     * @param float|null $quote_eur Last known XTZ/EUR price
      *
      * @return self
      */
     public function setQuoteEur($quote_eur)
     {
+
+        if (is_null($quote_eur)) {
+            throw new \InvalidArgumentException('non-nullable quote_eur cannot be null');
+        }
+
         $this->container['quote_eur'] = $quote_eur;
 
         return $this;
@@ -623,7 +939,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote_usd
      *
-     * @return double|null
+     * @return float|null
      */
     public function getQuoteUsd()
     {
@@ -633,12 +949,17 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote_usd
      *
-     * @param double|null $quote_usd Last known XTZ/USD price
+     * @param float|null $quote_usd Last known XTZ/USD price
      *
      * @return self
      */
     public function setQuoteUsd($quote_usd)
     {
+
+        if (is_null($quote_usd)) {
+            throw new \InvalidArgumentException('non-nullable quote_usd cannot be null');
+        }
+
         $this->container['quote_usd'] = $quote_usd;
 
         return $this;
@@ -647,7 +968,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote_cny
      *
-     * @return double|null
+     * @return float|null
      */
     public function getQuoteCny()
     {
@@ -657,12 +978,17 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote_cny
      *
-     * @param double|null $quote_cny Last known XTZ/CNY price
+     * @param float|null $quote_cny Last known XTZ/CNY price
      *
      * @return self
      */
     public function setQuoteCny($quote_cny)
     {
+
+        if (is_null($quote_cny)) {
+            throw new \InvalidArgumentException('non-nullable quote_cny cannot be null');
+        }
+
         $this->container['quote_cny'] = $quote_cny;
 
         return $this;
@@ -671,7 +997,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote_jpy
      *
-     * @return double|null
+     * @return float|null
      */
     public function getQuoteJpy()
     {
@@ -681,12 +1007,17 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote_jpy
      *
-     * @param double|null $quote_jpy Last known XTZ/JPY price
+     * @param float|null $quote_jpy Last known XTZ/JPY price
      *
      * @return self
      */
     public function setQuoteJpy($quote_jpy)
     {
+
+        if (is_null($quote_jpy)) {
+            throw new \InvalidArgumentException('non-nullable quote_jpy cannot be null');
+        }
+
         $this->container['quote_jpy'] = $quote_jpy;
 
         return $this;
@@ -695,7 +1026,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote_krw
      *
-     * @return double|null
+     * @return float|null
      */
     public function getQuoteKrw()
     {
@@ -705,12 +1036,17 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote_krw
      *
-     * @param double|null $quote_krw Last known XTZ/KRW price
+     * @param float|null $quote_krw Last known XTZ/KRW price
      *
      * @return self
      */
     public function setQuoteKrw($quote_krw)
     {
+
+        if (is_null($quote_krw)) {
+            throw new \InvalidArgumentException('non-nullable quote_krw cannot be null');
+        }
+
         $this->container['quote_krw'] = $quote_krw;
 
         return $this;
@@ -719,7 +1055,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote_eth
      *
-     * @return double|null
+     * @return float|null
      */
     public function getQuoteEth()
     {
@@ -729,13 +1065,47 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote_eth
      *
-     * @param double|null $quote_eth Last known XTZ/ETH price
+     * @param float|null $quote_eth Last known XTZ/ETH price
      *
      * @return self
      */
     public function setQuoteEth($quote_eth)
     {
+
+        if (is_null($quote_eth)) {
+            throw new \InvalidArgumentException('non-nullable quote_eth cannot be null');
+        }
+
         $this->container['quote_eth'] = $quote_eth;
+
+        return $this;
+    }
+
+    /**
+     * Gets quote_gbp
+     *
+     * @return float|null
+     */
+    public function getQuoteGbp()
+    {
+        return $this->container['quote_gbp'];
+    }
+
+    /**
+     * Sets quote_gbp
+     *
+     * @param float|null $quote_gbp Last known XTZ/GBP price
+     *
+     * @return self
+     */
+    public function setQuoteGbp($quote_gbp)
+    {
+
+        if (is_null($quote_gbp)) {
+            throw new \InvalidArgumentException('non-nullable quote_gbp cannot be null');
+        }
+
+        $this->container['quote_gbp'] = $quote_gbp;
 
         return $this;
     }
@@ -746,7 +1116,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -758,6 +1128,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -771,7 +1142,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -787,7 +1158,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -799,6 +1170,7 @@ class State implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

@@ -2,7 +2,7 @@
 /**
  * ProposalOperation
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -37,9 +37,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class ProposalOperation extends Operation
 {
@@ -67,9 +65,10 @@ class ProposalOperation extends Operation
         'period' => 'OneOfPeriodInfo',
         'proposal' => 'OneOfProposalAlias',
         'delegate' => 'OneOfAlias',
-        'rolls' => 'int',
+        'voting_power' => 'int',
         'duplicated' => 'bool',
-        'quote' => 'OneOfQuoteShort'
+        'quote' => 'OneOfQuoteShort',
+        'rolls' => 'int'
     ];
 
     /**
@@ -81,7 +80,7 @@ class ProposalOperation extends Operation
       */
     protected static $openAPIFormats = [
         'type' => null,
-        'id' => 'int32',
+        'id' => 'int64',
         'level' => 'int32',
         'timestamp' => 'date-time',
         'block' => null,
@@ -89,10 +88,39 @@ class ProposalOperation extends Operation
         'period' => null,
         'proposal' => null,
         'delegate' => null,
-        'rolls' => 'int32',
+        'voting_power' => 'int64',
         'duplicated' => null,
-        'quote' => null
+        'quote' => null,
+        'rolls' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'type' => true,
+		'id' => false,
+		'level' => false,
+		'timestamp' => false,
+		'block' => true,
+		'hash' => true,
+		'period' => true,
+		'proposal' => true,
+		'delegate' => true,
+		'voting_power' => false,
+		'duplicated' => false,
+		'quote' => true,
+		'rolls' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -115,6 +143,58 @@ class ProposalOperation extends Operation
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables + parent::openAPINullables();
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -130,9 +210,10 @@ class ProposalOperation extends Operation
         'period' => 'period',
         'proposal' => 'proposal',
         'delegate' => 'delegate',
-        'rolls' => 'rolls',
+        'voting_power' => 'votingPower',
         'duplicated' => 'duplicated',
-        'quote' => 'quote'
+        'quote' => 'quote',
+        'rolls' => 'rolls'
     ];
 
     /**
@@ -150,9 +231,10 @@ class ProposalOperation extends Operation
         'period' => 'setPeriod',
         'proposal' => 'setProposal',
         'delegate' => 'setDelegate',
-        'rolls' => 'setRolls',
+        'voting_power' => 'setVotingPower',
         'duplicated' => 'setDuplicated',
-        'quote' => 'setQuote'
+        'quote' => 'setQuote',
+        'rolls' => 'setRolls'
     ];
 
     /**
@@ -170,9 +252,10 @@ class ProposalOperation extends Operation
         'period' => 'getPeriod',
         'proposal' => 'getProposal',
         'delegate' => 'getDelegate',
-        'rolls' => 'getRolls',
+        'voting_power' => 'getVotingPower',
         'duplicated' => 'getDuplicated',
-        'quote' => 'getQuote'
+        'quote' => 'getQuote',
+        'rolls' => 'getRolls'
     ];
 
     /**
@@ -228,18 +311,37 @@ class ProposalOperation extends Operation
     {
         parent::__construct($data);
 
-        $this->container['type'] = $data['type'] ?? null;
-        $this->container['id'] = $data['id'] ?? null;
-        $this->container['level'] = $data['level'] ?? null;
-        $this->container['timestamp'] = $data['timestamp'] ?? null;
-        $this->container['block'] = $data['block'] ?? null;
-        $this->container['hash'] = $data['hash'] ?? null;
-        $this->container['period'] = $data['period'] ?? null;
-        $this->container['proposal'] = $data['proposal'] ?? null;
-        $this->container['delegate'] = $data['delegate'] ?? null;
-        $this->container['rolls'] = $data['rolls'] ?? null;
-        $this->container['duplicated'] = $data['duplicated'] ?? null;
-        $this->container['quote'] = $data['quote'] ?? null;
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('block', $data ?? [], null);
+        $this->setIfExists('hash', $data ?? [], null);
+        $this->setIfExists('period', $data ?? [], null);
+        $this->setIfExists('proposal', $data ?? [], null);
+        $this->setIfExists('delegate', $data ?? [], null);
+        $this->setIfExists('voting_power', $data ?? [], null);
+        $this->setIfExists('duplicated', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('rolls', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -251,9 +353,6 @@ class ProposalOperation extends Operation
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -272,7 +371,7 @@ class ProposalOperation extends Operation
     /**
      * Gets type
      *
-     * @return string
+     * @return string|null
      */
     public function getType()
     {
@@ -282,12 +381,24 @@ class ProposalOperation extends Operation
     /**
      * Sets type
      *
-     * @param string $type Type of the operation, `proposal` - is used by bakers (delegates) to submit and/or upvote proposals to amend the protocol
+     * @param string|null $type Type of the operation, `proposal` - is used by bakers (delegates) to submit and/or upvote proposals to amend the protocol
      *
      * @return self
      */
     public function setType($type)
     {
+
+        if (is_null($type)) {
+            array_push($this->openAPINullablesSetToNull, 'type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['type'] = $type;
 
         return $this;
@@ -312,6 +423,11 @@ class ProposalOperation extends Operation
      */
     public function setId($id)
     {
+
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+
         $this->container['id'] = $id;
 
         return $this;
@@ -336,6 +452,11 @@ class ProposalOperation extends Operation
      */
     public function setLevel($level)
     {
+
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
+        }
+
         $this->container['level'] = $level;
 
         return $this;
@@ -360,6 +481,11 @@ class ProposalOperation extends Operation
      */
     public function setTimestamp($timestamp)
     {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
         $this->container['timestamp'] = $timestamp;
 
         return $this;
@@ -384,6 +510,18 @@ class ProposalOperation extends Operation
      */
     public function setBlock($block)
     {
+
+        if (is_null($block)) {
+            array_push($this->openAPINullablesSetToNull, 'block');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('block', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['block'] = $block;
 
         return $this;
@@ -408,6 +546,18 @@ class ProposalOperation extends Operation
      */
     public function setHash($hash)
     {
+
+        if (is_null($hash)) {
+            array_push($this->openAPINullablesSetToNull, 'hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['hash'] = $hash;
 
         return $this;
@@ -432,6 +582,18 @@ class ProposalOperation extends Operation
      */
     public function setPeriod($period)
     {
+
+        if (is_null($period)) {
+            array_push($this->openAPINullablesSetToNull, 'period');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('period', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['period'] = $period;
 
         return $this;
@@ -456,6 +618,18 @@ class ProposalOperation extends Operation
      */
     public function setProposal($proposal)
     {
+
+        if (is_null($proposal)) {
+            array_push($this->openAPINullablesSetToNull, 'proposal');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('proposal', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['proposal'] = $proposal;
 
         return $this;
@@ -480,31 +654,48 @@ class ProposalOperation extends Operation
      */
     public function setDelegate($delegate)
     {
+
+        if (is_null($delegate)) {
+            array_push($this->openAPINullablesSetToNull, 'delegate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('delegate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['delegate'] = $delegate;
 
         return $this;
     }
 
     /**
-     * Gets rolls
+     * Gets voting_power
      *
      * @return int|null
      */
-    public function getRolls()
+    public function getVotingPower()
     {
-        return $this->container['rolls'];
+        return $this->container['voting_power'];
     }
 
     /**
-     * Sets rolls
+     * Sets voting_power
      *
-     * @param int|null $rolls Number of baker's rolls (baker's voting power)
+     * @param int|null $voting_power Baker's voting power
      *
      * @return self
      */
-    public function setRolls($rolls)
+    public function setVotingPower($voting_power)
     {
-        $this->container['rolls'] = $rolls;
+
+        if (is_null($voting_power)) {
+            throw new \InvalidArgumentException('non-nullable voting_power cannot be null');
+        }
+
+        $this->container['voting_power'] = $voting_power;
 
         return $this;
     }
@@ -528,6 +719,11 @@ class ProposalOperation extends Operation
      */
     public function setDuplicated($duplicated)
     {
+
+        if (is_null($duplicated)) {
+            throw new \InvalidArgumentException('non-nullable duplicated cannot be null');
+        }
+
         $this->container['duplicated'] = $duplicated;
 
         return $this;
@@ -552,7 +748,48 @@ class ProposalOperation extends Operation
      */
     public function setQuote($quote)
     {
+
+        if (is_null($quote)) {
+            array_push($this->openAPINullablesSetToNull, 'quote');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets rolls
+     *
+     * @return int|null
+     */
+    public function getRolls()
+    {
+        return $this->container['rolls'];
+    }
+
+    /**
+     * Sets rolls
+     *
+     * @param int|null $rolls [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setRolls($rolls)
+    {
+
+        if (is_null($rolls)) {
+            throw new \InvalidArgumentException('non-nullable rolls cannot be null');
+        }
+
+        $this->container['rolls'] = $rolls;
 
         return $this;
     }
@@ -563,7 +800,7 @@ class ProposalOperation extends Operation
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -575,6 +812,7 @@ class ProposalOperation extends Operation
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -588,7 +826,7 @@ class ProposalOperation extends Operation
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -604,7 +842,7 @@ class ProposalOperation extends Operation
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -616,6 +854,7 @@ class ProposalOperation extends Operation
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

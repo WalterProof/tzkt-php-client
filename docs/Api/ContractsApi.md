@@ -1,37 +1,41 @@
 # Bzzhh\Tzkt\ContractsApi
 
-All URIs are relative to https://api.tzkt.io.
+All URIs are relative to https://api.tzkt.io, except if the operation defines another base path.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**contractsBuildEntrypointParameters()**](ContractsApi.md#contractsBuildEntrypointParameters) | **GET** /v1/contracts/{address}/entrypoints/{name}/build | Build entrypoint parameters
-[**contractsBuildEntrypointParameters2()**](ContractsApi.md#contractsBuildEntrypointParameters2) | **POST** /v1/contracts/{address}/entrypoints/{name}/build | Build entrypoint parameters
-[**contractsGet()**](ContractsApi.md#contractsGet) | **GET** /v1/contracts | Get contracts
-[**contractsGetBigMapByName()**](ContractsApi.md#contractsGetBigMapByName) | **GET** /v1/contracts/{address}/bigmaps/{name} | Get bigmap by name
-[**contractsGetBigMapByNameKeys()**](ContractsApi.md#contractsGetBigMapByNameKeys) | **GET** /v1/contracts/{address}/bigmaps/{name}/keys | Get bigmap keys
-[**contractsGetBigMaps()**](ContractsApi.md#contractsGetBigMaps) | **GET** /v1/contracts/{address}/bigmaps | Get contract bigmaps
-[**contractsGetByAddress()**](ContractsApi.md#contractsGetByAddress) | **GET** /v1/contracts/{address} | Get contract by address
-[**contractsGetCode()**](ContractsApi.md#contractsGetCode) | **GET** /v1/contracts/{address}/code | Get contract code
-[**contractsGetCount()**](ContractsApi.md#contractsGetCount) | **GET** /v1/contracts/count | Get contracts count
-[**contractsGetEntrypointByName()**](ContractsApi.md#contractsGetEntrypointByName) | **GET** /v1/contracts/{address}/entrypoints/{name} | Get entrypoint by name
-[**contractsGetEntrypoints()**](ContractsApi.md#contractsGetEntrypoints) | **GET** /v1/contracts/{address}/entrypoints | Get contract entrypoints
-[**contractsGetHistoricalKeys()**](ContractsApi.md#contractsGetHistoricalKeys) | **GET** /v1/contracts/{address}/bigmaps/{name}/historical_keys/{level} | Get historical keys
-[**contractsGetInterface()**](ContractsApi.md#contractsGetInterface) | **GET** /v1/contracts/{address}/interface | Get JSON Schema [2020-12] interface for the contract
-[**contractsGetKey()**](ContractsApi.md#contractsGetKey) | **GET** /v1/contracts/{address}/bigmaps/{name}/keys/{key} | Get bigmap key
-[**contractsGetKey2()**](ContractsApi.md#contractsGetKey2) | **GET** /v1/contracts/{address}/bigmaps/{name}/historical_keys/{level}/{key} | Get historical key
-[**contractsGetKeyUpdates()**](ContractsApi.md#contractsGetKeyUpdates) | **GET** /v1/contracts/{address}/bigmaps/{name}/keys/{key}/updates | Get bigmap key updates
-[**contractsGetRawStorage()**](ContractsApi.md#contractsGetRawStorage) | **GET** /v1/contracts/{address}/storage/raw | Get raw contract storage
-[**contractsGetRawStorageHistory()**](ContractsApi.md#contractsGetRawStorageHistory) | **GET** /v1/contracts/{address}/storage/raw/history | Get raw contract storage history
-[**contractsGetRawStorageSchema()**](ContractsApi.md#contractsGetRawStorageSchema) | **GET** /v1/contracts/{address}/storage/raw/schema | Get raw contract storage schema
-[**contractsGetStorage()**](ContractsApi.md#contractsGetStorage) | **GET** /v1/contracts/{address}/storage | Get contract storage
-[**contractsGetStorageHistory()**](ContractsApi.md#contractsGetStorageHistory) | **GET** /v1/contracts/{address}/storage/history | Get contract storage history
-[**contractsGetStorageSchema()**](ContractsApi.md#contractsGetStorageSchema) | **GET** /v1/contracts/{address}/storage/schema | Get contract storage schema
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**contractsBuildEntrypointParametersGET()**](ContractsApi.md#contractsBuildEntrypointParametersGET) | **GET** /v1/contracts/{address}/entrypoints/{name}/build | Build entrypoint parameters |
+| [**contractsBuildEntrypointParametersPOST()**](ContractsApi.md#contractsBuildEntrypointParametersPOST) | **POST** /v1/contracts/{address}/entrypoints/{name}/build | Build entrypoint parameters |
+| [**contractsGet()**](ContractsApi.md#contractsGet) | **GET** /v1/contracts | Get contracts |
+| [**contractsGetBigMapByName()**](ContractsApi.md#contractsGetBigMapByName) | **GET** /v1/contracts/{address}/bigmaps/{name} | Get bigmap by name |
+| [**contractsGetBigMapByNameKeys()**](ContractsApi.md#contractsGetBigMapByNameKeys) | **GET** /v1/contracts/{address}/bigmaps/{name}/keys | Get bigmap keys |
+| [**contractsGetBigMaps()**](ContractsApi.md#contractsGetBigMaps) | **GET** /v1/contracts/{address}/bigmaps | Get contract bigmaps |
+| [**contractsGetByAddress()**](ContractsApi.md#contractsGetByAddress) | **GET** /v1/contracts/{address} | Get contract by address |
+| [**contractsGetCode()**](ContractsApi.md#contractsGetCode) | **GET** /v1/contracts/{address}/code | Get contract code |
+| [**contractsGetContractViewByName()**](ContractsApi.md#contractsGetContractViewByName) | **GET** /v1/contracts/{address}/views/{name} | Get view by name |
+| [**contractsGetContractViews()**](ContractsApi.md#contractsGetContractViews) | **GET** /v1/contracts/{address}/views | Get contract views |
+| [**contractsGetCount()**](ContractsApi.md#contractsGetCount) | **GET** /v1/contracts/count | Get contracts count |
+| [**contractsGetEntrypointByName()**](ContractsApi.md#contractsGetEntrypointByName) | **GET** /v1/contracts/{address}/entrypoints/{name} | Get entrypoint by name |
+| [**contractsGetEntrypoints()**](ContractsApi.md#contractsGetEntrypoints) | **GET** /v1/contracts/{address}/entrypoints | Get contract entrypoints |
+| [**contractsGetHistoricalKeys()**](ContractsApi.md#contractsGetHistoricalKeys) | **GET** /v1/contracts/{address}/bigmaps/{name}/historical_keys/{level} | Get historical keys |
+| [**contractsGetInterface()**](ContractsApi.md#contractsGetInterface) | **GET** /v1/contracts/{address}/interface | Get JSON Schema [2020-12] interface for the contract |
+| [**contractsGetKey()**](ContractsApi.md#contractsGetKey) | **GET** /v1/contracts/{address}/bigmaps/{name}/keys/{key} | Get bigmap key |
+| [**contractsGetKey2()**](ContractsApi.md#contractsGetKey2) | **GET** /v1/contracts/{address}/bigmaps/{name}/historical_keys/{level}/{key} | Get historical key |
+| [**contractsGetKeyUpdates()**](ContractsApi.md#contractsGetKeyUpdates) | **GET** /v1/contracts/{address}/bigmaps/{name}/keys/{key}/updates | Get bigmap key updates |
+| [**contractsGetRawStorage()**](ContractsApi.md#contractsGetRawStorage) | **GET** /v1/contracts/{address}/storage/raw | Get raw contract storage |
+| [**contractsGetRawStorageHistory()**](ContractsApi.md#contractsGetRawStorageHistory) | **GET** /v1/contracts/{address}/storage/raw/history | Get raw contract storage history |
+| [**contractsGetRawStorageSchema()**](ContractsApi.md#contractsGetRawStorageSchema) | **GET** /v1/contracts/{address}/storage/raw/schema | Get raw contract storage schema |
+| [**contractsGetSame()**](ContractsApi.md#contractsGetSame) | **GET** /v1/contracts/{address}/same | Get same contracts |
+| [**contractsGetSimilar()**](ContractsApi.md#contractsGetSimilar) | **GET** /v1/contracts/{address}/similar | Get similar contracts |
+| [**contractsGetStorage()**](ContractsApi.md#contractsGetStorage) | **GET** /v1/contracts/{address}/storage | Get contract storage |
+| [**contractsGetStorageHistory()**](ContractsApi.md#contractsGetStorageHistory) | **GET** /v1/contracts/{address}/storage/history | Get contract storage history |
+| [**contractsGetStorageSchema()**](ContractsApi.md#contractsGetStorageSchema) | **GET** /v1/contracts/{address}/storage/schema | Get contract storage schema |
 
 
-## `contractsBuildEntrypointParameters()`
+## `contractsBuildEntrypointParametersGET()`
 
 ```php
-contractsBuildEntrypointParameters($address, $name, $value): \SplFileObject
+contractsBuildEntrypointParametersGET($address, $name, $value): \SplFileObject
 ```
 
 Build entrypoint parameters
@@ -56,24 +60,24 @@ $name = 'name_example'; // string | Entrypoint name
 $value = 'value_example'; // string | Json parameters
 
 try {
-    $result = $apiInstance->contractsBuildEntrypointParameters($address, $name, $value);
+    $result = $apiInstance->contractsBuildEntrypointParametersGET($address, $name, $value);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ContractsApi->contractsBuildEntrypointParameters: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ContractsApi->contractsBuildEntrypointParametersGET: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **name** | **string**| Entrypoint name |
- **value** | **string**| Json parameters | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **name** | **string**| Entrypoint name | |
+| **value** | **string**| Json parameters | [optional] |
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -88,10 +92,10 @@ No authorization required
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `contractsBuildEntrypointParameters2()`
+## `contractsBuildEntrypointParametersPOST()`
 
 ```php
-contractsBuildEntrypointParameters2($address, $name, $body): \SplFileObject
+contractsBuildEntrypointParametersPOST($address, $name, $body): \SplFileObject
 ```
 
 Build entrypoint parameters
@@ -116,24 +120,24 @@ $name = 'name_example'; // string | Entrypoint name
 $body = NULL; // mixed | Json parameters
 
 try {
-    $result = $apiInstance->contractsBuildEntrypointParameters2($address, $name, $body);
+    $result = $apiInstance->contractsBuildEntrypointParametersPOST($address, $name, $body);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ContractsApi->contractsBuildEntrypointParameters2: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ContractsApi->contractsBuildEntrypointParametersPOST: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **name** | **string**| Entrypoint name |
- **body** | **mixed**| Json parameters |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **name** | **string**| Entrypoint name | |
+| **body** | **mixed**| Json parameters | |
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -151,7 +155,7 @@ No authorization required
 ## `contractsGet()`
 
 ```php
-contractsGet($kind, $creator, $manager, $delegate, $last_activity, $select, $sort, $offset, $limit, $include_storage): \Bzzhh\Tzkt\Model\Contract[]
+contractsGet($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage): \Bzzhh\Tzkt\Model\Contract[]
 ```
 
 Get contracts
@@ -171,19 +175,24 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$kind = new \Bzzhh\Tzkt\Model\OneOfContractKindParameter(); // OneOfContractKindParameter | Contract kind to filter by (`delegator_contract` or `smart_contract`)
-$creator = new \Bzzhh\Tzkt\Model\OneOfAccountParameter(); // OneOfAccountParameter | Filters contracts by creator. Allowed fields for `.eqx` mode: `manager`, `delegate`.
-$manager = new \Bzzhh\Tzkt\Model\OneOfAccountParameter(); // OneOfAccountParameter | Filters contracts by manager. Allowed fields for `.eqx` mode: `creator`, `delegate`.
-$delegate = new \Bzzhh\Tzkt\Model\OneOfAccountParameter(); // OneOfAccountParameter | Filters contracts by delegate. Allowed fields for `.eqx` mode: `manager`, `creator`.
-$last_activity = new \Bzzhh\Tzkt\Model\OneOfInt32Parameter(); // OneOfInt32Parameter | Filters contracts by last activity level (where the contract was updated)
-$select = new \Bzzhh\Tzkt\Model\OneOfSelectParameter(); // OneOfSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts delegators by specified field. Supported fields: `id` (default), `balance`, `firstActivity`, `lastActivity`, `numTransactions`.
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$address = new \Bzzhh\Tzkt\Model\AccountsGetAddressParameter(); // AccountsGetAddressParameter | Filters by address
+$kind = new \Bzzhh\Tzkt\Model\AccountsGetKindParameter(); // AccountsGetKindParameter | Contract kind to filter by (`delegator_contract`, `smart_contract`, or `asset`)
+$tzips = new \Bzzhh\Tzkt\Model\ContractsGetTzipsParameter(); // ContractsGetTzipsParameter | Filters by tzips (`fa1`, `fa12`, or `fa2`)
+$creator = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters contracts by creator. Allowed fields for `.eqx` mode: `manager`, `delegate`.
+$manager = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters contracts by manager. Allowed fields for `.eqx` mode: `creator`, `delegate`.
+$delegate = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters contracts by delegate. Allowed fields for `.eqx` mode: `manager`, `creator`.
+$balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters contracts by balance
+$last_activity = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters contracts by last activity level (where the contract was updated)
+$type_hash = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts)
+$code_hash = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters contracts by 32-bit hash of contract code (helpful for searching same contracts)
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts contracts by specified field. Supported fields: `id` (default), `balance`, `firstActivity`, `lastActivity`, `numTransactions`.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
 $include_storage = false; // bool | Specifies whether to include contract storage value in response.
 
 try {
-    $result = $apiInstance->contractsGet($kind, $creator, $manager, $delegate, $last_activity, $select, $sort, $offset, $limit, $include_storage);
+    $result = $apiInstance->contractsGet($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ContractsApi->contractsGet: ', $e->getMessage(), PHP_EOL;
@@ -192,18 +201,23 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **kind** | [**OneOfContractKindParameter**](../Model/.md)| Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) | [optional]
- **creator** | [**OneOfAccountParameter**](../Model/.md)| Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. | [optional]
- **manager** | [**OneOfAccountParameter**](../Model/.md)| Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. | [optional]
- **delegate** | [**OneOfAccountParameter**](../Model/.md)| Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. | [optional]
- **last_activity** | [**OneOfInt32Parameter**](../Model/.md)| Filters contracts by last activity level (where the contract was updated) | [optional]
- **select** | [**OneOfSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional]
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
- **include_storage** | **bool**| Specifies whether to include contract storage value in response. | [optional] [default to false]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | [**AccountsGetAddressParameter**](../Model/.md)| Filters by address | [optional] |
+| **kind** | [**AccountsGetKindParameter**](../Model/.md)| Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) | [optional] |
+| **tzips** | [**ContractsGetTzipsParameter**](../Model/.md)| Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) | [optional] |
+| **creator** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. | [optional] |
+| **manager** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. | [optional] |
+| **delegate** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. | [optional] |
+| **balance** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters contracts by balance | [optional] |
+| **last_activity** | [**AccountsGetIdParameter**](../Model/.md)| Filters contracts by last activity level (where the contract was updated) | [optional] |
+| **type_hash** | [**AccountsGetIdParameter**](../Model/.md)| Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) | [optional] |
+| **code_hash** | [**AccountsGetIdParameter**](../Model/.md)| Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) | [optional] |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **include_storage** | **bool**| Specifies whether to include contract storage value in response. | [optional] [default to false] |
 
 ### Return type
 
@@ -247,7 +261,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
 );
 $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
-$micheline = new \Bzzhh\Tzkt\Model\OneOfMichelineFormat(); // OneOfMichelineFormat | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
+$micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
     $result = $apiInstance->contractsGetBigMapByName($address, $name, $micheline);
@@ -259,11 +273,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. |
- **micheline** | [**OneOfMichelineFormat**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
+| **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
 
@@ -308,14 +322,14 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
 $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
 $active = True; // bool | Filters keys by status: `true` - active, `false` - removed.
-$key = new \Bzzhh\Tzkt\Model\OneOfJsonParameter(); // OneOfJsonParameter | Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,             so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`.
-$value = new \Bzzhh\Tzkt\Model\OneOfJsonParameter(); // OneOfJsonParameter | Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,             so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`.
-$last_level = new \Bzzhh\Tzkt\Model\OneOfInt32Parameter(); // OneOfInt32Parameter | Filters bigmap keys by the last update level.
-$select = new \Bzzhh\Tzkt\Model\OneOfSelectParameter(); // OneOfSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts bigmap keys by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `updates`.
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$key = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,             so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`.
+$value = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,             so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`.
+$last_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters bigmap keys by the last update level.
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts bigmap keys by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `updates`.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
-$micheline = new \Bzzhh\Tzkt\Model\OneOfMichelineFormat(); // OneOfMichelineFormat | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
+$micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
     $result = $apiInstance->contractsGetBigMapByNameKeys($address, $name, $active, $key, $value, $last_level, $select, $sort, $offset, $limit, $micheline);
@@ -327,19 +341,19 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. |
- **active** | **bool**| Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. | [optional]
- **key** | [**OneOfJsonParameter**](../Model/.md)| Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. | [optional]
- **value** | [**OneOfJsonParameter**](../Model/.md)| Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. | [optional]
- **last_level** | [**OneOfInt32Parameter**](../Model/.md)| Filters bigmap keys by the last update level. | [optional]
- **select** | [**OneOfSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional]
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
- **micheline** | [**OneOfMichelineFormat**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
+| **active** | **bool**| Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. | [optional] |
+| **key** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. | [optional] |
+| **value** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. | [optional] |
+| **last_level** | [**AccountsGetIdParameter**](../Model/.md)| Filters bigmap keys by the last update level. | [optional] |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;updates&#x60;. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
 
@@ -382,12 +396,12 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
     new GuzzleHttp\Client()
 );
 $address = 'address_example'; // string | Contract address
-$tags = new \Bzzhh\Tzkt\Model\OneOfBigMapTagsParameter(); // OneOfBigMapTagsParameter | Filters bigmaps tags (`token_metadata` - tzip-12, `metadata` - tzip-16).
-$select = new \Bzzhh\Tzkt\Model\OneOfSelectParameter(); // OneOfSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both `.fields` and `.values` modes.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts bigmaps by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`.
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$tags = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapsTagsParameter(); // BigMapsGetBigMapsTagsParameter | Filters bigmaps tags (`metadata`, `token_metadata`, `ledger`).
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts bigmaps by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
-$micheline = new \Bzzhh\Tzkt\Model\OneOfMichelineFormat(); // OneOfMichelineFormat | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
+$micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
     $result = $apiInstance->contractsGetBigMaps($address, $tags, $select, $sort, $offset, $limit, $micheline);
@@ -399,15 +413,15 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **tags** | [**OneOfBigMapTagsParameter**](../Model/.md)| Filters bigmaps tags (&#x60;token_metadata&#x60; - tzip-12, &#x60;metadata&#x60; - tzip-16). | [optional]
- **select** | [**OneOfSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional]
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
- **micheline** | [**OneOfMichelineFormat**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **tags** | [**BigMapsGetBigMapsTagsParameter**](../Model/.md)| Filters bigmaps tags (&#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60;). | [optional] |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object.             If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
 
@@ -461,9 +475,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address (starting with KT) |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address (starting with KT) | |
 
 ### Return type
 
@@ -485,7 +499,7 @@ No authorization required
 ## `contractsGetCode()`
 
 ```php
-contractsGetCode($address, $format): \SplFileObject
+contractsGetCode($address, $level, $format): \SplFileObject
 ```
 
 Get contract code
@@ -506,10 +520,11 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
     new GuzzleHttp\Client()
 );
 $address = 'address_example'; // string | Contract address (starting with KT)
+$level = 0; // int | Level at which contract code should be taken. If `0` or not specified, the current value will be returned.
 $format = 0; // int | Code format (`0` - micheline, `1` - michelson, `2` - bytes (base64))
 
 try {
-    $result = $apiInstance->contractsGetCode($address, $format);
+    $result = $apiInstance->contractsGetCode($address, $level, $format);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ContractsApi->contractsGetCode: ', $e->getMessage(), PHP_EOL;
@@ -518,14 +533,15 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address (starting with KT) |
- **format** | **int**| Code format (&#x60;0&#x60; - micheline, &#x60;1&#x60; - michelson, &#x60;2&#x60; - bytes (base64)) | [optional] [default to 0]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address (starting with KT) | |
+| **level** | **int**| Level at which contract code should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. | [optional] [default to 0] |
+| **format** | **int**| Code format (&#x60;0&#x60; - micheline, &#x60;1&#x60; - michelson, &#x60;2&#x60; - bytes (base64)) | [optional] [default to 0] |
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -535,6 +551,132 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: `application/octet-stream`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `contractsGetContractViewByName()`
+
+```php
+contractsGetContractViewByName($address, $name, $json, $micheline, $michelson): \Bzzhh\Tzkt\Model\ContractView
+```
+
+Get view by name
+
+Returns contract view with specified name.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$address = 'address_example'; // string | Contract address (starting with KT)
+$name = 'name_example'; // string | View name
+$json = true; // bool | Include parameter and return types in human-readable JSON format
+$micheline = false; // bool | Include parameter and return types in micheline format
+$michelson = false; // bool | Include parameter and return types in michelson format
+
+try {
+    $result = $apiInstance->contractsGetContractViewByName($address, $name, $json, $micheline, $michelson);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ContractsApi->contractsGetContractViewByName: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address (starting with KT) | |
+| **name** | **string**| View name | |
+| **json** | **bool**| Include parameter and return types in human-readable JSON format | [optional] [default to true] |
+| **micheline** | **bool**| Include parameter and return types in micheline format | [optional] [default to false] |
+| **michelson** | **bool**| Include parameter and return types in michelson format | [optional] [default to false] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\ContractView**](../Model/ContractView.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `contractsGetContractViews()`
+
+```php
+contractsGetContractViews($address, $json, $micheline, $michelson): \Bzzhh\Tzkt\Model\ContractView[]
+```
+
+Get contract views
+
+Returns all views of the specified contract.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$address = 'address_example'; // string | Contract address (starting with KT)
+$json = true; // bool | Include parameter and return types in human-readable JSON format
+$micheline = false; // bool | Include parameter and return types in micheline format
+$michelson = false; // bool | Include parameter and return types in michelson format
+
+try {
+    $result = $apiInstance->contractsGetContractViews($address, $json, $micheline, $michelson);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ContractsApi->contractsGetContractViews: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address (starting with KT) | |
+| **json** | **bool**| Include parameter and return types in human-readable JSON format | [optional] [default to true] |
+| **micheline** | **bool**| Include parameter and return types in micheline format | [optional] [default to false] |
+| **michelson** | **bool**| Include parameter and return types in michelson format | [optional] [default to false] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\ContractView[]**](../Model/ContractView.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -563,7 +705,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$kind = new \Bzzhh\Tzkt\Model\OneOfContractKindParameter(); // OneOfContractKindParameter | Contract kind to filter by (`delegator_contract` or `smart_contract`)
+$kind = new \Bzzhh\Tzkt\Model\AccountsGetKindParameter(); // AccountsGetKindParameter | Contract kind to filter by (`delegator_contract` or `smart_contract`)
 
 try {
     $result = $apiInstance->contractsGetCount($kind);
@@ -575,9 +717,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **kind** | [**OneOfContractKindParameter**](../Model/.md)| Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **kind** | [**AccountsGetKindParameter**](../Model/.md)| Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) | [optional] |
 
 ### Return type
 
@@ -635,13 +777,13 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address (starting with KT) |
- **name** | **string**| Entrypoint name |
- **json** | **bool**| Include parameters schema in human-readable JSON format | [optional] [default to true]
- **micheline** | **bool**| Include parameters schema in micheline format | [optional] [default to false]
- **michelson** | **bool**| Include parameters schema in michelson format | [optional] [default to false]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address (starting with KT) | |
+| **name** | **string**| Entrypoint name | |
+| **json** | **bool**| Include parameters schema in human-readable JSON format | [optional] [default to true] |
+| **micheline** | **bool**| Include parameters schema in micheline format | [optional] [default to false] |
+| **michelson** | **bool**| Include parameters schema in michelson format | [optional] [default to false] |
 
 ### Return type
 
@@ -699,13 +841,13 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address (starting with KT) |
- **all** | **bool**| If true, returns all entrypoints, including unused ones.             Unused means that the entrypoint can be normalized to a more specific one.             For example here &#x60;(or %entry1 (unit %entry2) (nat %entry3))&#x60; the &#x60;%entry1&#x60; is unused entrypoint             because it can be normalized to &#x60;%entry2&#x60; or &#x60;%entry3&#x60; | [optional] [default to false]
- **json** | **bool**| Include parameters schema in human-readable JSON format | [optional] [default to true]
- **micheline** | **bool**| Include parameters schema in micheline format | [optional] [default to false]
- **michelson** | **bool**| Include parameters schema in michelson format | [optional] [default to false]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address (starting with KT) | |
+| **all** | **bool**| If true, returns all entrypoints, including unused ones.             Unused means that the entrypoint can be normalized to a more specific one.             For example here &#x60;(or %entry1 (unit %entry2) (nat %entry3))&#x60; the &#x60;%entry1&#x60; is unused entrypoint             because it can be normalized to &#x60;%entry2&#x60; or &#x60;%entry3&#x60; | [optional] [default to false] |
+| **json** | **bool**| Include parameters schema in human-readable JSON format | [optional] [default to true] |
+| **micheline** | **bool**| Include parameters schema in micheline format | [optional] [default to false] |
+| **michelson** | **bool**| Include parameters schema in michelson format | [optional] [default to false] |
 
 ### Return type
 
@@ -751,13 +893,13 @@ $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
 $level = 56; // int | Level of the block at which you want to get bigmap keys
 $active = True; // bool | Filters keys by status: `true` - active, `false` - removed.
-$key = new \Bzzhh\Tzkt\Model\OneOfJsonParameter(); // OneOfJsonParameter | Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,             so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`.
-$value = new \Bzzhh\Tzkt\Model\OneOfJsonParameter(); // OneOfJsonParameter | Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,             so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`.
-$select = new \Bzzhh\Tzkt\Model\OneOfSelectParameter(); // OneOfSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts bigmap keys by specified field. Supported fields: `id` (default).
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$key = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,             so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`.
+$value = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,             so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`.
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts bigmap keys by specified field. Supported fields: `id` (default).
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
-$micheline = new \Bzzhh\Tzkt\Model\OneOfMichelineFormat(); // OneOfMichelineFormat | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
+$micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
     $result = $apiInstance->contractsGetHistoricalKeys($address, $name, $level, $active, $key, $value, $select, $sort, $offset, $limit, $micheline);
@@ -769,19 +911,19 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. |
- **level** | **int**| Level of the block at which you want to get bigmap keys |
- **active** | **bool**| Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. | [optional]
- **key** | [**OneOfJsonParameter**](../Model/.md)| Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. | [optional]
- **value** | [**OneOfJsonParameter**](../Model/.md)| Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. | [optional]
- **select** | [**OneOfSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional]
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
- **micheline** | [**OneOfMichelineFormat**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
+| **level** | **int**| Level of the block at which you want to get bigmap keys | |
+| **active** | **bool**| Filters keys by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. | [optional] |
+| **key** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filters keys by JSON key. Note, this query parameter supports the following format: &#x60;?key{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?key.token_id&#x3D;...&#x60;. | [optional] |
+| **value** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filters keys by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. | [optional] |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts bigmap keys by specified field. Supported fields: &#x60;id&#x60; (default). | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
 
@@ -835,9 +977,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
 
 ### Return type
 
@@ -881,8 +1023,8 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
 );
 $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
-$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"token\":123}`.
-$micheline = new \Bzzhh\Tzkt\Model\OneOfMichelineFormat(); // OneOfMichelineFormat | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
+$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
+$micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
     $result = $apiInstance->contractsGetKey($address, $name, $key, $micheline);
@@ -894,12 +1036,12 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. |
- **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. |
- **micheline** | [**OneOfMichelineFormat**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
+| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
+| **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
 
@@ -944,8 +1086,8 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
 $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
 $level = 56; // int | Level of the block at which you want to get bigmap key
-$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"token\":123}`.
-$micheline = new \Bzzhh\Tzkt\Model\OneOfMichelineFormat(); // OneOfMichelineFormat | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
+$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
+$micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
     $result = $apiInstance->contractsGetKey2($address, $name, $level, $key, $micheline);
@@ -957,13 +1099,13 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. |
- **level** | **int**| Level of the block at which you want to get bigmap key |
- **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. |
- **micheline** | [**OneOfMichelineFormat**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
+| **level** | **int**| Level of the block at which you want to get bigmap key | |
+| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
+| **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
 
@@ -1007,11 +1149,11 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
 );
 $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
-$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"token\":123}`.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts bigmap updates by specified field. Supported fields: `id` (default).
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts bigmap updates by specified field. Supported fields: `id` (default).
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
-$micheline = new \Bzzhh\Tzkt\Model\OneOfMichelineFormat(); // OneOfMichelineFormat | Format of the key value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
+$micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the key value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
     $result = $apiInstance->contractsGetKeyUpdates($address, $name, $key, $sort, $offset, $limit, $micheline);
@@ -1023,15 +1165,15 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. |
- **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;token\&quot;:123}&#x60;. |
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
- **micheline** | [**OneOfMichelineFormat**](../Model/.md)| Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
+| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the key value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
 
@@ -1086,10 +1228,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **level** | **int**| Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. | [optional] [default to 0]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **level** | **int**| Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. | [optional] [default to 0] |
 
 ### Return type
 
@@ -1145,11 +1287,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **last_id** | **int**| Id of the last item received (for pagination) | [optional] [default to 0]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 10]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **last_id** | **int**| Id of the last item received (for pagination) | [optional] [default to 0] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 10] |
 
 ### Return type
 
@@ -1204,14 +1346,146 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **level** | **int**| Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. | [optional] [default to 0]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **level** | **int**| Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. | [optional] [default to 0] |
 
 ### Return type
 
 [**\Bzzhh\Tzkt\Model\IMicheline**](../Model/IMicheline.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `contractsGetSame()`
+
+```php
+contractsGetSame($address, $select, $sort, $offset, $limit, $include_storage): \Bzzhh\Tzkt\Model\Contract[]
+```
+
+Get same contracts
+
+Returns contracts which have the same script as the specified one. Note, contract scripts are compared by 32-bit hash, so in very rare cases there may be collisions.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$address = 'address_example'; // string | Contract address (starting with KT)
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts contracts by specified field. Supported fields: `id` (default), `balance`, `firstActivity`, `lastActivity`, `numTransactions`.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
+$limit = 100; // int | Maximum number of items to return
+$include_storage = false; // bool | Specifies whether to include contract storage value in response.
+
+try {
+    $result = $apiInstance->contractsGetSame($address, $select, $sort, $offset, $limit, $include_storage);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ContractsApi->contractsGetSame: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address (starting with KT) | |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **include_storage** | **bool**| Specifies whether to include contract storage value in response. | [optional] [default to false] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\Contract[]**](../Model/Contract.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `contractsGetSimilar()`
+
+```php
+contractsGetSimilar($address, $select, $sort, $offset, $limit, $include_storage): \Bzzhh\Tzkt\Model\Contract[]
+```
+
+Get similar contracts
+
+Returns contracts which have the same interface (parameter and storage types) as the specified one. Note, contract parameter and storage types are compared by 32-bit hash, so in very rare cases there may be collisions.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$address = 'address_example'; // string | Contract address (starting with KT)
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts contracts by specified field. Supported fields: `id` (default), `balance`, `firstActivity`, `lastActivity`, `numTransactions`.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
+$limit = 100; // int | Maximum number of items to return
+$include_storage = false; // bool | Specifies whether to include contract storage value in response.
+
+try {
+    $result = $apiInstance->contractsGetSimilar($address, $select, $sort, $offset, $limit, $include_storage);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ContractsApi->contractsGetSimilar: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address (starting with KT) | |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
+| **include_storage** | **bool**| Specifies whether to include contract storage value in response. | [optional] [default to false] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\Contract[]**](../Model/Contract.md)
 
 ### Authorization
 
@@ -1263,15 +1537,15 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **level** | **int**| Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. | [optional] [default to 0]
- **path** | **string**| Path in the JSON value (point-separated list of field names, e.g. &#x60;path&#x3D;settings.refund_time&#x60; to return | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **level** | **int**| Level at which storage value should be taken. If &#x60;0&#x60; or not specified, the current value will be returned. | [optional] [default to 0] |
+| **path** | **string**| Path in the JSON value (point-separated list of field names, e.g. &#x60;path&#x3D;settings.refund_time&#x60; to return | [optional] |
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -1323,11 +1597,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **last_id** | **int**| Id of the last item received (for pagination) | [optional] [default to 0]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 10]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **last_id** | **int**| Id of the last item received (for pagination) | [optional] [default to 0] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 10] |
 
 ### Return type
 
@@ -1382,14 +1656,14 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **address** | **string**| Contract address |
- **level** | **int**| Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. | [optional] [default to 0]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **address** | **string**| Contract address | |
+| **level** | **int**| Level at which storage schema should be taken. If &#x60;0&#x60; or not specified, the current schema will be returned. | [optional] [default to 0] |
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 

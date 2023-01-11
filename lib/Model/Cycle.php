@@ -2,7 +2,7 @@
 /**
  * Cycle
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -69,11 +67,13 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'snapshot_level' => 'int',
         'random_seed' => 'string',
         'total_bakers' => 'int',
-        'total_rolls' => 'int',
         'total_staking' => 'int',
         'total_delegators' => 'int',
         'total_delegated' => 'int',
-        'quote' => 'OneOfQuoteShort'
+        'selected_bakers' => 'int',
+        'selected_stake' => 'int',
+        'quote' => '\Bzzhh\Tzkt\Model\CycleQuote',
+        'total_rolls' => 'int'
     ];
 
     /**
@@ -93,12 +93,45 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'snapshot_level' => 'int32',
         'random_seed' => null,
         'total_bakers' => 'int32',
-        'total_rolls' => 'int32',
         'total_staking' => 'int64',
         'total_delegators' => 'int32',
         'total_delegated' => 'int64',
-        'quote' => null
+        'selected_bakers' => 'int32',
+        'selected_stake' => 'int64',
+        'quote' => null,
+        'total_rolls' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'index' => false,
+		'first_level' => false,
+		'start_time' => false,
+		'last_level' => false,
+		'end_time' => false,
+		'snapshot_index' => false,
+		'snapshot_level' => false,
+		'random_seed' => true,
+		'total_bakers' => false,
+		'total_staking' => false,
+		'total_delegators' => false,
+		'total_delegated' => false,
+		'selected_bakers' => false,
+		'selected_stake' => false,
+		'quote' => true,
+		'total_rolls' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -121,6 +154,58 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -136,11 +221,13 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'snapshot_level' => 'snapshotLevel',
         'random_seed' => 'randomSeed',
         'total_bakers' => 'totalBakers',
-        'total_rolls' => 'totalRolls',
         'total_staking' => 'totalStaking',
         'total_delegators' => 'totalDelegators',
         'total_delegated' => 'totalDelegated',
-        'quote' => 'quote'
+        'selected_bakers' => 'selectedBakers',
+        'selected_stake' => 'selectedStake',
+        'quote' => 'quote',
+        'total_rolls' => 'totalRolls'
     ];
 
     /**
@@ -158,11 +245,13 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'snapshot_level' => 'setSnapshotLevel',
         'random_seed' => 'setRandomSeed',
         'total_bakers' => 'setTotalBakers',
-        'total_rolls' => 'setTotalRolls',
         'total_staking' => 'setTotalStaking',
         'total_delegators' => 'setTotalDelegators',
         'total_delegated' => 'setTotalDelegated',
-        'quote' => 'setQuote'
+        'selected_bakers' => 'setSelectedBakers',
+        'selected_stake' => 'setSelectedStake',
+        'quote' => 'setQuote',
+        'total_rolls' => 'setTotalRolls'
     ];
 
     /**
@@ -180,11 +269,13 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'snapshot_level' => 'getSnapshotLevel',
         'random_seed' => 'getRandomSeed',
         'total_bakers' => 'getTotalBakers',
-        'total_rolls' => 'getTotalRolls',
         'total_staking' => 'getTotalStaking',
         'total_delegators' => 'getTotalDelegators',
         'total_delegated' => 'getTotalDelegated',
-        'quote' => 'getQuote'
+        'selected_bakers' => 'getSelectedBakers',
+        'selected_stake' => 'getSelectedStake',
+        'quote' => 'getQuote',
+        'total_rolls' => 'getTotalRolls'
     ];
 
     /**
@@ -244,20 +335,40 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['index'] = $data['index'] ?? null;
-        $this->container['first_level'] = $data['first_level'] ?? null;
-        $this->container['start_time'] = $data['start_time'] ?? null;
-        $this->container['last_level'] = $data['last_level'] ?? null;
-        $this->container['end_time'] = $data['end_time'] ?? null;
-        $this->container['snapshot_index'] = $data['snapshot_index'] ?? null;
-        $this->container['snapshot_level'] = $data['snapshot_level'] ?? null;
-        $this->container['random_seed'] = $data['random_seed'] ?? null;
-        $this->container['total_bakers'] = $data['total_bakers'] ?? null;
-        $this->container['total_rolls'] = $data['total_rolls'] ?? null;
-        $this->container['total_staking'] = $data['total_staking'] ?? null;
-        $this->container['total_delegators'] = $data['total_delegators'] ?? null;
-        $this->container['total_delegated'] = $data['total_delegated'] ?? null;
-        $this->container['quote'] = $data['quote'] ?? null;
+        $this->setIfExists('index', $data ?? [], null);
+        $this->setIfExists('first_level', $data ?? [], null);
+        $this->setIfExists('start_time', $data ?? [], null);
+        $this->setIfExists('last_level', $data ?? [], null);
+        $this->setIfExists('end_time', $data ?? [], null);
+        $this->setIfExists('snapshot_index', $data ?? [], null);
+        $this->setIfExists('snapshot_level', $data ?? [], null);
+        $this->setIfExists('random_seed', $data ?? [], null);
+        $this->setIfExists('total_bakers', $data ?? [], null);
+        $this->setIfExists('total_staking', $data ?? [], null);
+        $this->setIfExists('total_delegators', $data ?? [], null);
+        $this->setIfExists('total_delegated', $data ?? [], null);
+        $this->setIfExists('selected_bakers', $data ?? [], null);
+        $this->setIfExists('selected_stake', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('total_rolls', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -303,6 +414,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setIndex($index)
     {
+
+        if (is_null($index)) {
+            throw new \InvalidArgumentException('non-nullable index cannot be null');
+        }
+
         $this->container['index'] = $index;
 
         return $this;
@@ -327,6 +443,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFirstLevel($first_level)
     {
+
+        if (is_null($first_level)) {
+            throw new \InvalidArgumentException('non-nullable first_level cannot be null');
+        }
+
         $this->container['first_level'] = $first_level;
 
         return $this;
@@ -351,6 +472,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setStartTime($start_time)
     {
+
+        if (is_null($start_time)) {
+            throw new \InvalidArgumentException('non-nullable start_time cannot be null');
+        }
+
         $this->container['start_time'] = $start_time;
 
         return $this;
@@ -375,6 +501,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLastLevel($last_level)
     {
+
+        if (is_null($last_level)) {
+            throw new \InvalidArgumentException('non-nullable last_level cannot be null');
+        }
+
         $this->container['last_level'] = $last_level;
 
         return $this;
@@ -399,6 +530,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setEndTime($end_time)
     {
+
+        if (is_null($end_time)) {
+            throw new \InvalidArgumentException('non-nullable end_time cannot be null');
+        }
+
         $this->container['end_time'] = $end_time;
 
         return $this;
@@ -423,6 +559,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setSnapshotIndex($snapshot_index)
     {
+
+        if (is_null($snapshot_index)) {
+            throw new \InvalidArgumentException('non-nullable snapshot_index cannot be null');
+        }
+
         $this->container['snapshot_index'] = $snapshot_index;
 
         return $this;
@@ -447,6 +588,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setSnapshotLevel($snapshot_level)
     {
+
+        if (is_null($snapshot_level)) {
+            throw new \InvalidArgumentException('non-nullable snapshot_level cannot be null');
+        }
+
         $this->container['snapshot_level'] = $snapshot_level;
 
         return $this;
@@ -471,6 +617,18 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setRandomSeed($random_seed)
     {
+
+        if (is_null($random_seed)) {
+            array_push($this->openAPINullablesSetToNull, 'random_seed');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('random_seed', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['random_seed'] = $random_seed;
 
         return $this;
@@ -495,31 +653,12 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalBakers($total_bakers)
     {
+
+        if (is_null($total_bakers)) {
+            throw new \InvalidArgumentException('non-nullable total_bakers cannot be null');
+        }
+
         $this->container['total_bakers'] = $total_bakers;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_rolls
-     *
-     * @return int|null
-     */
-    public function getTotalRolls()
-    {
-        return $this->container['total_rolls'];
-    }
-
-    /**
-     * Sets total_rolls
-     *
-     * @param int|null $total_rolls Total number of rolls involved in baking rights distribution
-     *
-     * @return self
-     */
-    public function setTotalRolls($total_rolls)
-    {
-        $this->container['total_rolls'] = $total_rolls;
 
         return $this;
     }
@@ -543,6 +682,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalStaking($total_staking)
     {
+
+        if (is_null($total_staking)) {
+            throw new \InvalidArgumentException('non-nullable total_staking cannot be null');
+        }
+
         $this->container['total_staking'] = $total_staking;
 
         return $this;
@@ -567,6 +711,11 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalDelegators($total_delegators)
     {
+
+        if (is_null($total_delegators)) {
+            throw new \InvalidArgumentException('non-nullable total_delegators cannot be null');
+        }
+
         $this->container['total_delegators'] = $total_delegators;
 
         return $this;
@@ -591,7 +740,70 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setTotalDelegated($total_delegated)
     {
+
+        if (is_null($total_delegated)) {
+            throw new \InvalidArgumentException('non-nullable total_delegated cannot be null');
+        }
+
         $this->container['total_delegated'] = $total_delegated;
+
+        return $this;
+    }
+
+    /**
+     * Gets selected_bakers
+     *
+     * @return int|null
+     */
+    public function getSelectedBakers()
+    {
+        return $this->container['selected_bakers'];
+    }
+
+    /**
+     * Sets selected_bakers
+     *
+     * @param int|null $selected_bakers Total number of bakers in stake distribution for the cycle
+     *
+     * @return self
+     */
+    public function setSelectedBakers($selected_bakers)
+    {
+
+        if (is_null($selected_bakers)) {
+            throw new \InvalidArgumentException('non-nullable selected_bakers cannot be null');
+        }
+
+        $this->container['selected_bakers'] = $selected_bakers;
+
+        return $this;
+    }
+
+    /**
+     * Gets selected_stake
+     *
+     * @return int|null
+     */
+    public function getSelectedStake()
+    {
+        return $this->container['selected_stake'];
+    }
+
+    /**
+     * Sets selected_stake
+     *
+     * @param int|null $selected_stake Total stake of bakers in stake distribution for the cycle
+     *
+     * @return self
+     */
+    public function setSelectedStake($selected_stake)
+    {
+
+        if (is_null($selected_stake)) {
+            throw new \InvalidArgumentException('non-nullable selected_stake cannot be null');
+        }
+
+        $this->container['selected_stake'] = $selected_stake;
 
         return $this;
     }
@@ -599,7 +811,7 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets quote
      *
-     * @return OneOfQuoteShort|null
+     * @return \Bzzhh\Tzkt\Model\CycleQuote|null
      */
     public function getQuote()
     {
@@ -609,13 +821,54 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets quote
      *
-     * @param OneOfQuoteShort|null $quote Injected historical quote at the end of the cycle
+     * @param \Bzzhh\Tzkt\Model\CycleQuote|null $quote quote
      *
      * @return self
      */
     public function setQuote($quote)
     {
+
+        if (is_null($quote)) {
+            array_push($this->openAPINullablesSetToNull, 'quote');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_rolls
+     *
+     * @return int|null
+     */
+    public function getTotalRolls()
+    {
+        return $this->container['total_rolls'];
+    }
+
+    /**
+     * Sets total_rolls
+     *
+     * @param int|null $total_rolls [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setTotalRolls($total_rolls)
+    {
+
+        if (is_null($total_rolls)) {
+            throw new \InvalidArgumentException('non-nullable total_rolls cannot be null');
+        }
+
+        $this->container['total_rolls'] = $total_rolls;
 
         return $this;
     }
@@ -626,7 +879,7 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -638,6 +891,7 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -651,7 +905,7 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -667,7 +921,7 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -679,6 +933,7 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

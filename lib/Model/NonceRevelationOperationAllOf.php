@@ -2,7 +2,7 @@
 /**
  * NonceRevelationOperationAllOf
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -67,10 +65,13 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
         'block' => 'string',
         'hash' => 'string',
         'baker' => 'OneOfAlias',
-        'baker_rewards' => 'int',
         'sender' => 'OneOfAlias',
         'revealed_level' => 'int',
-        'quote' => 'OneOfQuoteShort'
+        'revealed_cycle' => 'int',
+        'nonce' => 'string',
+        'reward' => 'int',
+        'quote' => 'OneOfQuoteShort',
+        'baker_rewards' => 'int'
     ];
 
     /**
@@ -82,17 +83,49 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
       */
     protected static $openAPIFormats = [
         'type' => null,
-        'id' => 'int32',
+        'id' => 'int64',
         'level' => 'int32',
         'timestamp' => 'date-time',
         'block' => null,
         'hash' => null,
         'baker' => null,
-        'baker_rewards' => 'int64',
         'sender' => null,
         'revealed_level' => 'int32',
-        'quote' => null
+        'revealed_cycle' => 'int32',
+        'nonce' => null,
+        'reward' => 'int64',
+        'quote' => null,
+        'baker_rewards' => 'int64'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'type' => true,
+		'id' => false,
+		'level' => false,
+		'timestamp' => false,
+		'block' => true,
+		'hash' => true,
+		'baker' => true,
+		'sender' => true,
+		'revealed_level' => false,
+		'revealed_cycle' => false,
+		'nonce' => true,
+		'reward' => false,
+		'quote' => true,
+		'baker_rewards' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -115,6 +148,58 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -128,10 +213,13 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
         'block' => 'block',
         'hash' => 'hash',
         'baker' => 'baker',
-        'baker_rewards' => 'bakerRewards',
         'sender' => 'sender',
         'revealed_level' => 'revealedLevel',
-        'quote' => 'quote'
+        'revealed_cycle' => 'revealedCycle',
+        'nonce' => 'nonce',
+        'reward' => 'reward',
+        'quote' => 'quote',
+        'baker_rewards' => 'bakerRewards'
     ];
 
     /**
@@ -147,10 +235,13 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
         'block' => 'setBlock',
         'hash' => 'setHash',
         'baker' => 'setBaker',
-        'baker_rewards' => 'setBakerRewards',
         'sender' => 'setSender',
         'revealed_level' => 'setRevealedLevel',
-        'quote' => 'setQuote'
+        'revealed_cycle' => 'setRevealedCycle',
+        'nonce' => 'setNonce',
+        'reward' => 'setReward',
+        'quote' => 'setQuote',
+        'baker_rewards' => 'setBakerRewards'
     ];
 
     /**
@@ -166,10 +257,13 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
         'block' => 'getBlock',
         'hash' => 'getHash',
         'baker' => 'getBaker',
-        'baker_rewards' => 'getBakerRewards',
         'sender' => 'getSender',
         'revealed_level' => 'getRevealedLevel',
-        'quote' => 'getQuote'
+        'revealed_cycle' => 'getRevealedCycle',
+        'nonce' => 'getNonce',
+        'reward' => 'getReward',
+        'quote' => 'getQuote',
+        'baker_rewards' => 'getBakerRewards'
     ];
 
     /**
@@ -229,17 +323,38 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(array $data = null)
     {
-        $this->container['type'] = $data['type'] ?? null;
-        $this->container['id'] = $data['id'] ?? null;
-        $this->container['level'] = $data['level'] ?? null;
-        $this->container['timestamp'] = $data['timestamp'] ?? null;
-        $this->container['block'] = $data['block'] ?? null;
-        $this->container['hash'] = $data['hash'] ?? null;
-        $this->container['baker'] = $data['baker'] ?? null;
-        $this->container['baker_rewards'] = $data['baker_rewards'] ?? null;
-        $this->container['sender'] = $data['sender'] ?? null;
-        $this->container['revealed_level'] = $data['revealed_level'] ?? null;
-        $this->container['quote'] = $data['quote'] ?? null;
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('block', $data ?? [], null);
+        $this->setIfExists('hash', $data ?? [], null);
+        $this->setIfExists('baker', $data ?? [], null);
+        $this->setIfExists('sender', $data ?? [], null);
+        $this->setIfExists('revealed_level', $data ?? [], null);
+        $this->setIfExists('revealed_cycle', $data ?? [], null);
+        $this->setIfExists('nonce', $data ?? [], null);
+        $this->setIfExists('reward', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('baker_rewards', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -285,6 +400,18 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setType($type)
     {
+
+        if (is_null($type)) {
+            array_push($this->openAPINullablesSetToNull, 'type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['type'] = $type;
 
         return $this;
@@ -309,6 +436,11 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setId($id)
     {
+
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+
         $this->container['id'] = $id;
 
         return $this;
@@ -333,6 +465,11 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setLevel($level)
     {
+
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
+        }
+
         $this->container['level'] = $level;
 
         return $this;
@@ -357,6 +494,11 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setTimestamp($timestamp)
     {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
         $this->container['timestamp'] = $timestamp;
 
         return $this;
@@ -381,6 +523,18 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setBlock($block)
     {
+
+        if (is_null($block)) {
+            array_push($this->openAPINullablesSetToNull, 'block');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('block', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['block'] = $block;
 
         return $this;
@@ -405,6 +559,18 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setHash($hash)
     {
+
+        if (is_null($hash)) {
+            array_push($this->openAPINullablesSetToNull, 'hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['hash'] = $hash;
 
         return $this;
@@ -429,31 +595,19 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setBaker($baker)
     {
+
+        if (is_null($baker)) {
+            array_push($this->openAPINullablesSetToNull, 'baker');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('baker', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['baker'] = $baker;
-
-        return $this;
-    }
-
-    /**
-     * Gets baker_rewards
-     *
-     * @return int|null
-     */
-    public function getBakerRewards()
-    {
-        return $this->container['baker_rewards'];
-    }
-
-    /**
-     * Sets baker_rewards
-     *
-     * @param int|null $baker_rewards Reward amount paid to baker, included this operation into a block
-     *
-     * @return self
-     */
-    public function setBakerRewards($baker_rewards)
-    {
-        $this->container['baker_rewards'] = $baker_rewards;
 
         return $this;
     }
@@ -477,6 +631,18 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setSender($sender)
     {
+
+        if (is_null($sender)) {
+            array_push($this->openAPINullablesSetToNull, 'sender');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sender', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['sender'] = $sender;
 
         return $this;
@@ -501,7 +667,106 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setRevealedLevel($revealed_level)
     {
+
+        if (is_null($revealed_level)) {
+            throw new \InvalidArgumentException('non-nullable revealed_level cannot be null');
+        }
+
         $this->container['revealed_level'] = $revealed_level;
+
+        return $this;
+    }
+
+    /**
+     * Gets revealed_cycle
+     *
+     * @return int|null
+     */
+    public function getRevealedCycle()
+    {
+        return $this->container['revealed_cycle'];
+    }
+
+    /**
+     * Sets revealed_cycle
+     *
+     * @param int|null $revealed_cycle Cycle for which seed nonce was revealed
+     *
+     * @return self
+     */
+    public function setRevealedCycle($revealed_cycle)
+    {
+
+        if (is_null($revealed_cycle)) {
+            throw new \InvalidArgumentException('non-nullable revealed_cycle cannot be null');
+        }
+
+        $this->container['revealed_cycle'] = $revealed_cycle;
+
+        return $this;
+    }
+
+    /**
+     * Gets nonce
+     *
+     * @return string|null
+     */
+    public function getNonce()
+    {
+        return $this->container['nonce'];
+    }
+
+    /**
+     * Sets nonce
+     *
+     * @param string|null $nonce Seed nonce hex
+     *
+     * @return self
+     */
+    public function setNonce($nonce)
+    {
+
+        if (is_null($nonce)) {
+            array_push($this->openAPINullablesSetToNull, 'nonce');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('nonce', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['nonce'] = $nonce;
+
+        return $this;
+    }
+
+    /**
+     * Gets reward
+     *
+     * @return int|null
+     */
+    public function getReward()
+    {
+        return $this->container['reward'];
+    }
+
+    /**
+     * Sets reward
+     *
+     * @param int|null $reward Baker reward for including seed nonce revelation into a block
+     *
+     * @return self
+     */
+    public function setReward($reward)
+    {
+
+        if (is_null($reward)) {
+            throw new \InvalidArgumentException('non-nullable reward cannot be null');
+        }
+
+        $this->container['reward'] = $reward;
 
         return $this;
     }
@@ -525,7 +790,48 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      */
     public function setQuote($quote)
     {
+
+        if (is_null($quote)) {
+            array_push($this->openAPINullablesSetToNull, 'quote');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets baker_rewards
+     *
+     * @return int|null
+     */
+    public function getBakerRewards()
+    {
+        return $this->container['baker_rewards'];
+    }
+
+    /**
+     * Sets baker_rewards
+     *
+     * @param int|null $baker_rewards [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setBakerRewards($baker_rewards)
+    {
+
+        if (is_null($baker_rewards)) {
+            throw new \InvalidArgumentException('non-nullable baker_rewards cannot be null');
+        }
+
+        $this->container['baker_rewards'] = $baker_rewards;
 
         return $this;
     }
@@ -536,7 +842,7 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -548,6 +854,7 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -561,7 +868,7 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -577,7 +884,7 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -589,6 +896,7 @@ class NonceRevelationOperationAllOf implements ModelInterface, ArrayAccess, \Jso
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

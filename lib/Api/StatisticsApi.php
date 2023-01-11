@@ -1,7 +1,7 @@
 <?php
 /**
  * StatisticsApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,23 @@ class StatisticsApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'statisticsGet' => [
+            'application/json',
+        ],
+        'statisticsGetCycles' => [
+            'application/json',
+        ],
+        'statisticsGetCyclesAll' => [
+            'application/json',
+        ],
+        'statisticsGetDaily' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -120,21 +137,22 @@ class StatisticsApi
      *
      * Get statistics
      *
-     * @param  OneOfInt32Parameter $level Filters statistics by level. (optional)
-     * @param  OneOfTimestampParameter $timestamp Filters statistics by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters statistics by level. (optional)
+     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters statistics by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Statistics[]
      */
-    public function statisticsGet($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGet($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGet'][0])
     {
-        list($response) = $this->statisticsGetWithHttpInfo($level, $timestamp, $select, $sort, $offset, $limit, $quote);
+        list($response) = $this->statisticsGetWithHttpInfo($level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -143,21 +161,22 @@ class StatisticsApi
      *
      * Get statistics
      *
-     * @param  OneOfInt32Parameter $level Filters statistics by level. (optional)
-     * @param  OneOfTimestampParameter $timestamp Filters statistics by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters statistics by level. (optional)
+     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters statistics by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Statistics[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function statisticsGetWithHttpInfo($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetWithHttpInfo($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGet'][0])
     {
-        $request = $this->statisticsGetRequest($level, $timestamp, $select, $sort, $offset, $limit, $quote);
+        $request = $this->statisticsGetRequest($level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -169,6 +188,13 @@ class StatisticsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -193,6 +219,9 @@ class StatisticsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Statistics[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -207,6 +236,9 @@ class StatisticsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -235,20 +267,21 @@ class StatisticsApi
      *
      * Get statistics
      *
-     * @param  OneOfInt32Parameter $level Filters statistics by level. (optional)
-     * @param  OneOfTimestampParameter $timestamp Filters statistics by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters statistics by level. (optional)
+     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters statistics by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function statisticsGetAsync($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetAsync($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGet'][0])
     {
-        return $this->statisticsGetAsyncWithHttpInfo($level, $timestamp, $select, $sort, $offset, $limit, $quote)
+        return $this->statisticsGetAsyncWithHttpInfo($level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -261,21 +294,22 @@ class StatisticsApi
      *
      * Get statistics
      *
-     * @param  OneOfInt32Parameter $level Filters statistics by level. (optional)
-     * @param  OneOfTimestampParameter $timestamp Filters statistics by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters statistics by level. (optional)
+     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters statistics by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function statisticsGetAsyncWithHttpInfo($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetAsyncWithHttpInfo($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGet'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Statistics[]';
-        $request = $this->statisticsGetRequest($level, $timestamp, $select, $sort, $offset, $limit, $quote);
+        $request = $this->statisticsGetRequest($level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -285,6 +319,9 @@ class StatisticsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -313,25 +350,33 @@ class StatisticsApi
     /**
      * Create request for operation 'statisticsGet'
      *
-     * @param  OneOfInt32Parameter $level Filters statistics by level. (optional)
-     * @param  OneOfTimestampParameter $timestamp Filters statistics by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters statistics by level. (optional)
+     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters statistics by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function statisticsGetRequest($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetRequest($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGet'][0])
     {
+
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling StatisticsApi.statisticsGet, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling StatisticsApi.statisticsGet, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/statistics';
@@ -342,96 +387,77 @@ class StatisticsApi
         $multipart = false;
 
         // query params
-        if ($level !== null) {
-            if('form' === 'form' && is_array($level)) {
-                foreach($level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['level'] = $level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($timestamp !== null) {
-            if('form' === 'form' && is_array($timestamp)) {
-                foreach($timestamp as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['timestamp'] = $timestamp;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -449,12 +475,12 @@ class StatisticsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -470,10 +496,11 @@ class StatisticsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -484,16 +511,17 @@ class StatisticsApi
      *
      * Get current statistics
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCycles'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Statistics
      */
-    public function statisticsGetCycles($select = null, $quote = null)
+    public function statisticsGetCycles($select = null, $quote = null, string $contentType = self::contentTypes['statisticsGetCycles'][0])
     {
-        list($response) = $this->statisticsGetCyclesWithHttpInfo($select, $quote);
+        list($response) = $this->statisticsGetCyclesWithHttpInfo($select, $quote, $contentType);
         return $response;
     }
 
@@ -502,16 +530,17 @@ class StatisticsApi
      *
      * Get current statistics
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCycles'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Statistics, HTTP status code, HTTP response headers (array of strings)
      */
-    public function statisticsGetCyclesWithHttpInfo($select = null, $quote = null)
+    public function statisticsGetCyclesWithHttpInfo($select = null, $quote = null, string $contentType = self::contentTypes['statisticsGetCycles'][0])
     {
-        $request = $this->statisticsGetCyclesRequest($select, $quote);
+        $request = $this->statisticsGetCyclesRequest($select, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -523,6 +552,13 @@ class StatisticsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -547,6 +583,9 @@ class StatisticsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Statistics' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -561,6 +600,9 @@ class StatisticsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -589,15 +631,16 @@ class StatisticsApi
      *
      * Get current statistics
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCycles'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function statisticsGetCyclesAsync($select = null, $quote = null)
+    public function statisticsGetCyclesAsync($select = null, $quote = null, string $contentType = self::contentTypes['statisticsGetCycles'][0])
     {
-        return $this->statisticsGetCyclesAsyncWithHttpInfo($select, $quote)
+        return $this->statisticsGetCyclesAsyncWithHttpInfo($select, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -610,16 +653,17 @@ class StatisticsApi
      *
      * Get current statistics
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCycles'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function statisticsGetCyclesAsyncWithHttpInfo($select = null, $quote = null)
+    public function statisticsGetCyclesAsyncWithHttpInfo($select = null, $quote = null, string $contentType = self::contentTypes['statisticsGetCycles'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Statistics';
-        $request = $this->statisticsGetCyclesRequest($select, $quote);
+        $request = $this->statisticsGetCyclesRequest($select, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -629,6 +673,9 @@ class StatisticsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -657,14 +704,18 @@ class StatisticsApi
     /**
      * Create request for operation 'statisticsGetCycles'
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCycles'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function statisticsGetCyclesRequest($select = null, $quote = null)
+    public function statisticsGetCyclesRequest($select = null, $quote = null, string $contentType = self::contentTypes['statisticsGetCycles'][0])
     {
+
+
+
 
         $resourcePath = '/v1/statistics/current';
         $formParams = [];
@@ -674,41 +725,32 @@ class StatisticsApi
         $multipart = false;
 
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -726,12 +768,12 @@ class StatisticsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -747,10 +789,11 @@ class StatisticsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -761,20 +804,21 @@ class StatisticsApi
      *
      * Get cyclic statistics
      *
-     * @param  OneOfInt32Parameter $cycle Filters statistics by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters statistics by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCyclesAll'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Statistics[]
      */
-    public function statisticsGetCyclesAll($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetCyclesAll($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetCyclesAll'][0])
     {
-        list($response) = $this->statisticsGetCyclesAllWithHttpInfo($cycle, $select, $sort, $offset, $limit, $quote);
+        list($response) = $this->statisticsGetCyclesAllWithHttpInfo($cycle, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -783,20 +827,21 @@ class StatisticsApi
      *
      * Get cyclic statistics
      *
-     * @param  OneOfInt32Parameter $cycle Filters statistics by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters statistics by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCyclesAll'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Statistics[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function statisticsGetCyclesAllWithHttpInfo($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetCyclesAllWithHttpInfo($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetCyclesAll'][0])
     {
-        $request = $this->statisticsGetCyclesAllRequest($cycle, $select, $sort, $offset, $limit, $quote);
+        $request = $this->statisticsGetCyclesAllRequest($cycle, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -808,6 +853,13 @@ class StatisticsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -832,6 +884,9 @@ class StatisticsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Statistics[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -846,6 +901,9 @@ class StatisticsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -874,19 +932,20 @@ class StatisticsApi
      *
      * Get cyclic statistics
      *
-     * @param  OneOfInt32Parameter $cycle Filters statistics by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters statistics by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCyclesAll'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function statisticsGetCyclesAllAsync($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetCyclesAllAsync($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetCyclesAll'][0])
     {
-        return $this->statisticsGetCyclesAllAsyncWithHttpInfo($cycle, $select, $sort, $offset, $limit, $quote)
+        return $this->statisticsGetCyclesAllAsyncWithHttpInfo($cycle, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -899,20 +958,21 @@ class StatisticsApi
      *
      * Get cyclic statistics
      *
-     * @param  OneOfInt32Parameter $cycle Filters statistics by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters statistics by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCyclesAll'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function statisticsGetCyclesAllAsyncWithHttpInfo($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetCyclesAllAsyncWithHttpInfo($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetCyclesAll'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Statistics[]';
-        $request = $this->statisticsGetCyclesAllRequest($cycle, $select, $sort, $offset, $limit, $quote);
+        $request = $this->statisticsGetCyclesAllRequest($cycle, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -922,6 +982,9 @@ class StatisticsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -950,24 +1013,31 @@ class StatisticsApi
     /**
      * Create request for operation 'statisticsGetCyclesAll'
      *
-     * @param  OneOfInt32Parameter $cycle Filters statistics by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters statistics by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetCyclesAll'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function statisticsGetCyclesAllRequest($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetCyclesAllRequest($cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetCyclesAll'][0])
     {
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling StatisticsApi.statisticsGetCyclesAll, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling StatisticsApi.statisticsGetCyclesAll, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/statistics/cyclic';
@@ -978,85 +1048,68 @@ class StatisticsApi
         $multipart = false;
 
         // query params
-        if ($cycle !== null) {
-            if('form' === 'form' && is_array($cycle)) {
-                foreach($cycle as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['cycle'] = $cycle;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $cycle,
+            'cycle', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1074,12 +1127,12 @@ class StatisticsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1095,10 +1148,11 @@ class StatisticsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1109,20 +1163,21 @@ class StatisticsApi
      *
      * Get daily statistics
      *
-     * @param  OneOfDateTimeParameter $date Filters statistics by date. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsTimestampParameter $date Filters statistics by date. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetDaily'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Statistics[]
      */
-    public function statisticsGetDaily($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetDaily($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetDaily'][0])
     {
-        list($response) = $this->statisticsGetDailyWithHttpInfo($date, $select, $sort, $offset, $limit, $quote);
+        list($response) = $this->statisticsGetDailyWithHttpInfo($date, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -1131,20 +1186,21 @@ class StatisticsApi
      *
      * Get daily statistics
      *
-     * @param  OneOfDateTimeParameter $date Filters statistics by date. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsTimestampParameter $date Filters statistics by date. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetDaily'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Statistics[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function statisticsGetDailyWithHttpInfo($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetDailyWithHttpInfo($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetDaily'][0])
     {
-        $request = $this->statisticsGetDailyRequest($date, $select, $sort, $offset, $limit, $quote);
+        $request = $this->statisticsGetDailyRequest($date, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1156,6 +1212,13 @@ class StatisticsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1180,6 +1243,9 @@ class StatisticsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Statistics[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1194,6 +1260,9 @@ class StatisticsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1222,19 +1291,20 @@ class StatisticsApi
      *
      * Get daily statistics
      *
-     * @param  OneOfDateTimeParameter $date Filters statistics by date. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsTimestampParameter $date Filters statistics by date. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetDaily'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function statisticsGetDailyAsync($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetDailyAsync($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetDaily'][0])
     {
-        return $this->statisticsGetDailyAsyncWithHttpInfo($date, $select, $sort, $offset, $limit, $quote)
+        return $this->statisticsGetDailyAsyncWithHttpInfo($date, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1247,20 +1317,21 @@ class StatisticsApi
      *
      * Get daily statistics
      *
-     * @param  OneOfDateTimeParameter $date Filters statistics by date. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsTimestampParameter $date Filters statistics by date. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetDaily'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function statisticsGetDailyAsyncWithHttpInfo($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetDailyAsyncWithHttpInfo($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetDaily'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Statistics[]';
-        $request = $this->statisticsGetDailyRequest($date, $select, $sort, $offset, $limit, $quote);
+        $request = $this->statisticsGetDailyRequest($date, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1270,6 +1341,9 @@ class StatisticsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1298,24 +1372,31 @@ class StatisticsApi
     /**
      * Create request for operation 'statisticsGetDaily'
      *
-     * @param  OneOfDateTimeParameter $date Filters statistics by date. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetOperationsTimestampParameter $date Filters statistics by date. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts delegators by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;level&#x60;, &#x60;cycle&#x60;, &#x60;date&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['statisticsGetDaily'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function statisticsGetDailyRequest($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function statisticsGetDailyRequest($date = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['statisticsGetDaily'][0])
     {
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling StatisticsApi.statisticsGetDaily, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling StatisticsApi.statisticsGetDaily, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/statistics/daily';
@@ -1326,85 +1407,68 @@ class StatisticsApi
         $multipart = false;
 
         // query params
-        if ($date !== null) {
-            if('form' === 'form' && is_array($date)) {
-                foreach($date as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['date'] = $date;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $date,
+            'date', // param base name
+            'OneOfDateTimeParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1422,12 +1486,12 @@ class StatisticsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1443,10 +1507,11 @@ class StatisticsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

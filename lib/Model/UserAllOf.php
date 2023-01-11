@@ -2,7 +2,7 @@
 /**
  * UserAllOf
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -60,30 +58,47 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'id' => 'int',
         'type' => 'string',
-        'alias' => 'string',
         'address' => 'string',
+        'alias' => 'string',
         'public_key' => 'string',
         'revealed' => 'bool',
         'balance' => 'int',
+        'rollup_bonds' => 'int',
         'counter' => 'int',
         'delegate' => 'OneOfDelegateInfo',
         'delegation_level' => 'int',
         'delegation_time' => '\DateTime',
         'num_contracts' => 'int',
+        'rollups_count' => 'int',
+        'active_tokens_count' => 'int',
+        'token_balances_count' => 'int',
+        'token_transfers_count' => 'int',
         'num_activations' => 'int',
         'num_delegations' => 'int',
         'num_originations' => 'int',
         'num_transactions' => 'int',
         'num_reveals' => 'int',
+        'num_register_constants' => 'int',
+        'num_set_deposits_limits' => 'int',
         'num_migrations' => 'int',
+        'tx_rollup_origination_count' => 'int',
+        'tx_rollup_submit_batch_count' => 'int',
+        'tx_rollup_commit_count' => 'int',
+        'tx_rollup_return_bond_count' => 'int',
+        'tx_rollup_finalize_commitment_count' => 'int',
+        'tx_rollup_remove_commitment_count' => 'int',
+        'tx_rollup_rejection_count' => 'int',
+        'tx_rollup_dispatch_tickets_count' => 'int',
+        'transfer_ticket_count' => 'int',
+        'increase_paid_storage_count' => 'int',
+        'drain_delegate_count' => 'int',
         'first_activity' => 'int',
         'first_activity_time' => '\DateTime',
         'last_activity' => 'int',
         'last_activity_time' => '\DateTime',
-        'contracts' => '\Bzzhh\Tzkt\Model\RelatedContract[]',
-        'operations' => '\Bzzhh\Tzkt\Model\Operation[]',
-        'metadata' => 'OneOfAccountMetadata'
+        'metadata' => 'OneOfProfileMetadata'
     ];
 
     /**
@@ -94,31 +109,104 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'id' => 'int32',
         'type' => null,
-        'alias' => null,
         'address' => null,
+        'alias' => null,
         'public_key' => null,
         'revealed' => null,
         'balance' => 'int64',
+        'rollup_bonds' => 'int64',
         'counter' => 'int32',
         'delegate' => null,
         'delegation_level' => 'int32',
         'delegation_time' => 'date-time',
         'num_contracts' => 'int32',
+        'rollups_count' => 'int32',
+        'active_tokens_count' => 'int32',
+        'token_balances_count' => 'int32',
+        'token_transfers_count' => 'int32',
         'num_activations' => 'int32',
         'num_delegations' => 'int32',
         'num_originations' => 'int32',
         'num_transactions' => 'int32',
         'num_reveals' => 'int32',
+        'num_register_constants' => 'int32',
+        'num_set_deposits_limits' => 'int32',
         'num_migrations' => 'int32',
+        'tx_rollup_origination_count' => 'int32',
+        'tx_rollup_submit_batch_count' => 'int32',
+        'tx_rollup_commit_count' => 'int32',
+        'tx_rollup_return_bond_count' => 'int32',
+        'tx_rollup_finalize_commitment_count' => 'int32',
+        'tx_rollup_remove_commitment_count' => 'int32',
+        'tx_rollup_rejection_count' => 'int32',
+        'tx_rollup_dispatch_tickets_count' => 'int32',
+        'transfer_ticket_count' => 'int32',
+        'increase_paid_storage_count' => 'int32',
+        'drain_delegate_count' => 'int32',
         'first_activity' => 'int32',
         'first_activity_time' => 'date-time',
         'last_activity' => 'int32',
         'last_activity_time' => 'date-time',
-        'contracts' => null,
-        'operations' => null,
         'metadata' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'id' => false,
+		'type' => true,
+		'address' => true,
+		'alias' => true,
+		'public_key' => true,
+		'revealed' => false,
+		'balance' => false,
+		'rollup_bonds' => false,
+		'counter' => false,
+		'delegate' => true,
+		'delegation_level' => true,
+		'delegation_time' => true,
+		'num_contracts' => false,
+		'rollups_count' => false,
+		'active_tokens_count' => false,
+		'token_balances_count' => false,
+		'token_transfers_count' => false,
+		'num_activations' => false,
+		'num_delegations' => false,
+		'num_originations' => false,
+		'num_transactions' => false,
+		'num_reveals' => false,
+		'num_register_constants' => false,
+		'num_set_deposits_limits' => false,
+		'num_migrations' => false,
+		'tx_rollup_origination_count' => false,
+		'tx_rollup_submit_batch_count' => false,
+		'tx_rollup_commit_count' => false,
+		'tx_rollup_return_bond_count' => false,
+		'tx_rollup_finalize_commitment_count' => false,
+		'tx_rollup_remove_commitment_count' => false,
+		'tx_rollup_rejection_count' => false,
+		'tx_rollup_dispatch_tickets_count' => false,
+		'transfer_ticket_count' => false,
+		'increase_paid_storage_count' => false,
+		'drain_delegate_count' => false,
+		'first_activity' => true,
+		'first_activity_time' => true,
+		'last_activity' => true,
+		'last_activity_time' => true,
+		'metadata' => true
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -141,35 +229,104 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
      * @var string[]
      */
     protected static $attributeMap = [
+        'id' => 'id',
         'type' => 'type',
-        'alias' => 'alias',
         'address' => 'address',
+        'alias' => 'alias',
         'public_key' => 'publicKey',
         'revealed' => 'revealed',
         'balance' => 'balance',
+        'rollup_bonds' => 'rollupBonds',
         'counter' => 'counter',
         'delegate' => 'delegate',
         'delegation_level' => 'delegationLevel',
         'delegation_time' => 'delegationTime',
         'num_contracts' => 'numContracts',
+        'rollups_count' => 'rollupsCount',
+        'active_tokens_count' => 'activeTokensCount',
+        'token_balances_count' => 'tokenBalancesCount',
+        'token_transfers_count' => 'tokenTransfersCount',
         'num_activations' => 'numActivations',
         'num_delegations' => 'numDelegations',
         'num_originations' => 'numOriginations',
         'num_transactions' => 'numTransactions',
         'num_reveals' => 'numReveals',
+        'num_register_constants' => 'numRegisterConstants',
+        'num_set_deposits_limits' => 'numSetDepositsLimits',
         'num_migrations' => 'numMigrations',
+        'tx_rollup_origination_count' => 'txRollupOriginationCount',
+        'tx_rollup_submit_batch_count' => 'txRollupSubmitBatchCount',
+        'tx_rollup_commit_count' => 'txRollupCommitCount',
+        'tx_rollup_return_bond_count' => 'txRollupReturnBondCount',
+        'tx_rollup_finalize_commitment_count' => 'txRollupFinalizeCommitmentCount',
+        'tx_rollup_remove_commitment_count' => 'txRollupRemoveCommitmentCount',
+        'tx_rollup_rejection_count' => 'txRollupRejectionCount',
+        'tx_rollup_dispatch_tickets_count' => 'txRollupDispatchTicketsCount',
+        'transfer_ticket_count' => 'transferTicketCount',
+        'increase_paid_storage_count' => 'increasePaidStorageCount',
+        'drain_delegate_count' => 'drainDelegateCount',
         'first_activity' => 'firstActivity',
         'first_activity_time' => 'firstActivityTime',
         'last_activity' => 'lastActivity',
         'last_activity_time' => 'lastActivityTime',
-        'contracts' => 'contracts',
-        'operations' => 'operations',
         'metadata' => 'metadata'
     ];
 
@@ -179,29 +336,46 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'id' => 'setId',
         'type' => 'setType',
-        'alias' => 'setAlias',
         'address' => 'setAddress',
+        'alias' => 'setAlias',
         'public_key' => 'setPublicKey',
         'revealed' => 'setRevealed',
         'balance' => 'setBalance',
+        'rollup_bonds' => 'setRollupBonds',
         'counter' => 'setCounter',
         'delegate' => 'setDelegate',
         'delegation_level' => 'setDelegationLevel',
         'delegation_time' => 'setDelegationTime',
         'num_contracts' => 'setNumContracts',
+        'rollups_count' => 'setRollupsCount',
+        'active_tokens_count' => 'setActiveTokensCount',
+        'token_balances_count' => 'setTokenBalancesCount',
+        'token_transfers_count' => 'setTokenTransfersCount',
         'num_activations' => 'setNumActivations',
         'num_delegations' => 'setNumDelegations',
         'num_originations' => 'setNumOriginations',
         'num_transactions' => 'setNumTransactions',
         'num_reveals' => 'setNumReveals',
+        'num_register_constants' => 'setNumRegisterConstants',
+        'num_set_deposits_limits' => 'setNumSetDepositsLimits',
         'num_migrations' => 'setNumMigrations',
+        'tx_rollup_origination_count' => 'setTxRollupOriginationCount',
+        'tx_rollup_submit_batch_count' => 'setTxRollupSubmitBatchCount',
+        'tx_rollup_commit_count' => 'setTxRollupCommitCount',
+        'tx_rollup_return_bond_count' => 'setTxRollupReturnBondCount',
+        'tx_rollup_finalize_commitment_count' => 'setTxRollupFinalizeCommitmentCount',
+        'tx_rollup_remove_commitment_count' => 'setTxRollupRemoveCommitmentCount',
+        'tx_rollup_rejection_count' => 'setTxRollupRejectionCount',
+        'tx_rollup_dispatch_tickets_count' => 'setTxRollupDispatchTicketsCount',
+        'transfer_ticket_count' => 'setTransferTicketCount',
+        'increase_paid_storage_count' => 'setIncreasePaidStorageCount',
+        'drain_delegate_count' => 'setDrainDelegateCount',
         'first_activity' => 'setFirstActivity',
         'first_activity_time' => 'setFirstActivityTime',
         'last_activity' => 'setLastActivity',
         'last_activity_time' => 'setLastActivityTime',
-        'contracts' => 'setContracts',
-        'operations' => 'setOperations',
         'metadata' => 'setMetadata'
     ];
 
@@ -211,29 +385,46 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'id' => 'getId',
         'type' => 'getType',
-        'alias' => 'getAlias',
         'address' => 'getAddress',
+        'alias' => 'getAlias',
         'public_key' => 'getPublicKey',
         'revealed' => 'getRevealed',
         'balance' => 'getBalance',
+        'rollup_bonds' => 'getRollupBonds',
         'counter' => 'getCounter',
         'delegate' => 'getDelegate',
         'delegation_level' => 'getDelegationLevel',
         'delegation_time' => 'getDelegationTime',
         'num_contracts' => 'getNumContracts',
+        'rollups_count' => 'getRollupsCount',
+        'active_tokens_count' => 'getActiveTokensCount',
+        'token_balances_count' => 'getTokenBalancesCount',
+        'token_transfers_count' => 'getTokenTransfersCount',
         'num_activations' => 'getNumActivations',
         'num_delegations' => 'getNumDelegations',
         'num_originations' => 'getNumOriginations',
         'num_transactions' => 'getNumTransactions',
         'num_reveals' => 'getNumReveals',
+        'num_register_constants' => 'getNumRegisterConstants',
+        'num_set_deposits_limits' => 'getNumSetDepositsLimits',
         'num_migrations' => 'getNumMigrations',
+        'tx_rollup_origination_count' => 'getTxRollupOriginationCount',
+        'tx_rollup_submit_batch_count' => 'getTxRollupSubmitBatchCount',
+        'tx_rollup_commit_count' => 'getTxRollupCommitCount',
+        'tx_rollup_return_bond_count' => 'getTxRollupReturnBondCount',
+        'tx_rollup_finalize_commitment_count' => 'getTxRollupFinalizeCommitmentCount',
+        'tx_rollup_remove_commitment_count' => 'getTxRollupRemoveCommitmentCount',
+        'tx_rollup_rejection_count' => 'getTxRollupRejectionCount',
+        'tx_rollup_dispatch_tickets_count' => 'getTxRollupDispatchTicketsCount',
+        'transfer_ticket_count' => 'getTransferTicketCount',
+        'increase_paid_storage_count' => 'getIncreasePaidStorageCount',
+        'drain_delegate_count' => 'getDrainDelegateCount',
         'first_activity' => 'getFirstActivity',
         'first_activity_time' => 'getFirstActivityTime',
         'last_activity' => 'getLastActivity',
         'last_activity_time' => 'getLastActivityTime',
-        'contracts' => 'getContracts',
-        'operations' => 'getOperations',
         'metadata' => 'getMetadata'
     ];
 
@@ -294,30 +485,65 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['type'] = $data['type'] ?? null;
-        $this->container['alias'] = $data['alias'] ?? null;
-        $this->container['address'] = $data['address'] ?? null;
-        $this->container['public_key'] = $data['public_key'] ?? null;
-        $this->container['revealed'] = $data['revealed'] ?? null;
-        $this->container['balance'] = $data['balance'] ?? null;
-        $this->container['counter'] = $data['counter'] ?? null;
-        $this->container['delegate'] = $data['delegate'] ?? null;
-        $this->container['delegation_level'] = $data['delegation_level'] ?? null;
-        $this->container['delegation_time'] = $data['delegation_time'] ?? null;
-        $this->container['num_contracts'] = $data['num_contracts'] ?? null;
-        $this->container['num_activations'] = $data['num_activations'] ?? null;
-        $this->container['num_delegations'] = $data['num_delegations'] ?? null;
-        $this->container['num_originations'] = $data['num_originations'] ?? null;
-        $this->container['num_transactions'] = $data['num_transactions'] ?? null;
-        $this->container['num_reveals'] = $data['num_reveals'] ?? null;
-        $this->container['num_migrations'] = $data['num_migrations'] ?? null;
-        $this->container['first_activity'] = $data['first_activity'] ?? null;
-        $this->container['first_activity_time'] = $data['first_activity_time'] ?? null;
-        $this->container['last_activity'] = $data['last_activity'] ?? null;
-        $this->container['last_activity_time'] = $data['last_activity_time'] ?? null;
-        $this->container['contracts'] = $data['contracts'] ?? null;
-        $this->container['operations'] = $data['operations'] ?? null;
-        $this->container['metadata'] = $data['metadata'] ?? null;
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('address', $data ?? [], null);
+        $this->setIfExists('alias', $data ?? [], null);
+        $this->setIfExists('public_key', $data ?? [], null);
+        $this->setIfExists('revealed', $data ?? [], null);
+        $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('rollup_bonds', $data ?? [], null);
+        $this->setIfExists('counter', $data ?? [], null);
+        $this->setIfExists('delegate', $data ?? [], null);
+        $this->setIfExists('delegation_level', $data ?? [], null);
+        $this->setIfExists('delegation_time', $data ?? [], null);
+        $this->setIfExists('num_contracts', $data ?? [], null);
+        $this->setIfExists('rollups_count', $data ?? [], null);
+        $this->setIfExists('active_tokens_count', $data ?? [], null);
+        $this->setIfExists('token_balances_count', $data ?? [], null);
+        $this->setIfExists('token_transfers_count', $data ?? [], null);
+        $this->setIfExists('num_activations', $data ?? [], null);
+        $this->setIfExists('num_delegations', $data ?? [], null);
+        $this->setIfExists('num_originations', $data ?? [], null);
+        $this->setIfExists('num_transactions', $data ?? [], null);
+        $this->setIfExists('num_reveals', $data ?? [], null);
+        $this->setIfExists('num_register_constants', $data ?? [], null);
+        $this->setIfExists('num_set_deposits_limits', $data ?? [], null);
+        $this->setIfExists('num_migrations', $data ?? [], null);
+        $this->setIfExists('tx_rollup_origination_count', $data ?? [], null);
+        $this->setIfExists('tx_rollup_submit_batch_count', $data ?? [], null);
+        $this->setIfExists('tx_rollup_commit_count', $data ?? [], null);
+        $this->setIfExists('tx_rollup_return_bond_count', $data ?? [], null);
+        $this->setIfExists('tx_rollup_finalize_commitment_count', $data ?? [], null);
+        $this->setIfExists('tx_rollup_remove_commitment_count', $data ?? [], null);
+        $this->setIfExists('tx_rollup_rejection_count', $data ?? [], null);
+        $this->setIfExists('tx_rollup_dispatch_tickets_count', $data ?? [], null);
+        $this->setIfExists('transfer_ticket_count', $data ?? [], null);
+        $this->setIfExists('increase_paid_storage_count', $data ?? [], null);
+        $this->setIfExists('drain_delegate_count', $data ?? [], null);
+        $this->setIfExists('first_activity', $data ?? [], null);
+        $this->setIfExists('first_activity_time', $data ?? [], null);
+        $this->setIfExists('last_activity', $data ?? [], null);
+        $this->setIfExists('last_activity_time', $data ?? [], null);
+        $this->setIfExists('metadata', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -345,6 +571,35 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id Internal TzKT id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
      * Gets type
      *
      * @return string|null
@@ -363,31 +618,19 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setType($type)
     {
+
+        if (is_null($type)) {
+            array_push($this->openAPINullablesSetToNull, 'type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets alias
-     *
-     * @return string|null
-     */
-    public function getAlias()
-    {
-        return $this->container['alias'];
-    }
-
-    /**
-     * Sets alias
-     *
-     * @param string|null $alias Name of the project behind the account or account description
-     *
-     * @return self
-     */
-    public function setAlias($alias)
-    {
-        $this->container['alias'] = $alias;
 
         return $this;
     }
@@ -411,7 +654,55 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setAddress($address)
     {
+
+        if (is_null($address)) {
+            array_push($this->openAPINullablesSetToNull, 'address');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('address', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['address'] = $address;
+
+        return $this;
+    }
+
+    /**
+     * Gets alias
+     *
+     * @return string|null
+     */
+    public function getAlias()
+    {
+        return $this->container['alias'];
+    }
+
+    /**
+     * Sets alias
+     *
+     * @param string|null $alias Name of the project behind the account or account description
+     *
+     * @return self
+     */
+    public function setAlias($alias)
+    {
+
+        if (is_null($alias)) {
+            array_push($this->openAPINullablesSetToNull, 'alias');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('alias', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['alias'] = $alias;
 
         return $this;
     }
@@ -435,6 +726,18 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setPublicKey($public_key)
     {
+
+        if (is_null($public_key)) {
+            array_push($this->openAPINullablesSetToNull, 'public_key');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('public_key', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['public_key'] = $public_key;
 
         return $this;
@@ -459,6 +762,11 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setRevealed($revealed)
     {
+
+        if (is_null($revealed)) {
+            throw new \InvalidArgumentException('non-nullable revealed cannot be null');
+        }
+
         $this->container['revealed'] = $revealed;
 
         return $this;
@@ -483,7 +791,41 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setBalance($balance)
     {
+
+        if (is_null($balance)) {
+            throw new \InvalidArgumentException('non-nullable balance cannot be null');
+        }
+
         $this->container['balance'] = $balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets rollup_bonds
+     *
+     * @return int|null
+     */
+    public function getRollupBonds()
+    {
+        return $this->container['rollup_bonds'];
+    }
+
+    /**
+     * Sets rollup_bonds
+     *
+     * @param int|null $rollup_bonds Amount of rollup commitment bonds (micro tez)
+     *
+     * @return self
+     */
+    public function setRollupBonds($rollup_bonds)
+    {
+
+        if (is_null($rollup_bonds)) {
+            throw new \InvalidArgumentException('non-nullable rollup_bonds cannot be null');
+        }
+
+        $this->container['rollup_bonds'] = $rollup_bonds;
 
         return $this;
     }
@@ -507,6 +849,11 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setCounter($counter)
     {
+
+        if (is_null($counter)) {
+            throw new \InvalidArgumentException('non-nullable counter cannot be null');
+        }
+
         $this->container['counter'] = $counter;
 
         return $this;
@@ -531,6 +878,18 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDelegate($delegate)
     {
+
+        if (is_null($delegate)) {
+            array_push($this->openAPINullablesSetToNull, 'delegate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('delegate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['delegate'] = $delegate;
 
         return $this;
@@ -555,6 +914,18 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDelegationLevel($delegation_level)
     {
+
+        if (is_null($delegation_level)) {
+            array_push($this->openAPINullablesSetToNull, 'delegation_level');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('delegation_level', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['delegation_level'] = $delegation_level;
 
         return $this;
@@ -579,6 +950,18 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDelegationTime($delegation_time)
     {
+
+        if (is_null($delegation_time)) {
+            array_push($this->openAPINullablesSetToNull, 'delegation_time');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('delegation_time', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['delegation_time'] = $delegation_time;
 
         return $this;
@@ -597,13 +980,134 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_contracts
      *
-     * @param int|null $num_contracts Number of contracts, created (originated) and/or managed by the contract
+     * @param int|null $num_contracts Number of contracts, created (originated) and/or managed by the account
      *
      * @return self
      */
     public function setNumContracts($num_contracts)
     {
+
+        if (is_null($num_contracts)) {
+            throw new \InvalidArgumentException('non-nullable num_contracts cannot be null');
+        }
+
         $this->container['num_contracts'] = $num_contracts;
+
+        return $this;
+    }
+
+    /**
+     * Gets rollups_count
+     *
+     * @return int|null
+     */
+    public function getRollupsCount()
+    {
+        return $this->container['rollups_count'];
+    }
+
+    /**
+     * Sets rollups_count
+     *
+     * @param int|null $rollups_count Number of tx rollups, created (originated) by the account
+     *
+     * @return self
+     */
+    public function setRollupsCount($rollups_count)
+    {
+
+        if (is_null($rollups_count)) {
+            throw new \InvalidArgumentException('non-nullable rollups_count cannot be null');
+        }
+
+        $this->container['rollups_count'] = $rollups_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets active_tokens_count
+     *
+     * @return int|null
+     */
+    public function getActiveTokensCount()
+    {
+        return $this->container['active_tokens_count'];
+    }
+
+    /**
+     * Sets active_tokens_count
+     *
+     * @param int|null $active_tokens_count Number of account tokens with non-zero balances
+     *
+     * @return self
+     */
+    public function setActiveTokensCount($active_tokens_count)
+    {
+
+        if (is_null($active_tokens_count)) {
+            throw new \InvalidArgumentException('non-nullable active_tokens_count cannot be null');
+        }
+
+        $this->container['active_tokens_count'] = $active_tokens_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets token_balances_count
+     *
+     * @return int|null
+     */
+    public function getTokenBalancesCount()
+    {
+        return $this->container['token_balances_count'];
+    }
+
+    /**
+     * Sets token_balances_count
+     *
+     * @param int|null $token_balances_count Number of tokens the account ever had
+     *
+     * @return self
+     */
+    public function setTokenBalancesCount($token_balances_count)
+    {
+
+        if (is_null($token_balances_count)) {
+            throw new \InvalidArgumentException('non-nullable token_balances_count cannot be null');
+        }
+
+        $this->container['token_balances_count'] = $token_balances_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets token_transfers_count
+     *
+     * @return int|null
+     */
+    public function getTokenTransfersCount()
+    {
+        return $this->container['token_transfers_count'];
+    }
+
+    /**
+     * Sets token_transfers_count
+     *
+     * @param int|null $token_transfers_count Number of token transfers from/to the account
+     *
+     * @return self
+     */
+    public function setTokenTransfersCount($token_transfers_count)
+    {
+
+        if (is_null($token_transfers_count)) {
+            throw new \InvalidArgumentException('non-nullable token_transfers_count cannot be null');
+        }
+
+        $this->container['token_transfers_count'] = $token_transfers_count;
 
         return $this;
     }
@@ -627,6 +1131,11 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setNumActivations($num_activations)
     {
+
+        if (is_null($num_activations)) {
+            throw new \InvalidArgumentException('non-nullable num_activations cannot be null');
+        }
+
         $this->container['num_activations'] = $num_activations;
 
         return $this;
@@ -651,6 +1160,11 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setNumDelegations($num_delegations)
     {
+
+        if (is_null($num_delegations)) {
+            throw new \InvalidArgumentException('non-nullable num_delegations cannot be null');
+        }
+
         $this->container['num_delegations'] = $num_delegations;
 
         return $this;
@@ -675,6 +1189,11 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setNumOriginations($num_originations)
     {
+
+        if (is_null($num_originations)) {
+            throw new \InvalidArgumentException('non-nullable num_originations cannot be null');
+        }
+
         $this->container['num_originations'] = $num_originations;
 
         return $this;
@@ -699,6 +1218,11 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setNumTransactions($num_transactions)
     {
+
+        if (is_null($num_transactions)) {
+            throw new \InvalidArgumentException('non-nullable num_transactions cannot be null');
+        }
+
         $this->container['num_transactions'] = $num_transactions;
 
         return $this;
@@ -723,7 +1247,70 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setNumReveals($num_reveals)
     {
+
+        if (is_null($num_reveals)) {
+            throw new \InvalidArgumentException('non-nullable num_reveals cannot be null');
+        }
+
         $this->container['num_reveals'] = $num_reveals;
+
+        return $this;
+    }
+
+    /**
+     * Gets num_register_constants
+     *
+     * @return int|null
+     */
+    public function getNumRegisterConstants()
+    {
+        return $this->container['num_register_constants'];
+    }
+
+    /**
+     * Sets num_register_constants
+     *
+     * @param int|null $num_register_constants Number of register global constant operations sent by the account
+     *
+     * @return self
+     */
+    public function setNumRegisterConstants($num_register_constants)
+    {
+
+        if (is_null($num_register_constants)) {
+            throw new \InvalidArgumentException('non-nullable num_register_constants cannot be null');
+        }
+
+        $this->container['num_register_constants'] = $num_register_constants;
+
+        return $this;
+    }
+
+    /**
+     * Gets num_set_deposits_limits
+     *
+     * @return int|null
+     */
+    public function getNumSetDepositsLimits()
+    {
+        return $this->container['num_set_deposits_limits'];
+    }
+
+    /**
+     * Sets num_set_deposits_limits
+     *
+     * @param int|null $num_set_deposits_limits Number of set deposits limit operations sent by the account
+     *
+     * @return self
+     */
+    public function setNumSetDepositsLimits($num_set_deposits_limits)
+    {
+
+        if (is_null($num_set_deposits_limits)) {
+            throw new \InvalidArgumentException('non-nullable num_set_deposits_limits cannot be null');
+        }
+
+        $this->container['num_set_deposits_limits'] = $num_set_deposits_limits;
 
         return $this;
     }
@@ -747,7 +1334,331 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setNumMigrations($num_migrations)
     {
+
+        if (is_null($num_migrations)) {
+            throw new \InvalidArgumentException('non-nullable num_migrations cannot be null');
+        }
+
         $this->container['num_migrations'] = $num_migrations;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_origination_count
+     *
+     * @return int|null
+     */
+    public function getTxRollupOriginationCount()
+    {
+        return $this->container['tx_rollup_origination_count'];
+    }
+
+    /**
+     * Sets tx_rollup_origination_count
+     *
+     * @param int|null $tx_rollup_origination_count Number of tx rollup origination operations sent by the account
+     *
+     * @return self
+     */
+    public function setTxRollupOriginationCount($tx_rollup_origination_count)
+    {
+
+        if (is_null($tx_rollup_origination_count)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_origination_count cannot be null');
+        }
+
+        $this->container['tx_rollup_origination_count'] = $tx_rollup_origination_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_submit_batch_count
+     *
+     * @return int|null
+     */
+    public function getTxRollupSubmitBatchCount()
+    {
+        return $this->container['tx_rollup_submit_batch_count'];
+    }
+
+    /**
+     * Sets tx_rollup_submit_batch_count
+     *
+     * @param int|null $tx_rollup_submit_batch_count Number of tx rollup submit batch operations sent by the account
+     *
+     * @return self
+     */
+    public function setTxRollupSubmitBatchCount($tx_rollup_submit_batch_count)
+    {
+
+        if (is_null($tx_rollup_submit_batch_count)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_submit_batch_count cannot be null');
+        }
+
+        $this->container['tx_rollup_submit_batch_count'] = $tx_rollup_submit_batch_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_commit_count
+     *
+     * @return int|null
+     */
+    public function getTxRollupCommitCount()
+    {
+        return $this->container['tx_rollup_commit_count'];
+    }
+
+    /**
+     * Sets tx_rollup_commit_count
+     *
+     * @param int|null $tx_rollup_commit_count Number of tx rollup commit operations sent by the account
+     *
+     * @return self
+     */
+    public function setTxRollupCommitCount($tx_rollup_commit_count)
+    {
+
+        if (is_null($tx_rollup_commit_count)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_commit_count cannot be null');
+        }
+
+        $this->container['tx_rollup_commit_count'] = $tx_rollup_commit_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_return_bond_count
+     *
+     * @return int|null
+     */
+    public function getTxRollupReturnBondCount()
+    {
+        return $this->container['tx_rollup_return_bond_count'];
+    }
+
+    /**
+     * Sets tx_rollup_return_bond_count
+     *
+     * @param int|null $tx_rollup_return_bond_count Number of tx rollup return bond operations sent by the account
+     *
+     * @return self
+     */
+    public function setTxRollupReturnBondCount($tx_rollup_return_bond_count)
+    {
+
+        if (is_null($tx_rollup_return_bond_count)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_return_bond_count cannot be null');
+        }
+
+        $this->container['tx_rollup_return_bond_count'] = $tx_rollup_return_bond_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_finalize_commitment_count
+     *
+     * @return int|null
+     */
+    public function getTxRollupFinalizeCommitmentCount()
+    {
+        return $this->container['tx_rollup_finalize_commitment_count'];
+    }
+
+    /**
+     * Sets tx_rollup_finalize_commitment_count
+     *
+     * @param int|null $tx_rollup_finalize_commitment_count Number of tx rollup finalize commitment operations sent by the account
+     *
+     * @return self
+     */
+    public function setTxRollupFinalizeCommitmentCount($tx_rollup_finalize_commitment_count)
+    {
+
+        if (is_null($tx_rollup_finalize_commitment_count)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_finalize_commitment_count cannot be null');
+        }
+
+        $this->container['tx_rollup_finalize_commitment_count'] = $tx_rollup_finalize_commitment_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_remove_commitment_count
+     *
+     * @return int|null
+     */
+    public function getTxRollupRemoveCommitmentCount()
+    {
+        return $this->container['tx_rollup_remove_commitment_count'];
+    }
+
+    /**
+     * Sets tx_rollup_remove_commitment_count
+     *
+     * @param int|null $tx_rollup_remove_commitment_count Number of tx rollup remove commitment operations sent by the account
+     *
+     * @return self
+     */
+    public function setTxRollupRemoveCommitmentCount($tx_rollup_remove_commitment_count)
+    {
+
+        if (is_null($tx_rollup_remove_commitment_count)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_remove_commitment_count cannot be null');
+        }
+
+        $this->container['tx_rollup_remove_commitment_count'] = $tx_rollup_remove_commitment_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_rejection_count
+     *
+     * @return int|null
+     */
+    public function getTxRollupRejectionCount()
+    {
+        return $this->container['tx_rollup_rejection_count'];
+    }
+
+    /**
+     * Sets tx_rollup_rejection_count
+     *
+     * @param int|null $tx_rollup_rejection_count Number of tx rollup rejection operations sent by the account
+     *
+     * @return self
+     */
+    public function setTxRollupRejectionCount($tx_rollup_rejection_count)
+    {
+
+        if (is_null($tx_rollup_rejection_count)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_rejection_count cannot be null');
+        }
+
+        $this->container['tx_rollup_rejection_count'] = $tx_rollup_rejection_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_rollup_dispatch_tickets_count
+     *
+     * @return int|null
+     */
+    public function getTxRollupDispatchTicketsCount()
+    {
+        return $this->container['tx_rollup_dispatch_tickets_count'];
+    }
+
+    /**
+     * Sets tx_rollup_dispatch_tickets_count
+     *
+     * @param int|null $tx_rollup_dispatch_tickets_count Number of tx rollup dispatch tickets operations sent by the account
+     *
+     * @return self
+     */
+    public function setTxRollupDispatchTicketsCount($tx_rollup_dispatch_tickets_count)
+    {
+
+        if (is_null($tx_rollup_dispatch_tickets_count)) {
+            throw new \InvalidArgumentException('non-nullable tx_rollup_dispatch_tickets_count cannot be null');
+        }
+
+        $this->container['tx_rollup_dispatch_tickets_count'] = $tx_rollup_dispatch_tickets_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets transfer_ticket_count
+     *
+     * @return int|null
+     */
+    public function getTransferTicketCount()
+    {
+        return $this->container['transfer_ticket_count'];
+    }
+
+    /**
+     * Sets transfer_ticket_count
+     *
+     * @param int|null $transfer_ticket_count Number of transfer ticket operations sent by the account
+     *
+     * @return self
+     */
+    public function setTransferTicketCount($transfer_ticket_count)
+    {
+
+        if (is_null($transfer_ticket_count)) {
+            throw new \InvalidArgumentException('non-nullable transfer_ticket_count cannot be null');
+        }
+
+        $this->container['transfer_ticket_count'] = $transfer_ticket_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets increase_paid_storage_count
+     *
+     * @return int|null
+     */
+    public function getIncreasePaidStorageCount()
+    {
+        return $this->container['increase_paid_storage_count'];
+    }
+
+    /**
+     * Sets increase_paid_storage_count
+     *
+     * @param int|null $increase_paid_storage_count Number of `increase_paid_storage` operations sent by the acount
+     *
+     * @return self
+     */
+    public function setIncreasePaidStorageCount($increase_paid_storage_count)
+    {
+
+        if (is_null($increase_paid_storage_count)) {
+            throw new \InvalidArgumentException('non-nullable increase_paid_storage_count cannot be null');
+        }
+
+        $this->container['increase_paid_storage_count'] = $increase_paid_storage_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets drain_delegate_count
+     *
+     * @return int|null
+     */
+    public function getDrainDelegateCount()
+    {
+        return $this->container['drain_delegate_count'];
+    }
+
+    /**
+     * Sets drain_delegate_count
+     *
+     * @param int|null $drain_delegate_count Number of `drain_delegate` operations related to the acount
+     *
+     * @return self
+     */
+    public function setDrainDelegateCount($drain_delegate_count)
+    {
+
+        if (is_null($drain_delegate_count)) {
+            throw new \InvalidArgumentException('non-nullable drain_delegate_count cannot be null');
+        }
+
+        $this->container['drain_delegate_count'] = $drain_delegate_count;
 
         return $this;
     }
@@ -771,6 +1682,18 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFirstActivity($first_activity)
     {
+
+        if (is_null($first_activity)) {
+            array_push($this->openAPINullablesSetToNull, 'first_activity');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('first_activity', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['first_activity'] = $first_activity;
 
         return $this;
@@ -795,6 +1718,18 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFirstActivityTime($first_activity_time)
     {
+
+        if (is_null($first_activity_time)) {
+            array_push($this->openAPINullablesSetToNull, 'first_activity_time');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('first_activity_time', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['first_activity_time'] = $first_activity_time;
 
         return $this;
@@ -819,6 +1754,18 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLastActivity($last_activity)
     {
+
+        if (is_null($last_activity)) {
+            array_push($this->openAPINullablesSetToNull, 'last_activity');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_activity', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['last_activity'] = $last_activity;
 
         return $this;
@@ -843,55 +1790,19 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLastActivityTime($last_activity_time)
     {
+
+        if (is_null($last_activity_time)) {
+            array_push($this->openAPINullablesSetToNull, 'last_activity_time');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_activity_time', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['last_activity_time'] = $last_activity_time;
-
-        return $this;
-    }
-
-    /**
-     * Gets contracts
-     *
-     * @return \Bzzhh\Tzkt\Model\RelatedContract[]|null
-     */
-    public function getContracts()
-    {
-        return $this->container['contracts'];
-    }
-
-    /**
-     * Sets contracts
-     *
-     * @param \Bzzhh\Tzkt\Model\RelatedContract[]|null $contracts List of contracts, related (originated or managed) to the account
-     *
-     * @return self
-     */
-    public function setContracts($contracts)
-    {
-        $this->container['contracts'] = $contracts;
-
-        return $this;
-    }
-
-    /**
-     * Gets operations
-     *
-     * @return \Bzzhh\Tzkt\Model\Operation[]|null
-     */
-    public function getOperations()
-    {
-        return $this->container['operations'];
-    }
-
-    /**
-     * Sets operations
-     *
-     * @param \Bzzhh\Tzkt\Model\Operation[]|null $operations List of all operations (synthetic type included), related to the account
-     *
-     * @return self
-     */
-    public function setOperations($operations)
-    {
-        $this->container['operations'] = $operations;
 
         return $this;
     }
@@ -899,7 +1810,7 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets metadata
      *
-     * @return OneOfAccountMetadata|null
+     * @return OneOfProfileMetadata|null
      */
     public function getMetadata()
     {
@@ -909,12 +1820,24 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param OneOfAccountMetadata|null $metadata Metadata of the account (alias, logo, website, contacts, etc)
+     * @param OneOfProfileMetadata|null $metadata Metadata of the account (alias, logo, website, contacts, etc)
      *
      * @return self
      */
     public function setMetadata($metadata)
     {
+
+        if (is_null($metadata)) {
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['metadata'] = $metadata;
 
         return $this;
@@ -926,7 +1849,7 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -938,6 +1861,7 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -951,7 +1875,7 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -967,7 +1891,7 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -979,6 +1903,7 @@ class UserAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

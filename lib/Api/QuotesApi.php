@@ -1,7 +1,7 @@
 <?php
 /**
  * QuotesApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,20 @@ class QuotesApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'quotesGet' => [
+            'application/json',
+        ],
+        'quotesGetCount' => [
+            'application/json',
+        ],
+        'quotesGetLast' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -120,20 +134,21 @@ class QuotesApi
      *
      * Get quotes
      *
-     * @param  OneOfInt32Parameter $level Filters quotes by level. (optional)
-     * @param  OneOfDateTimeParameter $timestamp Filters quotes by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters quotes by level. (optional)
+     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters quotes by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Quote[]
      */
-    public function quotesGet($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function quotesGet($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['quotesGet'][0])
     {
-        list($response) = $this->quotesGetWithHttpInfo($level, $timestamp, $select, $sort, $offset, $limit);
+        list($response) = $this->quotesGetWithHttpInfo($level, $timestamp, $select, $sort, $offset, $limit, $contentType);
         return $response;
     }
 
@@ -142,20 +157,21 @@ class QuotesApi
      *
      * Get quotes
      *
-     * @param  OneOfInt32Parameter $level Filters quotes by level. (optional)
-     * @param  OneOfDateTimeParameter $timestamp Filters quotes by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters quotes by level. (optional)
+     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters quotes by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Quote[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function quotesGetWithHttpInfo($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function quotesGetWithHttpInfo($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['quotesGet'][0])
     {
-        $request = $this->quotesGetRequest($level, $timestamp, $select, $sort, $offset, $limit);
+        $request = $this->quotesGetRequest($level, $timestamp, $select, $sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -167,6 +183,13 @@ class QuotesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -191,6 +214,9 @@ class QuotesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Quote[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -205,6 +231,9 @@ class QuotesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -233,19 +262,20 @@ class QuotesApi
      *
      * Get quotes
      *
-     * @param  OneOfInt32Parameter $level Filters quotes by level. (optional)
-     * @param  OneOfDateTimeParameter $timestamp Filters quotes by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters quotes by level. (optional)
+     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters quotes by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function quotesGetAsync($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function quotesGetAsync($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['quotesGet'][0])
     {
-        return $this->quotesGetAsyncWithHttpInfo($level, $timestamp, $select, $sort, $offset, $limit)
+        return $this->quotesGetAsyncWithHttpInfo($level, $timestamp, $select, $sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -258,20 +288,21 @@ class QuotesApi
      *
      * Get quotes
      *
-     * @param  OneOfInt32Parameter $level Filters quotes by level. (optional)
-     * @param  OneOfDateTimeParameter $timestamp Filters quotes by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters quotes by level. (optional)
+     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters quotes by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function quotesGetAsyncWithHttpInfo($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function quotesGetAsyncWithHttpInfo($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['quotesGet'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Quote[]';
-        $request = $this->quotesGetRequest($level, $timestamp, $select, $sort, $offset, $limit);
+        $request = $this->quotesGetRequest($level, $timestamp, $select, $sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -281,6 +312,9 @@ class QuotesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -309,25 +343,32 @@ class QuotesApi
     /**
      * Create request for operation 'quotesGet'
      *
-     * @param  OneOfInt32Parameter $level Filters quotes by level. (optional)
-     * @param  OneOfDateTimeParameter $timestamp Filters quotes by timestamp. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $level Filters quotes by level. (optional)
+     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters quotes by timestamp. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function quotesGetRequest($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function quotesGetRequest($level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['quotesGet'][0])
     {
+
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling QuotesApi.quotesGet, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling QuotesApi.quotesGet, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/quotes';
         $formParams = [];
@@ -337,85 +378,68 @@ class QuotesApi
         $multipart = false;
 
         // query params
-        if ($level !== null) {
-            if('form' === 'form' && is_array($level)) {
-                foreach($level as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['level'] = $level;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($timestamp !== null) {
-            if('form' === 'form' && is_array($timestamp)) {
-                foreach($timestamp as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['timestamp'] = $timestamp;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfDateTimeParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -433,12 +457,12 @@ class QuotesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -454,10 +478,11 @@ class QuotesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -468,14 +493,15 @@ class QuotesApi
      *
      * Get quotes count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function quotesGetCount()
+    public function quotesGetCount(string $contentType = self::contentTypes['quotesGetCount'][0])
     {
-        list($response) = $this->quotesGetCountWithHttpInfo();
+        list($response) = $this->quotesGetCountWithHttpInfo($contentType);
         return $response;
     }
 
@@ -484,14 +510,15 @@ class QuotesApi
      *
      * Get quotes count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function quotesGetCountWithHttpInfo()
+    public function quotesGetCountWithHttpInfo(string $contentType = self::contentTypes['quotesGetCount'][0])
     {
-        $request = $this->quotesGetCountRequest();
+        $request = $this->quotesGetCountRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -503,6 +530,13 @@ class QuotesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -527,6 +561,9 @@ class QuotesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -541,6 +578,9 @@ class QuotesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -569,13 +609,14 @@ class QuotesApi
      *
      * Get quotes count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function quotesGetCountAsync()
+    public function quotesGetCountAsync(string $contentType = self::contentTypes['quotesGetCount'][0])
     {
-        return $this->quotesGetCountAsyncWithHttpInfo()
+        return $this->quotesGetCountAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -588,14 +629,15 @@ class QuotesApi
      *
      * Get quotes count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function quotesGetCountAsyncWithHttpInfo()
+    public function quotesGetCountAsyncWithHttpInfo(string $contentType = self::contentTypes['quotesGetCount'][0])
     {
         $returnType = 'int';
-        $request = $this->quotesGetCountRequest();
+        $request = $this->quotesGetCountRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -605,6 +647,9 @@ class QuotesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -633,12 +678,14 @@ class QuotesApi
     /**
      * Create request for operation 'quotesGetCount'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function quotesGetCountRequest()
+    public function quotesGetCountRequest(string $contentType = self::contentTypes['quotesGetCount'][0])
     {
+
 
         $resourcePath = '/v1/quotes/count';
         $formParams = [];
@@ -651,16 +698,11 @@ class QuotesApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -678,12 +720,12 @@ class QuotesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -699,10 +741,11 @@ class QuotesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -713,14 +756,15 @@ class QuotesApi
      *
      * Get last quote
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetLast'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Quote
      */
-    public function quotesGetLast()
+    public function quotesGetLast(string $contentType = self::contentTypes['quotesGetLast'][0])
     {
-        list($response) = $this->quotesGetLastWithHttpInfo();
+        list($response) = $this->quotesGetLastWithHttpInfo($contentType);
         return $response;
     }
 
@@ -729,14 +773,15 @@ class QuotesApi
      *
      * Get last quote
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetLast'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Quote, HTTP status code, HTTP response headers (array of strings)
      */
-    public function quotesGetLastWithHttpInfo()
+    public function quotesGetLastWithHttpInfo(string $contentType = self::contentTypes['quotesGetLast'][0])
     {
-        $request = $this->quotesGetLastRequest();
+        $request = $this->quotesGetLastRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -748,6 +793,13 @@ class QuotesApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -772,6 +824,9 @@ class QuotesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Quote' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -786,6 +841,9 @@ class QuotesApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -814,13 +872,14 @@ class QuotesApi
      *
      * Get last quote
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetLast'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function quotesGetLastAsync()
+    public function quotesGetLastAsync(string $contentType = self::contentTypes['quotesGetLast'][0])
     {
-        return $this->quotesGetLastAsyncWithHttpInfo()
+        return $this->quotesGetLastAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -833,14 +892,15 @@ class QuotesApi
      *
      * Get last quote
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetLast'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function quotesGetLastAsyncWithHttpInfo()
+    public function quotesGetLastAsyncWithHttpInfo(string $contentType = self::contentTypes['quotesGetLast'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Quote';
-        $request = $this->quotesGetLastRequest();
+        $request = $this->quotesGetLastRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -850,6 +910,9 @@ class QuotesApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -878,12 +941,14 @@ class QuotesApi
     /**
      * Create request for operation 'quotesGetLast'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['quotesGetLast'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function quotesGetLastRequest()
+    public function quotesGetLastRequest(string $contentType = self::contentTypes['quotesGetLast'][0])
     {
+
 
         $resourcePath = '/v1/quotes/last';
         $formParams = [];
@@ -896,16 +961,11 @@ class QuotesApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -923,12 +983,12 @@ class QuotesApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -944,10 +1004,11 @@ class QuotesApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

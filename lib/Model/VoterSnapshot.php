@@ -2,7 +2,7 @@
 /**
  * VoterSnapshot
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -60,9 +58,10 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'delegate' => 'OneOfAlias',
-        'rolls' => 'int',
-        'status' => 'string'
+        'delegate' => '\Bzzhh\Tzkt\Model\VoterSnapshotDelegate',
+        'voting_power' => 'int',
+        'status' => 'string',
+        'rolls' => 'int'
     ];
 
     /**
@@ -74,9 +73,29 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'delegate' => null,
-        'rolls' => 'int32',
-        'status' => null
+        'voting_power' => 'int64',
+        'status' => null,
+        'rolls' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'delegate' => true,
+		'voting_power' => false,
+		'status' => true,
+		'rolls' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -99,6 +118,58 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -106,8 +177,9 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'delegate' => 'delegate',
-        'rolls' => 'rolls',
-        'status' => 'status'
+        'voting_power' => 'votingPower',
+        'status' => 'status',
+        'rolls' => 'rolls'
     ];
 
     /**
@@ -117,8 +189,9 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'delegate' => 'setDelegate',
-        'rolls' => 'setRolls',
-        'status' => 'setStatus'
+        'voting_power' => 'setVotingPower',
+        'status' => 'setStatus',
+        'rolls' => 'setRolls'
     ];
 
     /**
@@ -128,8 +201,9 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'delegate' => 'getDelegate',
-        'rolls' => 'getRolls',
-        'status' => 'getStatus'
+        'voting_power' => 'getVotingPower',
+        'status' => 'getStatus',
+        'rolls' => 'getRolls'
     ];
 
     /**
@@ -189,9 +263,28 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['delegate'] = $data['delegate'] ?? null;
-        $this->container['rolls'] = $data['rolls'] ?? null;
-        $this->container['status'] = $data['status'] ?? null;
+        $this->setIfExists('delegate', $data ?? [], null);
+        $this->setIfExists('voting_power', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('rolls', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -221,7 +314,7 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets delegate
      *
-     * @return OneOfAlias|null
+     * @return \Bzzhh\Tzkt\Model\VoterSnapshotDelegate|null
      */
     public function getDelegate()
     {
@@ -231,37 +324,54 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets delegate
      *
-     * @param OneOfAlias|null $delegate Voter identity
+     * @param \Bzzhh\Tzkt\Model\VoterSnapshotDelegate|null $delegate delegate
      *
      * @return self
      */
     public function setDelegate($delegate)
     {
+
+        if (is_null($delegate)) {
+            array_push($this->openAPINullablesSetToNull, 'delegate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('delegate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['delegate'] = $delegate;
 
         return $this;
     }
 
     /**
-     * Gets rolls
+     * Gets voting_power
      *
      * @return int|null
      */
-    public function getRolls()
+    public function getVotingPower()
     {
-        return $this->container['rolls'];
+        return $this->container['voting_power'];
     }
 
     /**
-     * Sets rolls
+     * Sets voting_power
      *
-     * @param int|null $rolls Voter's rolls snapshot (aka voting power)
+     * @param int|null $voting_power Baker's voting power
      *
      * @return self
      */
-    public function setRolls($rolls)
+    public function setVotingPower($voting_power)
     {
-        $this->container['rolls'] = $rolls;
+
+        if (is_null($voting_power)) {
+            throw new \InvalidArgumentException('non-nullable voting_power cannot be null');
+        }
+
+        $this->container['voting_power'] = $voting_power;
 
         return $this;
     }
@@ -285,7 +395,48 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setStatus($status)
     {
+
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets rolls
+     *
+     * @return int|null
+     */
+    public function getRolls()
+    {
+        return $this->container['rolls'];
+    }
+
+    /**
+     * Sets rolls
+     *
+     * @param int|null $rolls [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setRolls($rolls)
+    {
+
+        if (is_null($rolls)) {
+            throw new \InvalidArgumentException('non-nullable rolls cannot be null');
+        }
+
+        $this->container['rolls'] = $rolls;
 
         return $this;
     }
@@ -296,7 +447,7 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -308,6 +459,7 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -321,7 +473,7 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -337,7 +489,7 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -349,6 +501,7 @@ class VoterSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

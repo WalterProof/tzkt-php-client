@@ -1,7 +1,7 @@
 <?php
 /**
  * VotingApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,53 @@ class VotingApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'votingGetCurrentEpoch' => [
+            'application/json',
+        ],
+        'votingGetCurrentPeriod' => [
+            'application/json',
+        ],
+        'votingGetEpoch' => [
+            'application/json',
+        ],
+        'votingGetEpochs' => [
+            'application/json',
+        ],
+        'votingGetLatestVoting' => [
+            'application/json',
+        ],
+        'votingGetPeriod' => [
+            'application/json',
+        ],
+        'votingGetPeriodVoter' => [
+            'application/json',
+        ],
+        'votingGetPeriodVoter2' => [
+            'application/json',
+        ],
+        'votingGetPeriodVoters' => [
+            'application/json',
+        ],
+        'votingGetPeriodVoters2' => [
+            'application/json',
+        ],
+        'votingGetPeriods' => [
+            'application/json',
+        ],
+        'votingGetProposalByHash' => [
+            'application/json',
+        ],
+        'votingGetProposals' => [
+            'application/json',
+        ],
+        'votingGetProposalsCount' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -120,14 +167,15 @@ class VotingApi
      *
      * Get current voting epoch
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentEpoch'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VotingEpoch
      */
-    public function votingGetCurrentEpoch()
+    public function votingGetCurrentEpoch(string $contentType = self::contentTypes['votingGetCurrentEpoch'][0])
     {
-        list($response) = $this->votingGetCurrentEpochWithHttpInfo();
+        list($response) = $this->votingGetCurrentEpochWithHttpInfo($contentType);
         return $response;
     }
 
@@ -136,14 +184,15 @@ class VotingApi
      *
      * Get current voting epoch
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentEpoch'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VotingEpoch, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetCurrentEpochWithHttpInfo()
+    public function votingGetCurrentEpochWithHttpInfo(string $contentType = self::contentTypes['votingGetCurrentEpoch'][0])
     {
-        $request = $this->votingGetCurrentEpochRequest();
+        $request = $this->votingGetCurrentEpochRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -155,6 +204,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -179,6 +235,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VotingEpoch' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -193,6 +252,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -221,13 +283,14 @@ class VotingApi
      *
      * Get current voting epoch
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentEpoch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetCurrentEpochAsync()
+    public function votingGetCurrentEpochAsync(string $contentType = self::contentTypes['votingGetCurrentEpoch'][0])
     {
-        return $this->votingGetCurrentEpochAsyncWithHttpInfo()
+        return $this->votingGetCurrentEpochAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -240,14 +303,15 @@ class VotingApi
      *
      * Get current voting epoch
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentEpoch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetCurrentEpochAsyncWithHttpInfo()
+    public function votingGetCurrentEpochAsyncWithHttpInfo(string $contentType = self::contentTypes['votingGetCurrentEpoch'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VotingEpoch';
-        $request = $this->votingGetCurrentEpochRequest();
+        $request = $this->votingGetCurrentEpochRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -257,6 +321,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -285,12 +352,14 @@ class VotingApi
     /**
      * Create request for operation 'votingGetCurrentEpoch'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentEpoch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetCurrentEpochRequest()
+    public function votingGetCurrentEpochRequest(string $contentType = self::contentTypes['votingGetCurrentEpoch'][0])
     {
+
 
         $resourcePath = '/v1/voting/epochs/current';
         $formParams = [];
@@ -303,16 +372,11 @@ class VotingApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -330,12 +394,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -351,10 +415,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -365,14 +430,15 @@ class VotingApi
      *
      * Get current voting period
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentPeriod'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VotingPeriod
      */
-    public function votingGetCurrentPeriod()
+    public function votingGetCurrentPeriod(string $contentType = self::contentTypes['votingGetCurrentPeriod'][0])
     {
-        list($response) = $this->votingGetCurrentPeriodWithHttpInfo();
+        list($response) = $this->votingGetCurrentPeriodWithHttpInfo($contentType);
         return $response;
     }
 
@@ -381,14 +447,15 @@ class VotingApi
      *
      * Get current voting period
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentPeriod'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VotingPeriod, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetCurrentPeriodWithHttpInfo()
+    public function votingGetCurrentPeriodWithHttpInfo(string $contentType = self::contentTypes['votingGetCurrentPeriod'][0])
     {
-        $request = $this->votingGetCurrentPeriodRequest();
+        $request = $this->votingGetCurrentPeriodRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -400,6 +467,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -424,6 +498,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VotingPeriod' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -438,6 +515,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -466,13 +546,14 @@ class VotingApi
      *
      * Get current voting period
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentPeriod'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetCurrentPeriodAsync()
+    public function votingGetCurrentPeriodAsync(string $contentType = self::contentTypes['votingGetCurrentPeriod'][0])
     {
-        return $this->votingGetCurrentPeriodAsyncWithHttpInfo()
+        return $this->votingGetCurrentPeriodAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -485,14 +566,15 @@ class VotingApi
      *
      * Get current voting period
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentPeriod'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetCurrentPeriodAsyncWithHttpInfo()
+    public function votingGetCurrentPeriodAsyncWithHttpInfo(string $contentType = self::contentTypes['votingGetCurrentPeriod'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VotingPeriod';
-        $request = $this->votingGetCurrentPeriodRequest();
+        $request = $this->votingGetCurrentPeriodRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -502,6 +584,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -530,12 +615,14 @@ class VotingApi
     /**
      * Create request for operation 'votingGetCurrentPeriod'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetCurrentPeriod'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetCurrentPeriodRequest()
+    public function votingGetCurrentPeriodRequest(string $contentType = self::contentTypes['votingGetCurrentPeriod'][0])
     {
+
 
         $resourcePath = '/v1/voting/periods/current';
         $formParams = [];
@@ -548,16 +635,11 @@ class VotingApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -575,12 +657,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -596,10 +678,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -611,14 +694,15 @@ class VotingApi
      * Get voting epoch by index
      *
      * @param  int $index Voting epoch index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpoch'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VotingEpoch
      */
-    public function votingGetEpoch($index)
+    public function votingGetEpoch($index, string $contentType = self::contentTypes['votingGetEpoch'][0])
     {
-        list($response) = $this->votingGetEpochWithHttpInfo($index);
+        list($response) = $this->votingGetEpochWithHttpInfo($index, $contentType);
         return $response;
     }
 
@@ -628,14 +712,15 @@ class VotingApi
      * Get voting epoch by index
      *
      * @param  int $index Voting epoch index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpoch'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VotingEpoch, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetEpochWithHttpInfo($index)
+    public function votingGetEpochWithHttpInfo($index, string $contentType = self::contentTypes['votingGetEpoch'][0])
     {
-        $request = $this->votingGetEpochRequest($index);
+        $request = $this->votingGetEpochRequest($index, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -647,6 +732,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -671,6 +763,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VotingEpoch' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -685,6 +780,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -714,13 +812,14 @@ class VotingApi
      * Get voting epoch by index
      *
      * @param  int $index Voting epoch index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpoch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetEpochAsync($index)
+    public function votingGetEpochAsync($index, string $contentType = self::contentTypes['votingGetEpoch'][0])
     {
-        return $this->votingGetEpochAsyncWithHttpInfo($index)
+        return $this->votingGetEpochAsyncWithHttpInfo($index, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -734,14 +833,15 @@ class VotingApi
      * Get voting epoch by index
      *
      * @param  int $index Voting epoch index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpoch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetEpochAsyncWithHttpInfo($index)
+    public function votingGetEpochAsyncWithHttpInfo($index, string $contentType = self::contentTypes['votingGetEpoch'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VotingEpoch';
-        $request = $this->votingGetEpochRequest($index);
+        $request = $this->votingGetEpochRequest($index, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -751,6 +851,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -780,18 +883,21 @@ class VotingApi
      * Create request for operation 'votingGetEpoch'
      *
      * @param  int $index Voting epoch index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpoch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetEpochRequest($index)
+    public function votingGetEpochRequest($index, string $contentType = self::contentTypes['votingGetEpoch'][0])
     {
+
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $index when calling votingGetEpoch'
             );
         }
+
 
         $resourcePath = '/v1/voting/epochs/{index}';
         $formParams = [];
@@ -812,16 +918,11 @@ class VotingApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -839,12 +940,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -860,10 +961,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -874,17 +976,18 @@ class VotingApi
      *
      * Get voting epochs
      *
-     * @param  OneOfSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpochs'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VotingEpoch[]
      */
-    public function votingGetEpochs($sort = null, $offset = null, $limit = 100)
+    public function votingGetEpochs($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetEpochs'][0])
     {
-        list($response) = $this->votingGetEpochsWithHttpInfo($sort, $offset, $limit);
+        list($response) = $this->votingGetEpochsWithHttpInfo($sort, $offset, $limit, $contentType);
         return $response;
     }
 
@@ -893,17 +996,18 @@ class VotingApi
      *
      * Get voting epochs
      *
-     * @param  OneOfSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpochs'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VotingEpoch[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetEpochsWithHttpInfo($sort = null, $offset = null, $limit = 100)
+    public function votingGetEpochsWithHttpInfo($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetEpochs'][0])
     {
-        $request = $this->votingGetEpochsRequest($sort, $offset, $limit);
+        $request = $this->votingGetEpochsRequest($sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -915,6 +1019,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -939,6 +1050,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VotingEpoch[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -953,6 +1067,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -981,16 +1098,17 @@ class VotingApi
      *
      * Get voting epochs
      *
-     * @param  OneOfSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpochs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetEpochsAsync($sort = null, $offset = null, $limit = 100)
+    public function votingGetEpochsAsync($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetEpochs'][0])
     {
-        return $this->votingGetEpochsAsyncWithHttpInfo($sort, $offset, $limit)
+        return $this->votingGetEpochsAsyncWithHttpInfo($sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1003,17 +1121,18 @@ class VotingApi
      *
      * Get voting epochs
      *
-     * @param  OneOfSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpochs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetEpochsAsyncWithHttpInfo($sort = null, $offset = null, $limit = 100)
+    public function votingGetEpochsAsyncWithHttpInfo($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetEpochs'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VotingEpoch[]';
-        $request = $this->votingGetEpochsRequest($sort, $offset, $limit);
+        $request = $this->votingGetEpochsRequest($sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1023,6 +1142,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1051,22 +1173,26 @@ class VotingApi
     /**
      * Create request for operation 'votingGetEpochs'
      *
-     * @param  OneOfSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting epochs by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetEpochs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetEpochsRequest($sort = null, $offset = null, $limit = 100)
+    public function votingGetEpochsRequest($sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetEpochs'][0])
     {
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetEpochs, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetEpochs, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/voting/epochs';
         $formParams = [];
@@ -1076,52 +1202,41 @@ class VotingApi
         $multipart = false;
 
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1139,12 +1254,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1160,10 +1275,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1174,14 +1290,15 @@ class VotingApi
      *
      * Get latest voting
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetLatestVoting'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VotingEpoch
      */
-    public function votingGetLatestVoting()
+    public function votingGetLatestVoting(string $contentType = self::contentTypes['votingGetLatestVoting'][0])
     {
-        list($response) = $this->votingGetLatestVotingWithHttpInfo();
+        list($response) = $this->votingGetLatestVotingWithHttpInfo($contentType);
         return $response;
     }
 
@@ -1190,14 +1307,15 @@ class VotingApi
      *
      * Get latest voting
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetLatestVoting'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VotingEpoch, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetLatestVotingWithHttpInfo()
+    public function votingGetLatestVotingWithHttpInfo(string $contentType = self::contentTypes['votingGetLatestVoting'][0])
     {
-        $request = $this->votingGetLatestVotingRequest();
+        $request = $this->votingGetLatestVotingRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1209,6 +1327,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1233,6 +1358,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VotingEpoch' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1247,6 +1375,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1275,13 +1406,14 @@ class VotingApi
      *
      * Get latest voting
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetLatestVoting'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetLatestVotingAsync()
+    public function votingGetLatestVotingAsync(string $contentType = self::contentTypes['votingGetLatestVoting'][0])
     {
-        return $this->votingGetLatestVotingAsyncWithHttpInfo()
+        return $this->votingGetLatestVotingAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1294,14 +1426,15 @@ class VotingApi
      *
      * Get latest voting
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetLatestVoting'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetLatestVotingAsyncWithHttpInfo()
+    public function votingGetLatestVotingAsyncWithHttpInfo(string $contentType = self::contentTypes['votingGetLatestVoting'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VotingEpoch';
-        $request = $this->votingGetLatestVotingRequest();
+        $request = $this->votingGetLatestVotingRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1311,6 +1444,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1339,12 +1475,14 @@ class VotingApi
     /**
      * Create request for operation 'votingGetLatestVoting'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetLatestVoting'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetLatestVotingRequest()
+    public function votingGetLatestVotingRequest(string $contentType = self::contentTypes['votingGetLatestVoting'][0])
     {
+
 
         $resourcePath = '/v1/voting/epochs/latest_voting';
         $formParams = [];
@@ -1357,16 +1495,11 @@ class VotingApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1384,12 +1517,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1405,10 +1538,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1420,14 +1554,15 @@ class VotingApi
      * Get voting period by index
      *
      * @param  int $index Voting period index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriod'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VotingPeriod
      */
-    public function votingGetPeriod($index)
+    public function votingGetPeriod($index, string $contentType = self::contentTypes['votingGetPeriod'][0])
     {
-        list($response) = $this->votingGetPeriodWithHttpInfo($index);
+        list($response) = $this->votingGetPeriodWithHttpInfo($index, $contentType);
         return $response;
     }
 
@@ -1437,14 +1572,15 @@ class VotingApi
      * Get voting period by index
      *
      * @param  int $index Voting period index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriod'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VotingPeriod, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetPeriodWithHttpInfo($index)
+    public function votingGetPeriodWithHttpInfo($index, string $contentType = self::contentTypes['votingGetPeriod'][0])
     {
-        $request = $this->votingGetPeriodRequest($index);
+        $request = $this->votingGetPeriodRequest($index, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1456,6 +1592,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1480,6 +1623,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VotingPeriod' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1494,6 +1640,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1523,13 +1672,14 @@ class VotingApi
      * Get voting period by index
      *
      * @param  int $index Voting period index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriod'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodAsync($index)
+    public function votingGetPeriodAsync($index, string $contentType = self::contentTypes['votingGetPeriod'][0])
     {
-        return $this->votingGetPeriodAsyncWithHttpInfo($index)
+        return $this->votingGetPeriodAsyncWithHttpInfo($index, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1543,14 +1693,15 @@ class VotingApi
      * Get voting period by index
      *
      * @param  int $index Voting period index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriod'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodAsyncWithHttpInfo($index)
+    public function votingGetPeriodAsyncWithHttpInfo($index, string $contentType = self::contentTypes['votingGetPeriod'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VotingPeriod';
-        $request = $this->votingGetPeriodRequest($index);
+        $request = $this->votingGetPeriodRequest($index, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1560,6 +1711,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1589,18 +1743,21 @@ class VotingApi
      * Create request for operation 'votingGetPeriod'
      *
      * @param  int $index Voting period index starting from zero (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriod'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetPeriodRequest($index)
+    public function votingGetPeriodRequest($index, string $contentType = self::contentTypes['votingGetPeriod'][0])
     {
+
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $index when calling votingGetPeriod'
             );
         }
+
 
         $resourcePath = '/v1/voting/periods/{index}';
         $formParams = [];
@@ -1621,16 +1778,11 @@ class VotingApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1648,12 +1800,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1669,10 +1821,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1685,14 +1838,15 @@ class VotingApi
      *
      * @param  int $index Voting period index starting from zero (required)
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VoterSnapshot
      */
-    public function votingGetPeriodVoter($index, $address)
+    public function votingGetPeriodVoter($index, $address, string $contentType = self::contentTypes['votingGetPeriodVoter'][0])
     {
-        list($response) = $this->votingGetPeriodVoterWithHttpInfo($index, $address);
+        list($response) = $this->votingGetPeriodVoterWithHttpInfo($index, $address, $contentType);
         return $response;
     }
 
@@ -1703,14 +1857,15 @@ class VotingApi
      *
      * @param  int $index Voting period index starting from zero (required)
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VoterSnapshot, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetPeriodVoterWithHttpInfo($index, $address)
+    public function votingGetPeriodVoterWithHttpInfo($index, $address, string $contentType = self::contentTypes['votingGetPeriodVoter'][0])
     {
-        $request = $this->votingGetPeriodVoterRequest($index, $address);
+        $request = $this->votingGetPeriodVoterRequest($index, $address, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1722,6 +1877,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1746,6 +1908,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VoterSnapshot' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1760,6 +1925,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1790,13 +1958,14 @@ class VotingApi
      *
      * @param  int $index Voting period index starting from zero (required)
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodVoterAsync($index, $address)
+    public function votingGetPeriodVoterAsync($index, $address, string $contentType = self::contentTypes['votingGetPeriodVoter'][0])
     {
-        return $this->votingGetPeriodVoterAsyncWithHttpInfo($index, $address)
+        return $this->votingGetPeriodVoterAsyncWithHttpInfo($index, $address, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1811,14 +1980,15 @@ class VotingApi
      *
      * @param  int $index Voting period index starting from zero (required)
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodVoterAsyncWithHttpInfo($index, $address)
+    public function votingGetPeriodVoterAsyncWithHttpInfo($index, $address, string $contentType = self::contentTypes['votingGetPeriodVoter'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VoterSnapshot';
-        $request = $this->votingGetPeriodVoterRequest($index, $address);
+        $request = $this->votingGetPeriodVoterRequest($index, $address, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1828,6 +1998,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1858,24 +2031,28 @@ class VotingApi
      *
      * @param  int $index Voting period index starting from zero (required)
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetPeriodVoterRequest($index, $address)
+    public function votingGetPeriodVoterRequest($index, $address, string $contentType = self::contentTypes['votingGetPeriodVoter'][0])
     {
+
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $index when calling votingGetPeriodVoter'
             );
         }
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling votingGetPeriodVoter'
             );
         }
+
 
         $resourcePath = '/v1/voting/periods/{index}/voters/{address}';
         $formParams = [];
@@ -1904,16 +2081,11 @@ class VotingApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1931,12 +2103,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1952,10 +2124,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1967,14 +2140,15 @@ class VotingApi
      * Get current period voter
      *
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter2'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VoterSnapshot
      */
-    public function votingGetPeriodVoter2($address)
+    public function votingGetPeriodVoter2($address, string $contentType = self::contentTypes['votingGetPeriodVoter2'][0])
     {
-        list($response) = $this->votingGetPeriodVoter2WithHttpInfo($address);
+        list($response) = $this->votingGetPeriodVoter2WithHttpInfo($address, $contentType);
         return $response;
     }
 
@@ -1984,14 +2158,15 @@ class VotingApi
      * Get current period voter
      *
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter2'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VoterSnapshot, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetPeriodVoter2WithHttpInfo($address)
+    public function votingGetPeriodVoter2WithHttpInfo($address, string $contentType = self::contentTypes['votingGetPeriodVoter2'][0])
     {
-        $request = $this->votingGetPeriodVoter2Request($address);
+        $request = $this->votingGetPeriodVoter2Request($address, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2003,6 +2178,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2027,6 +2209,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VoterSnapshot' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2041,6 +2226,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2070,13 +2258,14 @@ class VotingApi
      * Get current period voter
      *
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodVoter2Async($address)
+    public function votingGetPeriodVoter2Async($address, string $contentType = self::contentTypes['votingGetPeriodVoter2'][0])
     {
-        return $this->votingGetPeriodVoter2AsyncWithHttpInfo($address)
+        return $this->votingGetPeriodVoter2AsyncWithHttpInfo($address, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2090,14 +2279,15 @@ class VotingApi
      * Get current period voter
      *
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodVoter2AsyncWithHttpInfo($address)
+    public function votingGetPeriodVoter2AsyncWithHttpInfo($address, string $contentType = self::contentTypes['votingGetPeriodVoter2'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VoterSnapshot';
-        $request = $this->votingGetPeriodVoter2Request($address);
+        $request = $this->votingGetPeriodVoter2Request($address, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2107,6 +2297,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2136,18 +2329,21 @@ class VotingApi
      * Create request for operation 'votingGetPeriodVoter2'
      *
      * @param  string $address Voter address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoter2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetPeriodVoter2Request($address)
+    public function votingGetPeriodVoter2Request($address, string $contentType = self::contentTypes['votingGetPeriodVoter2'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling votingGetPeriodVoter2'
             );
         }
+
 
         $resourcePath = '/v1/voting/periods/current/voters/{address}';
         $formParams = [];
@@ -2168,16 +2364,11 @@ class VotingApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -2195,12 +2386,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -2216,10 +2407,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -2228,40 +2420,44 @@ class VotingApi
     /**
      * Operation votingGetPeriodVoters
      *
-     * Get current period voters
+     * Get period voters
      *
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $index Voting period index starting from zero (required)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VoterSnapshot[]
      */
-    public function votingGetPeriodVoters($status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVoters($index, $status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters'][0])
     {
-        list($response) = $this->votingGetPeriodVotersWithHttpInfo($status, $sort, $offset, $limit);
+        list($response) = $this->votingGetPeriodVotersWithHttpInfo($index, $status, $sort, $offset, $limit, $contentType);
         return $response;
     }
 
     /**
      * Operation votingGetPeriodVotersWithHttpInfo
      *
-     * Get current period voters
+     * Get period voters
      *
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $index Voting period index starting from zero (required)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VoterSnapshot[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetPeriodVotersWithHttpInfo($status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVotersWithHttpInfo($index, $status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters'][0])
     {
-        $request = $this->votingGetPeriodVotersRequest($status, $sort, $offset, $limit);
+        $request = $this->votingGetPeriodVotersRequest($index, $status, $sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2273,6 +2469,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2297,6 +2500,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VoterSnapshot[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2311,6 +2517,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2337,19 +2546,21 @@ class VotingApi
     /**
      * Operation votingGetPeriodVotersAsync
      *
-     * Get current period voters
+     * Get period voters
      *
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $index Voting period index starting from zero (required)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodVotersAsync($status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVotersAsync($index, $status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters'][0])
     {
-        return $this->votingGetPeriodVotersAsyncWithHttpInfo($status, $sort, $offset, $limit)
+        return $this->votingGetPeriodVotersAsyncWithHttpInfo($index, $status, $sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2360,20 +2571,22 @@ class VotingApi
     /**
      * Operation votingGetPeriodVotersAsyncWithHttpInfo
      *
-     * Get current period voters
+     * Get period voters
      *
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $index Voting period index starting from zero (required)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodVotersAsyncWithHttpInfo($status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVotersAsyncWithHttpInfo($index, $status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VoterSnapshot[]';
-        $request = $this->votingGetPeriodVotersRequest($status, $sort, $offset, $limit);
+        $request = $this->votingGetPeriodVotersRequest($index, $status, $sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2383,6 +2596,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2411,25 +2627,38 @@ class VotingApi
     /**
      * Create request for operation 'votingGetPeriodVoters'
      *
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $index Voting period index starting from zero (required)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetPeriodVotersRequest($status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVotersRequest($index, $status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters'][0])
     {
+
+        // verify the required parameter 'index' is set
+        if ($index === null || (is_array($index) && count($index) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $index when calling votingGetPeriodVoters'
+            );
+        }
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetPeriodVoters, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetPeriodVoters, must be bigger than or equal to 0.');
         }
+        
 
-
-        $resourcePath = '/v1/voting/periods/current/voters';
+        $resourcePath = '/v1/voting/periods/{index}/voters';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2437,63 +2666,58 @@ class VotingApi
         $multipart = false;
 
         // query params
-        if ($status !== null) {
-            if('form' === 'form' && is_array($status)) {
-                foreach($status as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['status'] = $status;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfVoterStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
-
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
+        // path params
+        if ($index !== null) {
+            $resourcePath = str_replace(
+                '{' . 'index' . '}',
+                ObjectSerializer::toPathValue($index),
+                $resourcePath
             );
         }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -2511,12 +2735,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -2532,54 +2756,55 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
     }
 
     /**
-     * Operation votingGetPeriodVotersAll
+     * Operation votingGetPeriodVoters2
      *
-     * Get period voters
+     * Get current period voters
      *
-     * @param  int $index Voting period index starting from zero (required)
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters2'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VoterSnapshot[]
      */
-    public function votingGetPeriodVotersAll($index, $status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVoters2($status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters2'][0])
     {
-        list($response) = $this->votingGetPeriodVotersAllWithHttpInfo($index, $status, $sort, $offset, $limit);
+        list($response) = $this->votingGetPeriodVoters2WithHttpInfo($status, $sort, $offset, $limit, $contentType);
         return $response;
     }
 
     /**
-     * Operation votingGetPeriodVotersAllWithHttpInfo
+     * Operation votingGetPeriodVoters2WithHttpInfo
      *
-     * Get period voters
+     * Get current period voters
      *
-     * @param  int $index Voting period index starting from zero (required)
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters2'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VoterSnapshot[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetPeriodVotersAllWithHttpInfo($index, $status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVoters2WithHttpInfo($status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters2'][0])
     {
-        $request = $this->votingGetPeriodVotersAllRequest($index, $status, $sort, $offset, $limit);
+        $request = $this->votingGetPeriodVoters2Request($status, $sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2591,6 +2816,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2615,6 +2847,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VoterSnapshot[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2629,6 +2864,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2653,22 +2891,22 @@ class VotingApi
     }
 
     /**
-     * Operation votingGetPeriodVotersAllAsync
+     * Operation votingGetPeriodVoters2Async
      *
-     * Get period voters
+     * Get current period voters
      *
-     * @param  int $index Voting period index starting from zero (required)
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodVotersAllAsync($index, $status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVoters2Async($status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters2'][0])
     {
-        return $this->votingGetPeriodVotersAllAsyncWithHttpInfo($index, $status, $sort, $offset, $limit)
+        return $this->votingGetPeriodVoters2AsyncWithHttpInfo($status, $sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2677,23 +2915,23 @@ class VotingApi
     }
 
     /**
-     * Operation votingGetPeriodVotersAllAsyncWithHttpInfo
+     * Operation votingGetPeriodVoters2AsyncWithHttpInfo
      *
-     * Get period voters
+     * Get current period voters
      *
-     * @param  int $index Voting period index starting from zero (required)
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodVotersAllAsyncWithHttpInfo($index, $status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVoters2AsyncWithHttpInfo($status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters2'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VoterSnapshot[]';
-        $request = $this->votingGetPeriodVotersAllRequest($index, $status, $sort, $offset, $limit);
+        $request = $this->votingGetPeriodVoters2Request($status, $sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2703,6 +2941,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2729,34 +2970,32 @@ class VotingApi
     }
 
     /**
-     * Create request for operation 'votingGetPeriodVotersAll'
+     * Create request for operation 'votingGetPeriodVoters2'
      *
-     * @param  int $index Voting period index starting from zero (required)
-     * @param  OneOfVoterStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
-     * @param  OneOfSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  VotingGetPeriodVotersStatusParameter $status Filters voters by status (&#x60;none&#x60;, &#x60;upvoted&#x60;, &#x60;voted_yay&#x60;, &#x60;voted_nay&#x60;, &#x60;voted_pass&#x60;) (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voters by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriodVoters2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetPeriodVotersAllRequest($index, $status = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodVoters2Request($status = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriodVoters2'][0])
     {
-        // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling votingGetPeriodVotersAll'
-            );
-        }
+
+
+
+
         if ($limit !== null && $limit > 10000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetPeriodVotersAll, must be smaller than or equal to 10000.');
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetPeriodVoters2, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetPeriodVotersAll, must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetPeriodVoters2, must be bigger than or equal to 0.');
         }
+        
 
-
-        $resourcePath = '/v1/voting/periods/{index}/voters';
+        $resourcePath = '/v1/voting/periods/current/voters';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2764,71 +3003,50 @@ class VotingApi
         $multipart = false;
 
         // query params
-        if ($status !== null) {
-            if('form' === 'form' && is_array($status)) {
-                foreach($status as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['status'] = $status;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfVoterStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
-        // path params
-        if ($index !== null) {
-            $resourcePath = str_replace(
-                '{' . 'index' . '}',
-                ObjectSerializer::toPathValue($index),
-                $resourcePath
-            );
-        }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -2846,12 +3064,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -2867,10 +3085,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -2881,18 +3100,19 @@ class VotingApi
      *
      * Get voting periods
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriods'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\VotingPeriod[]
      */
-    public function votingGetPeriods($select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriods($select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriods'][0])
     {
-        list($response) = $this->votingGetPeriodsWithHttpInfo($select, $sort, $offset, $limit);
+        list($response) = $this->votingGetPeriodsWithHttpInfo($select, $sort, $offset, $limit, $contentType);
         return $response;
     }
 
@@ -2901,18 +3121,19 @@ class VotingApi
      *
      * Get voting periods
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriods'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\VotingPeriod[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetPeriodsWithHttpInfo($select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodsWithHttpInfo($select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriods'][0])
     {
-        $request = $this->votingGetPeriodsRequest($select, $sort, $offset, $limit);
+        $request = $this->votingGetPeriodsRequest($select, $sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2924,6 +3145,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2948,6 +3176,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\VotingPeriod[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2962,6 +3193,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2990,17 +3224,18 @@ class VotingApi
      *
      * Get voting periods
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriods'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodsAsync($select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodsAsync($select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriods'][0])
     {
-        return $this->votingGetPeriodsAsyncWithHttpInfo($select, $sort, $offset, $limit)
+        return $this->votingGetPeriodsAsyncWithHttpInfo($select, $sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3013,18 +3248,19 @@ class VotingApi
      *
      * Get voting periods
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriods'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetPeriodsAsyncWithHttpInfo($select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodsAsyncWithHttpInfo($select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriods'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\VotingPeriod[]';
-        $request = $this->votingGetPeriodsRequest($select, $sort, $offset, $limit);
+        $request = $this->votingGetPeriodsRequest($select, $sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3034,6 +3270,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3062,23 +3301,28 @@ class VotingApi
     /**
      * Create request for operation 'votingGetPeriods'
      *
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetPeriods'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetPeriodsRequest($select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetPeriodsRequest($select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetPeriods'][0])
     {
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetPeriods, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetPeriods, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/voting/periods';
         $formParams = [];
@@ -3088,63 +3332,50 @@ class VotingApi
         $multipart = false;
 
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -3162,12 +3393,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -3183,10 +3414,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -3198,14 +3430,15 @@ class VotingApi
      * Get proposal by hash
      *
      * @param  string $hash Proposal hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalByHash'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Proposal
      */
-    public function votingGetProposalByHash($hash)
+    public function votingGetProposalByHash($hash, string $contentType = self::contentTypes['votingGetProposalByHash'][0])
     {
-        list($response) = $this->votingGetProposalByHashWithHttpInfo($hash);
+        list($response) = $this->votingGetProposalByHashWithHttpInfo($hash, $contentType);
         return $response;
     }
 
@@ -3215,14 +3448,15 @@ class VotingApi
      * Get proposal by hash
      *
      * @param  string $hash Proposal hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalByHash'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Proposal, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetProposalByHashWithHttpInfo($hash)
+    public function votingGetProposalByHashWithHttpInfo($hash, string $contentType = self::contentTypes['votingGetProposalByHash'][0])
     {
-        $request = $this->votingGetProposalByHashRequest($hash);
+        $request = $this->votingGetProposalByHashRequest($hash, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3234,6 +3468,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -3258,6 +3499,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Proposal' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3272,6 +3516,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -3301,13 +3548,14 @@ class VotingApi
      * Get proposal by hash
      *
      * @param  string $hash Proposal hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalByHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetProposalByHashAsync($hash)
+    public function votingGetProposalByHashAsync($hash, string $contentType = self::contentTypes['votingGetProposalByHash'][0])
     {
-        return $this->votingGetProposalByHashAsyncWithHttpInfo($hash)
+        return $this->votingGetProposalByHashAsyncWithHttpInfo($hash, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3321,14 +3569,15 @@ class VotingApi
      * Get proposal by hash
      *
      * @param  string $hash Proposal hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalByHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetProposalByHashAsyncWithHttpInfo($hash)
+    public function votingGetProposalByHashAsyncWithHttpInfo($hash, string $contentType = self::contentTypes['votingGetProposalByHash'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Proposal';
-        $request = $this->votingGetProposalByHashRequest($hash);
+        $request = $this->votingGetProposalByHashRequest($hash, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3338,6 +3587,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3367,18 +3619,21 @@ class VotingApi
      * Create request for operation 'votingGetProposalByHash'
      *
      * @param  string $hash Proposal hash (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalByHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetProposalByHashRequest($hash)
+    public function votingGetProposalByHashRequest($hash, string $contentType = self::contentTypes['votingGetProposalByHash'][0])
     {
+
         // verify the required parameter 'hash' is set
         if ($hash === null || (is_array($hash) && count($hash) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $hash when calling votingGetProposalByHash'
             );
         }
+
 
         $resourcePath = '/v1/voting/proposals/{hash}';
         $formParams = [];
@@ -3399,16 +3654,11 @@ class VotingApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -3426,12 +3676,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -3447,10 +3697,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -3461,19 +3712,21 @@ class VotingApi
      *
      * Get proposals
      *
-     * @param  OneOfInt32Parameter $epoch Filters proposals by voting epoch (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  OperationsGetBallotsProposalParameter $hash Filters proposals by hash (optional)
+     * @param  AccountsGetIdParameter $epoch Filters proposals by voting epoch (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposals'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Proposal[]
      */
-    public function votingGetProposals($epoch = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetProposals($hash = null, $epoch = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetProposals'][0])
     {
-        list($response) = $this->votingGetProposalsWithHttpInfo($epoch, $select, $sort, $offset, $limit);
+        list($response) = $this->votingGetProposalsWithHttpInfo($hash, $epoch, $select, $sort, $offset, $limit, $contentType);
         return $response;
     }
 
@@ -3482,19 +3735,21 @@ class VotingApi
      *
      * Get proposals
      *
-     * @param  OneOfInt32Parameter $epoch Filters proposals by voting epoch (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  OperationsGetBallotsProposalParameter $hash Filters proposals by hash (optional)
+     * @param  AccountsGetIdParameter $epoch Filters proposals by voting epoch (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposals'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Proposal[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetProposalsWithHttpInfo($epoch = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetProposalsWithHttpInfo($hash = null, $epoch = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetProposals'][0])
     {
-        $request = $this->votingGetProposalsRequest($epoch, $select, $sort, $offset, $limit);
+        $request = $this->votingGetProposalsRequest($hash, $epoch, $select, $sort, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3506,6 +3761,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -3530,6 +3792,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\Proposal[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3544,6 +3809,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -3572,18 +3840,20 @@ class VotingApi
      *
      * Get proposals
      *
-     * @param  OneOfInt32Parameter $epoch Filters proposals by voting epoch (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  OperationsGetBallotsProposalParameter $hash Filters proposals by hash (optional)
+     * @param  AccountsGetIdParameter $epoch Filters proposals by voting epoch (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposals'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetProposalsAsync($epoch = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetProposalsAsync($hash = null, $epoch = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetProposals'][0])
     {
-        return $this->votingGetProposalsAsyncWithHttpInfo($epoch, $select, $sort, $offset, $limit)
+        return $this->votingGetProposalsAsyncWithHttpInfo($hash, $epoch, $select, $sort, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3596,19 +3866,21 @@ class VotingApi
      *
      * Get proposals
      *
-     * @param  OneOfInt32Parameter $epoch Filters proposals by voting epoch (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  OperationsGetBallotsProposalParameter $hash Filters proposals by hash (optional)
+     * @param  AccountsGetIdParameter $epoch Filters proposals by voting epoch (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposals'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetProposalsAsyncWithHttpInfo($epoch = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetProposalsAsyncWithHttpInfo($hash = null, $epoch = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetProposals'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Proposal[]';
-        $request = $this->votingGetProposalsRequest($epoch, $select, $sort, $offset, $limit);
+        $request = $this->votingGetProposalsRequest($hash, $epoch, $select, $sort, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3618,6 +3890,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3646,24 +3921,32 @@ class VotingApi
     /**
      * Create request for operation 'votingGetProposals'
      *
-     * @param  OneOfInt32Parameter $epoch Filters proposals by voting epoch (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;rolls&#x60;. (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  OperationsGetBallotsProposalParameter $hash Filters proposals by hash (optional)
+     * @param  AccountsGetIdParameter $epoch Filters proposals by voting epoch (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts proposals by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;upvotes&#x60;, &#x60;votingPower&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposals'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetProposalsRequest($epoch = null, $select = null, $sort = null, $offset = null, $limit = 100)
+    public function votingGetProposalsRequest($hash = null, $epoch = null, $select = null, $sort = null, $offset = null, $limit = 100, string $contentType = self::contentTypes['votingGetProposals'][0])
     {
+
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetProposals, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling VotingApi.votingGetProposals, must be bigger than or equal to 0.');
         }
-
+        
 
         $resourcePath = '/v1/voting/proposals';
         $formParams = [];
@@ -3673,74 +3956,68 @@ class VotingApi
         $multipart = false;
 
         // query params
-        if ($epoch !== null) {
-            if('form' === 'form' && is_array($epoch)) {
-                foreach($epoch as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['epoch'] = $epoch;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $hash,
+            'hash', // param base name
+            'OneOfProtocolParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $epoch,
+            'epoch', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -3758,12 +4035,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -3779,10 +4056,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -3793,14 +4071,15 @@ class VotingApi
      *
      * Get proposals count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalsCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function votingGetProposalsCount()
+    public function votingGetProposalsCount(string $contentType = self::contentTypes['votingGetProposalsCount'][0])
     {
-        list($response) = $this->votingGetProposalsCountWithHttpInfo();
+        list($response) = $this->votingGetProposalsCountWithHttpInfo($contentType);
         return $response;
     }
 
@@ -3809,14 +4088,15 @@ class VotingApi
      *
      * Get proposals count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalsCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function votingGetProposalsCountWithHttpInfo()
+    public function votingGetProposalsCountWithHttpInfo(string $contentType = self::contentTypes['votingGetProposalsCount'][0])
     {
-        $request = $this->votingGetProposalsCountRequest();
+        $request = $this->votingGetProposalsCountRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3828,6 +4108,13 @@ class VotingApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -3852,6 +4139,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3866,6 +4156,9 @@ class VotingApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -3894,13 +4187,14 @@ class VotingApi
      *
      * Get proposals count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetProposalsCountAsync()
+    public function votingGetProposalsCountAsync(string $contentType = self::contentTypes['votingGetProposalsCount'][0])
     {
-        return $this->votingGetProposalsCountAsyncWithHttpInfo()
+        return $this->votingGetProposalsCountAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3913,14 +4207,15 @@ class VotingApi
      *
      * Get proposals count
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function votingGetProposalsCountAsyncWithHttpInfo()
+    public function votingGetProposalsCountAsyncWithHttpInfo(string $contentType = self::contentTypes['votingGetProposalsCount'][0])
     {
         $returnType = 'int';
-        $request = $this->votingGetProposalsCountRequest();
+        $request = $this->votingGetProposalsCountRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3930,6 +4225,9 @@ class VotingApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -3958,12 +4256,14 @@ class VotingApi
     /**
      * Create request for operation 'votingGetProposalsCount'
      *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['votingGetProposalsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function votingGetProposalsCountRequest()
+    public function votingGetProposalsCountRequest(string $contentType = self::contentTypes['votingGetProposalsCount'][0])
     {
+
 
         $resourcePath = '/v1/voting/proposals/count';
         $formParams = [];
@@ -3976,16 +4276,11 @@ class VotingApi
 
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -4003,12 +4298,12 @@ class VotingApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -4024,10 +4319,11 @@ class VotingApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

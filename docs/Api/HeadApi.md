@@ -1,10 +1,10 @@
 # Bzzhh\Tzkt\HeadApi
 
-All URIs are relative to https://api.tzkt.io.
+All URIs are relative to https://api.tzkt.io, except if the operation defines another base path.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**headGet()**](HeadApi.md#headGet) | **GET** /v1/head | Get indexer head
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**headGet()**](HeadApi.md#headGet) | **GET** /v1/head | Get indexer head |
 
 
 ## `headGet()`

@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**\Bzzhh\Tzkt\Model\MichelineType**](MichelineType.md) |  | [optional]
 **prim** | [**\Bzzhh\Tzkt\Model\PrimType**](PrimType.md) |  | [optional]
 **args** | [**\Bzzhh\Tzkt\Model\IMicheline[]**](IMicheline.md) |  | [optional]
 **annots** | [**\Bzzhh\Tzkt\Model\IAnnotation[]**](IAnnotation.md) |  | [optional]

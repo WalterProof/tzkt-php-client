@@ -1,7 +1,7 @@
 <?php
 /**
  * RewardsApi
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -12,12 +12,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -30,6 +30,7 @@ namespace Bzzhh\Tzkt\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -69,7 +70,35 @@ class RewardsApi
      */
     protected $hostIndex;
 
-    /**
+    /** @var string[] $contentTypes **/
+    public const contentTypes = [
+        'rewardsGetBakerRewards' => [
+            'application/json',
+        ],
+        'rewardsGetBakerRewardsByCycle' => [
+            'application/json',
+        ],
+        'rewardsGetBakerRewardsCount' => [
+            'application/json',
+        ],
+        'rewardsGetDelegatorRewards' => [
+            'application/json',
+        ],
+        'rewardsGetDelegatorRewardsByCycle' => [
+            'application/json',
+        ],
+        'rewardsGetDelegatorRewardsCount' => [
+            'application/json',
+        ],
+        'rewardsGetRewardSplit' => [
+            'application/json',
+        ],
+        'rewardsGetRewardSplitDelegator' => [
+            'application/json',
+        ],
+    ];
+
+/**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -121,20 +150,21 @@ class RewardsApi
      * Get baker cycle rewards
      *
      * @param  string $address Baker address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewards'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BakerRewards[]
      */
-    public function rewardsGetBakerRewards($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetBakerRewards($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewards'][0])
     {
-        list($response) = $this->rewardsGetBakerRewardsWithHttpInfo($address, $cycle, $select, $sort, $offset, $limit, $quote);
+        list($response) = $this->rewardsGetBakerRewardsWithHttpInfo($address, $cycle, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -144,20 +174,21 @@ class RewardsApi
      * Get baker cycle rewards
      *
      * @param  string $address Baker address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewards'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BakerRewards[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function rewardsGetBakerRewardsWithHttpInfo($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetBakerRewardsWithHttpInfo($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewards'][0])
     {
-        $request = $this->rewardsGetBakerRewardsRequest($address, $cycle, $select, $sort, $offset, $limit, $quote);
+        $request = $this->rewardsGetBakerRewardsRequest($address, $cycle, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -169,6 +200,13 @@ class RewardsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -193,6 +231,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BakerRewards[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -207,6 +248,9 @@ class RewardsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -236,19 +280,20 @@ class RewardsApi
      * Get baker cycle rewards
      *
      * @param  string $address Baker address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewards'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetBakerRewardsAsync($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetBakerRewardsAsync($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewards'][0])
     {
-        return $this->rewardsGetBakerRewardsAsyncWithHttpInfo($address, $cycle, $select, $sort, $offset, $limit, $quote)
+        return $this->rewardsGetBakerRewardsAsyncWithHttpInfo($address, $cycle, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -262,20 +307,21 @@ class RewardsApi
      * Get baker cycle rewards
      *
      * @param  string $address Baker address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewards'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetBakerRewardsAsyncWithHttpInfo($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetBakerRewardsAsyncWithHttpInfo($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewards'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BakerRewards[]';
-        $request = $this->rewardsGetBakerRewardsRequest($address, $cycle, $select, $sort, $offset, $limit, $quote);
+        $request = $this->rewardsGetBakerRewardsRequest($address, $cycle, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -285,6 +331,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -314,30 +363,38 @@ class RewardsApi
      * Create request for operation 'rewardsGetBakerRewards'
      *
      * @param  string $address Baker address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewards'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rewardsGetBakerRewardsRequest($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetBakerRewardsRequest($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewards'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling rewardsGetBakerRewards'
             );
         }
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RewardsApi.rewardsGetBakerRewards, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RewardsApi.rewardsGetBakerRewards, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/rewards/bakers/{address}';
@@ -348,71 +405,59 @@ class RewardsApi
         $multipart = false;
 
         // query params
-        if ($cycle !== null) {
-            if('form' === 'form' && is_array($cycle)) {
-                foreach($cycle as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['cycle'] = $cycle;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $cycle,
+            'cycle', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -425,16 +470,11 @@ class RewardsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -452,12 +492,12 @@ class RewardsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -473,10 +513,11 @@ class RewardsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -489,15 +530,16 @@ class RewardsApi
      *
      * @param  string $address Baker address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BakerRewards
      */
-    public function rewardsGetBakerRewardsByCycle($address, $cycle, $quote = null)
+    public function rewardsGetBakerRewardsByCycle($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewardsByCycle'][0])
     {
-        list($response) = $this->rewardsGetBakerRewardsByCycleWithHttpInfo($address, $cycle, $quote);
+        list($response) = $this->rewardsGetBakerRewardsByCycleWithHttpInfo($address, $cycle, $quote, $contentType);
         return $response;
     }
 
@@ -508,15 +550,16 @@ class RewardsApi
      *
      * @param  string $address Baker address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BakerRewards, HTTP status code, HTTP response headers (array of strings)
      */
-    public function rewardsGetBakerRewardsByCycleWithHttpInfo($address, $cycle, $quote = null)
+    public function rewardsGetBakerRewardsByCycleWithHttpInfo($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewardsByCycle'][0])
     {
-        $request = $this->rewardsGetBakerRewardsByCycleRequest($address, $cycle, $quote);
+        $request = $this->rewardsGetBakerRewardsByCycleRequest($address, $cycle, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -528,6 +571,13 @@ class RewardsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -552,6 +602,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BakerRewards' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -566,6 +619,9 @@ class RewardsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -596,14 +652,15 @@ class RewardsApi
      *
      * @param  string $address Baker address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetBakerRewardsByCycleAsync($address, $cycle, $quote = null)
+    public function rewardsGetBakerRewardsByCycleAsync($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewardsByCycle'][0])
     {
-        return $this->rewardsGetBakerRewardsByCycleAsyncWithHttpInfo($address, $cycle, $quote)
+        return $this->rewardsGetBakerRewardsByCycleAsyncWithHttpInfo($address, $cycle, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -618,15 +675,16 @@ class RewardsApi
      *
      * @param  string $address Baker address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetBakerRewardsByCycleAsyncWithHttpInfo($address, $cycle, $quote = null)
+    public function rewardsGetBakerRewardsByCycleAsyncWithHttpInfo($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewardsByCycle'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BakerRewards';
-        $request = $this->rewardsGetBakerRewardsByCycleRequest($address, $cycle, $quote);
+        $request = $this->rewardsGetBakerRewardsByCycleRequest($address, $cycle, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -636,6 +694,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -666,25 +727,30 @@ class RewardsApi
      *
      * @param  string $address Baker address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rewardsGetBakerRewardsByCycleRequest($address, $cycle, $quote = null)
+    public function rewardsGetBakerRewardsByCycleRequest($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetBakerRewardsByCycle'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling rewardsGetBakerRewardsByCycle'
             );
         }
+
         // verify the required parameter 'cycle' is set
         if ($cycle === null || (is_array($cycle) && count($cycle) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $cycle when calling rewardsGetBakerRewardsByCycle'
             );
         }
+
+
 
         $resourcePath = '/v1/rewards/bakers/{address}/{cycle}';
         $formParams = [];
@@ -694,16 +760,14 @@ class RewardsApi
         $multipart = false;
 
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -724,16 +788,11 @@ class RewardsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -751,12 +810,12 @@ class RewardsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -772,10 +831,11 @@ class RewardsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -787,14 +847,15 @@ class RewardsApi
      * Get baker cycle rewards count
      *
      * @param  string $address Baker address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function rewardsGetBakerRewardsCount($address)
+    public function rewardsGetBakerRewardsCount($address, string $contentType = self::contentTypes['rewardsGetBakerRewardsCount'][0])
     {
-        list($response) = $this->rewardsGetBakerRewardsCountWithHttpInfo($address);
+        list($response) = $this->rewardsGetBakerRewardsCountWithHttpInfo($address, $contentType);
         return $response;
     }
 
@@ -804,14 +865,15 @@ class RewardsApi
      * Get baker cycle rewards count
      *
      * @param  string $address Baker address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function rewardsGetBakerRewardsCountWithHttpInfo($address)
+    public function rewardsGetBakerRewardsCountWithHttpInfo($address, string $contentType = self::contentTypes['rewardsGetBakerRewardsCount'][0])
     {
-        $request = $this->rewardsGetBakerRewardsCountRequest($address);
+        $request = $this->rewardsGetBakerRewardsCountRequest($address, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -823,6 +885,13 @@ class RewardsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -847,6 +916,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -861,6 +933,9 @@ class RewardsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -890,13 +965,14 @@ class RewardsApi
      * Get baker cycle rewards count
      *
      * @param  string $address Baker address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetBakerRewardsCountAsync($address)
+    public function rewardsGetBakerRewardsCountAsync($address, string $contentType = self::contentTypes['rewardsGetBakerRewardsCount'][0])
     {
-        return $this->rewardsGetBakerRewardsCountAsyncWithHttpInfo($address)
+        return $this->rewardsGetBakerRewardsCountAsyncWithHttpInfo($address, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -910,14 +986,15 @@ class RewardsApi
      * Get baker cycle rewards count
      *
      * @param  string $address Baker address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetBakerRewardsCountAsyncWithHttpInfo($address)
+    public function rewardsGetBakerRewardsCountAsyncWithHttpInfo($address, string $contentType = self::contentTypes['rewardsGetBakerRewardsCount'][0])
     {
         $returnType = 'int';
-        $request = $this->rewardsGetBakerRewardsCountRequest($address);
+        $request = $this->rewardsGetBakerRewardsCountRequest($address, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -927,6 +1004,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -956,18 +1036,21 @@ class RewardsApi
      * Create request for operation 'rewardsGetBakerRewardsCount'
      *
      * @param  string $address Baker address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetBakerRewardsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rewardsGetBakerRewardsCountRequest($address)
+    public function rewardsGetBakerRewardsCountRequest($address, string $contentType = self::contentTypes['rewardsGetBakerRewardsCount'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling rewardsGetBakerRewardsCount'
             );
         }
+
 
         $resourcePath = '/v1/rewards/bakers/{address}/count';
         $formParams = [];
@@ -988,16 +1071,11 @@ class RewardsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1015,12 +1093,12 @@ class RewardsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1036,10 +1114,11 @@ class RewardsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1051,20 +1130,21 @@ class RewardsApi
      * Get delegator cycle rewards
      *
      * @param  string $address Delegator address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewards'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\DelegatorRewards[]
      */
-    public function rewardsGetDelegatorRewards($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetDelegatorRewards($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewards'][0])
     {
-        list($response) = $this->rewardsGetDelegatorRewardsWithHttpInfo($address, $cycle, $select, $sort, $offset, $limit, $quote);
+        list($response) = $this->rewardsGetDelegatorRewardsWithHttpInfo($address, $cycle, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -1074,20 +1154,21 @@ class RewardsApi
      * Get delegator cycle rewards
      *
      * @param  string $address Delegator address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewards'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\DelegatorRewards[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function rewardsGetDelegatorRewardsWithHttpInfo($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetDelegatorRewardsWithHttpInfo($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewards'][0])
     {
-        $request = $this->rewardsGetDelegatorRewardsRequest($address, $cycle, $select, $sort, $offset, $limit, $quote);
+        $request = $this->rewardsGetDelegatorRewardsRequest($address, $cycle, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1099,6 +1180,13 @@ class RewardsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1123,6 +1211,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\DelegatorRewards[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1137,6 +1228,9 @@ class RewardsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1166,19 +1260,20 @@ class RewardsApi
      * Get delegator cycle rewards
      *
      * @param  string $address Delegator address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewards'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetDelegatorRewardsAsync($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetDelegatorRewardsAsync($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewards'][0])
     {
-        return $this->rewardsGetDelegatorRewardsAsyncWithHttpInfo($address, $cycle, $select, $sort, $offset, $limit, $quote)
+        return $this->rewardsGetDelegatorRewardsAsyncWithHttpInfo($address, $cycle, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1192,20 +1287,21 @@ class RewardsApi
      * Get delegator cycle rewards
      *
      * @param  string $address Delegator address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewards'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetDelegatorRewardsAsyncWithHttpInfo($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetDelegatorRewardsAsyncWithHttpInfo($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewards'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\DelegatorRewards[]';
-        $request = $this->rewardsGetDelegatorRewardsRequest($address, $cycle, $select, $sort, $offset, $limit, $quote);
+        $request = $this->rewardsGetDelegatorRewardsRequest($address, $cycle, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1215,6 +1311,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1244,30 +1343,38 @@ class RewardsApi
      * Create request for operation 'rewardsGetDelegatorRewards'
      *
      * @param  string $address Delegator address. (required)
-     * @param  OneOfInt32Parameter $cycle Filters rewards by cycle. (optional)
-     * @param  OneOfSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  OneOfSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
-     * @param  OneOfOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  AccountsGetIdParameter $cycle Filters rewards by cycle. (optional)
+     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts cycle rewards by specified field. Supported fields: &#x60;cycle&#x60; (default, desc). (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
      * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewards'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rewardsGetDelegatorRewardsRequest($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null)
+    public function rewardsGetDelegatorRewardsRequest($address, $cycle = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewards'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling rewardsGetDelegatorRewards'
             );
         }
+
+
+
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RewardsApi.rewardsGetDelegatorRewards, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RewardsApi.rewardsGetDelegatorRewards, must be bigger than or equal to 0.');
         }
+        
 
 
         $resourcePath = '/v1/rewards/delegators/{address}';
@@ -1278,71 +1385,59 @@ class RewardsApi
         $multipart = false;
 
         // query params
-        if ($cycle !== null) {
-            if('form' === 'form' && is_array($cycle)) {
-                foreach($cycle as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['cycle'] = $cycle;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $cycle,
+            'cycle', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($select !== null) {
-            if('form' === 'form' && is_array($select)) {
-                foreach($select as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['select'] = $select;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($sort !== null) {
-            if('form' === 'form' && is_array($sort)) {
-                foreach($sort as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['sort'] = $sort;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -1355,16 +1450,11 @@ class RewardsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1382,12 +1472,12 @@ class RewardsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1403,10 +1493,11 @@ class RewardsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1419,15 +1510,16 @@ class RewardsApi
      *
      * @param  string $address Delegator address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\DelegatorRewards
      */
-    public function rewardsGetDelegatorRewardsByCycle($address, $cycle, $quote = null)
+    public function rewardsGetDelegatorRewardsByCycle($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsByCycle'][0])
     {
-        list($response) = $this->rewardsGetDelegatorRewardsByCycleWithHttpInfo($address, $cycle, $quote);
+        list($response) = $this->rewardsGetDelegatorRewardsByCycleWithHttpInfo($address, $cycle, $quote, $contentType);
         return $response;
     }
 
@@ -1438,15 +1530,16 @@ class RewardsApi
      *
      * @param  string $address Delegator address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\DelegatorRewards, HTTP status code, HTTP response headers (array of strings)
      */
-    public function rewardsGetDelegatorRewardsByCycleWithHttpInfo($address, $cycle, $quote = null)
+    public function rewardsGetDelegatorRewardsByCycleWithHttpInfo($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsByCycle'][0])
     {
-        $request = $this->rewardsGetDelegatorRewardsByCycleRequest($address, $cycle, $quote);
+        $request = $this->rewardsGetDelegatorRewardsByCycleRequest($address, $cycle, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1458,6 +1551,13 @@ class RewardsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1482,6 +1582,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\DelegatorRewards' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1496,6 +1599,9 @@ class RewardsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1526,14 +1632,15 @@ class RewardsApi
      *
      * @param  string $address Delegator address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetDelegatorRewardsByCycleAsync($address, $cycle, $quote = null)
+    public function rewardsGetDelegatorRewardsByCycleAsync($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsByCycle'][0])
     {
-        return $this->rewardsGetDelegatorRewardsByCycleAsyncWithHttpInfo($address, $cycle, $quote)
+        return $this->rewardsGetDelegatorRewardsByCycleAsyncWithHttpInfo($address, $cycle, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1548,15 +1655,16 @@ class RewardsApi
      *
      * @param  string $address Delegator address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetDelegatorRewardsByCycleAsyncWithHttpInfo($address, $cycle, $quote = null)
+    public function rewardsGetDelegatorRewardsByCycleAsyncWithHttpInfo($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsByCycle'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\DelegatorRewards';
-        $request = $this->rewardsGetDelegatorRewardsByCycleRequest($address, $cycle, $quote);
+        $request = $this->rewardsGetDelegatorRewardsByCycleRequest($address, $cycle, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1566,6 +1674,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1596,25 +1707,30 @@ class RewardsApi
      *
      * @param  string $address Delegator address (required)
      * @param  int $cycle Rewards cycle (required)
-     * @param  OneOfSymbols $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsByCycle'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rewardsGetDelegatorRewardsByCycleRequest($address, $cycle, $quote = null)
+    public function rewardsGetDelegatorRewardsByCycleRequest($address, $cycle, $quote = null, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsByCycle'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling rewardsGetDelegatorRewardsByCycle'
             );
         }
+
         // verify the required parameter 'cycle' is set
         if ($cycle === null || (is_array($cycle) && count($cycle) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $cycle when calling rewardsGetDelegatorRewardsByCycle'
             );
         }
+
+
 
         $resourcePath = '/v1/rewards/delegators/{address}/{cycle}';
         $formParams = [];
@@ -1624,16 +1740,14 @@ class RewardsApi
         $multipart = false;
 
         // query params
-        if ($quote !== null) {
-            if('form' === 'form' && is_array($quote)) {
-                foreach($quote as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['quote'] = $quote;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -1654,16 +1768,11 @@ class RewardsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1681,12 +1790,12 @@ class RewardsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1702,10 +1811,11 @@ class RewardsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1717,14 +1827,15 @@ class RewardsApi
      * Get delegator cycle rewards count
      *
      * @param  string $address Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function rewardsGetDelegatorRewardsCount($address)
+    public function rewardsGetDelegatorRewardsCount($address, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsCount'][0])
     {
-        list($response) = $this->rewardsGetDelegatorRewardsCountWithHttpInfo($address);
+        list($response) = $this->rewardsGetDelegatorRewardsCountWithHttpInfo($address, $contentType);
         return $response;
     }
 
@@ -1734,14 +1845,15 @@ class RewardsApi
      * Get delegator cycle rewards count
      *
      * @param  string $address Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function rewardsGetDelegatorRewardsCountWithHttpInfo($address)
+    public function rewardsGetDelegatorRewardsCountWithHttpInfo($address, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsCount'][0])
     {
-        $request = $this->rewardsGetDelegatorRewardsCountRequest($address);
+        $request = $this->rewardsGetDelegatorRewardsCountRequest($address, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1753,6 +1865,13 @@ class RewardsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -1777,6 +1896,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1791,6 +1913,9 @@ class RewardsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -1820,13 +1945,14 @@ class RewardsApi
      * Get delegator cycle rewards count
      *
      * @param  string $address Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetDelegatorRewardsCountAsync($address)
+    public function rewardsGetDelegatorRewardsCountAsync($address, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsCount'][0])
     {
-        return $this->rewardsGetDelegatorRewardsCountAsyncWithHttpInfo($address)
+        return $this->rewardsGetDelegatorRewardsCountAsyncWithHttpInfo($address, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1840,14 +1966,15 @@ class RewardsApi
      * Get delegator cycle rewards count
      *
      * @param  string $address Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetDelegatorRewardsCountAsyncWithHttpInfo($address)
+    public function rewardsGetDelegatorRewardsCountAsyncWithHttpInfo($address, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsCount'][0])
     {
         $returnType = 'int';
-        $request = $this->rewardsGetDelegatorRewardsCountRequest($address);
+        $request = $this->rewardsGetDelegatorRewardsCountRequest($address, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1857,6 +1984,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -1886,18 +2016,21 @@ class RewardsApi
      * Create request for operation 'rewardsGetDelegatorRewardsCount'
      *
      * @param  string $address Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetDelegatorRewardsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rewardsGetDelegatorRewardsCountRequest($address)
+    public function rewardsGetDelegatorRewardsCountRequest($address, string $contentType = self::contentTypes['rewardsGetDelegatorRewardsCount'][0])
     {
+
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $address when calling rewardsGetDelegatorRewardsCount'
             );
         }
+
 
         $resourcePath = '/v1/rewards/delegators/{address}/count';
         $formParams = [];
@@ -1918,16 +2051,11 @@ class RewardsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -1945,12 +2073,12 @@ class RewardsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -1966,10 +2094,11 @@ class RewardsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -1980,18 +2109,19 @@ class RewardsApi
      *
      * Get reward split
      *
-     * @param  string $address Baker address (required)
+     * @param  string $baker Baker address (required)
      * @param  int $cycle Rewards cycle (required)
      * @param  int $offset Specifies how many delegators in the reward split should be skipped (optional, default to 0)
      * @param  int $limit Maximum number of delegators to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplit'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\RewardSplit
      */
-    public function rewardsGetRewardSplit($address, $cycle, $offset = 0, $limit = 100)
+    public function rewardsGetRewardSplit($baker, $cycle, $offset = 0, $limit = 100, string $contentType = self::contentTypes['rewardsGetRewardSplit'][0])
     {
-        list($response) = $this->rewardsGetRewardSplitWithHttpInfo($address, $cycle, $offset, $limit);
+        list($response) = $this->rewardsGetRewardSplitWithHttpInfo($baker, $cycle, $offset, $limit, $contentType);
         return $response;
     }
 
@@ -2000,18 +2130,19 @@ class RewardsApi
      *
      * Get reward split
      *
-     * @param  string $address Baker address (required)
+     * @param  string $baker Baker address (required)
      * @param  int $cycle Rewards cycle (required)
      * @param  int $offset Specifies how many delegators in the reward split should be skipped (optional, default to 0)
      * @param  int $limit Maximum number of delegators to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplit'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\RewardSplit, HTTP status code, HTTP response headers (array of strings)
      */
-    public function rewardsGetRewardSplitWithHttpInfo($address, $cycle, $offset = 0, $limit = 100)
+    public function rewardsGetRewardSplitWithHttpInfo($baker, $cycle, $offset = 0, $limit = 100, string $contentType = self::contentTypes['rewardsGetRewardSplit'][0])
     {
-        $request = $this->rewardsGetRewardSplitRequest($address, $cycle, $offset, $limit);
+        $request = $this->rewardsGetRewardSplitRequest($baker, $cycle, $offset, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2023,6 +2154,13 @@ class RewardsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2047,6 +2185,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\RewardSplit' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2061,6 +2202,9 @@ class RewardsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2089,17 +2233,18 @@ class RewardsApi
      *
      * Get reward split
      *
-     * @param  string $address Baker address (required)
+     * @param  string $baker Baker address (required)
      * @param  int $cycle Rewards cycle (required)
      * @param  int $offset Specifies how many delegators in the reward split should be skipped (optional, default to 0)
      * @param  int $limit Maximum number of delegators to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplit'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetRewardSplitAsync($address, $cycle, $offset = 0, $limit = 100)
+    public function rewardsGetRewardSplitAsync($baker, $cycle, $offset = 0, $limit = 100, string $contentType = self::contentTypes['rewardsGetRewardSplit'][0])
     {
-        return $this->rewardsGetRewardSplitAsyncWithHttpInfo($address, $cycle, $offset, $limit)
+        return $this->rewardsGetRewardSplitAsyncWithHttpInfo($baker, $cycle, $offset, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2112,18 +2257,19 @@ class RewardsApi
      *
      * Get reward split
      *
-     * @param  string $address Baker address (required)
+     * @param  string $baker Baker address (required)
      * @param  int $cycle Rewards cycle (required)
      * @param  int $offset Specifies how many delegators in the reward split should be skipped (optional, default to 0)
      * @param  int $limit Maximum number of delegators to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplit'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetRewardSplitAsyncWithHttpInfo($address, $cycle, $offset = 0, $limit = 100)
+    public function rewardsGetRewardSplitAsyncWithHttpInfo($baker, $cycle, $offset = 0, $limit = 100, string $contentType = self::contentTypes['rewardsGetRewardSplit'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\RewardSplit';
-        $request = $this->rewardsGetRewardSplitRequest($address, $cycle, $offset, $limit);
+        $request = $this->rewardsGetRewardSplitRequest($baker, $cycle, $offset, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2133,6 +2279,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2161,37 +2310,42 @@ class RewardsApi
     /**
      * Create request for operation 'rewardsGetRewardSplit'
      *
-     * @param  string $address Baker address (required)
+     * @param  string $baker Baker address (required)
      * @param  int $cycle Rewards cycle (required)
      * @param  int $offset Specifies how many delegators in the reward split should be skipped (optional, default to 0)
      * @param  int $limit Maximum number of delegators to return (optional, default to 100)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplit'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rewardsGetRewardSplitRequest($address, $cycle, $offset = 0, $limit = 100)
+    public function rewardsGetRewardSplitRequest($baker, $cycle, $offset = 0, $limit = 100, string $contentType = self::contentTypes['rewardsGetRewardSplit'][0])
     {
-        // verify the required parameter 'address' is set
-        if ($address === null || (is_array($address) && count($address) === 0)) {
+
+        // verify the required parameter 'baker' is set
+        if ($baker === null || (is_array($baker) && count($baker) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $address when calling rewardsGetRewardSplit'
+                'Missing the required parameter $baker when calling rewardsGetRewardSplit'
             );
         }
+
         // verify the required parameter 'cycle' is set
         if ($cycle === null || (is_array($cycle) && count($cycle) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $cycle when calling rewardsGetRewardSplit'
             );
         }
+
+
         if ($limit !== null && $limit > 10000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RewardsApi.rewardsGetRewardSplit, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RewardsApi.rewardsGetRewardSplit, must be bigger than or equal to 0.');
         }
+        
 
-
-        $resourcePath = '/v1/rewards/split/{address}/{cycle}';
+        $resourcePath = '/v1/rewards/split/{baker}/{cycle}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2199,34 +2353,30 @@ class RewardsApi
         $multipart = false;
 
         // query params
-        if ($offset !== null) {
-            if('form' === 'form' && is_array($offset)) {
-                foreach($offset as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['offset'] = $offset;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
-        if ($limit !== null) {
-            if('form' === 'form' && is_array($limit)) {
-                foreach($limit as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['limit'] = $limit;
-            }
-        }
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
-        if ($address !== null) {
+        if ($baker !== null) {
             $resourcePath = str_replace(
-                '{' . 'address' . '}',
-                ObjectSerializer::toPathValue($address),
+                '{' . 'baker' . '}',
+                ObjectSerializer::toPathValue($baker),
                 $resourcePath
             );
         }
@@ -2240,16 +2390,11 @@ class RewardsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -2267,12 +2412,12 @@ class RewardsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -2288,10 +2433,11 @@ class RewardsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
@@ -2305,14 +2451,15 @@ class RewardsApi
      * @param  string $baker Baker address (required)
      * @param  int $cycle Reward split cycle (required)
      * @param  string $delegator Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplitDelegator'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\SplitDelegator
      */
-    public function rewardsGetRewardSplitDelegator($baker, $cycle, $delegator)
+    public function rewardsGetRewardSplitDelegator($baker, $cycle, $delegator, string $contentType = self::contentTypes['rewardsGetRewardSplitDelegator'][0])
     {
-        list($response) = $this->rewardsGetRewardSplitDelegatorWithHttpInfo($baker, $cycle, $delegator);
+        list($response) = $this->rewardsGetRewardSplitDelegatorWithHttpInfo($baker, $cycle, $delegator, $contentType);
         return $response;
     }
 
@@ -2324,14 +2471,15 @@ class RewardsApi
      * @param  string $baker Baker address (required)
      * @param  int $cycle Reward split cycle (required)
      * @param  string $delegator Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplitDelegator'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\SplitDelegator, HTTP status code, HTTP response headers (array of strings)
      */
-    public function rewardsGetRewardSplitDelegatorWithHttpInfo($baker, $cycle, $delegator)
+    public function rewardsGetRewardSplitDelegatorWithHttpInfo($baker, $cycle, $delegator, string $contentType = self::contentTypes['rewardsGetRewardSplitDelegator'][0])
     {
-        $request = $this->rewardsGetRewardSplitDelegatorRequest($baker, $cycle, $delegator);
+        $request = $this->rewardsGetRewardSplitDelegatorRequest($baker, $cycle, $delegator, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2343,6 +2491,13 @@ class RewardsApi
                     (int) $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
                     $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
                 );
             }
 
@@ -2367,6 +2522,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\SplitDelegator' !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2381,6 +2539,9 @@ class RewardsApi
                 $content = $response->getBody(); //stream goes to serializer
             } else {
                 $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
             }
 
             return [
@@ -2412,13 +2573,14 @@ class RewardsApi
      * @param  string $baker Baker address (required)
      * @param  int $cycle Reward split cycle (required)
      * @param  string $delegator Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplitDelegator'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetRewardSplitDelegatorAsync($baker, $cycle, $delegator)
+    public function rewardsGetRewardSplitDelegatorAsync($baker, $cycle, $delegator, string $contentType = self::contentTypes['rewardsGetRewardSplitDelegator'][0])
     {
-        return $this->rewardsGetRewardSplitDelegatorAsyncWithHttpInfo($baker, $cycle, $delegator)
+        return $this->rewardsGetRewardSplitDelegatorAsyncWithHttpInfo($baker, $cycle, $delegator, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2434,14 +2596,15 @@ class RewardsApi
      * @param  string $baker Baker address (required)
      * @param  int $cycle Reward split cycle (required)
      * @param  string $delegator Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplitDelegator'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function rewardsGetRewardSplitDelegatorAsyncWithHttpInfo($baker, $cycle, $delegator)
+    public function rewardsGetRewardSplitDelegatorAsyncWithHttpInfo($baker, $cycle, $delegator, string $contentType = self::contentTypes['rewardsGetRewardSplitDelegator'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\SplitDelegator';
-        $request = $this->rewardsGetRewardSplitDelegatorRequest($baker, $cycle, $delegator);
+        $request = $this->rewardsGetRewardSplitDelegatorRequest($baker, $cycle, $delegator, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2451,6 +2614,9 @@ class RewardsApi
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
                     }
 
                     return [
@@ -2482,30 +2648,35 @@ class RewardsApi
      * @param  string $baker Baker address (required)
      * @param  int $cycle Reward split cycle (required)
      * @param  string $delegator Delegator address (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rewardsGetRewardSplitDelegator'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function rewardsGetRewardSplitDelegatorRequest($baker, $cycle, $delegator)
+    public function rewardsGetRewardSplitDelegatorRequest($baker, $cycle, $delegator, string $contentType = self::contentTypes['rewardsGetRewardSplitDelegator'][0])
     {
+
         // verify the required parameter 'baker' is set
         if ($baker === null || (is_array($baker) && count($baker) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $baker when calling rewardsGetRewardSplitDelegator'
             );
         }
+
         // verify the required parameter 'cycle' is set
         if ($cycle === null || (is_array($cycle) && count($cycle) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $cycle when calling rewardsGetRewardSplitDelegator'
             );
         }
+
         // verify the required parameter 'delegator' is set
         if ($delegator === null || (is_array($delegator) && count($delegator) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $delegator when calling rewardsGetRewardSplitDelegator'
             );
         }
+
 
         $resourcePath = '/v1/rewards/split/{baker}/{cycle}/{delegator}';
         $formParams = [];
@@ -2542,16 +2713,11 @@ class RewardsApi
         }
 
 
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
 
         // for model (json/xml)
         if (count($formParams) > 0) {
@@ -2569,12 +2735,12 @@ class RewardsApi
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
 
-            } elseif ($headers['Content-Type'] === 'application/json') {
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\json_encode($formParams);
-
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = ObjectSerializer::buildQuery($formParams);
             }
         }
 
@@ -2590,10 +2756,11 @@ class RewardsApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

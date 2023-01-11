@@ -2,7 +2,7 @@
 /**
  * VotingEpoch
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -39,9 +39,7 @@ use \Bzzhh\Tzkt\ObjectSerializer;
  * @package  Bzzhh\Tzkt
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null
+ * @implements \ArrayAccess<string, mixed>
  */
 class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
 {
@@ -66,7 +64,8 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_level' => 'int',
         'end_time' => '\DateTime',
         'status' => 'string',
-        'periods' => '\Bzzhh\Tzkt\Model\VotingPeriod[]'
+        'periods' => '\Bzzhh\Tzkt\Model\VotingPeriod[]',
+        'proposals' => '\Bzzhh\Tzkt\Model\Proposal[]'
     ];
 
     /**
@@ -83,8 +82,32 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_level' => 'int32',
         'end_time' => 'date-time',
         'status' => null,
-        'periods' => null
+        'periods' => null,
+        'proposals' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'index' => false,
+		'first_level' => false,
+		'start_time' => false,
+		'last_level' => false,
+		'end_time' => false,
+		'status' => true,
+		'periods' => true,
+		'proposals' => true
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -107,6 +130,58 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
@@ -119,7 +194,8 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_level' => 'lastLevel',
         'end_time' => 'endTime',
         'status' => 'status',
-        'periods' => 'periods'
+        'periods' => 'periods',
+        'proposals' => 'proposals'
     ];
 
     /**
@@ -134,7 +210,8 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_level' => 'setLastLevel',
         'end_time' => 'setEndTime',
         'status' => 'setStatus',
-        'periods' => 'setPeriods'
+        'periods' => 'setPeriods',
+        'proposals' => 'setProposals'
     ];
 
     /**
@@ -149,7 +226,8 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_level' => 'getLastLevel',
         'end_time' => 'getEndTime',
         'status' => 'getStatus',
-        'periods' => 'getPeriods'
+        'periods' => 'getPeriods',
+        'proposals' => 'getProposals'
     ];
 
     /**
@@ -209,13 +287,32 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['index'] = $data['index'] ?? null;
-        $this->container['first_level'] = $data['first_level'] ?? null;
-        $this->container['start_time'] = $data['start_time'] ?? null;
-        $this->container['last_level'] = $data['last_level'] ?? null;
-        $this->container['end_time'] = $data['end_time'] ?? null;
-        $this->container['status'] = $data['status'] ?? null;
-        $this->container['periods'] = $data['periods'] ?? null;
+        $this->setIfExists('index', $data ?? [], null);
+        $this->setIfExists('first_level', $data ?? [], null);
+        $this->setIfExists('start_time', $data ?? [], null);
+        $this->setIfExists('last_level', $data ?? [], null);
+        $this->setIfExists('end_time', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('periods', $data ?? [], null);
+        $this->setIfExists('proposals', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -261,6 +358,11 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setIndex($index)
     {
+
+        if (is_null($index)) {
+            throw new \InvalidArgumentException('non-nullable index cannot be null');
+        }
+
         $this->container['index'] = $index;
 
         return $this;
@@ -285,6 +387,11 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setFirstLevel($first_level)
     {
+
+        if (is_null($first_level)) {
+            throw new \InvalidArgumentException('non-nullable first_level cannot be null');
+        }
+
         $this->container['first_level'] = $first_level;
 
         return $this;
@@ -309,6 +416,11 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setStartTime($start_time)
     {
+
+        if (is_null($start_time)) {
+            throw new \InvalidArgumentException('non-nullable start_time cannot be null');
+        }
+
         $this->container['start_time'] = $start_time;
 
         return $this;
@@ -333,6 +445,11 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setLastLevel($last_level)
     {
+
+        if (is_null($last_level)) {
+            throw new \InvalidArgumentException('non-nullable last_level cannot be null');
+        }
+
         $this->container['last_level'] = $last_level;
 
         return $this;
@@ -357,6 +474,11 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setEndTime($end_time)
     {
+
+        if (is_null($end_time)) {
+            throw new \InvalidArgumentException('non-nullable end_time cannot be null');
+        }
+
         $this->container['end_time'] = $end_time;
 
         return $this;
@@ -381,6 +503,18 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setStatus($status)
     {
+
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['status'] = $status;
 
         return $this;
@@ -405,7 +539,55 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setPeriods($periods)
     {
+
+        if (is_null($periods)) {
+            array_push($this->openAPINullablesSetToNull, 'periods');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('periods', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
         $this->container['periods'] = $periods;
+
+        return $this;
+    }
+
+    /**
+     * Gets proposals
+     *
+     * @return \Bzzhh\Tzkt\Model\Proposal[]|null
+     */
+    public function getProposals()
+    {
+        return $this->container['proposals'];
+    }
+
+    /**
+     * Sets proposals
+     *
+     * @param \Bzzhh\Tzkt\Model\Proposal[]|null $proposals Proposals pushed during the voting epoch (null, if there were no proposals).
+     *
+     * @return self
+     */
+    public function setProposals($proposals)
+    {
+
+        if (is_null($proposals)) {
+            array_push($this->openAPINullablesSetToNull, 'proposals');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('proposals', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['proposals'] = $proposals;
 
         return $this;
     }
@@ -416,7 +598,7 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -428,6 +610,7 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -441,7 +624,7 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -457,7 +640,7 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }
@@ -469,6 +652,7 @@ class VotingEpoch implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

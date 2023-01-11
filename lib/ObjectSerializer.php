@@ -2,7 +2,7 @@
 /**
  * ObjectSerializer
  *
- * PHP version 7.2
+ * PHP version 7.4
  *
  * @category Class
  * @package  Bzzhh\Tzkt
@@ -13,12 +13,12 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides a free REST-like API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Edo2net: `https://api.edo2net.tzkt.io/` ([view docs](https://api.edo2net.tzkt.io)) - Florencenet: `https://api.florencenet.tzkt.io/` ([view docs](https://api.florencenet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io)) - Edo2net staging: `https://staging.api.edo2net.tzkt.io/` ([view docs](https://staging.api.edo2net.tzkt.io))      Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Email: hello@baking-bad.org - Twitter: https://twitter.com/TezosBakingBad - Telegram: [tg://resolve?domain=baking_bad_chat](tg://resolve?domain=baking_bad_chat) - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you should mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io)) - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@baking-bad.org  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
  *
- * The version of the OpenAPI document: v1.5
+ * The version of the OpenAPI document: v1.11.0
  * Contact: hello@baking-bad.org
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 5.2.0-SNAPSHOT
+ * OpenAPI Generator version: 6.2.1
  */
 
 /**
@@ -29,6 +29,7 @@
 
 namespace Bzzhh\Tzkt;
 
+use GuzzleHttp\Psr7\Utils;
 use Bzzhh\Tzkt\Model\ModelInterface;
 
 /**
@@ -87,7 +88,7 @@ class ObjectSerializer
                 foreach ($data::openAPITypes() as $property => $openAPIType) {
                     $getter = $data::getters()[$property];
                     $value = $data->$getter();
-                    if ($value !== null && !in_array($openAPIType, ['DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
+                    if ($value !== null && !in_array($openAPIType, ['\DateTime', '\SplFileObject', 'array', 'bool', 'boolean', 'byte', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
                         $callable = [$openAPIType, 'getAllowableEnumValues'];
                         if (is_callable($callable)) {
                             /** array $callable */
@@ -98,7 +99,7 @@ class ObjectSerializer
                             }
                         }
                     }
-                    if ($value !== null) {
+                    if (($data::isNullable($property) && $data->isNullableSetToNull($property)) || $value !== null) {
                         $values[$data::attributeMap()[$property]] = self::sanitizeForSerialization($value, $openAPIType, $formats[$property]);
                     }
                 }
@@ -131,6 +132,20 @@ class ObjectSerializer
     }
 
     /**
+     * Shorter timestamp microseconds to 6 digits length.
+     *
+     * @param string $timestamp Original timestamp
+     *
+     * @return string the shorten timestamp
+     */
+    public static function sanitizeTimestamp($timestamp)
+    {
+        if (!is_string($timestamp)) return $timestamp;
+
+        return preg_replace('/(:\d{2}.\d{6})\d*/', '$1', $timestamp);
+    }
+
+    /**
      * Take value and turn it into a string suitable for inclusion in
      * the path, by url-encoding.
      *
@@ -144,22 +159,96 @@ class ObjectSerializer
     }
 
     /**
-     * Take value and turn it into a string suitable for inclusion in
-     * the query, by imploding comma-separated if it's an object.
-     * If it's a string, pass through unchanged. It will be url-encoded
-     * later.
+     * Take query parameter properties and turn it into an array suitable for
+     * native http_build_query or GuzzleHttp\Psr7\Query::build.
      *
-     * @param string[]|string|\DateTime $object an object to be serialized to a string
+     * @param mixed  $value       Parameter value
+     * @param string $paramName   Parameter name
+     * @param string $openApiType OpenAPIType eg. array or object
+     * @param string $style       Parameter serialization style
+     * @param bool   $explode     Parameter explode option
+     * @param bool   $required    Whether query param is required or not
      *
-     * @return string the serialized object
+     * @return array
      */
-    public static function toQueryValue($object)
-    {
-        if (is_array($object)) {
-            return implode(',', $object);
-        } else {
-            return self::toString($object);
+    public static function toQueryValue(
+        $value,
+        string $paramName,
+        string $openApiType = 'string',
+        string $style = 'form',
+        bool $explode = true,
+        bool $required = true
+    ): array {
+        if (
+            empty($value)
+            && ($value !== false || $openApiType !== 'boolean') // if $value === false and $openApiType ==='boolean' it isn't empty
+        ) {
+            if ($required) {
+                return ["{$paramName}" => ''];
+            } else {
+                return [];
+            }
         }
+
+        # Handle DateTime objects in query
+        if($openApiType === "\\DateTime" && $value instanceof \DateTime) {
+            return ["{$paramName}" => $value->format(self::$dateTimeFormat)];
+        }
+
+        $query = [];
+        $value = (in_array($openApiType, ['object', 'array'], true)) ? (array)$value : $value;
+
+        // since \GuzzleHttp\Psr7\Query::build fails with nested arrays
+        // need to flatten array first
+        $flattenArray = function ($arr, $name, &$result = []) use (&$flattenArray, $style, $explode) {
+            if (!is_array($arr)) return $arr;
+
+            foreach ($arr as $k => $v) {
+                $prop = ($style === 'deepObject') ? $prop = "{$name}[{$k}]" : $k;
+
+                if (is_array($v)) {
+                    $flattenArray($v, $prop, $result);
+                } else {
+                    if ($style !== 'deepObject' && !$explode) {
+                        // push key itself
+                        $result[] = $prop;
+                    }
+                    $result[$prop] = $v;
+                }
+            }
+            return $result;
+        };
+
+        $value = $flattenArray($value, $paramName);
+
+        if ($openApiType === 'object' && ($style === 'deepObject' || $explode)) {
+            return $value;
+        }
+
+        if ('boolean' === $openApiType && is_bool($value)) {
+            $value = self::convertBoolToQueryStringFormat($value);
+        }
+
+        // handle style in serializeCollection
+        $query[$paramName] = ($explode) ? $value : self::serializeCollection((array)$value, $style);
+
+        return $query;
+    }
+
+    /**
+     * Convert boolean value to format for query string.
+     *
+     * @param bool $value Boolean value
+     *
+     * @return int|string Boolean value in format
+     */
+    public static function convertBoolToQueryStringFormat(bool $value)
+    {
+        if (Configuration::BOOLEAN_FORMAT_STRING == Configuration::getDefaultConfiguration()->getBooleanFormatForQueryString()) {
+            return $value ? 'true' : 'false';
+        }
+
+        return (int) $value;
     }
 
     /**
@@ -216,7 +305,7 @@ class ObjectSerializer
         } elseif (is_bool($value)) {
             return $value ? 'true' : 'false';
         } else {
-            return $value;
+            return (string) $value;
         }
     }
 
@@ -306,6 +395,9 @@ class ObjectSerializer
         if ($class === 'object') {
             settype($data, 'array');
             return $data;
+        } elseif ($class === 'mixed') {
+            settype($data, gettype($data));
+            return $data;
         }
 
         if ($class === '\DateTime') {
@@ -320,28 +412,26 @@ class ObjectSerializer
                     return new \DateTime($data);
                 } catch (\Exception $exception) {
                     // Some API's return a date-time with too high nanosecond
-                    // precision for php's DateTime to handle. This conversion
-                    // (string -> unix timestamp -> DateTime) is a workaround
-                    // for the problem.
-                    return (new \DateTime())->setTimestamp(strtotime($data));
+                    // precision for php's DateTime to handle.
+                    // With provided regexp 6 digits of microseconds saved
+                    return new \DateTime(self::sanitizeTimestamp($data));
                 }
             } else {
                 return null;
             }
         }
 
-        /** @psalm-suppress ParadoxicalCondition */
-        if (in_array($class, ['DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
-            settype($data, $class);
-            return $data;
-        }
-
         if ($class === '\SplFileObject') {
+            $data = Utils::streamFor($data);
+
             /** @var \Psr\Http\Message\StreamInterface $data */
 
             // determine file name
-            if (array_key_exists('Content-Disposition', $httpHeaders) &&
-                preg_match('/inline; filename=[\'"]?([^\'"\s]+)[\'"]?$/i', $httpHeaders['Content-Disposition'], $match)) {
+            if (
+                is_array($httpHeaders)
+                && array_key_exists('Content-Disposition', $httpHeaders) 
+                && preg_match('/inline; filename=[\'"]?([^\'"\s]+)[\'"]?$/i', $httpHeaders['Content-Disposition'], $match)
+            ) {
                 $filename = Configuration::getDefaultConfiguration()->getTempFolderPath() . DIRECTORY_SEPARATOR . self::sanitizeFilename($match[1]);
             } else {
                 $filename = tempnam(Configuration::getDefaultConfiguration()->getTempFolderPath(), '');
@@ -354,7 +444,16 @@ class ObjectSerializer
             fclose($file);
 
             return new \SplFileObject($filename, 'r');
-        } elseif (method_exists($class, 'getAllowableEnumValues')) {
+        }
+
+        /** @psalm-suppress ParadoxicalCondition */
+        if (in_array($class, ['\DateTime', '\SplFileObject', 'array', 'bool', 'boolean', 'byte', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
+            settype($data, $class);
+            return $data;
+        }
+
+
+        if (method_exists($class, 'getAllowableEnumValues')) {
             if (!in_array($data, $class::getAllowableEnumValues(), true)) {
                 $imploded = implode("', '", $class::getAllowableEnumValues());
                 throw new \InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
@@ -363,8 +462,8 @@ class ObjectSerializer
         } else {
             $data = is_string($data) ? json_decode($data) : $data;
 
-            if (!class_exists($class)) {
-                return $instance ?? null;
+            if (is_array($data)) {
+                $data = (object)$data;
             }
 
             // If a discriminator is defined and points to a valid subclass, use it.
@@ -381,7 +480,15 @@ class ObjectSerializer
             foreach ($instance::openAPITypes() as $property => $type) {
                 $propertySetter = $instance::setters()[$property];
 
-                if (!isset($propertySetter) || !isset($data->{$instance::attributeMap()[$property]})) {
+                if (!isset($propertySetter)) {
+                    continue;
+                }
+
+                if (!isset($data->{$instance::attributeMap()[$property]})) {
+                    if ($instance::isNullable($property)) {
+                        $instance->$propertySetter(null);
+                    }
+
                     continue;
                 }
 
@@ -390,8 +497,27 @@ class ObjectSerializer
                     $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
                 }
             }
-
             return $instance;
         }
+    }
+
+    /**
+     * Native `http_build_query` wrapper.
+     * @see https://www.php.net/manual/en/function.http-build-query
+     *
+     * @param array|object $data           May be an array or object containing properties.
+     * @param string       $numeric_prefix If numeric indices are used in the base array and this parameter is provided, it will be prepended to the numeric index for elements in the base array only.
+     * @param string|null  $arg_separator  arg_separator.output is used to separate arguments but may be overridden by specifying this parameter.
+     * @param int          $encoding_type  Encoding type. By default, PHP_QUERY_RFC1738.
+     *
+     * @return string
+     */
+    public static function buildQuery(
+        $data,
+        string $numeric_prefix = '',
+        ?string $arg_separator = null,
+        int $encoding_type = \PHP_QUERY_RFC3986
+    ): string {
+        return \GuzzleHttp\Psr7\Query::build($data, $encoding_type);
     }
 }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **string** | Type of the account, &#x60;empty&#x60; - account hasn&#39;t appeared in the blockchain yet |
+**type** | **string** | Type of the account, &#x60;empty&#x60; - account hasn&#39;t appeared in the blockchain yet | [optional]
 **address** | **string** | Public key hash of the account | [optional]
 **counter** | **int** | An account nonce which is used to prevent operation replay | [optional]
 

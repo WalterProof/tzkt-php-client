@@ -1,12 +1,12 @@
 # Bzzhh\Tzkt\QuotesApi
 
-All URIs are relative to https://api.tzkt.io.
+All URIs are relative to https://api.tzkt.io, except if the operation defines another base path.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**quotesGet()**](QuotesApi.md#quotesGet) | **GET** /v1/quotes | Get quotes
-[**quotesGetCount()**](QuotesApi.md#quotesGetCount) | **GET** /v1/quotes/count | Get quotes count
-[**quotesGetLast()**](QuotesApi.md#quotesGetLast) | **GET** /v1/quotes/last | Get last quote
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**quotesGet()**](QuotesApi.md#quotesGet) | **GET** /v1/quotes | Get quotes |
+| [**quotesGetCount()**](QuotesApi.md#quotesGetCount) | **GET** /v1/quotes/count | Get quotes count |
+| [**quotesGetLast()**](QuotesApi.md#quotesGetLast) | **GET** /v1/quotes/last | Get last quote |
 
 
 ## `quotesGet()`
@@ -32,11 +32,11 @@ $apiInstance = new Bzzhh\Tzkt\Api\QuotesApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$level = new \Bzzhh\Tzkt\Model\OneOfInt32Parameter(); // OneOfInt32Parameter | Filters quotes by level.
-$timestamp = new \Bzzhh\Tzkt\Model\OneOfDateTimeParameter(); // OneOfDateTimeParameter | Filters quotes by timestamp.
-$select = new \Bzzhh\Tzkt\Model\OneOfSelectParameter(); // OneOfSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
-$sort = new \Bzzhh\Tzkt\Model\OneOfSortParameter(); // OneOfSortParameter | Sorts quotes by specified field. Supported fields: `level` (default).
-$offset = new \Bzzhh\Tzkt\Model\OneOfOffsetParameter(); // OneOfOffsetParameter | Specifies which or how many items should be skipped
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters quotes by level.
+$timestamp = new \Bzzhh\Tzkt\Model\AccountsGetOperationsTimestampParameter(); // AccountsGetOperationsTimestampParameter | Filters quotes by timestamp.
+$select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts quotes by specified field. Supported fields: `level` (default).
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
 
 try {
@@ -49,14 +49,14 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **level** | [**OneOfInt32Parameter**](../Model/.md)| Filters quotes by level. | [optional]
- **timestamp** | [**OneOfDateTimeParameter**](../Model/.md)| Filters quotes by timestamp. | [optional]
- **select** | [**OneOfSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional]
- **sort** | [**OneOfSortParameter**](../Model/.md)| Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). | [optional]
- **offset** | [**OneOfOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional]
- **limit** | **int**| Maximum number of items to return | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filters quotes by level. | [optional] |
+| **timestamp** | [**AccountsGetOperationsTimestampParameter**](../Model/.md)| Filters quotes by timestamp. | [optional] |
+| **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts quotes by specified field. Supported fields: &#x60;level&#x60; (default). | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
+| **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |
 
 ### Return type
 
