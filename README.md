@@ -7,7 +7,7 @@ TzKT is an open-source project, so you can easily clone and build it and use it 
 
 TzKT API is available for the following Tezos networks with the following base URLs:
 
-- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) 
+- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))
 - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))
 - Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io))
 - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))
@@ -58,23 +58,9 @@ Should also work with PHP 8.0.
 
 ### Composer
 
-To install the bindings via [Composer](https://getcomposer.org/), add the following to `composer.json`:
-
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
-    }
-  ],
-  "require": {
-    "GIT_USER_ID/GIT_REPO_ID": "*@dev"
-  }
-}
 ```
-
-Then run `composer install`
+composer require "bzzhh/tzkt-php-client"
+```
 
 ### Manual Installation
 
