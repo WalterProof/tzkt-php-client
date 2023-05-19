@@ -1,0 +1,43 @@
+# # SmartRollupAllOf
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **int** | Internal TzKT id | [optional]
+**type** | **string** | Type of the account | [optional]
+**address** | **string** | Address of the account | [optional]
+**alias** | **string** | Name of the account | [optional]
+**creator** | [**OneOfAlias**](OneOfAlias.md) | Information about the account, which has deployed the rollup to the blockchain | [optional]
+**pvm_kind** | **string** | PVM kind: &#x60;arith&#x60; or &#x60;wasm&#x60; | [optional]
+**genesis_commitment** | **string** | Genesis commitment hash | [optional]
+**last_commitment** | **string** | The most recent cemented commitment hash | [optional]
+**inbox_level** | **int** | Inbox level of the most recent cemented commitment | [optional]
+**total_stakers** | **int** | Total number of stakers. | [optional]
+**active_stakers** | **int** | Total number of active stakers. | [optional]
+**executed_commitments** | **int** | Number of commitments that were cemented and executed | [optional]
+**cemented_commitments** | **int** | Number of commitments that were cemented (including executed ones) | [optional]
+**pending_commitments** | **int** | Number of pending commitments | [optional]
+**refuted_commitments** | **int** | Number of commitments that were refuted | [optional]
+**orphan_commitments** | **int** | Number of commitments that became orphan, due to their parent was refuted | [optional]
+**smart_rollup_bonds** | **int** | Amount of mutez locked as bonds | [optional]
+**active_tokens_count** | **int** | Number of account tokens with non-zero balances | [optional]
+**token_balances_count** | **int** | Number of tokens the account ever had | [optional]
+**token_transfers_count** | **int** | Number of token transfers from/to the account | [optional]
+**num_transactions** | **int** | Number of transaction operations related to the account | [optional]
+**transfer_ticket_count** | **int** | Number of transfer ticket operations related to the account | [optional]
+**smart_rollup_cement_count** | **int** | Number of &#x60;smart_rollup_cement&#x60; operations related to the account | [optional]
+**smart_rollup_execute_count** | **int** | Number of &#x60;smart_rollup_execute_outbox_message&#x60; operations related to the account | [optional]
+**smart_rollup_originate_count** | **int** | Number of &#x60;smart_rollup_originate&#x60; operations related to the account | [optional]
+**smart_rollup_publish_count** | **int** | Number of &#x60;smart_rollup_publish&#x60; operations related to the account | [optional]
+**smart_rollup_recover_bond_count** | **int** | Number of &#x60;smart_rollup_recover_bond&#x60; operations related to the account | [optional]
+**smart_rollup_refute_count** | **int** | Number of &#x60;smart_rollup_refute&#x60; operations related to the account | [optional]
+**refutation_games_count** | **int** | Number of smart rollup refutation games related to the account | [optional]
+**active_refutation_games_count** | **int** | Number of active smart rollup refutation games related to the account | [optional]
+**first_activity** | **int** | Block height at which the ghost contract appeared first time | [optional]
+**first_activity_time** | **\DateTime** | Block datetime at which the ghost contract appeared first time (ISO 8601, e.g. &#x60;2020-02-20T02:40:57Z&#x60;) | [optional]
+**last_activity** | **int** | Height of the block in which the ghost contract state was changed last time | [optional]
+**last_activity_time** | **\DateTime** | Datetime of the block in which the ghost contract state was changed last time (ISO 8601, e.g. &#x60;2020-02-20T02:40:57Z&#x60;) | [optional]
+**extras** | **mixed** | Off-chain extras | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

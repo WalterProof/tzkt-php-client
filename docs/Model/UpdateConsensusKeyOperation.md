@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **storage_limit** | **int** | A cap on the amount of storage a given operation can consume | [optional]
 **baker_fee** | **int** | Fee to the baker, produced block, in which the operation was included (micro tez) | [optional]
 **status** | **string** | Operation status (&#x60;applied&#x60; - an operation applied by the node and successfully added to the blockchain, &#x60;failed&#x60; - an operation which failed with some particular error (not enough balance, gas limit, etc), &#x60;backtracked&#x60; - an operation which was successful but reverted due to one of the following operations in the same operation group was failed, &#x60;skipped&#x60; - all operations after the failed one in an operation group) | [optional]
-**activation_cycle** | **int** | Index of the cycle from which the conssensus key will be active | [optional]
+**activation_cycle** | **int** | Index of the cycle from which the consensus key will be active | [optional]
 **public_key** | **string** | Consensus key | [optional]
 **public_key_hash** | **string** | Consensus key hash | [optional]
 **errors** | [**\Bzzhh\Tzkt\Model\OperationError[]**](OperationError.md) | List of errors provided by the node, injected the operation to the blockchain. &#x60;null&#x60; if there is no errors | [optional]

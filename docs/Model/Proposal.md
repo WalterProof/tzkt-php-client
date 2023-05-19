@@ -12,7 +12,8 @@ Name | Type | Description | Notes
 **upvotes** | **int** | The total number of upvotes (proposal operations) | [optional]
 **voting_power** | **int** | The total voting power of bakers, upvoted the proposal | [optional]
 **status** | **string** | Status of the proposal &#x60;active&#x60; - the proposal in the active state &#x60;accepted&#x60; - the proposal was accepted &#x60;rejected&#x60; - the proposal was rejected due to too many \&quot;nay\&quot; ballots &#x60;skipped&#x60; - the proposal was skipped due to the quorum was not reached | [optional]
-**metadata** | [**\Bzzhh\Tzkt\Model\ProposalMetadata**](ProposalMetadata.md) |  | [optional]
+**extras** | **mixed** | Off-chain extras | [optional]
 **rolls** | **int** | [DEPRECATED] | [optional]
+**metadata** | [**\Bzzhh\Tzkt\Model\ConstantMetadata**](ConstantMetadata.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

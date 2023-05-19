@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **storage** | **mixed** | Contract storage value. Omitted by default. Use &#x60;?includeStorage&#x3D;true&#x60; to include it in response. | [optional]
 **type_hash** | **int** | 32-bit hash of the contract parameter and storage types. This field can be used for searching similar contracts (which have the same interface). | [optional]
 **code_hash** | **int** | 32-bit hash of the contract code. This field can be used for searching same contracts (which have the same script). | [optional]
-**metadata** | [**OneOfProfileMetadata**](OneOfProfileMetadata.md) | Metadata of the contract (alias, logo, website, contacts, etc) | [optional]
+**metadata** | **mixed** | TZIP-16 metadata (with &#x60;?legacy&#x3D;true&#x60; this field will contain tzkt profile info) | [optional]
+**extras** | **mixed** | Off-chain extras | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

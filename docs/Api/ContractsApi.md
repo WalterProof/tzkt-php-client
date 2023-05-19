@@ -443,7 +443,7 @@ No authorization required
 ## `contractsGetByAddress()`
 
 ```php
-contractsGetByAddress($address): \Bzzhh\Tzkt\Model\Contract
+contractsGetByAddress($address, $legacy): \Bzzhh\Tzkt\Model\Contract
 ```
 
 Get contract by address
@@ -464,9 +464,10 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
     new GuzzleHttp\Client()
 );
 $address = 'address_example'; // string | Contract address (starting with KT)
+$legacy = true; // bool | If `true` (by default), the `metadata` field will contain tzkt profile info, or TZIP-16 metadata otherwise. This is a part of a deprecation mechanism, allowing to switch to new functionality smoothly.
 
 try {
-    $result = $apiInstance->contractsGetByAddress($address);
+    $result = $apiInstance->contractsGetByAddress($address, $legacy);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ContractsApi->contractsGetByAddress: ', $e->getMessage(), PHP_EOL;
@@ -478,6 +479,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **address** | **string**| Contract address (starting with KT) | |
+| **legacy** | **bool**| If &#x60;true&#x60; (by default), the &#x60;metadata&#x60; field will contain tzkt profile info, or TZIP-16 metadata otherwise. This is a part of a deprecation mechanism, allowing to switch to new functionality smoothly. | [optional] [default to true] |
 
 ### Return type
 
@@ -1023,7 +1025,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
 );
 $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
-$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
+$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`foo...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
 $micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
@@ -1040,7 +1042,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **address** | **string**| Contract address | |
 | **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
-| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
+| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;foo...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
 | **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
@@ -1086,7 +1088,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
 $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
 $level = 56; // int | Level of the block at which you want to get bigmap key
-$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
+$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`foo...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
 $micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string
 
 try {
@@ -1104,7 +1106,7 @@ try {
 | **address** | **string**| Contract address | |
 | **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
 | **level** | **int**| Level of the block at which you want to get bigmap key | |
-| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
+| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;foo...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
 | **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the bigmap key and value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - Micheline, &#x60;3&#x60; - Micheline string | [optional] |
 
 ### Return type
@@ -1149,7 +1151,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\ContractsApi(
 );
 $address = 'address_example'; // string | Contract address
 $name = 'name_example'; // string | Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.             If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path.
-$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`abcde...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
+$key = 'key_example'; // string | Either a key hash (`expr123...`) or a plain value (`foo...`).             Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`.
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts bigmap updates by specified field. Supported fields: `id` (default).
 $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
@@ -1169,7 +1171,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **address** | **string**| Contract address | |
 | **name** | **string**| Bigmap name is the last piece of the bigmap storage path.             For example, if the storage path is &#x60;ledger&#x60; or &#x60;assets.ledger&#x60;, then the name is &#x60;ledger&#x60;.             If there are multiple bigmaps with the same name, for example &#x60;assets.ledger&#x60; and &#x60;tokens.ledger&#x60;, you can specify the full path. | |
-| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;abcde...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
+| **key** | **string**| Either a key hash (&#x60;expr123...&#x60;) or a plain value (&#x60;foo...&#x60;).             Even if the key is complex (an object or an array), you can specify it as is, for example, &#x60;/keys/{\&quot;address\&quot;:\&quot;tz123\&quot;,\&quot;nat\&quot;:\&quot;123\&quot;}&#x60;. | |
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts bigmap updates by specified field. Supported fields: &#x60;id&#x60; (default). | [optional] |
 | **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |
 | **limit** | **int**| Maximum number of items to return | [optional] [default to 100] |

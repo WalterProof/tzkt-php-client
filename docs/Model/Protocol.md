@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **first_cycle_level** | **int** | Level of the first block of the first cycle started with the protocol | [optional]
 **last_level** | **int** | Block height where the protocol ends. &#x60;null&#x60; if the protocol is active | [optional]
 **constants** | [**\Bzzhh\Tzkt\Model\ProtocolConstants**](ProtocolConstants.md) |  | [optional]
-**metadata** | [**\Bzzhh\Tzkt\Model\ProtocolMetadata**](ProtocolMetadata.md) |  | [optional]
+**extras** | **mixed** | Off-chain extras | [optional]
+**metadata** | [**\Bzzhh\Tzkt\Model\ConstantMetadata**](ConstantMetadata.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

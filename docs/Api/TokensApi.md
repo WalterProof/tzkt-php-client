@@ -16,7 +16,7 @@ All URIs are relative to https://api.tzkt.io, except if the operation defines an
 ## `tokensGetTokenBalances()`
 
 ```php
-tokensGetTokenBalances($id, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $balance, $first_level, $first_time, $last_level, $last_time, $indexed_at, $sort, $offset, $limit, $select): \Bzzhh\Tzkt\Model\TokenBalance[]
+tokensGetTokenBalances($id, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $balance, $first_level, $first_time, $last_level, $last_time, $indexed_at, $sort, $offset, $limit, $select): \Bzzhh\Tzkt\Model\TokenBalance[]
 ```
 
 Get token balances
@@ -43,7 +43,6 @@ $token_contract = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // Accou
 $token_token_id = new \Bzzhh\Tzkt\Model\TokensGetTokensCountTokenIdParameter(); // TokensGetTokensCountTokenIdParameter | Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).   Click on the parameter to expand more details.
 $token_standard = new \Bzzhh\Tzkt\Model\TokensGetTokensCountStandardParameter(); // TokensGetTokensCountStandardParameter | Filter by token standard (`fa1.2` or `fa2`).   Click on the parameter to expand more details.
 $token_metadata = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`, so you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.   Click on the parameter to expand more details.
-$token_has_filters = True; // bool
 $balance = new \Bzzhh\Tzkt\Model\TokensGetTokensCountTokenIdParameter(); // TokensGetTokensCountTokenIdParameter | Filter by balance.   Click on the parameter to expand more details.
 $first_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block where the balance was first changed.   Click on the parameter to expand more details.
 $first_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the block where the balance was first changed.   Click on the parameter to expand more details.
@@ -56,7 +55,7 @@ $limit = 56; // int | Maximum number of items to return.
 $select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
 
 try {
-    $result = $apiInstance->tokensGetTokenBalances($id, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $balance, $first_level, $first_time, $last_level, $last_time, $indexed_at, $sort, $offset, $limit, $select);
+    $result = $apiInstance->tokensGetTokenBalances($id, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $balance, $first_level, $first_time, $last_level, $last_time, $indexed_at, $sort, $offset, $limit, $select);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TokensApi->tokensGetTokenBalances: ', $e->getMessage(), PHP_EOL;
@@ -74,7 +73,6 @@ try {
 | **token_token_id** | [**TokensGetTokensCountTokenIdParameter**](../Model/.md)| Filter by tokenId (for FA1.2 tokens tokenId is always &#x60;\&quot;0\&quot;&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_standard** | [**TokensGetTokensCountStandardParameter**](../Model/.md)| Filter by token standard (&#x60;fa1.2&#x60; or &#x60;fa2&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_metadata** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filter by metadata. Note, this parameter supports the following format: &#x60;token.metadata{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by, for example: &#x60;?token.metadata.symbol.in&#x3D;kUSD,uUSD&#x60;.   Click on the parameter to expand more details. | [optional] |
-| **token_has_filters** | **bool**|  | [optional] |
 | **balance** | [**TokensGetTokensCountTokenIdParameter**](../Model/.md)| Filter by balance.   Click on the parameter to expand more details. | [optional] |
 | **first_level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block where the balance was first changed.   Click on the parameter to expand more details. | [optional] |
 | **first_time** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the balance was first changed.   Click on the parameter to expand more details. | [optional] |
@@ -106,7 +104,7 @@ No authorization required
 ## `tokensGetTokenBalances2()`
 
 ```php
-tokensGetTokenBalances2($level, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $balance, $sort, $offset, $limit, $select): \Bzzhh\Tzkt\Model\TokenBalanceShort[]
+tokensGetTokenBalances2($level, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $balance, $sort, $offset, $limit, $select): \Bzzhh\Tzkt\Model\TokenBalanceShort[]
 ```
 
 Get historical token balances
@@ -133,7 +131,6 @@ $token_contract = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // Accou
 $token_token_id = new \Bzzhh\Tzkt\Model\TokensGetTokensCountTokenIdParameter(); // TokensGetTokensCountTokenIdParameter | Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).   Click on the parameter to expand more details.
 $token_standard = new \Bzzhh\Tzkt\Model\TokensGetTokensCountStandardParameter(); // TokensGetTokensCountStandardParameter | Filter by token standard (`fa1.2` or `fa2`).   Click on the parameter to expand more details.
 $token_metadata = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`, so you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.   Click on the parameter to expand more details.
-$token_has_filters = True; // bool
 $balance = new \Bzzhh\Tzkt\Model\TokensGetTokensCountTokenIdParameter(); // TokensGetTokensCountTokenIdParameter | Filter by balance.   Click on the parameter to expand more details.
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
 $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
@@ -141,7 +138,7 @@ $limit = 56; // int | Maximum number of items to return.
 $select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
 
 try {
-    $result = $apiInstance->tokensGetTokenBalances2($level, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $balance, $sort, $offset, $limit, $select);
+    $result = $apiInstance->tokensGetTokenBalances2($level, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $balance, $sort, $offset, $limit, $select);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TokensApi->tokensGetTokenBalances2: ', $e->getMessage(), PHP_EOL;
@@ -159,7 +156,6 @@ try {
 | **token_token_id** | [**TokensGetTokensCountTokenIdParameter**](../Model/.md)| Filter by tokenId (for FA1.2 tokens tokenId is always &#x60;\&quot;0\&quot;&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_standard** | [**TokensGetTokensCountStandardParameter**](../Model/.md)| Filter by token standard (&#x60;fa1.2&#x60; or &#x60;fa2&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_metadata** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filter by metadata. Note, this parameter supports the following format: &#x60;token.metadata{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by, for example: &#x60;?token.metadata.symbol.in&#x3D;kUSD,uUSD&#x60;.   Click on the parameter to expand more details. | [optional] |
-| **token_has_filters** | **bool**|  | [optional] |
 | **balance** | [**TokensGetTokensCountTokenIdParameter**](../Model/.md)| Filter by balance.   Click on the parameter to expand more details. | [optional] |
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
 | **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
@@ -186,7 +182,7 @@ No authorization required
 ## `tokensGetTokenBalancesCount()`
 
 ```php
-tokensGetTokenBalancesCount($id, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $balance, $first_level, $first_time, $last_level, $last_time, $indexed_at): int
+tokensGetTokenBalancesCount($id, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $balance, $first_level, $first_time, $last_level, $last_time, $indexed_at): int
 ```
 
 Get token balances count
@@ -213,7 +209,6 @@ $token_contract = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // Accou
 $token_token_id = new \Bzzhh\Tzkt\Model\TokensGetTokensCountTokenIdParameter(); // TokensGetTokensCountTokenIdParameter | Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).   Click on the parameter to expand more details.
 $token_standard = new \Bzzhh\Tzkt\Model\TokensGetTokensCountStandardParameter(); // TokensGetTokensCountStandardParameter | Filter by token standard (`fa1.2` or `fa2`).   Click on the parameter to expand more details.
 $token_metadata = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`, so you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.   Click on the parameter to expand more details.
-$token_has_filters = True; // bool
 $balance = new \Bzzhh\Tzkt\Model\TokensGetTokensCountTokenIdParameter(); // TokensGetTokensCountTokenIdParameter | Filter by balance.   Click on the parameter to expand more details.
 $first_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block where the balance was first changed.   Click on the parameter to expand more details.
 $first_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the block where the balance was first changed.   Click on the parameter to expand more details.
@@ -222,7 +217,7 @@ $last_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); 
 $indexed_at = new \Bzzhh\Tzkt\Model\CommitmentsGetAllActivationLevelParameter(); // CommitmentsGetAllActivationLevelParameter
 
 try {
-    $result = $apiInstance->tokensGetTokenBalancesCount($id, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $balance, $first_level, $first_time, $last_level, $last_time, $indexed_at);
+    $result = $apiInstance->tokensGetTokenBalancesCount($id, $account, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $balance, $first_level, $first_time, $last_level, $last_time, $indexed_at);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TokensApi->tokensGetTokenBalancesCount: ', $e->getMessage(), PHP_EOL;
@@ -240,7 +235,6 @@ try {
 | **token_token_id** | [**TokensGetTokensCountTokenIdParameter**](../Model/.md)| Filter by tokenId (for FA1.2 tokens tokenId is always &#x60;\&quot;0\&quot;&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_standard** | [**TokensGetTokensCountStandardParameter**](../Model/.md)| Filter by token standard (&#x60;fa1.2&#x60; or &#x60;fa2&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_metadata** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filter by metadata. Note, this parameter supports the following format: &#x60;token.metadata{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by, for example: &#x60;?token.metadata.symbol.in&#x3D;kUSD,uUSD&#x60;.   Click on the parameter to expand more details. | [optional] |
-| **token_has_filters** | **bool**|  | [optional] |
 | **balance** | [**TokensGetTokensCountTokenIdParameter**](../Model/.md)| Filter by balance.   Click on the parameter to expand more details. | [optional] |
 | **first_level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block where the balance was first changed.   Click on the parameter to expand more details. | [optional] |
 | **first_time** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the balance was first changed.   Click on the parameter to expand more details. | [optional] |
@@ -268,7 +262,7 @@ No authorization required
 ## `tokensGetTokenTransfers()`
 
 ```php
-tokensGetTokenTransfers($id, $level, $timestamp, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $anyof, $from, $to, $amount, $transaction_id, $origination_id, $migration_id, $indexed_at, $sort, $offset, $limit, $select): \Bzzhh\Tzkt\Model\TokenTransfer[]
+tokensGetTokenTransfers($id, $level, $timestamp, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $anyof, $from, $to, $amount, $transaction_id, $origination_id, $migration_id, $indexed_at, $sort, $offset, $limit, $select): \Bzzhh\Tzkt\Model\TokenTransfer[]
 ```
 
 Get token transfers
@@ -296,7 +290,6 @@ $token_contract = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // Accou
 $token_token_id = new \Bzzhh\Tzkt\Model\TokensGetTokensCountTokenIdParameter(); // TokensGetTokensCountTokenIdParameter | Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).   Click on the parameter to expand more details.
 $token_standard = new \Bzzhh\Tzkt\Model\TokensGetTokensCountStandardParameter(); // TokensGetTokensCountStandardParameter | Filter by token standard (`fa1.2` or `fa2`).   Click on the parameter to expand more details.
 $token_metadata = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`, so you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.   Click on the parameter to expand more details.
-$token_has_filters = True; // bool
 $anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParameter | Filter by any of the specified fields (`from` or `to`). Example: `anyof.from.to=tz1...` will return transfers where `from` OR `to` is equal to the specified value. This parameter is useful when you need to get both incoming and outgoing transfers of the account at once.   Click on the parameter to expand more details.
 $from = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by sender account address.   Click on the parameter to expand more details.
 $to = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by target account address.   Click on the parameter to expand more details.
@@ -311,7 +304,7 @@ $limit = 56; // int | Maximum number of items to return.
 $select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
 
 try {
-    $result = $apiInstance->tokensGetTokenTransfers($id, $level, $timestamp, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $anyof, $from, $to, $amount, $transaction_id, $origination_id, $migration_id, $indexed_at, $sort, $offset, $limit, $select);
+    $result = $apiInstance->tokensGetTokenTransfers($id, $level, $timestamp, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $anyof, $from, $to, $amount, $transaction_id, $origination_id, $migration_id, $indexed_at, $sort, $offset, $limit, $select);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TokensApi->tokensGetTokenTransfers: ', $e->getMessage(), PHP_EOL;
@@ -330,7 +323,6 @@ try {
 | **token_token_id** | [**TokensGetTokensCountTokenIdParameter**](../Model/.md)| Filter by tokenId (for FA1.2 tokens tokenId is always &#x60;\&quot;0\&quot;&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_standard** | [**TokensGetTokensCountStandardParameter**](../Model/.md)| Filter by token standard (&#x60;fa1.2&#x60; or &#x60;fa2&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_metadata** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filter by metadata. Note, this parameter supports the following format: &#x60;token.metadata{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by, for example: &#x60;?token.metadata.symbol.in&#x3D;kUSD,uUSD&#x60;.   Click on the parameter to expand more details. | [optional] |
-| **token_has_filters** | **bool**|  | [optional] |
 | **anyof** | [**BlocksGetAnyofParameter**](../Model/.md)| Filter by any of the specified fields (&#x60;from&#x60; or &#x60;to&#x60;). Example: &#x60;anyof.from.to&#x3D;tz1...&#x60; will return transfers where &#x60;from&#x60; OR &#x60;to&#x60; is equal to the specified value. This parameter is useful when you need to get both incoming and outgoing transfers of the account at once.   Click on the parameter to expand more details. | [optional] |
 | **from** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by sender account address.   Click on the parameter to expand more details. | [optional] |
 | **to** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by target account address.   Click on the parameter to expand more details. | [optional] |
@@ -364,7 +356,7 @@ No authorization required
 ## `tokensGetTokenTransfersCount()`
 
 ```php
-tokensGetTokenTransfersCount($id, $level, $timestamp, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $anyof, $from, $to, $amount, $transaction_id, $origination_id, $migration_id, $indexed_at): int
+tokensGetTokenTransfersCount($id, $level, $timestamp, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $anyof, $from, $to, $amount, $transaction_id, $origination_id, $migration_id, $indexed_at): int
 ```
 
 Get token transfers count
@@ -392,7 +384,6 @@ $token_contract = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // Accou
 $token_token_id = new \Bzzhh\Tzkt\Model\TokensGetTokensCountTokenIdParameter(); // TokensGetTokensCountTokenIdParameter | Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).   Click on the parameter to expand more details.
 $token_standard = new \Bzzhh\Tzkt\Model\TokensGetTokensCountStandardParameter(); // TokensGetTokensCountStandardParameter | Filter by token standard (`fa1.2` or `fa2`).   Click on the parameter to expand more details.
 $token_metadata = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`, so you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.   Click on the parameter to expand more details.
-$token_has_filters = True; // bool
 $anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParameter | Filter by any of the specified fields (`from` or `to`). Example: `anyof.from.to=tz1...` will return transfers where `from` OR `to` is equal to the specified value. This parameter is useful when you need to get both incoming and outgoing transfers of the account at once.   Click on the parameter to expand more details.
 $from = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by sender account address.   Click on the parameter to expand more details.
 $to = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by target account address.   Click on the parameter to expand more details.
@@ -403,7 +394,7 @@ $migration_id = new \Bzzhh\Tzkt\Model\TokensGetTokenTransfersCountTransactionIdP
 $indexed_at = new \Bzzhh\Tzkt\Model\CommitmentsGetAllActivationLevelParameter(); // CommitmentsGetAllActivationLevelParameter
 
 try {
-    $result = $apiInstance->tokensGetTokenTransfersCount($id, $level, $timestamp, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $token_has_filters, $anyof, $from, $to, $amount, $transaction_id, $origination_id, $migration_id, $indexed_at);
+    $result = $apiInstance->tokensGetTokenTransfersCount($id, $level, $timestamp, $token_id, $token_contract, $token_token_id, $token_standard, $token_metadata, $anyof, $from, $to, $amount, $transaction_id, $origination_id, $migration_id, $indexed_at);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TokensApi->tokensGetTokenTransfersCount: ', $e->getMessage(), PHP_EOL;
@@ -422,7 +413,6 @@ try {
 | **token_token_id** | [**TokensGetTokensCountTokenIdParameter**](../Model/.md)| Filter by tokenId (for FA1.2 tokens tokenId is always &#x60;\&quot;0\&quot;&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_standard** | [**TokensGetTokensCountStandardParameter**](../Model/.md)| Filter by token standard (&#x60;fa1.2&#x60; or &#x60;fa2&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **token_metadata** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filter by metadata. Note, this parameter supports the following format: &#x60;token.metadata{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by, for example: &#x60;?token.metadata.symbol.in&#x3D;kUSD,uUSD&#x60;.   Click on the parameter to expand more details. | [optional] |
-| **token_has_filters** | **bool**|  | [optional] |
 | **anyof** | [**BlocksGetAnyofParameter**](../Model/.md)| Filter by any of the specified fields (&#x60;from&#x60; or &#x60;to&#x60;). Example: &#x60;anyof.from.to&#x3D;tz1...&#x60; will return transfers where &#x60;from&#x60; OR &#x60;to&#x60; is equal to the specified value. This parameter is useful when you need to get both incoming and outgoing transfers of the account at once.   Click on the parameter to expand more details. | [optional] |
 | **from** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by sender account address.   Click on the parameter to expand more details. | [optional] |
 | **to** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by target account address.   Click on the parameter to expand more details. | [optional] |

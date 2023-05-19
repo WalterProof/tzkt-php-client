@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **total_banished** | **int** | Total amount of tokens sent to the null-address, which is equivalent to burning | [optional]
 **total_frozen** | **int** | Total amount of frozen tokens (frozen security deposits, frozen rewards and frozen fees) | [optional]
 **total_rollup_bonds** | **int** | Total amount of tokens locked as rollup bonds | [optional]
+**total_smart_rollup_bonds** | **int** | Total amount of tokens locked as smart rollup bonds | [optional]
 **quote** | [**\Bzzhh\Tzkt\Model\StatisticsQuote**](StatisticsQuote.md) |  | [optional]
 **total_vested** | **int** | [DEPRECATED] | [optional]
 

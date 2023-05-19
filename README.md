@@ -5,12 +5,12 @@
 TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos.
 TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.
 
-TzKT API is available for the following Tezos networks with the following base URLs:
+TzKT API is available for the following Tezos networks with the following base URLs: 
 
-- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))
+- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) 
 - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))
-- Kathmandunet: `https://api.kathmandunet.tzkt.io/` ([view docs](https://api.kathmandunet.tzkt.io))
 - Limanet: `https://api.limanet.tzkt.io/` ([view docs](https://api.limanet.tzkt.io))
+- Mumbainet: `https://api.mumbainet.tzkt.io/` ([view docs](https://api.mumbainet.tzkt.io))
 
 We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:
 
@@ -58,9 +58,23 @@ Should also work with PHP 8.0.
 
 ### Composer
 
+To install the bindings via [Composer](https://getcomposer.org/), add the following to `composer.json`:
+
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+    }
+  ],
+  "require": {
+    "GIT_USER_ID/GIT_REPO_ID": "*@dev"
+  }
+}
 ```
-composer require "bzzhh/tzkt-php-client"
-```
+
+Then run `composer install`
 
 ### Manual Installation
 
@@ -89,7 +103,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\AccountsApi(
 );
 $id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters by internal id.
 $address = new \Bzzhh\Tzkt\Model\AccountsGetAddressParameter(); // AccountsGetAddressParameter | Filters by address.
-$type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters accounts by type (`user`, `delegate`, `contract`, `ghost`).
+$type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters accounts by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`).
 $kind = new \Bzzhh\Tzkt\Model\AccountsGetKindParameter(); // AccountsGetKindParameter | Filters accounts by contract kind (`delegator_contract` or `smart_contract`)
 $delegate = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters accounts by delegate. Allowed fields for `.eqx` mode: none.
 $balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters accounts by balance
@@ -126,7 +140,6 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**accountsGetCount**](docs/Api/AccountsApi.md#accountsgetcount) | **GET** /v1/accounts/count | Get accounts count
 *AccountsApi* | [**accountsGetCounter**](docs/Api/AccountsApi.md#accountsgetcounter) | **GET** /v1/accounts/{address}/counter | Get counter
 *AccountsApi* | [**accountsGetDelegators**](docs/Api/AccountsApi.md#accountsgetdelegators) | **GET** /v1/accounts/{address}/delegators | Get account delegators
-*AccountsApi* | [**accountsGetMetadata**](docs/Api/AccountsApi.md#accountsgetmetadata) | **GET** /v1/accounts/{address}/metadata | Get account metadata
 *AccountsApi* | [**accountsGetOperations**](docs/Api/AccountsApi.md#accountsgetoperations) | **GET** /v1/accounts/{address}/operations | Get account operations
 *BigMapsApi* | [**bigMapsGetBigMapById**](docs/Api/BigMapsApi.md#bigmapsgetbigmapbyid) | **GET** /v1/bigmaps/{id} | Get bigmap by Id
 *BigMapsApi* | [**bigMapsGetBigMapType**](docs/Api/BigMapsApi.md#bigmapsgetbigmaptype) | **GET** /v1/bigmaps/{id}/type | Get bigmap type
@@ -184,11 +197,13 @@ Class | Method | HTTP request | Description
 *DelegatesApi* | [**delegatesGetByAddress**](docs/Api/DelegatesApi.md#delegatesgetbyaddress) | **GET** /v1/delegates/{address} | Get delegate by address
 *DelegatesApi* | [**delegatesGetCount**](docs/Api/DelegatesApi.md#delegatesgetcount) | **GET** /v1/delegates/count | Get delegates count
 *DomainsApi* | [**domainsGet**](docs/Api/DomainsApi.md#domainsget) | **GET** /v1/domains | Get domains
+*DomainsApi* | [**domainsGetByName**](docs/Api/DomainsApi.md#domainsgetbyname) | **GET** /v1/domains/{name} | Get domain by name
 *DomainsApi* | [**domainsGetCount**](docs/Api/DomainsApi.md#domainsgetcount) | **GET** /v1/domains/count | Get domains count
-*DomainsApi* | [**domainsGetCount2**](docs/Api/DomainsApi.md#domainsgetcount2) | **GET** /v1/domains/{name} | Get domain by name
 *EventsApi* | [**eventsGetContractEvents**](docs/Api/EventsApi.md#eventsgetcontractevents) | **GET** /v1/contracts/events | Get contract events
 *EventsApi* | [**eventsGetContractEventsCount**](docs/Api/EventsApi.md#eventsgetcontracteventscount) | **GET** /v1/contracts/events/count | Get contract events count
 *HeadApi* | [**headGet**](docs/Api/HeadApi.md#headget) | **GET** /v1/head | Get indexer head
+*HelpersApi* | [**helpersPostInject**](docs/Api/HelpersApi.md#helperspostinject) | **POST** /v1/helpers/inject | Inject operation
+*HelpersApi* | [**helpersPostRunScriptView**](docs/Api/HelpersApi.md#helperspostrunscriptview) | **POST** /v1/helpers/view/{contract}/{name} | Run script view
 *OperationsApi* | [**operationsGetActivationByHash**](docs/Api/OperationsApi.md#operationsgetactivationbyhash) | **GET** /v1/operations/activations/{hash} | Get activation by hash
 *OperationsApi* | [**operationsGetActivations**](docs/Api/OperationsApi.md#operationsgetactivations) | **GET** /v1/operations/activations | Get activations
 *OperationsApi* | [**operationsGetActivationsCount**](docs/Api/OperationsApi.md#operationsgetactivationscount) | **GET** /v1/operations/activations/count | Get activations count
@@ -257,6 +272,20 @@ Class | Method | HTTP request | Description
 *OperationsApi* | [**operationsGetSetDepositsLimitStatus**](docs/Api/OperationsApi.md#operationsgetsetdepositslimitstatus) | **GET** /v1/operations/set_deposits_limits/{hash}/status | Get set deposits limit status
 *OperationsApi* | [**operationsGetSetDepositsLimits**](docs/Api/OperationsApi.md#operationsgetsetdepositslimits) | **GET** /v1/operations/set_deposits_limits | Get set deposits limits
 *OperationsApi* | [**operationsGetSetDepositsLimitsCount**](docs/Api/OperationsApi.md#operationsgetsetdepositslimitscount) | **GET** /v1/operations/set_deposits_limits/count | Get set deposits limits count
+*OperationsApi* | [**operationsGetSmartRollupAddMessagesOps**](docs/Api/OperationsApi.md#operationsgetsmartrollupaddmessagesops) | **GET** /v1/operations/sr_add_messages | Get smart rollup add messages
+*OperationsApi* | [**operationsGetSmartRollupAddMessagesOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrollupaddmessagesopscount) | **GET** /v1/operations/sr_add_messages/count | Get smart rollup add messages count
+*OperationsApi* | [**operationsGetSmartRollupCementOps**](docs/Api/OperationsApi.md#operationsgetsmartrollupcementops) | **GET** /v1/operations/sr_cement | Get smart rollup cement
+*OperationsApi* | [**operationsGetSmartRollupCementOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrollupcementopscount) | **GET** /v1/operations/sr_cement/count | Get smart rollup cement count
+*OperationsApi* | [**operationsGetSmartRollupExecuteOps**](docs/Api/OperationsApi.md#operationsgetsmartrollupexecuteops) | **GET** /v1/operations/sr_execute | Get smart rollup execute
+*OperationsApi* | [**operationsGetSmartRollupExecuteOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrollupexecuteopscount) | **GET** /v1/operations/sr_execute/count | Get smart rollup execute count
+*OperationsApi* | [**operationsGetSmartRollupOriginateOps**](docs/Api/OperationsApi.md#operationsgetsmartrolluporiginateops) | **GET** /v1/operations/sr_originate | Get smart rollup originate
+*OperationsApi* | [**operationsGetSmartRollupOriginateOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrolluporiginateopscount) | **GET** /v1/operations/sr_originate/count | Get smart rollup originate count
+*OperationsApi* | [**operationsGetSmartRollupPublishOps**](docs/Api/OperationsApi.md#operationsgetsmartrolluppublishops) | **GET** /v1/operations/sr_publish | Get smart rollup publish
+*OperationsApi* | [**operationsGetSmartRollupPublishOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrolluppublishopscount) | **GET** /v1/operations/sr_publish/count | Get smart rollup publish count
+*OperationsApi* | [**operationsGetSmartRollupRecoverBondOps**](docs/Api/OperationsApi.md#operationsgetsmartrolluprecoverbondops) | **GET** /v1/operations/sr_recover_bond | Get smart rollup recover bond
+*OperationsApi* | [**operationsGetSmartRollupRecoverBondOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrolluprecoverbondopscount) | **GET** /v1/operations/sr_recover_bond/count | Get smart rollup recover bond count
+*OperationsApi* | [**operationsGetSmartRollupRefuteOps**](docs/Api/OperationsApi.md#operationsgetsmartrolluprefuteops) | **GET** /v1/operations/sr_refute | Get smart rollup refute
+*OperationsApi* | [**operationsGetSmartRollupRefuteOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrolluprefuteopscount) | **GET** /v1/operations/sr_refute/count | Get smart rollup refute count
 *OperationsApi* | [**operationsGetStatus**](docs/Api/OperationsApi.md#operationsgetstatus) | **GET** /v1/operations/{hash}/status | Get operation status
 *OperationsApi* | [**operationsGetTransactionByHash**](docs/Api/OperationsApi.md#operationsgettransactionbyhash) | **GET** /v1/operations/transactions/{hash} | Get transaction by hash
 *OperationsApi* | [**operationsGetTransactionByHashCounter**](docs/Api/OperationsApi.md#operationsgettransactionbyhashcounter) | **GET** /v1/operations/transactions/{hash}/{counter} | Get transaction by hash and counter
@@ -325,6 +354,16 @@ Class | Method | HTTP request | Description
 *RewardsApi* | [**rewardsGetRewardSplitDelegator**](docs/Api/RewardsApi.md#rewardsgetrewardsplitdelegator) | **GET** /v1/rewards/split/{baker}/{cycle}/{delegator} | Get reward split delegator
 *RightsApi* | [**rightsGet**](docs/Api/RightsApi.md#rightsget) | **GET** /v1/rights | Get rights
 *RightsApi* | [**rightsGetCount**](docs/Api/RightsApi.md#rightsgetcount) | **GET** /v1/rights/count | Get rights count
+*SmartRollupsApi* | [**smartRollupsGetInboxMessages**](docs/Api/SmartRollupsApi.md#smartrollupsgetinboxmessages) | **GET** /v1/smart_rollups/inbox | Get inbox messages
+*SmartRollupsApi* | [**smartRollupsGetInboxMessagesCount**](docs/Api/SmartRollupsApi.md#smartrollupsgetinboxmessagescount) | **GET** /v1/smart_rollups/inbox/count | Get inbox messages count
+*SmartRollupsApi* | [**smartRollupsGetSmartRollup**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollup) | **GET** /v1/smart_rollups/{address} | Get smart rollup by address
+*SmartRollupsApi* | [**smartRollupsGetSmartRollupCommitments**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupcommitments) | **GET** /v1/smart_rollups/commitments | Get smart rollup commitments
+*SmartRollupsApi* | [**smartRollupsGetSmartRollupCommitmentsCount**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupcommitmentscount) | **GET** /v1/smart_rollups/commitments/count | Get smart rollup commitments count
+*SmartRollupsApi* | [**smartRollupsGetSmartRollupGames**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupgames) | **GET** /v1/smart_rollups/games | Get smart rollup games
+*SmartRollupsApi* | [**smartRollupsGetSmartRollupGamesCount**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupgamescount) | **GET** /v1/smart_rollups/games/count | Get smart rollup games count
+*SmartRollupsApi* | [**smartRollupsGetSmartRollupStakers**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupstakers) | **GET** /v1/smart_rollups/{address}/stakers | Get smart rollup stakers
+*SmartRollupsApi* | [**smartRollupsGetSmartRollups**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollups) | **GET** /v1/smart_rollups | Get smart rollups
+*SmartRollupsApi* | [**smartRollupsGetSmartRollupsCount**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupscount) | **GET** /v1/smart_rollups/count | Get smart rollups count
 *SoftwareApi* | [**softwareGet**](docs/Api/SoftwareApi.md#softwareget) | **GET** /v1/software | Get baker software
 *SoftwareApi* | [**softwareGetCount**](docs/Api/SoftwareApi.md#softwaregetcount) | **GET** /v1/software/count | Get software count
 *StatisticsApi* | [**statisticsGet**](docs/Api/StatisticsApi.md#statisticsget) | **GET** /v1/statistics | Get statistics
@@ -456,7 +495,7 @@ Class | Method | HTTP request | Description
 - [DomainAddress](docs/Model/DomainAddress.md)
 - [DomainData](docs/Model/DomainData.md)
 - [DomainOwner](docs/Model/DomainOwner.md)
-- [DomainsGetCountAddressParameter](docs/Model/DomainsGetCountAddressParameter.md)
+- [DomainsGetCountOwnerParameter](docs/Model/DomainsGetCountOwnerParameter.md)
 - [DomainsGetSelectParameter](docs/Model/DomainsGetSelectParameter.md)
 - [DoubleBakingOperation](docs/Model/DoubleBakingOperation.md)
 - [DoubleBakingOperationAllOf](docs/Model/DoubleBakingOperationAllOf.md)
@@ -507,12 +546,18 @@ Class | Method | HTTP request | Description
 - [NonceRevelationOperation](docs/Model/NonceRevelationOperation.md)
 - [NonceRevelationOperationAllOf](docs/Model/NonceRevelationOperationAllOf.md)
 - [OffsetParameter](docs/Model/OffsetParameter.md)
+- [OpHashParameter](docs/Model/OpHashParameter.md)
 - [Operation](docs/Model/Operation.md)
 - [OperationError](docs/Model/OperationError.md)
 - [OperationStatusParameter](docs/Model/OperationStatusParameter.md)
 - [OperationsGetBallotsProposalParameter](docs/Model/OperationsGetBallotsProposalParameter.md)
 - [OperationsGetBallotsVoteParameter](docs/Model/OperationsGetBallotsVoteParameter.md)
 - [OperationsGetMigrationsKindParameter](docs/Model/OperationsGetMigrationsKindParameter.md)
+- [OperationsGetSmartRollupAddMessagesOpsHashParameter](docs/Model/OperationsGetSmartRollupAddMessagesOpsHashParameter.md)
+- [OperationsGetSmartRollupCementOpsRollupParameter](docs/Model/OperationsGetSmartRollupCementOpsRollupParameter.md)
+- [OperationsGetSmartRollupPublishOpsCommitmentHashParameter](docs/Model/OperationsGetSmartRollupPublishOpsCommitmentHashParameter.md)
+- [OperationsGetSmartRollupRefuteOpsGameStatusParameter](docs/Model/OperationsGetSmartRollupRefuteOpsGameStatusParameter.md)
+- [OperationsGetSmartRollupRefuteOpsMoveParameter](docs/Model/OperationsGetSmartRollupRefuteOpsMoveParameter.md)
 - [OriginatedContract](docs/Model/OriginatedContract.md)
 - [OriginationOperation](docs/Model/OriginationOperation.md)
 - [OriginationOperationAllOf](docs/Model/OriginationOperationAllOf.md)
@@ -520,19 +565,18 @@ Class | Method | HTTP request | Description
 - [PreendorsementOperation](docs/Model/PreendorsementOperation.md)
 - [PreendorsementOperationAllOf](docs/Model/PreendorsementOperationAllOf.md)
 - [PrimType](docs/Model/PrimType.md)
-- [ProfileMetadata](docs/Model/ProfileMetadata.md)
 - [Proposal](docs/Model/Proposal.md)
 - [ProposalAlias](docs/Model/ProposalAlias.md)
 - [ProposalInitiator](docs/Model/ProposalInitiator.md)
-- [ProposalMetadata](docs/Model/ProposalMetadata.md)
 - [ProposalOperation](docs/Model/ProposalOperation.md)
 - [ProposalOperationAllOf](docs/Model/ProposalOperationAllOf.md)
 - [Protocol](docs/Model/Protocol.md)
 - [ProtocolConstants](docs/Model/ProtocolConstants.md)
-- [ProtocolMetadata](docs/Model/ProtocolMetadata.md)
 - [ProtocolParameter](docs/Model/ProtocolParameter.md)
 - [Quote](docs/Model/Quote.md)
 - [QuoteShort](docs/Model/QuoteShort.md)
+- [RefutationGameStatusParameter](docs/Model/RefutationGameStatusParameter.md)
+- [RefutationMoveParameter](docs/Model/RefutationMoveParameter.md)
 - [RegisterConstantOperation](docs/Model/RegisterConstantOperation.md)
 - [RegisterConstantOperationAllOf](docs/Model/RegisterConstantOperationAllOf.md)
 - [RelatedContract](docs/Model/RelatedContract.md)
@@ -550,6 +594,26 @@ Class | Method | HTTP request | Description
 - [SelectionParameter](docs/Model/SelectionParameter.md)
 - [SetDepositsLimitOperation](docs/Model/SetDepositsLimitOperation.md)
 - [SetDepositsLimitOperationAllOf](docs/Model/SetDepositsLimitOperationAllOf.md)
+- [SmartRollup](docs/Model/SmartRollup.md)
+- [SmartRollupAddMessagesOperation](docs/Model/SmartRollupAddMessagesOperation.md)
+- [SmartRollupAddMessagesOperationAllOf](docs/Model/SmartRollupAddMessagesOperationAllOf.md)
+- [SmartRollupAllOf](docs/Model/SmartRollupAllOf.md)
+- [SmartRollupCementOperation](docs/Model/SmartRollupCementOperation.md)
+- [SmartRollupCementOperationAllOf](docs/Model/SmartRollupCementOperationAllOf.md)
+- [SmartRollupExecuteOperation](docs/Model/SmartRollupExecuteOperation.md)
+- [SmartRollupExecuteOperationAllOf](docs/Model/SmartRollupExecuteOperationAllOf.md)
+- [SmartRollupOriginateOperation](docs/Model/SmartRollupOriginateOperation.md)
+- [SmartRollupOriginateOperationAllOf](docs/Model/SmartRollupOriginateOperationAllOf.md)
+- [SmartRollupParameter](docs/Model/SmartRollupParameter.md)
+- [SmartRollupPublishOperation](docs/Model/SmartRollupPublishOperation.md)
+- [SmartRollupPublishOperationAllOf](docs/Model/SmartRollupPublishOperationAllOf.md)
+- [SmartRollupRecoverBondOperation](docs/Model/SmartRollupRecoverBondOperation.md)
+- [SmartRollupRecoverBondOperationAllOf](docs/Model/SmartRollupRecoverBondOperationAllOf.md)
+- [SmartRollupRefuteOperation](docs/Model/SmartRollupRefuteOperation.md)
+- [SmartRollupRefuteOperationAllOf](docs/Model/SmartRollupRefuteOperationAllOf.md)
+- [SmartRollupsGetInboxMessagesCountTypeParameter](docs/Model/SmartRollupsGetInboxMessagesCountTypeParameter.md)
+- [SmartRollupsGetSmartRollupCommitmentsCountStatusParameter](docs/Model/SmartRollupsGetSmartRollupCommitmentsCountStatusParameter.md)
+- [SmartRollupsGetSmartRollupStakersBondStatusParameter](docs/Model/SmartRollupsGetSmartRollupStakersBondStatusParameter.md)
 - [Software](docs/Model/Software.md)
 - [SoftwareAlias](docs/Model/SoftwareAlias.md)
 - [SortMode](docs/Model/SortMode.md)
@@ -557,6 +621,31 @@ Class | Method | HTTP request | Description
 - [SourceOperation](docs/Model/SourceOperation.md)
 - [SourceOperationParameter](docs/Model/SourceOperationParameter.md)
 - [SplitDelegator](docs/Model/SplitDelegator.md)
+- [SrBondStatusParameter](docs/Model/SrBondStatusParameter.md)
+- [SrCommitment](docs/Model/SrCommitment.md)
+- [SrCommitmentInfo](docs/Model/SrCommitmentInfo.md)
+- [SrCommitmentInfoInitiator](docs/Model/SrCommitmentInfoInitiator.md)
+- [SrCommitmentPredecessor](docs/Model/SrCommitmentPredecessor.md)
+- [SrCommitmentRollup](docs/Model/SrCommitmentRollup.md)
+- [SrCommitmentStatusParameter](docs/Model/SrCommitmentStatusParameter.md)
+- [SrGame](docs/Model/SrGame.md)
+- [SrGameInfo](docs/Model/SrGameInfo.md)
+- [SrGameInfoInitiator](docs/Model/SrGameInfoInitiator.md)
+- [SrGameInfoInitiatorCommitment](docs/Model/SrGameInfoInitiatorCommitment.md)
+- [SrGameInfoOpponent](docs/Model/SrGameInfoOpponent.md)
+- [SrGameInfoOpponentCommitment](docs/Model/SrGameInfoOpponentCommitment.md)
+- [SrGameLastMove](docs/Model/SrGameLastMove.md)
+- [SrGameMove](docs/Model/SrGameMove.md)
+- [SrGameMoveSender](docs/Model/SrGameMoveSender.md)
+- [SrGameRollup](docs/Model/SrGameRollup.md)
+- [SrMessage](docs/Model/SrMessage.md)
+- [SrMessageInitiator](docs/Model/SrMessageInitiator.md)
+- [SrMessageSender](docs/Model/SrMessageSender.md)
+- [SrMessageTarget](docs/Model/SrMessageTarget.md)
+- [SrMessageTypeParameter](docs/Model/SrMessageTypeParameter.md)
+- [SrStaker](docs/Model/SrStaker.md)
+- [SrStakerAllOf](docs/Model/SrStakerAllOf.md)
+- [Src1HashParameter](docs/Model/Src1HashParameter.md)
 - [State](docs/Model/State.md)
 - [Statistics](docs/Model/Statistics.md)
 - [StatisticsQuote](docs/Model/StatisticsQuote.md)
@@ -636,5 +725,5 @@ hello@baking-bad.org
 
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: `v1.11.0`
+- API version: `1.12.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

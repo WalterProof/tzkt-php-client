@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **string** | Domain record name.   **[sortable]** | [optional]
 **owner** | [**\Bzzhh\Tzkt\Model\DomainOwner**](DomainOwner.md) |  | [optional]
 **address** | [**\Bzzhh\Tzkt\Model\DomainAddress**](DomainAddress.md) |  | [optional]
+**reverse** | **bool** | Whether or not the domain is on the reverse records list | [optional]
 **expiration** | **\DateTime** | Expiration datetime | [optional]
 **data** | [**\Bzzhh\Tzkt\Model\DomainData**](DomainData.md) |  | [optional]
 **first_level** | **int** | Level of the block where the domain was first seen.   **[sortable]** | [optional]

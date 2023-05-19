@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **creator** | [**\Bzzhh\Tzkt\Model\ConstantCreator**](ConstantCreator.md) |  | [optional]
 **creation_level** | **int** | Level of the first block baked with this software | [optional]
 **creation_time** | **\DateTime** | Datetime of the first block baked with this software | [optional]
+**extras** | **mixed** | Off-chain extras | [optional]
 **metadata** | [**\Bzzhh\Tzkt\Model\ConstantMetadata**](ConstantMetadata.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

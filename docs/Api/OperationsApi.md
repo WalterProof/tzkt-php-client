@@ -72,6 +72,20 @@ All URIs are relative to https://api.tzkt.io, except if the operation defines an
 | [**operationsGetSetDepositsLimitStatus()**](OperationsApi.md#operationsGetSetDepositsLimitStatus) | **GET** /v1/operations/set_deposits_limits/{hash}/status | Get set deposits limit status |
 | [**operationsGetSetDepositsLimits()**](OperationsApi.md#operationsGetSetDepositsLimits) | **GET** /v1/operations/set_deposits_limits | Get set deposits limits |
 | [**operationsGetSetDepositsLimitsCount()**](OperationsApi.md#operationsGetSetDepositsLimitsCount) | **GET** /v1/operations/set_deposits_limits/count | Get set deposits limits count |
+| [**operationsGetSmartRollupAddMessagesOps()**](OperationsApi.md#operationsGetSmartRollupAddMessagesOps) | **GET** /v1/operations/sr_add_messages | Get smart rollup add messages |
+| [**operationsGetSmartRollupAddMessagesOpsCount()**](OperationsApi.md#operationsGetSmartRollupAddMessagesOpsCount) | **GET** /v1/operations/sr_add_messages/count | Get smart rollup add messages count |
+| [**operationsGetSmartRollupCementOps()**](OperationsApi.md#operationsGetSmartRollupCementOps) | **GET** /v1/operations/sr_cement | Get smart rollup cement |
+| [**operationsGetSmartRollupCementOpsCount()**](OperationsApi.md#operationsGetSmartRollupCementOpsCount) | **GET** /v1/operations/sr_cement/count | Get smart rollup cement count |
+| [**operationsGetSmartRollupExecuteOps()**](OperationsApi.md#operationsGetSmartRollupExecuteOps) | **GET** /v1/operations/sr_execute | Get smart rollup execute |
+| [**operationsGetSmartRollupExecuteOpsCount()**](OperationsApi.md#operationsGetSmartRollupExecuteOpsCount) | **GET** /v1/operations/sr_execute/count | Get smart rollup execute count |
+| [**operationsGetSmartRollupOriginateOps()**](OperationsApi.md#operationsGetSmartRollupOriginateOps) | **GET** /v1/operations/sr_originate | Get smart rollup originate |
+| [**operationsGetSmartRollupOriginateOpsCount()**](OperationsApi.md#operationsGetSmartRollupOriginateOpsCount) | **GET** /v1/operations/sr_originate/count | Get smart rollup originate count |
+| [**operationsGetSmartRollupPublishOps()**](OperationsApi.md#operationsGetSmartRollupPublishOps) | **GET** /v1/operations/sr_publish | Get smart rollup publish |
+| [**operationsGetSmartRollupPublishOpsCount()**](OperationsApi.md#operationsGetSmartRollupPublishOpsCount) | **GET** /v1/operations/sr_publish/count | Get smart rollup publish count |
+| [**operationsGetSmartRollupRecoverBondOps()**](OperationsApi.md#operationsGetSmartRollupRecoverBondOps) | **GET** /v1/operations/sr_recover_bond | Get smart rollup recover bond |
+| [**operationsGetSmartRollupRecoverBondOpsCount()**](OperationsApi.md#operationsGetSmartRollupRecoverBondOpsCount) | **GET** /v1/operations/sr_recover_bond/count | Get smart rollup recover bond count |
+| [**operationsGetSmartRollupRefuteOps()**](OperationsApi.md#operationsGetSmartRollupRefuteOps) | **GET** /v1/operations/sr_refute | Get smart rollup refute |
+| [**operationsGetSmartRollupRefuteOpsCount()**](OperationsApi.md#operationsGetSmartRollupRefuteOpsCount) | **GET** /v1/operations/sr_refute/count | Get smart rollup refute count |
 | [**operationsGetStatus()**](OperationsApi.md#operationsGetStatus) | **GET** /v1/operations/{hash}/status | Get operation status |
 | [**operationsGetTransactionByHash()**](OperationsApi.md#operationsGetTransactionByHash) | **GET** /v1/operations/transactions/{hash} | Get transaction by hash |
 | [**operationsGetTransactionByHashCounter()**](OperationsApi.md#operationsGetTransactionByHashCounter) | **GET** /v1/operations/transactions/{hash}/{counter} | Get transaction by hash and counter |
@@ -1786,7 +1800,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParameter | Filtersby any of the specified fields. Example: `anyof.delegate.target=tz1...` will return operations where `delegate` OR `target` is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account.
+$anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParameter | Filters by any of the specified fields. Example: `anyof.delegate.target=tz1...` will return operations where `delegate` OR `target` is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account.
 $delegate = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters by drained baker. Allowed fields for `.eqx` mode: none.
 $target = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters by target. Allowed fields for `.eqx` mode: none.
 $level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters by level.
@@ -1809,7 +1823,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **anyof** | [**BlocksGetAnyofParameter**](../Model/.md)| Filtersby any of the specified fields. Example: &#x60;anyof.delegate.target&#x3D;tz1...&#x60; will return operations where &#x60;delegate&#x60; OR &#x60;target&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. | [optional] |
+| **anyof** | [**BlocksGetAnyofParameter**](../Model/.md)| Filters by any of the specified fields. Example: &#x60;anyof.delegate.target&#x3D;tz1...&#x60; will return operations where &#x60;delegate&#x60; OR &#x60;target&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. | [optional] |
 | **delegate** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters by drained baker. Allowed fields for &#x60;.eqx&#x60; mode: none. | [optional] |
 | **target** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters by target. Allowed fields for &#x60;.eqx&#x60; mode: none. | [optional] |
 | **level** | [**AccountsGetIdParameter**](../Model/.md)| Filters by level. | [optional] |
@@ -4417,6 +4431,1110 @@ No authorization required
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `operationsGetSmartRollupAddMessagesOps()`
+
+```php
+operationsGetSmartRollupAddMessagesOps($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote): \Bzzhh\Tzkt\Model\SmartRollupAddMessagesOperation[]
+```
+
+Get smart rollup add messages
+
+Returns a list of smart rollup add messages operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
+$limit = 56; // int | Maximum number of items to return.
+$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupAddMessagesOps($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupAddMessagesOps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
+| **limit** | **int**| Maximum number of items to return. | [optional] |
+| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\SmartRollupAddMessagesOperation[]**](../Model/SmartRollupAddMessagesOperation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupAddMessagesOpsCount()`
+
+```php
+operationsGetSmartRollupAddMessagesOpsCount($id, $hash, $counter, $level, $timestamp, $status, $sender): int
+```
+
+Get smart rollup add messages count
+
+Returns a total number of smart rollup add messages operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupAddMessagesOpsCount($id, $hash, $counter, $level, $timestamp, $status, $sender);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupAddMessagesOpsCount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+
+### Return type
+
+**int**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupCementOps()`
+
+```php
+operationsGetSmartRollupCementOps($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote): \Bzzhh\Tzkt\Model\SmartRollupCementOperation[]
+```
+
+Get smart rollup cement
+
+Returns a list of smart rollup cement operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
+$limit = 56; // int | Maximum number of items to return.
+$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupCementOps($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupCementOps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
+| **limit** | **int**| Maximum number of items to return. | [optional] |
+| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\SmartRollupCementOperation[]**](../Model/SmartRollupCementOperation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupCementOpsCount()`
+
+```php
+operationsGetSmartRollupCementOpsCount($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender): int
+```
+
+Get smart rollup cement count
+
+Returns a total number of smart rollup cement operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupCementOpsCount($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupCementOpsCount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+
+### Return type
+
+**int**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupExecuteOps()`
+
+```php
+operationsGetSmartRollupExecuteOps($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote): \Bzzhh\Tzkt\Model\SmartRollupExecuteOperation[]
+```
+
+Get smart rollup execute
+
+Returns a list of smart rollup execute operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
+$limit = 56; // int | Maximum number of items to return.
+$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupExecuteOps($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupExecuteOps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
+| **limit** | **int**| Maximum number of items to return. | [optional] |
+| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\SmartRollupExecuteOperation[]**](../Model/SmartRollupExecuteOperation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupExecuteOpsCount()`
+
+```php
+operationsGetSmartRollupExecuteOpsCount($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender): int
+```
+
+Get smart rollup execute count
+
+Returns a total number of smart rollup execute operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupExecuteOpsCount($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupExecuteOpsCount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+
+### Return type
+
+**int**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupOriginateOps()`
+
+```php
+operationsGetSmartRollupOriginateOps($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $micheline): \Bzzhh\Tzkt\Model\SmartRollupOriginateOperation[]
+```
+
+Get smart rollup originate
+
+Returns a list of smart rollup originate operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
+$limit = 56; // int | Maximum number of items to return.
+$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
+$micheline = new \Bzzhh\Tzkt\Model\AccountsGetOperationsMichelineParameter(); // AccountsGetOperationsMichelineParameter | Format of the parameter type value: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupOriginateOps($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $micheline);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupOriginateOps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
+| **limit** | **int**| Maximum number of items to return. | [optional] |
+| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
+| **micheline** | [**AccountsGetOperationsMichelineParameter**](../Model/.md)| Format of the parameter type value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - raw micheline, &#x60;3&#x60; - raw micheline string | [optional] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\SmartRollupOriginateOperation[]**](../Model/SmartRollupOriginateOperation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupOriginateOpsCount()`
+
+```php
+operationsGetSmartRollupOriginateOpsCount($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender): int
+```
+
+Get smart rollup originate count
+
+Returns a total number of smart rollup originate operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupOriginateOpsCount($rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupOriginateOpsCount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+
+### Return type
+
+**int**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupPublishOps()`
+
+```php
+operationsGetSmartRollupPublishOps($commitment_id, $commitment_hash, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote): \Bzzhh\Tzkt\Model\SmartRollupPublishOperation[]
+```
+
+Get smart rollup publish
+
+Returns a list of smart rollup publish operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$commitment_id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$commitment_hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupPublishOpsCommitmentHashParameter(); // OperationsGetSmartRollupPublishOpsCommitmentHashParameter | Filter by commitment hash.   Click on the parameter to expand more details.
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
+$limit = 56; // int | Maximum number of items to return.
+$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupPublishOps($commitment_id, $commitment_hash, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupPublishOps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **commitment_id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **commitment_hash** | [**OperationsGetSmartRollupPublishOpsCommitmentHashParameter**](../Model/.md)| Filter by commitment hash.   Click on the parameter to expand more details. | [optional] |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
+| **limit** | **int**| Maximum number of items to return. | [optional] |
+| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\SmartRollupPublishOperation[]**](../Model/SmartRollupPublishOperation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupPublishOpsCount()`
+
+```php
+operationsGetSmartRollupPublishOpsCount($commitment_id, $commitment_hash, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender): int
+```
+
+Get smart rollup publish count
+
+Returns a total number of smart rollup publish operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$commitment_id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$commitment_hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupPublishOpsCommitmentHashParameter(); // OperationsGetSmartRollupPublishOpsCommitmentHashParameter | Filter by commitment hash.   Click on the parameter to expand more details.
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupPublishOpsCount($commitment_id, $commitment_hash, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupPublishOpsCount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **commitment_id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **commitment_hash** | [**OperationsGetSmartRollupPublishOpsCommitmentHashParameter**](../Model/.md)| Filter by commitment hash.   Click on the parameter to expand more details. | [optional] |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+
+### Return type
+
+**int**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupRecoverBondOps()`
+
+```php
+operationsGetSmartRollupRecoverBondOps($anyof, $staker, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote): \Bzzhh\Tzkt\Model\SmartRollupRecoverBondOperation[]
+```
+
+Get smart rollup recover bond
+
+Returns a list of smart rollup recover bond operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParameter | Filter by any of the specified fields (`sender` or `staker`). Example: `anyof.sender.staker=tz1...` will return operations where `sender` OR `staker` is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details.
+$staker = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by staker address.   Click on the parameter to expand more details.
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
+$limit = 56; // int | Maximum number of items to return.
+$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupRecoverBondOps($anyof, $staker, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupRecoverBondOps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **anyof** | [**BlocksGetAnyofParameter**](../Model/.md)| Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. | [optional] |
+| **staker** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by staker address.   Click on the parameter to expand more details. | [optional] |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
+| **limit** | **int**| Maximum number of items to return. | [optional] |
+| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\SmartRollupRecoverBondOperation[]**](../Model/SmartRollupRecoverBondOperation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupRecoverBondOpsCount()`
+
+```php
+operationsGetSmartRollupRecoverBondOpsCount($anyof, $staker, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender): int
+```
+
+Get smart rollup recover bond count
+
+Returns a total number of smart rollup recover bond operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParameter | Filter by any of the specified fields (`sender` or `staker`). Example: `anyof.sender.staker=tz1...` will return operations where `sender` OR `staker` is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details.
+$staker = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by staker address.   Click on the parameter to expand more details.
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupRecoverBondOpsCount($anyof, $staker, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupRecoverBondOpsCount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **anyof** | [**BlocksGetAnyofParameter**](../Model/.md)| Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. | [optional] |
+| **staker** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by staker address.   Click on the parameter to expand more details. | [optional] |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+
+### Return type
+
+**int**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupRefuteOps()`
+
+```php
+operationsGetSmartRollupRefuteOps($anyof, $game_id, $game_initiator, $game_initiator_commitment_id, $game_initiator_commitment_hash, $game_opponent, $game_opponent_commitment_id, $game_opponent_commitment_hash, $move, $game_status, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote): \Bzzhh\Tzkt\Model\SmartRollupRefuteOperation[]
+```
+
+Get smart rollup refute
+
+Returns a list of smart rollup refute operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParameter | Filter by any of the specified fields (`sender`, `initiator`, or `opponent`). Example: `anyof.initiator.opponent=tz1...` will return operations where `initiator` OR `opponent` is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details.
+$game_id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$game_initiator = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by initiator (who found a wrong commitment and started the refutation game).   Click on the parameter to expand more details.
+$game_initiator_commitment_id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$game_initiator_commitment_hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupPublishOpsCommitmentHashParameter(); // OperationsGetSmartRollupPublishOpsCommitmentHashParameter | Filter by commitment hash.   Click on the parameter to expand more details.
+$game_opponent = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by opponent (who was accused in publishing a wrong commitment).   Click on the parameter to expand more details.
+$game_opponent_commitment_id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$game_opponent_commitment_hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupPublishOpsCommitmentHashParameter(); // OperationsGetSmartRollupPublishOpsCommitmentHashParameter | Filter by commitment hash.   Click on the parameter to expand more details.
+$move = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupRefuteOpsMoveParameter(); // OperationsGetSmartRollupRefuteOpsMoveParameter | Filter by refutation game move (`start`, `dissection`, `proof`, or `timeout`).   Click on the parameter to expand more details.
+$game_status = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupRefuteOpsGameStatusParameter(); // OperationsGetSmartRollupRefuteOpsGameStatusParameter | Filter by refutation game status (`none`, `ongoing`, `loser`, or `draw`).   Click on the parameter to expand more details.
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+$sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
+$offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
+$limit = 56; // int | Maximum number of items to return.
+$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupRefuteOps($anyof, $game_id, $game_initiator, $game_initiator_commitment_id, $game_initiator_commitment_hash, $game_opponent, $game_opponent_commitment_id, $game_opponent_commitment_hash, $move, $game_status, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupRefuteOps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **anyof** | [**BlocksGetAnyofParameter**](../Model/.md)| Filter by any of the specified fields (&#x60;sender&#x60;, &#x60;initiator&#x60;, or &#x60;opponent&#x60;). Example: &#x60;anyof.initiator.opponent&#x3D;tz1...&#x60; will return operations where &#x60;initiator&#x60; OR &#x60;opponent&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. | [optional] |
+| **game_id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **game_initiator** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by initiator (who found a wrong commitment and started the refutation game).   Click on the parameter to expand more details. | [optional] |
+| **game_initiator_commitment_id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **game_initiator_commitment_hash** | [**OperationsGetSmartRollupPublishOpsCommitmentHashParameter**](../Model/.md)| Filter by commitment hash.   Click on the parameter to expand more details. | [optional] |
+| **game_opponent** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by opponent (who was accused in publishing a wrong commitment).   Click on the parameter to expand more details. | [optional] |
+| **game_opponent_commitment_id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **game_opponent_commitment_hash** | [**OperationsGetSmartRollupPublishOpsCommitmentHashParameter**](../Model/.md)| Filter by commitment hash.   Click on the parameter to expand more details. | [optional] |
+| **move** | [**OperationsGetSmartRollupRefuteOpsMoveParameter**](../Model/.md)| Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **game_status** | [**OperationsGetSmartRollupRefuteOpsGameStatusParameter**](../Model/.md)| Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+| **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
+| **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
+| **limit** | **int**| Maximum number of items to return. | [optional] |
+| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
+
+### Return type
+
+[**\Bzzhh\Tzkt\Model\SmartRollupRefuteOperation[]**](../Model/SmartRollupRefuteOperation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `operationsGetSmartRollupRefuteOpsCount()`
+
+```php
+operationsGetSmartRollupRefuteOpsCount($anyof, $game_id, $game_initiator, $game_initiator_commitment_id, $game_initiator_commitment_hash, $game_opponent, $game_opponent_commitment_id, $game_opponent_commitment_hash, $move, $game_status, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender): int
+```
+
+Get smart rollup refute count
+
+Returns a total number of smart rollup refute operations.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Bzzhh\Tzkt\Api\OperationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParameter | Filter by any of the specified fields (`sender`, `initiator`, or `opponent`). Example: `anyof.initiator.opponent=tz1...` will return operations where `initiator` OR `opponent` is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details.
+$game_id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$game_initiator = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by initiator (who found a wrong commitment and started the refutation game).   Click on the parameter to expand more details.
+$game_initiator_commitment_id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$game_initiator_commitment_hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupPublishOpsCommitmentHashParameter(); // OperationsGetSmartRollupPublishOpsCommitmentHashParameter | Filter by commitment hash.   Click on the parameter to expand more details.
+$game_opponent = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by opponent (who was accused in publishing a wrong commitment).   Click on the parameter to expand more details.
+$game_opponent_commitment_id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$game_opponent_commitment_hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupPublishOpsCommitmentHashParameter(); // OperationsGetSmartRollupPublishOpsCommitmentHashParameter | Filter by commitment hash.   Click on the parameter to expand more details.
+$move = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupRefuteOpsMoveParameter(); // OperationsGetSmartRollupRefuteOpsMoveParameter | Filter by refutation game move (`start`, `dissection`, `proof`, or `timeout`).   Click on the parameter to expand more details.
+$game_status = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupRefuteOpsGameStatusParameter(); // OperationsGetSmartRollupRefuteOpsGameStatusParameter | Filter by refutation game status (`none`, `ongoing`, `loser`, or `draw`).   Click on the parameter to expand more details.
+$rollup = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupCementOpsRollupParameter(); // OperationsGetSmartRollupCementOpsRollupParameter | Filter by rollup address.   Click on the parameter to expand more details.
+$id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
+$hash = new \Bzzhh\Tzkt\Model\OperationsGetSmartRollupAddMessagesOpsHashParameter(); // OperationsGetSmartRollupAddMessagesOpsHashParameter | Filter by operation hash.   Click on the parameter to expand more details.
+$counter = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by operation counter.   Click on the parameter to expand more details.
+$level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by the domain level.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details.
+$status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filter by operation status (`applied`, `failed`, `backtracked`, `skipped`).   Click on the parameter to expand more details.
+$sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by operation sender address.   Click on the parameter to expand more details.
+
+try {
+    $result = $apiInstance->operationsGetSmartRollupRefuteOpsCount($anyof, $game_id, $game_initiator, $game_initiator_commitment_id, $game_initiator_commitment_hash, $game_opponent, $game_opponent_commitment_id, $game_opponent_commitment_hash, $move, $game_status, $rollup, $id, $hash, $counter, $level, $timestamp, $status, $sender);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OperationsApi->operationsGetSmartRollupRefuteOpsCount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **anyof** | [**BlocksGetAnyofParameter**](../Model/.md)| Filter by any of the specified fields (&#x60;sender&#x60;, &#x60;initiator&#x60;, or &#x60;opponent&#x60;). Example: &#x60;anyof.initiator.opponent&#x3D;tz1...&#x60; will return operations where &#x60;initiator&#x60; OR &#x60;opponent&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. | [optional] |
+| **game_id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **game_initiator** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by initiator (who found a wrong commitment and started the refutation game).   Click on the parameter to expand more details. | [optional] |
+| **game_initiator_commitment_id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **game_initiator_commitment_hash** | [**OperationsGetSmartRollupPublishOpsCommitmentHashParameter**](../Model/.md)| Filter by commitment hash.   Click on the parameter to expand more details. | [optional] |
+| **game_opponent** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by opponent (who was accused in publishing a wrong commitment).   Click on the parameter to expand more details. | [optional] |
+| **game_opponent_commitment_id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **game_opponent_commitment_hash** | [**OperationsGetSmartRollupPublishOpsCommitmentHashParameter**](../Model/.md)| Filter by commitment hash.   Click on the parameter to expand more details. | [optional] |
+| **move** | [**OperationsGetSmartRollupRefuteOpsMoveParameter**](../Model/.md)| Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **game_status** | [**OperationsGetSmartRollupRefuteOpsGameStatusParameter**](../Model/.md)| Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **rollup** | [**OperationsGetSmartRollupCementOpsRollupParameter**](../Model/.md)| Filter by rollup address.   Click on the parameter to expand more details. | [optional] |
+| **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
+| **hash** | [**OperationsGetSmartRollupAddMessagesOpsHashParameter**](../Model/.md)| Filter by operation hash.   Click on the parameter to expand more details. | [optional] |
+| **counter** | [**AccountsGetIdParameter**](../Model/.md)| Filter by operation counter.   Click on the parameter to expand more details. | [optional] |
+| **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by the domain level.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. | [optional] |
+| **status** | [**AccountsGetOperationsStatusParameter**](../Model/.md)| Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by operation sender address.   Click on the parameter to expand more details. | [optional] |
+
+### Return type
+
+**int**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `operationsGetStatus()`
 
 ```php
@@ -4742,7 +5860,7 @@ $anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParam
 $initiator = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions by initiator. Allowed fields for `.eqx` mode: `target`.
 $sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions by sender. Allowed fields for `.eqx` mode: `target`.
 $target = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions by target. Allowed fields for `.eqx` mode: `sender`, `initiator`.
-$amount = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters transactions by amount (microtez).
+$amount = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters transactions by amount (micro tez).
 $id = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters transactions by id.
 $level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters transactions by level.
 $timestamp = new \Bzzhh\Tzkt\Model\AccountsGetOperationsTimestampParameter(); // AccountsGetOperationsTimestampParameter | Filters transactions by timestamp.
@@ -4776,7 +5894,7 @@ try {
 | **initiator** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions by initiator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;target&#x60;. | [optional] |
 | **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions by sender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;target&#x60;. | [optional] |
 | **target** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions by target. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;sender&#x60;, &#x60;initiator&#x60;. | [optional] |
-| **amount** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters transactions by amount (microtez). | [optional] |
+| **amount** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters transactions by amount (micro tez). | [optional] |
 | **id** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters transactions by id. | [optional] |
 | **level** | [**AccountsGetIdParameter**](../Model/.md)| Filters transactions by level. | [optional] |
 | **timestamp** | [**AccountsGetOperationsTimestampParameter**](../Model/.md)| Filters transactions by timestamp. | [optional] |
@@ -4814,7 +5932,7 @@ No authorization required
 ## `operationsGetTransactionsCount()`
 
 ```php
-operationsGetTransactionsCount($anyof, $initiator, $sender, $target, $level, $timestamp, $entrypoint, $parameter, $status): int
+operationsGetTransactionsCount($anyof, $initiator, $sender, $target, $amount, $level, $timestamp, $entrypoint, $parameter, $status): int
 ```
 
 Get transactions count
@@ -4838,6 +5956,7 @@ $anyof = new \Bzzhh\Tzkt\Model\BlocksGetAnyofParameter(); // BlocksGetAnyofParam
 $initiator = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions by initiator. Allowed fields for `.eqx` mode: `target`.
 $sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions by sender. Allowed fields for `.eqx` mode: `target`.
 $target = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions by target. Allowed fields for `.eqx` mode: `sender`, `initiator`.
+$amount = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters transactions by amount (micro tez).
 $level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters transactions by level.
 $timestamp = new \Bzzhh\Tzkt\Model\AccountsGetOperationsTimestampParameter(); // AccountsGetOperationsTimestampParameter | Filters transactions by timestamp.
 $entrypoint = new \Bzzhh\Tzkt\Model\AccountsGetOperationsEntrypointParameter(); // AccountsGetOperationsEntrypointParameter | Filters transactions by entrypoint called on the target contract.
@@ -4845,7 +5964,7 @@ $parameter = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); //
 $status = new \Bzzhh\Tzkt\Model\AccountsGetOperationsStatusParameter(); // AccountsGetOperationsStatusParameter | Filters transactions by operation status (`applied`, `failed`, `backtracked`, `skipped`).
 
 try {
-    $result = $apiInstance->operationsGetTransactionsCount($anyof, $initiator, $sender, $target, $level, $timestamp, $entrypoint, $parameter, $status);
+    $result = $apiInstance->operationsGetTransactionsCount($anyof, $initiator, $sender, $target, $amount, $level, $timestamp, $entrypoint, $parameter, $status);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling OperationsApi->operationsGetTransactionsCount: ', $e->getMessage(), PHP_EOL;
@@ -4860,6 +5979,7 @@ try {
 | **initiator** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions by initiator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;target&#x60;. | [optional] |
 | **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions by sender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;target&#x60;. | [optional] |
 | **target** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions by target. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;sender&#x60;, &#x60;initiator&#x60;. | [optional] |
+| **amount** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters transactions by amount (micro tez). | [optional] |
 | **level** | [**AccountsGetIdParameter**](../Model/.md)| Filters transactions by level. | [optional] |
 | **timestamp** | [**AccountsGetOperationsTimestampParameter**](../Model/.md)| Filters transactions by timestamp. | [optional] |
 | **entrypoint** | [**AccountsGetOperationsEntrypointParameter**](../Model/.md)| Filters transactions by entrypoint called on the target contract. | [optional] |

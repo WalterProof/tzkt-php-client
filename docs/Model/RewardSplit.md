@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 **double_baking_losses** | **int** | Amount of frozen deposits lost due to double baking | [optional]
 **double_endorsing_rewards** | **int** | Rewards for detecting double endorsing (accusing someone of validating two different blocks at the same level). | [optional]
 **double_endorsing_losses** | **int** | Amount of frozen deposits lost due to double endorsing | [optional]
-**double_preendorsing_rewards** | **int** | Rewards for detecting double preendorsing (accusing someone of prevalidating two different blocks at the same level). | [optional]
+**double_preendorsing_rewards** | **int** | Rewards for detecting double preendorsing (accusing someone of pre-validating two different blocks at the same level). | [optional]
 **double_preendorsing_losses** | **int** | Amount of frozen deposits lost due to double preendorsing | [optional]
 **revelation_rewards** | **int** | Rewards for including into a block seed nonce revelation operations. | [optional]
 **revelation_losses** | **int** | Amount of frozen deposits lost due to missing seed nonce revelation (always zero after Ithaca). | [optional]

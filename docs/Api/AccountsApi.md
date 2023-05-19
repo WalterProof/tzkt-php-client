@@ -15,7 +15,6 @@ All URIs are relative to https://api.tzkt.io, except if the operation defines an
 | [**accountsGetCount()**](AccountsApi.md#accountsGetCount) | **GET** /v1/accounts/count | Get accounts count |
 | [**accountsGetCounter()**](AccountsApi.md#accountsGetCounter) | **GET** /v1/accounts/{address}/counter | Get counter |
 | [**accountsGetDelegators()**](AccountsApi.md#accountsGetDelegators) | **GET** /v1/accounts/{address}/delegators | Get account delegators |
-| [**accountsGetMetadata()**](AccountsApi.md#accountsGetMetadata) | **GET** /v1/accounts/{address}/metadata | Get account metadata |
 | [**accountsGetOperations()**](AccountsApi.md#accountsGetOperations) | **GET** /v1/accounts/{address}/operations | Get account operations |
 
 
@@ -44,7 +43,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\AccountsApi(
 );
 $id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters by internal id.
 $address = new \Bzzhh\Tzkt\Model\AccountsGetAddressParameter(); // AccountsGetAddressParameter | Filters by address.
-$type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters accounts by type (`user`, `delegate`, `contract`, `ghost`).
+$type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters accounts by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`).
 $kind = new \Bzzhh\Tzkt\Model\AccountsGetKindParameter(); // AccountsGetKindParameter | Filters accounts by contract kind (`delegator_contract` or `smart_contract`)
 $delegate = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters accounts by delegate. Allowed fields for `.eqx` mode: none.
 $balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters accounts by balance
@@ -69,7 +68,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | [**AccountsGetIdParameter**](../Model/.md)| Filters by internal id. | [optional] |
 | **address** | [**AccountsGetAddressParameter**](../Model/.md)| Filters by address. | [optional] |
-| **type** | [**AccountsGetTypeParameter**](../Model/.md)| Filters accounts by type (&#x60;user&#x60;, &#x60;delegate&#x60;, &#x60;contract&#x60;, &#x60;ghost&#x60;). | [optional] |
+| **type** | [**AccountsGetTypeParameter**](../Model/.md)| Filters accounts by type (&#x60;user&#x60;, &#x60;delegate&#x60;, &#x60;contract&#x60;, &#x60;rollup&#x60;, &#x60;smart_rollup&#x60;, &#x60;ghost&#x60;). | [optional] |
 | **kind** | [**AccountsGetKindParameter**](../Model/.md)| Filters accounts by contract kind (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) | [optional] |
 | **delegate** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters accounts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: none. | [optional] |
 | **balance** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters accounts by balance | [optional] |
@@ -408,7 +407,7 @@ No authorization required
 ## `accountsGetByAddress()`
 
 ```php
-accountsGetByAddress($address, $metadata): \Bzzhh\Tzkt\Model\Account
+accountsGetByAddress($address, $legacy): \Bzzhh\Tzkt\Model\Account
 ```
 
 Get account by address
@@ -428,11 +427,11 @@ $apiInstance = new Bzzhh\Tzkt\Api\AccountsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$address = 'address_example'; // string | Account address (starting with tz or KT)
-$metadata = false; // bool | Include or not account metadata
+$address = 'address_example'; // string | Account address
+$legacy = true; // bool | If `true` (by default), the `metadata` field will contain tzkt profile info, or TZIP-16 metadata otherwise. This is a part of a deprecation mechanism, allowing smooth migration.
 
 try {
-    $result = $apiInstance->accountsGetByAddress($address, $metadata);
+    $result = $apiInstance->accountsGetByAddress($address, $legacy);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->accountsGetByAddress: ', $e->getMessage(), PHP_EOL;
@@ -443,8 +442,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **address** | **string**| Account address (starting with tz or KT) | |
-| **metadata** | **bool**| Include or not account metadata | [optional] [default to false] |
+| **address** | **string**| Account address | |
+| **legacy** | **bool**| If &#x60;true&#x60; (by default), the &#x60;metadata&#x60; field will contain tzkt profile info, or TZIP-16 metadata otherwise. This is a part of a deprecation mechanism, allowing smooth migration. | [optional] [default to true] |
 
 ### Return type
 
@@ -548,7 +547,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\AccountsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters accounts by type (`user`, `delegate`, `contract`, `ghost`).
+$type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters accounts by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`).
 $kind = new \Bzzhh\Tzkt\Model\AccountsGetKindParameter(); // AccountsGetKindParameter | Filters accounts by contract kind (`delegator_contract` or `smart_contract`)
 $balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters accounts by balance
 $staked = new \Bzzhh\Tzkt\Model\AccountsGetStakedParameter(); // AccountsGetStakedParameter | Filters accounts by participation in staking
@@ -566,7 +565,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **type** | [**AccountsGetTypeParameter**](../Model/.md)| Filters accounts by type (&#x60;user&#x60;, &#x60;delegate&#x60;, &#x60;contract&#x60;, &#x60;ghost&#x60;). | [optional] |
+| **type** | [**AccountsGetTypeParameter**](../Model/.md)| Filters accounts by type (&#x60;user&#x60;, &#x60;delegate&#x60;, &#x60;contract&#x60;, &#x60;rollup&#x60;, &#x60;smart_rollup&#x60;, &#x60;ghost&#x60;). | [optional] |
 | **kind** | [**AccountsGetKindParameter**](../Model/.md)| Filters accounts by contract kind (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) | [optional] |
 | **balance** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters accounts by balance | [optional] |
 | **staked** | [**AccountsGetStakedParameter**](../Model/.md)| Filters accounts by participation in staking | [optional] |
@@ -669,7 +668,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\AccountsApi(
     new GuzzleHttp\Client()
 );
 $address = 'address_example'; // string | Account address (starting with tz)
-$type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters delegators by type (`user`, `delegate`, `contract`, `ghost`).
+$type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters delegators by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`).
 $balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters delegators by balance.
 $delegation_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Number of items to skip
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts delegators by specified field. Supported fields: `delegationLevel` (default, desc), `balance`.
@@ -689,7 +688,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **address** | **string**| Account address (starting with tz) | |
-| **type** | [**AccountsGetTypeParameter**](../Model/.md)| Filters delegators by type (&#x60;user&#x60;, &#x60;delegate&#x60;, &#x60;contract&#x60;, &#x60;ghost&#x60;). | [optional] |
+| **type** | [**AccountsGetTypeParameter**](../Model/.md)| Filters delegators by type (&#x60;user&#x60;, &#x60;delegate&#x60;, &#x60;contract&#x60;, &#x60;rollup&#x60;, &#x60;smart_rollup&#x60;, &#x60;ghost&#x60;). | [optional] |
 | **balance** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters delegators by balance. | [optional] |
 | **delegation_level** | [**AccountsGetIdParameter**](../Model/.md)| Number of items to skip | [optional] |
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts delegators by specified field. Supported fields: &#x60;delegationLevel&#x60; (default, desc), &#x60;balance&#x60;. | [optional] |
@@ -699,62 +698,6 @@ try {
 ### Return type
 
 [**\Bzzhh\Tzkt\Model\Delegator[]**](../Model/Delegator.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `accountsGetMetadata()`
-
-```php
-accountsGetMetadata($address): \Bzzhh\Tzkt\Model\ProfileMetadata
-```
-
-Get account metadata
-
-Returns metadata of the specified account (alias, logo, website, contacts, etc).
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-
-$apiInstance = new Bzzhh\Tzkt\Api\AccountsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-$address = 'address_example'; // string | Account address (starting with tz or KT)
-
-try {
-    $result = $apiInstance->accountsGetMetadata($address);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AccountsApi->accountsGetMetadata: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **address** | **string**| Account address (starting with tz or KT) | |
-
-### Return type
-
-[**\Bzzhh\Tzkt\Model\ProfileMetadata**](../Model/ProfileMetadata.md)
 
 ### Authorization
 
@@ -792,8 +735,8 @@ $apiInstance = new Bzzhh\Tzkt\Api\AccountsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$address = 'address_example'; // string | Account address (starting with tz or KT)
-$type = 'type_example'; // string | Comma separated list of operation types to return (`endorsement`, `preendorsement`, `ballot`, `proposal`, `activation`, `double_baking`,             `double_endorsing`, `double_preendorsing`, `nonce_revelation`, `vdf_revelation`, `delegation`, `origination`, `transaction`, `reveal`, `register_constant`,             `set_deposits_limit`, `increase_paid_storage`, `tx_rollup_origination`, `tx_rollup_submit_batch`, `tx_rollup_commit`, `tx_rollup_return_bond`,             `tx_rollup_finalize_commitment`, `tx_rollup_remove_commitment`, `tx_rollup_rejection`, `tx_rollup_dispatch_tickets`, `transfer_ticket`, `migration`,             `update_consensus_key`, `drain_delegate`, `revelation_penalty`, `baking`, `endorsing_reward`). If not specified then the default set will be returned.
+$address = 'address_example'; // string | Account address
+$type = 'type_example'; // string | Comma separated list of operation types to return (`endorsement`, `preendorsement`, `ballot`, `proposal`, `activation`, `double_baking`,             `double_endorsing`, `double_preendorsing`, `nonce_revelation`, `vdf_revelation`, `delegation`, `origination`, `transaction`, `reveal`, `register_constant`,             `set_deposits_limit`, `increase_paid_storage`, `tx_rollup_origination`, `tx_rollup_submit_batch`, `tx_rollup_commit`, `tx_rollup_return_bond`,             `tx_rollup_finalize_commitment`, `tx_rollup_remove_commitment`, `tx_rollup_rejection`, `tx_rollup_dispatch_tickets`, `transfer_ticket`, `migration`,             `update_consensus_key`, `drain_delegate`, `sr_add_messages`, `sr_cement`, `sr_execute`, `sr_originate`, `sr_publish`, `sr_recover_bond`, `sr_refute`,             `revelation_penalty`, `baking`, `endorsing_reward`). If not specified then the default set will be returned.
 $initiator = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions, delegations and originations by initiator. Allowed fields for `.eqx` mode: none.
 $sender = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions, delegations, originations, reveals and seed nonce revelations by sender. Allowed fields for `.eqx` mode: none.
 $target = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters transactions by target. Allowed fields for `.eqx` mode: none.
@@ -829,8 +772,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **address** | **string**| Account address (starting with tz or KT) | |
-| **type** | **string**| Comma separated list of operation types to return (&#x60;endorsement&#x60;, &#x60;preendorsement&#x60;, &#x60;ballot&#x60;, &#x60;proposal&#x60;, &#x60;activation&#x60;, &#x60;double_baking&#x60;,             &#x60;double_endorsing&#x60;, &#x60;double_preendorsing&#x60;, &#x60;nonce_revelation&#x60;, &#x60;vdf_revelation&#x60;, &#x60;delegation&#x60;, &#x60;origination&#x60;, &#x60;transaction&#x60;, &#x60;reveal&#x60;, &#x60;register_constant&#x60;,             &#x60;set_deposits_limit&#x60;, &#x60;increase_paid_storage&#x60;, &#x60;tx_rollup_origination&#x60;, &#x60;tx_rollup_submit_batch&#x60;, &#x60;tx_rollup_commit&#x60;, &#x60;tx_rollup_return_bond&#x60;,             &#x60;tx_rollup_finalize_commitment&#x60;, &#x60;tx_rollup_remove_commitment&#x60;, &#x60;tx_rollup_rejection&#x60;, &#x60;tx_rollup_dispatch_tickets&#x60;, &#x60;transfer_ticket&#x60;, &#x60;migration&#x60;,             &#x60;update_consensus_key&#x60;, &#x60;drain_delegate&#x60;, &#x60;revelation_penalty&#x60;, &#x60;baking&#x60;, &#x60;endorsing_reward&#x60;). If not specified then the default set will be returned. | [optional] |
+| **address** | **string**| Account address | |
+| **type** | **string**| Comma separated list of operation types to return (&#x60;endorsement&#x60;, &#x60;preendorsement&#x60;, &#x60;ballot&#x60;, &#x60;proposal&#x60;, &#x60;activation&#x60;, &#x60;double_baking&#x60;,             &#x60;double_endorsing&#x60;, &#x60;double_preendorsing&#x60;, &#x60;nonce_revelation&#x60;, &#x60;vdf_revelation&#x60;, &#x60;delegation&#x60;, &#x60;origination&#x60;, &#x60;transaction&#x60;, &#x60;reveal&#x60;, &#x60;register_constant&#x60;,             &#x60;set_deposits_limit&#x60;, &#x60;increase_paid_storage&#x60;, &#x60;tx_rollup_origination&#x60;, &#x60;tx_rollup_submit_batch&#x60;, &#x60;tx_rollup_commit&#x60;, &#x60;tx_rollup_return_bond&#x60;,             &#x60;tx_rollup_finalize_commitment&#x60;, &#x60;tx_rollup_remove_commitment&#x60;, &#x60;tx_rollup_rejection&#x60;, &#x60;tx_rollup_dispatch_tickets&#x60;, &#x60;transfer_ticket&#x60;, &#x60;migration&#x60;,             &#x60;update_consensus_key&#x60;, &#x60;drain_delegate&#x60;, &#x60;sr_add_messages&#x60;, &#x60;sr_cement&#x60;, &#x60;sr_execute&#x60;, &#x60;sr_originate&#x60;, &#x60;sr_publish&#x60;, &#x60;sr_recover_bond&#x60;, &#x60;sr_refute&#x60;,             &#x60;revelation_penalty&#x60;, &#x60;baking&#x60;, &#x60;endorsing_reward&#x60;). If not specified then the default set will be returned. | [optional] |
 | **initiator** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions, delegations and originations by initiator. Allowed fields for &#x60;.eqx&#x60; mode: none. | [optional] |
 | **sender** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions, delegations, originations, reveals and seed nonce revelations by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. | [optional] |
 | **target** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters transactions by target. Allowed fields for &#x60;.eqx&#x60; mode: none. | [optional] |
