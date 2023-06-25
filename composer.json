@@ -32,12 +32,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Bzzhh\Tzkt\": "lib/"
+      "Bzzhh\\Tzkt\\": "lib/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Bzzhh\Tzkt\Test\": "test/"
+      "Bzzhh\\Tzkt\\Test\\": "test/"
     }
   }
 }
