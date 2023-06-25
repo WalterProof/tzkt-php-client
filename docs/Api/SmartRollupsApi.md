@@ -42,7 +42,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\SmartRollupsApi(
 $id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
 $level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block, where the message was pushed.   Click on the parameter to expand more details.
 $timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp of the block, where the message was pushed.   Click on the parameter to expand more details.
-$type = new \Bzzhh\Tzkt\Model\SmartRollupsGetInboxMessagesCountTypeParameter(); // SmartRollupsGetInboxMessagesCountTypeParameter | Filter by inbox message type (`level_start`, `level_info`, `level_end`, `transfer`, `external`).   Click on the parameter to expand more details.
+$type = new \Bzzhh\Tzkt\Model\SmartRollupsGetInboxMessagesCountTypeParameter(); // SmartRollupsGetInboxMessagesCountTypeParameter | Filter by inbox message type (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).   Click on the parameter to expand more details.
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
 $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
 $limit = 56; // int | Maximum number of items to return.
@@ -64,7 +64,7 @@ try {
 | **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
 | **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block, where the message was pushed.   Click on the parameter to expand more details. | [optional] |
 | **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp of the block, where the message was pushed.   Click on the parameter to expand more details. | [optional] |
-| **type** | [**SmartRollupsGetInboxMessagesCountTypeParameter**](../Model/.md)| Filter by inbox message type (&#x60;level_start&#x60;, &#x60;level_info&#x60;, &#x60;level_end&#x60;, &#x60;transfer&#x60;, &#x60;external&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **type** | [**SmartRollupsGetInboxMessagesCountTypeParameter**](../Model/.md)| Filter by inbox message type (&#x60;level_start&#x60;, &#x60;level_info&#x60;, &#x60;level_end&#x60;, &#x60;transfer&#x60;, &#x60;external&#x60;, &#x60;migration&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
 | **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
 | **limit** | **int**| Maximum number of items to return. | [optional] |
@@ -114,7 +114,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\SmartRollupsApi(
 $id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
 $level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block, where the message was pushed.   Click on the parameter to expand more details.
 $timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp of the block, where the message was pushed.   Click on the parameter to expand more details.
-$type = new \Bzzhh\Tzkt\Model\SmartRollupsGetInboxMessagesCountTypeParameter(); // SmartRollupsGetInboxMessagesCountTypeParameter | Filter by inbox message type (`level_start`, `level_info`, `level_end`, `transfer`, `external`).   Click on the parameter to expand more details.
+$type = new \Bzzhh\Tzkt\Model\SmartRollupsGetInboxMessagesCountTypeParameter(); // SmartRollupsGetInboxMessagesCountTypeParameter | Filter by inbox message type (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).   Click on the parameter to expand more details.
 
 try {
     $result = $apiInstance->smartRollupsGetInboxMessagesCount($id, $level, $timestamp, $type);
@@ -131,7 +131,7 @@ try {
 | **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
 | **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block, where the message was pushed.   Click on the parameter to expand more details. | [optional] |
 | **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp of the block, where the message was pushed.   Click on the parameter to expand more details. | [optional] |
-| **type** | [**SmartRollupsGetInboxMessagesCountTypeParameter**](../Model/.md)| Filter by inbox message type (&#x60;level_start&#x60;, &#x60;level_info&#x60;, &#x60;level_end&#x60;, &#x60;transfer&#x60;, &#x60;external&#x60;).   Click on the parameter to expand more details. | [optional] |
+| **type** | [**SmartRollupsGetInboxMessagesCountTypeParameter**](../Model/.md)| Filter by inbox message type (&#x60;level_start&#x60;, &#x60;level_info&#x60;, &#x60;level_end&#x60;, &#x60;transfer&#x60;, &#x60;external&#x60;, &#x60;migration&#x60;).   Click on the parameter to expand more details. | [optional] |
 
 ### Return type
 
@@ -557,7 +557,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\SmartRollupsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$address = new \Bzzhh\Tzkt\Model\AccountsGetAddressParameter(); // AccountsGetAddressParameter | Filter by smart rollup staker address.   Click on the parameter to expand more details.
+$address = array('key' => new \Bzzhh\Tzkt\Model\AddressParameter()); // AddressParameter | Filter by smart rollup staker address.   Click on the parameter to expand more details.
 $id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
 $bond_status = new \Bzzhh\Tzkt\Model\SmartRollupsGetSmartRollupStakersBondStatusParameter(); // SmartRollupsGetSmartRollupStakersBondStatusParameter | Filter by staker bond status (`active`, `returned`, or `lost`).   Click on the parameter to expand more details.
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
@@ -577,7 +577,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **address** | [**AccountsGetAddressParameter**](../Model/.md)| Filter by smart rollup staker address.   Click on the parameter to expand more details. | |
+| **address** | [**AddressParameter**](../Model/.md)| Filter by smart rollup staker address.   Click on the parameter to expand more details. | |
 | **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
 | **bond_status** | [**SmartRollupsGetSmartRollupStakersBondStatusParameter**](../Model/.md)| Filter by staker bond status (&#x60;active&#x60;, &#x60;returned&#x60;, or &#x60;lost&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
