@@ -5,10 +5,8 @@ All URIs are relative to https://api.tzkt.io, except if the operation defines an
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**rewardsGetBakerRewards()**](RewardsApi.md#rewardsGetBakerRewards) | **GET** /v1/rewards/bakers/{address} | Get baker cycle rewards |
-| [**rewardsGetBakerRewardsByCycle()**](RewardsApi.md#rewardsGetBakerRewardsByCycle) | **GET** /v1/rewards/bakers/{address}/{cycle} | Get baker cycle rewards by cycle |
 | [**rewardsGetBakerRewardsCount()**](RewardsApi.md#rewardsGetBakerRewardsCount) | **GET** /v1/rewards/bakers/{address}/count | Get baker cycle rewards count |
 | [**rewardsGetDelegatorRewards()**](RewardsApi.md#rewardsGetDelegatorRewards) | **GET** /v1/rewards/delegators/{address} | Get delegator cycle rewards |
-| [**rewardsGetDelegatorRewardsByCycle()**](RewardsApi.md#rewardsGetDelegatorRewardsByCycle) | **GET** /v1/rewards/delegators/{address}/{cycle} | Get delegator cycle rewards by cycle |
 | [**rewardsGetDelegatorRewardsCount()**](RewardsApi.md#rewardsGetDelegatorRewardsCount) | **GET** /v1/rewards/delegators/{address}/count | Get delegator cycle rewards count |
 | [**rewardsGetRewardSplit()**](RewardsApi.md#rewardsGetRewardSplit) | **GET** /v1/rewards/split/{baker}/{cycle} | Get reward split |
 | [**rewardsGetRewardSplitDelegator()**](RewardsApi.md#rewardsGetRewardSplitDelegator) | **GET** /v1/rewards/split/{baker}/{cycle}/{delegator} | Get reward split delegator |
@@ -68,66 +66,6 @@ try {
 ### Return type
 
 [**\Bzzhh\Tzkt\Model\BakerRewards[]**](../Model/BakerRewards.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `rewardsGetBakerRewardsByCycle()`
-
-```php
-rewardsGetBakerRewardsByCycle($address, $cycle, $quote): \Bzzhh\Tzkt\Model\BakerRewards
-```
-
-Get baker cycle rewards by cycle
-
-Returns baker cycle rewards for the specified cycle.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-
-$apiInstance = new Bzzhh\Tzkt\Api\RewardsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-$address = 'address_example'; // string | Baker address
-$cycle = 56; // int | Rewards cycle
-$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
-
-try {
-    $result = $apiInstance->rewardsGetBakerRewardsByCycle($address, $cycle, $quote);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling RewardsApi->rewardsGetBakerRewardsByCycle: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **address** | **string**| Baker address | |
-| **cycle** | **int**| Rewards cycle | |
-| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
-
-### Return type
-
-[**\Bzzhh\Tzkt\Model\BakerRewards**](../Model/BakerRewards.md)
 
 ### Authorization
 
@@ -252,66 +190,6 @@ try {
 ### Return type
 
 [**\Bzzhh\Tzkt\Model\DelegatorRewards[]**](../Model/DelegatorRewards.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `rewardsGetDelegatorRewardsByCycle()`
-
-```php
-rewardsGetDelegatorRewardsByCycle($address, $cycle, $quote): \Bzzhh\Tzkt\Model\DelegatorRewards
-```
-
-Get delegator cycle rewards by cycle
-
-Returns delegator cycle rewards for the specified cycle.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-
-$apiInstance = new Bzzhh\Tzkt\Api\RewardsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-$address = 'address_example'; // string | Delegator address
-$cycle = 56; // int | Rewards cycle
-$quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
-
-try {
-    $result = $apiInstance->rewardsGetDelegatorRewardsByCycle($address, $cycle, $quote);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling RewardsApi->rewardsGetDelegatorRewardsByCycle: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **address** | **string**| Delegator address | |
-| **cycle** | **int**| Rewards cycle | |
-| **quote** | [**AccountsGetOperationsQuoteParameter**](../Model/.md)| Comma-separated list of ticker symbols to inject historical prices into response | [optional] |
-
-### Return type
-
-[**\Bzzhh\Tzkt\Model\DelegatorRewards**](../Model/DelegatorRewards.md)
 
 ### Authorization
 
@@ -452,7 +330,7 @@ rewardsGetRewardSplitDelegator($baker, $cycle, $delegator): \Bzzhh\Tzkt\Model\Sp
 
 Get reward split delegator
 
-Returns delegator from the reward split for the specified cycle.
+Returns delegator/staker from the reward split for the specified cycle.
 
 ### Example
 

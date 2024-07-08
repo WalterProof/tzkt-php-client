@@ -12,5 +12,6 @@ Name | Type | Description | Notes
 **le** | **int** | **Less or equal** filter mode. \\ Specify an integer number to get items where the specified field is less than or equal to the specified value.  Example: &#x60;?balance.le&#x3D;1234&#x60;. | [optional]
 **in** | **int[]** | **In list** (any of) filter mode. \\ Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.  Example: &#x60;?level.in&#x3D;12,14,52,69&#x60;. | [optional]
 **ni** | **int[]** | **Not in list** (none of) filter mode. \\ Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.  Example: &#x60;?level.ni&#x3D;12,14,52,69&#x60;. | [optional]
+**empty** | **bool** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

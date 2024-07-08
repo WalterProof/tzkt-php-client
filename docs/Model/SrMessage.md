@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | Internal TzKT id.   **[sortable]** | [optional]
 **level** | **int** | Level of the block where the message was pushed.   **[sortable]** | [optional]
+**index** | **int** | Index of the inbox message within the block. | [optional]
 **timestamp** | **\DateTime** | Timestamp of the block where the message was pushed. | [optional]
 **type** | **string** | Type of the message (&#x60;level_start&#x60;, &#x60;level_info&#x60;, &#x60;level_end&#x60;, &#x60;transfer&#x60;, &#x60;external&#x60;, &#x60;migration&#x60;). | [optional]
 **predecessor_hash** | **string** | For &#x60;level_info&#x60; messages only. Hash of the predecessor block. | [optional]

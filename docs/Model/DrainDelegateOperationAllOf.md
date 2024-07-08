@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **target** | [**OneOfAlias**](OneOfAlias.md) | Information about the recipient account | [optional]
 **amount** | **int** | Amount sent from the drained baker to the target | [optional]
 **fee** | **int** | Amount sent from the drained baker to the block baker | [optional]
+**allocation_fee** | **int** | The amount of funds burned from the drained baker for account creation (micro tez) | [optional]
 **quote** | [**OneOfQuoteShort**](OneOfQuoteShort.md) | Injected historical quote at the time of operation | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -33,7 +33,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\EventsApi(
 );
 $id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
 $level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block where the event was emitted.   Click on the parameter to expand more details.
-$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the block where the event was emitted.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysFirstTimeParameter(); // BigMapsGetBigMapKeysFirstTimeParameter | Filter by timestamp (ISO 8601) of the block where the event was emitted.   Click on the parameter to expand more details.
 $contract = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by contract address.   Click on the parameter to expand more details.
 $code_hash = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by hash of the code of the contract emitted the event.   Click on the parameter to expand more details.
 $tag = new \Bzzhh\Tzkt\Model\AccountsGetOperationsEntrypointParameter(); // AccountsGetOperationsEntrypointParameter | Filter by event tag.   Click on the parameter to expand more details.
@@ -42,7 +42,7 @@ $transaction_id = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // Accoun
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
 $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
 $limit = 56; // int | Maximum number of items to return.
-$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$select = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysSelectParameter(); // BigMapsGetBigMapKeysSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
 
 try {
     $result = $apiInstance->eventsGetContractEvents($id, $level, $timestamp, $contract, $code_hash, $tag, $payload, $transaction_id, $sort, $offset, $limit, $select);
@@ -58,7 +58,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
 | **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block where the event was emitted.   Click on the parameter to expand more details. | [optional] |
-| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the event was emitted.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapKeysFirstTimeParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the event was emitted.   Click on the parameter to expand more details. | [optional] |
 | **contract** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by contract address.   Click on the parameter to expand more details. | [optional] |
 | **code_hash** | [**AccountsGetIdParameter**](../Model/.md)| Filter by hash of the code of the contract emitted the event.   Click on the parameter to expand more details. | [optional] |
 | **tag** | [**AccountsGetOperationsEntrypointParameter**](../Model/.md)| Filter by event tag.   Click on the parameter to expand more details. | [optional] |
@@ -67,7 +67,7 @@ try {
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
 | **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
 | **limit** | **int**| Maximum number of items to return. | [optional] |
-| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **select** | [**BigMapsGetBigMapKeysSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
 
 ### Return type
 
@@ -111,7 +111,7 @@ $apiInstance = new Bzzhh\Tzkt\Api\EventsApi(
 );
 $id = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by internal TzKT id.   Click on the parameter to expand more details.
 $level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block where the event was emitted.   Click on the parameter to expand more details.
-$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the block where the event was emitted.   Click on the parameter to expand more details.
+$timestamp = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysFirstTimeParameter(); // BigMapsGetBigMapKeysFirstTimeParameter | Filter by timestamp (ISO 8601) of the block where the event was emitted.   Click on the parameter to expand more details.
 $contract = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filter by contract address.   Click on the parameter to expand more details.
 $code_hash = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by hash of the code of the contract emitted the event.   Click on the parameter to expand more details.
 $tag = new \Bzzhh\Tzkt\Model\AccountsGetOperationsEntrypointParameter(); // AccountsGetOperationsEntrypointParameter | Filter by event tag.   Click on the parameter to expand more details.
@@ -132,7 +132,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | [**AccountsGetIdParameter**](../Model/.md)| Filter by internal TzKT id.   Click on the parameter to expand more details. | [optional] |
 | **level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block where the event was emitted.   Click on the parameter to expand more details. | [optional] |
-| **timestamp** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the event was emitted.   Click on the parameter to expand more details. | [optional] |
+| **timestamp** | [**BigMapsGetBigMapKeysFirstTimeParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the event was emitted.   Click on the parameter to expand more details. | [optional] |
 | **contract** | [**AccountsGetDelegateParameter**](../Model/.md)| Filter by contract address.   Click on the parameter to expand more details. | [optional] |
 | **code_hash** | [**AccountsGetIdParameter**](../Model/.md)| Filter by hash of the code of the contract emitted the event.   Click on the parameter to expand more details. | [optional] |
 | **tag** | [**AccountsGetOperationsEntrypointParameter**](../Model/.md)| Filter by event tag.   Click on the parameter to expand more details. | [optional] |

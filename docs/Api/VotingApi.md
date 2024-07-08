@@ -594,7 +594,7 @@ No authorization required
 ## `votingGetPeriods()`
 
 ```php
-votingGetPeriods($select, $sort, $offset, $limit): \Bzzhh\Tzkt\Model\VotingPeriod[]
+votingGetPeriods($first_level, $last_level, $select, $sort, $offset, $limit): \Bzzhh\Tzkt\Model\VotingPeriod[]
 ```
 
 Get voting periods
@@ -614,13 +614,15 @@ $apiInstance = new Bzzhh\Tzkt\Api\VotingApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
+$first_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the first block of the period.
+$last_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the last block of the period.
 $select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts voting periods by specified field. Supported fields: `id` (default).
 $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
 $limit = 100; // int | Maximum number of items to return
 
 try {
-    $result = $apiInstance->votingGetPeriods($select, $sort, $offset, $limit);
+    $result = $apiInstance->votingGetPeriods($first_level, $last_level, $select, $sort, $offset, $limit);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling VotingApi->votingGetPeriods: ', $e->getMessage(), PHP_EOL;
@@ -631,6 +633,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
+| **first_level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the first block of the period. | [optional] |
+| **last_level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the last block of the period. | [optional] |
 | **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts voting periods by specified field. Supported fields: &#x60;id&#x60; (default). | [optional] |
 | **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |

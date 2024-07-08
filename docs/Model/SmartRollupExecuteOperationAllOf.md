@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **rollup** | [**OneOfAlias**](OneOfAlias.md) | Smart rollup to which the operation was sent | [optional]
 **commitment** | [**OneOfSrCommitmentInfo**](OneOfSrCommitmentInfo.md) | Executed commitment | [optional]
 **errors** | [**\Bzzhh\Tzkt\Model\OperationError[]**](OperationError.md) | List of errors provided by the node, injected the operation to the blockchain. &#x60;null&#x60; if there is no errors | [optional]
+**ticket_transfers_count** | **int** | Number of ticket transfers produced by the operation, or &#x60;null&#x60; if there are no transfers | [optional]
 **quote** | [**OneOfQuoteShort**](OneOfQuoteShort.md) | Injected historical quote at the time of operation | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

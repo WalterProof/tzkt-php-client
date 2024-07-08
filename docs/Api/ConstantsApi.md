@@ -32,9 +32,9 @@ $apiInstance = new Bzzhh\Tzkt\Api\ConstantsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$address = new \Bzzhh\Tzkt\Model\ConstantsGetAddressParameter(); // ConstantsGetAddressParameter | Filters constants by global address (starts with `expr..`).
+$address = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysHashParameter(); // BigMapsGetBigMapKeysHashParameter | Filters constants by global address (starts with `expr..`).
 $creation_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters constants by creation level.
-$creation_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filters constants by creation time.
+$creation_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysFirstTimeParameter(); // BigMapsGetBigMapKeysFirstTimeParameter | Filters constants by creation time.
 $creator = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters constants by creator.
 $refs = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters constants by number of refs.
 $size = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters constants by size in bytes.
@@ -56,9 +56,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **address** | [**ConstantsGetAddressParameter**](../Model/.md)| Filters constants by global address (starts with &#x60;expr..&#x60;). | [optional] |
+| **address** | [**BigMapsGetBigMapKeysHashParameter**](../Model/.md)| Filters constants by global address (starts with &#x60;expr..&#x60;). | [optional] |
 | **creation_level** | [**AccountsGetIdParameter**](../Model/.md)| Filters constants by creation level. | [optional] |
-| **creation_time** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filters constants by creation time. | [optional] |
+| **creation_time** | [**BigMapsGetBigMapKeysFirstTimeParameter**](../Model/.md)| Filters constants by creation time. | [optional] |
 | **creator** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters constants by creator. | [optional] |
 | **refs** | [**AccountsGetIdParameter**](../Model/.md)| Filters constants by number of refs. | [optional] |
 | **size** | [**AccountsGetIdParameter**](../Model/.md)| Filters constants by size in bytes. | [optional] |

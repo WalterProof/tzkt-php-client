@@ -12,7 +12,7 @@ All URIs are relative to https://api.tzkt.io, except if the operation defines an
 ## `cyclesGet()`
 
 ```php
-cyclesGet($snapshot_index, $select, $sort, $offset, $limit, $quote): \Bzzhh\Tzkt\Model\Cycle[]
+cyclesGet($select, $sort, $offset, $limit, $quote): \Bzzhh\Tzkt\Model\Cycle[]
 ```
 
 Get cycles
@@ -32,7 +32,6 @@ $apiInstance = new Bzzhh\Tzkt\Api\CyclesApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$snapshot_index = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters cycles by snapshot index (0..15)
 $select = new \Bzzhh\Tzkt\Model\AccountsGetSelectParameter(); // AccountsGetSelectParameter | Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts cycles by specified field. Supported fields: `index` (default, desc).
 $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped
@@ -40,7 +39,7 @@ $limit = 100; // int | Maximum number of items to return
 $quote = new \Bzzhh\Tzkt\Model\AccountsGetOperationsQuoteParameter(); // AccountsGetOperationsQuoteParameter | Comma-separated list of ticker symbols to inject historical prices into response
 
 try {
-    $result = $apiInstance->cyclesGet($snapshot_index, $select, $sort, $offset, $limit, $quote);
+    $result = $apiInstance->cyclesGet($select, $sort, $offset, $limit, $quote);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling CyclesApi->cyclesGet: ', $e->getMessage(), PHP_EOL;
@@ -51,7 +50,6 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **snapshot_index** | [**AccountsGetIdParameter**](../Model/.md)| Filters cycles by snapshot index (0..15) | [optional] |
 | **select** | [**AccountsGetSelectParameter**](../Model/.md)| Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. | [optional] |
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts cycles by specified field. Supported fields: &#x60;index&#x60; (default, desc). | [optional] |
 | **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped | [optional] |

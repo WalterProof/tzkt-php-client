@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **errors** | [**\Bzzhh\Tzkt\Model\OperationError[]**](OperationError.md) | List of errors provided by the node, injected the operation to the blockchain. &#x60;null&#x60; if there is no errors | [optional]
 **has_internals** | **bool** | An indication of whether the transaction has an internal operations &#x60;true&#x60; - there are internal operations &#x60;false&#x60; - no internal operations | [optional]
 **token_transfers_count** | **int** | Number of token transfers produced by the operation, or &#x60;null&#x60; if there are no transfers | [optional]
+**ticket_transfers_count** | **int** | Number of ticket transfers produced by the operation, or &#x60;null&#x60; if there are no transfers | [optional]
 **events_count** | **int** | Number of events produced by the operation, or &#x60;null&#x60; if there are no events | [optional]
 **quote** | [**OneOfQuoteShort**](OneOfQuoteShort.md) | Injected historical quote at the time of operation | [optional]
 

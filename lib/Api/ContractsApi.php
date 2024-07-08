@@ -12,9 +12,9 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:   - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Mumbainet: `https://api.mumbainet.tzkt.io/` ([view docs](https://api.mumbainet.tzkt.io)) - Nairobinet: `https://api.nairobinet.tzkt.io/` ([view docs](https://api.nairobinet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer.  You can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community  to help developers build more services and dapps on top of Tezos.  TzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service, because you can always clone, build and run it yourself to have full control over all the components.  Feel free to contact us if you have any questions or feature requests. Your feedback is much appreciated!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊  # Get Started  There are two API services provided for public use: - **Free TzKT API** with free anonymous access; - **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.  You can find more details about differences between available tiers [here](https://tzkt.io/api).  ## Free TzKT API  Free-tier TzKT API is the best way to get started and explore available Tezos data and API functionality. It doesn't require authorization and is free for everyone and for both commercial and non-commercial use.  > #### Note: attribution required If you use free-tier TzKT API, you **must** mention it on your website or application by placing the label \"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Parisnet: `https://api.parisnet.tzkt.io/` ([view docs](https://api.parisnet.tzkt.io))  ### Sending Requests  To send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network (for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint (for example, chain's head: `/v1/head`), that's pretty much it:   ```bash curl https://api.tzkt.io/v1/head ```  Read through this documentation to explore available endpoints, query parameters (note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.) and response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits.  If you exceed the limit, the API will respond with `HTTP 429` status code.  ## TzKT Pro  TzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA. TzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io)) - Testnets: *let us know if you need TzKT Pro for testnets*  ### Authorization  To access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription. This can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.  Note that you can have multiple API keys within a single subscription.  Keep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories. If your key was compromised, just let us know and we will issue a new one.  Also note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted, but query string is not, so the key can be unintentionally exposed to third parties.  ### Sending Requests  Sending a request with the API key passed as a query string parameter:  ```bash curl https://pro.tzkt.io/v1/head?apikey={your_key} ```  Sending a request with the API key passed via an HTTP header:  ```bash curl https://pro.tzkt.io/v1/head \\     -H 'apikey: {your_key}' ```  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.  Also, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests and the time remaining (in seconds) until the quota is reset. Here's an example:  ``` RateLimit-Limit: 50 RateLimit-Remaining: 49 RateLimit-Reset: 1 ```  It also sends general information about your rate limits per second and per day:  ``` X-RateLimit-Limit-Second: 50 X-RateLimit-Remaining-Second: 49 X-RateLimit-Limit-Day: 3000000 X-RateLimit-Remaining-Day: 2994953 ```  If you exceed the limit, the API will respond with `HTTP 429` status code.
  *
- * The version of the OpenAPI document: 1.12.1
+ * The version of the OpenAPI document: 1.14.4
  * Contact: hello@bakingbad.dev
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.2.1
@@ -843,30 +843,34 @@ class ContractsApi
      *
      * Get contracts
      *
-     * @param  AccountsGetAddressParameter $address Filters by address (optional)
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
-     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
-     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
-     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
-     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  bool $include_storage Specifies whether to include contract storage into response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Contract[]
      */
-    public function contractsGet($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
+    public function contractsGet($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
-        list($response) = $this->contractsGetWithHttpInfo($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        list($response) = $this->contractsGetWithHttpInfo($id, $address, $kind, $tzips, $balance, $creator, $manager, $delegate, $first_activity, $first_activity_time, $last_activity, $last_activity_time, $type_hash, $code_hash, $sort, $offset, $limit, $select, $include_storage, $contentType);
         return $response;
     }
 
@@ -875,30 +879,34 @@ class ContractsApi
      *
      * Get contracts
      *
-     * @param  AccountsGetAddressParameter $address Filters by address (optional)
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
-     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
-     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
-     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
-     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  bool $include_storage Specifies whether to include contract storage into response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Contract[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetWithHttpInfo($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
+    public function contractsGetWithHttpInfo($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
-        $request = $this->contractsGetRequest($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        $request = $this->contractsGetRequest($id, $address, $kind, $tzips, $balance, $creator, $manager, $delegate, $first_activity, $first_activity_time, $last_activity, $last_activity_time, $type_hash, $code_hash, $sort, $offset, $limit, $select, $include_storage, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -989,29 +997,33 @@ class ContractsApi
      *
      * Get contracts
      *
-     * @param  AccountsGetAddressParameter $address Filters by address (optional)
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
-     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
-     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
-     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
-     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  bool $include_storage Specifies whether to include contract storage into response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetAsync($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
+    public function contractsGetAsync($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
-        return $this->contractsGetAsyncWithHttpInfo($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage, $contentType)
+        return $this->contractsGetAsyncWithHttpInfo($id, $address, $kind, $tzips, $balance, $creator, $manager, $delegate, $first_activity, $first_activity_time, $last_activity, $last_activity_time, $type_hash, $code_hash, $sort, $offset, $limit, $select, $include_storage, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1024,30 +1036,34 @@ class ContractsApi
      *
      * Get contracts
      *
-     * @param  AccountsGetAddressParameter $address Filters by address (optional)
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
-     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
-     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
-     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
-     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  bool $include_storage Specifies whether to include contract storage into response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetAsyncWithHttpInfo($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
+    public function contractsGetAsyncWithHttpInfo($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Contract[]';
-        $request = $this->contractsGetRequest($address, $kind, $tzips, $creator, $manager, $delegate, $balance, $last_activity, $type_hash, $code_hash, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        $request = $this->contractsGetRequest($id, $address, $kind, $tzips, $balance, $creator, $manager, $delegate, $first_activity, $first_activity_time, $last_activity, $last_activity_time, $type_hash, $code_hash, $sort, $offset, $limit, $select, $include_storage, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1088,28 +1104,35 @@ class ContractsApi
     /**
      * Create request for operation 'contractsGet'
      *
-     * @param  AccountsGetAddressParameter $address Filters by address (optional)
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;) (optional)
-     * @param  ContractsGetTzipsParameter $tzips Filters by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;) (optional)
-     * @param  AccountsGetDelegateParameter $creator Filters contracts by creator. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $manager Filters contracts by manager. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;creator&#x60;, &#x60;delegate&#x60;. (optional)
-     * @param  AccountsGetDelegateParameter $delegate Filters contracts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;manager&#x60;, &#x60;creator&#x60;. (optional)
-     * @param  AccountsGetBalanceParameter $balance Filters contracts by balance (optional)
-     * @param  AccountsGetIdParameter $last_activity Filters contracts by last activity level (where the contract was updated) (optional)
-     * @param  AccountsGetIdParameter $type_hash Filters contracts by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts) (optional)
-     * @param  AccountsGetIdParameter $code_hash Filters contracts by 32-bit hash of contract code (helpful for searching same contracts) (optional)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  bool $include_storage Specifies whether to include contract storage into response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetRequest($address = null, $kind = null, $tzips = null, $creator = null, $manager = null, $delegate = null, $balance = null, $last_activity = null, $type_hash = null, $code_hash = null, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
+    public function contractsGetRequest($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGet'][0])
     {
+
+
+
 
 
 
@@ -1133,6 +1156,7 @@ class ContractsApi
         
 
 
+
         $resourcePath = '/v1/contracts';
         $formParams = [];
         $queryParams = [];
@@ -1140,6 +1164,15 @@ class ContractsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $address,
@@ -1163,6 +1196,15 @@ class ContractsApi
             $tzips,
             'tzips', // param base name
             'OneOfContractTagsParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $balance,
+            'balance', // param base name
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1196,9 +1238,18 @@ class ContractsApi
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $balance,
-            'balance', // param base name
-            'OneOfInt64Parameter', // openApiType
+            $first_activity,
+            'firstActivity', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $first_activity_time,
+            'firstActivityTime', // param base name
+            'OneOfTimestampParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1208,6 +1259,15 @@ class ContractsApi
             $last_activity,
             'lastActivity', // param base name
             'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_activity_time,
+            'lastActivityTime', // param base name
+            'OneOfTimestampParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1226,15 +1286,6 @@ class ContractsApi
             $code_hash,
             'codeHash', // param base name
             'OneOfInt32Parameter', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $select,
-            'select', // param base name
-            'OneOfSelectParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1262,6 +1313,15 @@ class ContractsApi
             $limit,
             'limit', // param base name
             'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectionParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -3771,16 +3831,29 @@ class ContractsApi
      *
      * Get contracts count
      *
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function contractsGetCount($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
+    public function contractsGetCount($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, string $contentType = self::contentTypes['contractsGetCount'][0])
     {
-        list($response) = $this->contractsGetCountWithHttpInfo($kind, $contentType);
+        list($response) = $this->contractsGetCountWithHttpInfo($id, $address, $kind, $tzips, $balance, $creator, $manager, $delegate, $first_activity, $first_activity_time, $last_activity, $last_activity_time, $type_hash, $code_hash, $contentType);
         return $response;
     }
 
@@ -3789,16 +3862,29 @@ class ContractsApi
      *
      * Get contracts count
      *
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of int, HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetCountWithHttpInfo($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
+    public function contractsGetCountWithHttpInfo($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, string $contentType = self::contentTypes['contractsGetCount'][0])
     {
-        $request = $this->contractsGetCountRequest($kind, $contentType);
+        $request = $this->contractsGetCountRequest($id, $address, $kind, $tzips, $balance, $creator, $manager, $delegate, $first_activity, $first_activity_time, $last_activity, $last_activity_time, $type_hash, $code_hash, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3889,15 +3975,28 @@ class ContractsApi
      *
      * Get contracts count
      *
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetCountAsync($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
+    public function contractsGetCountAsync($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, string $contentType = self::contentTypes['contractsGetCount'][0])
     {
-        return $this->contractsGetCountAsyncWithHttpInfo($kind, $contentType)
+        return $this->contractsGetCountAsyncWithHttpInfo($id, $address, $kind, $tzips, $balance, $creator, $manager, $delegate, $first_activity, $first_activity_time, $last_activity, $last_activity_time, $type_hash, $code_hash, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3910,16 +4009,29 @@ class ContractsApi
      *
      * Get contracts count
      *
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetCountAsyncWithHttpInfo($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
+    public function contractsGetCountAsyncWithHttpInfo($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, string $contentType = self::contentTypes['contractsGetCount'][0])
     {
         $returnType = 'int';
-        $request = $this->contractsGetCountRequest($kind, $contentType);
+        $request = $this->contractsGetCountRequest($id, $address, $kind, $tzips, $balance, $creator, $manager, $delegate, $first_activity, $first_activity_time, $last_activity, $last_activity_time, $type_hash, $code_hash, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3960,14 +4072,40 @@ class ContractsApi
     /**
      * Create request for operation 'contractsGetCount'
      *
-     * @param  AccountsGetKindParameter $kind Contract kind to filter by (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetAddressParameter $address Filter by address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetKindParameter $kind Filter by kind (&#x60;delegator_contract&#x60;, &#x60;smart_contract&#x60;, or &#x60;asset&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  ContractsGetTzipsParameter $tzips Filter by tzips (&#x60;fa1&#x60;, &#x60;fa12&#x60;, or &#x60;fa2&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $balance Filter by balance.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $creator Filter by creator.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $manager Filter by manager.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $delegate Filter by delegate.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_activity Filter by level of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_activity_time Filter by timestamp (ISO 8601) of the block where the contract was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_activity Filter by level of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_activity_time Filter by timestamp (ISO 8601) of the block where the contract was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $type_hash Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $code_hash Filter by 32-bit hash of contract code (helpful for searching same contracts).   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetCountRequest($kind = null, string $contentType = self::contentTypes['contractsGetCount'][0])
+    public function contractsGetCountRequest($id = null, $address = null, $kind = null, $tzips = null, $balance = null, $creator = null, $manager = null, $delegate = null, $first_activity = null, $first_activity_time = null, $last_activity = null, $last_activity_time = null, $type_hash = null, $code_hash = null, string $contentType = self::contentTypes['contractsGetCount'][0])
     {
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3980,9 +4118,126 @@ class ContractsApi
 
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $address,
+            'address', // param base name
+            'OneOfAddressParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $kind,
             'kind', // param base name
             'OneOfContractKindParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $tzips,
+            'tzips', // param base name
+            'OneOfContractTagsParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $balance,
+            'balance', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $creator,
+            'creator', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $manager,
+            'manager', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $delegate,
+            'delegate', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $first_activity,
+            'firstActivity', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $first_activity_time,
+            'firstActivityTime', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_activity,
+            'lastActivity', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_activity_time,
+            'lastActivityTime', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $type_hash,
+            'typeHash', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $code_hash,
+            'codeHash', // param base name
+            'OneOfInt32Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -7473,10 +7728,10 @@ class ContractsApi
      * Get same contracts
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
      *
@@ -7484,9 +7739,9 @@ class ContractsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Contract[]
      */
-    public function contractsGetSame($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    public function contractsGetSame($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
     {
-        list($response) = $this->contractsGetSameWithHttpInfo($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        list($response) = $this->contractsGetSameWithHttpInfo($address, $sort, $offset, $limit, $select, $include_storage, $contentType);
         return $response;
     }
 
@@ -7496,10 +7751,10 @@ class ContractsApi
      * Get same contracts
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
      *
@@ -7507,9 +7762,9 @@ class ContractsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Contract[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetSameWithHttpInfo($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    public function contractsGetSameWithHttpInfo($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
     {
-        $request = $this->contractsGetSameRequest($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        $request = $this->contractsGetSameRequest($address, $sort, $offset, $limit, $select, $include_storage, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -7601,19 +7856,19 @@ class ContractsApi
      * Get same contracts
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetSameAsync($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    public function contractsGetSameAsync($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
     {
-        return $this->contractsGetSameAsyncWithHttpInfo($address, $select, $sort, $offset, $limit, $include_storage, $contentType)
+        return $this->contractsGetSameAsyncWithHttpInfo($address, $sort, $offset, $limit, $select, $include_storage, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -7627,20 +7882,20 @@ class ContractsApi
      * Get same contracts
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetSameAsyncWithHttpInfo($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    public function contractsGetSameAsyncWithHttpInfo($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Contract[]';
-        $request = $this->contractsGetSameRequest($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        $request = $this->contractsGetSameRequest($address, $sort, $offset, $limit, $select, $include_storage, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -7682,17 +7937,17 @@ class ContractsApi
      * Create request for operation 'contractsGetSame'
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSame'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetSameRequest($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
+    public function contractsGetSameRequest($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSame'][0])
     {
 
         // verify the required parameter 'address' is set
@@ -7701,7 +7956,6 @@ class ContractsApi
                 'Missing the required parameter $address when calling contractsGetSame'
             );
         }
-
 
 
 
@@ -7714,6 +7968,7 @@ class ContractsApi
         
 
 
+
         $resourcePath = '/v1/contracts/{address}/same';
         $formParams = [];
         $queryParams = [];
@@ -7721,15 +7976,6 @@ class ContractsApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $select,
-            'select', // param base name
-            'OneOfSelectParameter', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $sort,
@@ -7753,6 +7999,15 @@ class ContractsApi
             $limit,
             'limit', // param base name
             'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectionParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -7837,10 +8092,10 @@ class ContractsApi
      * Get similar contracts
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
      *
@@ -7848,9 +8103,9 @@ class ContractsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\Contract[]
      */
-    public function contractsGetSimilar($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    public function contractsGetSimilar($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
     {
-        list($response) = $this->contractsGetSimilarWithHttpInfo($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        list($response) = $this->contractsGetSimilarWithHttpInfo($address, $sort, $offset, $limit, $select, $include_storage, $contentType);
         return $response;
     }
 
@@ -7860,10 +8115,10 @@ class ContractsApi
      * Get similar contracts
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
      *
@@ -7871,9 +8126,9 @@ class ContractsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\Contract[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function contractsGetSimilarWithHttpInfo($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    public function contractsGetSimilarWithHttpInfo($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
     {
-        $request = $this->contractsGetSimilarRequest($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        $request = $this->contractsGetSimilarRequest($address, $sort, $offset, $limit, $select, $include_storage, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -7965,19 +8220,19 @@ class ContractsApi
      * Get similar contracts
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetSimilarAsync($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    public function contractsGetSimilarAsync($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
     {
-        return $this->contractsGetSimilarAsyncWithHttpInfo($address, $select, $sort, $offset, $limit, $include_storage, $contentType)
+        return $this->contractsGetSimilarAsyncWithHttpInfo($address, $sort, $offset, $limit, $select, $include_storage, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -7991,20 +8246,20 @@ class ContractsApi
      * Get similar contracts
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function contractsGetSimilarAsyncWithHttpInfo($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    public function contractsGetSimilarAsyncWithHttpInfo($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\Contract[]';
-        $request = $this->contractsGetSimilarRequest($address, $select, $sort, $offset, $limit, $include_storage, $contentType);
+        $request = $this->contractsGetSimilarRequest($address, $sort, $offset, $limit, $select, $include_storage, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -8046,17 +8301,17 @@ class ContractsApi
      * Create request for operation 'contractsGetSimilar'
      *
      * @param  string $address Contract address (starting with KT) (required)
-     * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts contracts by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;balance&#x60;, &#x60;firstActivity&#x60;, &#x60;lastActivity&#x60;, &#x60;numTransactions&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  bool $include_storage Specifies whether to include contract storage value in response. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['contractsGetSimilar'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function contractsGetSimilarRequest($address, $select = null, $sort = null, $offset = null, $limit = 100, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
+    public function contractsGetSimilarRequest($address, $sort = null, $offset = null, $limit = null, $select = null, $include_storage = false, string $contentType = self::contentTypes['contractsGetSimilar'][0])
     {
 
         // verify the required parameter 'address' is set
@@ -8065,7 +8320,6 @@ class ContractsApi
                 'Missing the required parameter $address when calling contractsGetSimilar'
             );
         }
-
 
 
 
@@ -8078,6 +8332,7 @@ class ContractsApi
         
 
 
+
         $resourcePath = '/v1/contracts/{address}/similar';
         $formParams = [];
         $queryParams = [];
@@ -8085,15 +8340,6 @@ class ContractsApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $select,
-            'select', // param base name
-            'OneOfSelectParameter', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $sort,
@@ -8117,6 +8363,15 @@ class ContractsApi
             $limit,
             'limit', // param base name
             'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectionParameter', // openApiType
             'form', // style
             true, // explode
             false // required

@@ -12,9 +12,9 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:   - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Mumbainet: `https://api.mumbainet.tzkt.io/` ([view docs](https://api.mumbainet.tzkt.io)) - Nairobinet: `https://api.nairobinet.tzkt.io/` ([view docs](https://api.nairobinet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer.  You can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community  to help developers build more services and dapps on top of Tezos.  TzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service, because you can always clone, build and run it yourself to have full control over all the components.  Feel free to contact us if you have any questions or feature requests. Your feedback is much appreciated!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊  # Get Started  There are two API services provided for public use: - **Free TzKT API** with free anonymous access; - **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.  You can find more details about differences between available tiers [here](https://tzkt.io/api).  ## Free TzKT API  Free-tier TzKT API is the best way to get started and explore available Tezos data and API functionality. It doesn't require authorization and is free for everyone and for both commercial and non-commercial use.  > #### Note: attribution required If you use free-tier TzKT API, you **must** mention it on your website or application by placing the label \"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Parisnet: `https://api.parisnet.tzkt.io/` ([view docs](https://api.parisnet.tzkt.io))  ### Sending Requests  To send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network (for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint (for example, chain's head: `/v1/head`), that's pretty much it:   ```bash curl https://api.tzkt.io/v1/head ```  Read through this documentation to explore available endpoints, query parameters (note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.) and response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits.  If you exceed the limit, the API will respond with `HTTP 429` status code.  ## TzKT Pro  TzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA. TzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io)) - Testnets: *let us know if you need TzKT Pro for testnets*  ### Authorization  To access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription. This can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.  Note that you can have multiple API keys within a single subscription.  Keep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories. If your key was compromised, just let us know and we will issue a new one.  Also note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted, but query string is not, so the key can be unintentionally exposed to third parties.  ### Sending Requests  Sending a request with the API key passed as a query string parameter:  ```bash curl https://pro.tzkt.io/v1/head?apikey={your_key} ```  Sending a request with the API key passed via an HTTP header:  ```bash curl https://pro.tzkt.io/v1/head \\     -H 'apikey: {your_key}' ```  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.  Also, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests and the time remaining (in seconds) until the quota is reset. Here's an example:  ``` RateLimit-Limit: 50 RateLimit-Remaining: 49 RateLimit-Reset: 1 ```  It also sends general information about your rate limits per second and per day:  ``` X-RateLimit-Limit-Second: 50 X-RateLimit-Remaining-Second: 49 X-RateLimit-Limit-Day: 3000000 X-RateLimit-Remaining-Day: 2994953 ```  If you exceed the limit, the API will respond with `HTTP 429` status code.
  *
- * The version of the OpenAPI document: 1.12.1
+ * The version of the OpenAPI document: 1.14.4
  * Contact: hello@bakingbad.dev
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.2.1
@@ -81,6 +81,12 @@ class OperationsApi
         'operationsGetActivationsCount' => [
             'application/json',
         ],
+        'operationsGetAutostakingOps' => [
+            'application/json',
+        ],
+        'operationsGetAutostakingOpsCount' => [
+            'application/json',
+        ],
         'operationsGetBaking' => [
             'application/json',
         ],
@@ -106,6 +112,12 @@ class OperationsApi
             'application/json',
         ],
         'operationsGetByHashCounterNonce' => [
+            'application/json',
+        ],
+        'operationsGetDalPublishCommitmentOps' => [
+            'application/json',
+        ],
+        'operationsGetDalPublishCommitmentOpsCount' => [
             'application/json',
         ],
         'operationsGetDelegationByHash' => [
@@ -264,6 +276,12 @@ class OperationsApi
         'operationsGetRevelationPenaltyById' => [
             'application/json',
         ],
+        'operationsGetSetDelegateParametersOps' => [
+            'application/json',
+        ],
+        'operationsGetSetDelegateParametersOpsCount' => [
+            'application/json',
+        ],
         'operationsGetSetDepositsLimitByHash' => [
             'application/json',
         ],
@@ -316,6 +334,12 @@ class OperationsApi
             'application/json',
         ],
         'operationsGetSmartRollupRefuteOpsCount' => [
+            'application/json',
+        ],
+        'operationsGetStakingOps' => [
+            'application/json',
+        ],
+        'operationsGetStakingOpsCount' => [
             'application/json',
         ],
         'operationsGetStatus' => [
@@ -1494,6 +1518,823 @@ class OperationsApi
     }
 
     /**
+     * Operation operationsGetAutostakingOps
+     *
+     * Get autostaking ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOps'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\AutostakingOperation[]
+     */
+    public function operationsGetAutostakingOps($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetAutostakingOps'][0])
+    {
+        list($response) = $this->operationsGetAutostakingOpsWithHttpInfo($id, $level, $timestamp, $baker, $action, $amount, $staking_updates_count, $sort, $offset, $limit, $select, $quote, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation operationsGetAutostakingOpsWithHttpInfo
+     *
+     * Get autostaking ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOps'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\AutostakingOperation[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function operationsGetAutostakingOpsWithHttpInfo($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetAutostakingOps'][0])
+    {
+        $request = $this->operationsGetAutostakingOpsRequest($id, $level, $timestamp, $baker, $action, $amount, $staking_updates_count, $sort, $offset, $limit, $select, $quote, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\AutostakingOperation[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\AutostakingOperation[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\AutostakingOperation[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\AutostakingOperation[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\AutostakingOperation[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation operationsGetAutostakingOpsAsync
+     *
+     * Get autostaking ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetAutostakingOpsAsync($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetAutostakingOps'][0])
+    {
+        return $this->operationsGetAutostakingOpsAsyncWithHttpInfo($id, $level, $timestamp, $baker, $action, $amount, $staking_updates_count, $sort, $offset, $limit, $select, $quote, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation operationsGetAutostakingOpsAsyncWithHttpInfo
+     *
+     * Get autostaking ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetAutostakingOpsAsyncWithHttpInfo($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetAutostakingOps'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\AutostakingOperation[]';
+        $request = $this->operationsGetAutostakingOpsRequest($id, $level, $timestamp, $baker, $action, $amount, $staking_updates_count, $sort, $offset, $limit, $select, $quote, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'operationsGetAutostakingOps'
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function operationsGetAutostakingOpsRequest($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetAutostakingOps'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+        if ($limit !== null && $limit > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling OperationsApi.operationsGetAutostakingOps, must be smaller than or equal to 10000.');
+        }
+        if ($limit !== null && $limit < 0) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling OperationsApi.operationsGetAutostakingOps, must be bigger than or equal to 0.');
+        }
+        
+
+
+
+        $resourcePath = '/v1/operations/autostaking';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $baker,
+            'baker', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $action,
+            'action', // param base name
+            'OneOfStakingActionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $amount,
+            'amount', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $staking_updates_count,
+            'stakingUpdatesCount', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation operationsGetAutostakingOpsCount
+     *
+     * Get autostaking ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return int
+     */
+    public function operationsGetAutostakingOpsCount($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, string $contentType = self::contentTypes['operationsGetAutostakingOpsCount'][0])
+    {
+        list($response) = $this->operationsGetAutostakingOpsCountWithHttpInfo($id, $level, $timestamp, $baker, $action, $amount, $staking_updates_count, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation operationsGetAutostakingOpsCountWithHttpInfo
+     *
+     * Get autostaking ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of int, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function operationsGetAutostakingOpsCountWithHttpInfo($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, string $contentType = self::contentTypes['operationsGetAutostakingOpsCount'][0])
+    {
+        $request = $this->operationsGetAutostakingOpsCountRequest($id, $level, $timestamp, $baker, $action, $amount, $staking_updates_count, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('int' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'int', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'int';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'int',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation operationsGetAutostakingOpsCountAsync
+     *
+     * Get autostaking ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetAutostakingOpsCountAsync($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, string $contentType = self::contentTypes['operationsGetAutostakingOpsCount'][0])
+    {
+        return $this->operationsGetAutostakingOpsCountAsyncWithHttpInfo($id, $level, $timestamp, $baker, $action, $amount, $staking_updates_count, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation operationsGetAutostakingOpsCountAsyncWithHttpInfo
+     *
+     * Get autostaking ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetAutostakingOpsCountAsyncWithHttpInfo($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, string $contentType = self::contentTypes['operationsGetAutostakingOpsCount'][0])
+    {
+        $returnType = 'int';
+        $request = $this->operationsGetAutostakingOpsCountRequest($id, $level, $timestamp, $baker, $action, $amount, $staking_updates_count, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'operationsGetAutostakingOpsCount'
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by level of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the block where the operation happened.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by autostaking action.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $amount Filter by amount.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $staking_updates_count Filter by number of staking updates.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetAutostakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function operationsGetAutostakingOpsCountRequest($id = null, $level = null, $timestamp = null, $baker = null, $action = null, $amount = null, $staking_updates_count = null, string $contentType = self::contentTypes['operationsGetAutostakingOpsCount'][0])
+    {
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/v1/operations/autostaking/count';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $baker,
+            'baker', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $action,
+            'action', // param base name
+            'OneOfStakingActionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $amount,
+            'amount', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $staking_updates_count,
+            'stakingUpdatesCount', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation operationsGetBaking
      *
      * Get baking
@@ -1502,6 +2343,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.proposer.producer&#x3D;tz1...&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $proposer Filters by block proposer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $producer Filters by block producer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -1515,9 +2357,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BakingOperation[]
      */
-    public function operationsGetBaking($baker = null, $anyof = null, $proposer = null, $producer = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
+    public function operationsGetBaking($baker = null, $anyof = null, $proposer = null, $producer = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
     {
-        list($response) = $this->operationsGetBakingWithHttpInfo($baker, $anyof, $proposer, $producer, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        list($response) = $this->operationsGetBakingWithHttpInfo($baker, $anyof, $proposer, $producer, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -1530,6 +2372,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.proposer.producer&#x3D;tz1...&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $proposer Filters by block proposer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $producer Filters by block producer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -1543,9 +2386,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BakingOperation[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationsGetBakingWithHttpInfo($baker = null, $anyof = null, $proposer = null, $producer = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
+    public function operationsGetBakingWithHttpInfo($baker = null, $anyof = null, $proposer = null, $producer = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
     {
-        $request = $this->operationsGetBakingRequest($baker, $anyof, $proposer, $producer, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetBakingRequest($baker, $anyof, $proposer, $producer, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1640,6 +2483,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.proposer.producer&#x3D;tz1...&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $proposer Filters by block proposer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $producer Filters by block producer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -1652,9 +2496,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetBakingAsync($baker = null, $anyof = null, $proposer = null, $producer = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
+    public function operationsGetBakingAsync($baker = null, $anyof = null, $proposer = null, $producer = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
     {
-        return $this->operationsGetBakingAsyncWithHttpInfo($baker, $anyof, $proposer, $producer, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
+        return $this->operationsGetBakingAsyncWithHttpInfo($baker, $anyof, $proposer, $producer, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1671,6 +2515,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.proposer.producer&#x3D;tz1...&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $proposer Filters by block proposer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $producer Filters by block producer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -1683,10 +2528,10 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetBakingAsyncWithHttpInfo($baker = null, $anyof = null, $proposer = null, $producer = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
+    public function operationsGetBakingAsyncWithHttpInfo($baker = null, $anyof = null, $proposer = null, $producer = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BakingOperation[]';
-        $request = $this->operationsGetBakingRequest($baker, $anyof, $proposer, $producer, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetBakingRequest($baker, $anyof, $proposer, $producer, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1731,6 +2576,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.proposer.producer&#x3D;tz1...&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $proposer Filters by block proposer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $producer Filters by block producer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -1743,8 +2589,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationsGetBakingRequest($baker = null, $anyof = null, $proposer = null, $producer = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
+    public function operationsGetBakingRequest($baker = null, $anyof = null, $proposer = null, $producer = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetBaking'][0])
     {
+
 
 
 
@@ -1803,6 +2650,15 @@ class OperationsApi
             $producer,
             'producer', // param base name
             'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -4558,6 +5414,823 @@ class OperationsApi
     }
 
     /**
+     * Operation operationsGetDalPublishCommitmentOps
+     *
+     * Get dal_publish_commitment ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOps'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\DalPublishCommitmentOperation[]
+     */
+    public function operationsGetDalPublishCommitmentOps($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOps'][0])
+    {
+        list($response) = $this->operationsGetDalPublishCommitmentOpsWithHttpInfo($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation operationsGetDalPublishCommitmentOpsWithHttpInfo
+     *
+     * Get dal_publish_commitment ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOps'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\DalPublishCommitmentOperation[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function operationsGetDalPublishCommitmentOpsWithHttpInfo($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOps'][0])
+    {
+        $request = $this->operationsGetDalPublishCommitmentOpsRequest($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\DalPublishCommitmentOperation[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\DalPublishCommitmentOperation[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\DalPublishCommitmentOperation[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\DalPublishCommitmentOperation[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\DalPublishCommitmentOperation[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation operationsGetDalPublishCommitmentOpsAsync
+     *
+     * Get dal_publish_commitment ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetDalPublishCommitmentOpsAsync($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOps'][0])
+    {
+        return $this->operationsGetDalPublishCommitmentOpsAsyncWithHttpInfo($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation operationsGetDalPublishCommitmentOpsAsyncWithHttpInfo
+     *
+     * Get dal_publish_commitment ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetDalPublishCommitmentOpsAsyncWithHttpInfo($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOps'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\DalPublishCommitmentOperation[]';
+        $request = $this->operationsGetDalPublishCommitmentOpsRequest($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'operationsGetDalPublishCommitmentOps'
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function operationsGetDalPublishCommitmentOpsRequest($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOps'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+        if ($limit !== null && $limit > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling OperationsApi.operationsGetDalPublishCommitmentOps, must be smaller than or equal to 10000.');
+        }
+        if ($limit !== null && $limit < 0) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling OperationsApi.operationsGetDalPublishCommitmentOps, must be bigger than or equal to 0.');
+        }
+        
+
+
+
+        $resourcePath = '/v1/operations/dal_publish_commitment';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $hash,
+            'hash', // param base name
+            'OneOfOpHashParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $counter,
+            'counter', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfOperationStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sender,
+            'sender', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation operationsGetDalPublishCommitmentOpsCount
+     *
+     * Get dal_publish_commitment ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOpsCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return int
+     */
+    public function operationsGetDalPublishCommitmentOpsCount($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOpsCount'][0])
+    {
+        list($response) = $this->operationsGetDalPublishCommitmentOpsCountWithHttpInfo($id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation operationsGetDalPublishCommitmentOpsCountWithHttpInfo
+     *
+     * Get dal_publish_commitment ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOpsCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of int, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function operationsGetDalPublishCommitmentOpsCountWithHttpInfo($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOpsCount'][0])
+    {
+        $request = $this->operationsGetDalPublishCommitmentOpsCountRequest($id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('int' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'int', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'int';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'int',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation operationsGetDalPublishCommitmentOpsCountAsync
+     *
+     * Get dal_publish_commitment ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetDalPublishCommitmentOpsCountAsync($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOpsCount'][0])
+    {
+        return $this->operationsGetDalPublishCommitmentOpsCountAsyncWithHttpInfo($id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation operationsGetDalPublishCommitmentOpsCountAsyncWithHttpInfo
+     *
+     * Get dal_publish_commitment ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetDalPublishCommitmentOpsCountAsyncWithHttpInfo($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOpsCount'][0])
+    {
+        $returnType = 'int';
+        $request = $this->operationsGetDalPublishCommitmentOpsCountRequest($id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'operationsGetDalPublishCommitmentOpsCount'
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetDalPublishCommitmentOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function operationsGetDalPublishCommitmentOpsCountRequest($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetDalPublishCommitmentOpsCount'][0])
+    {
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/v1/operations/dal_publish_commitment/count';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $hash,
+            'hash', // param base name
+            'OneOfOpHashParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $counter,
+            'counter', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfOperationStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sender,
+            'sender', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation operationsGetDelegationByHash
      *
      * Get delegation by hash
@@ -5148,6 +6821,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $sender Filters delegations by sender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;prevDelegate&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $prev_delegate Filters delegations by prev delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $new_delegate Filters delegations by new delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;prevDelegate&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters delegations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters delegations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
@@ -5163,9 +6837,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\DelegationOperation[]
      */
-    public function operationsGetDelegations($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
+    public function operationsGetDelegations($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $id = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
     {
-        list($response) = $this->operationsGetDelegationsWithHttpInfo($anyof, $initiator, $sender, $prev_delegate, $new_delegate, $level, $timestamp, $sender_code_hash, $status, $select, $sort, $offset, $limit, $quote, $contentType);
+        list($response) = $this->operationsGetDelegationsWithHttpInfo($anyof, $initiator, $sender, $prev_delegate, $new_delegate, $id, $level, $timestamp, $sender_code_hash, $status, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -5179,6 +6853,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $sender Filters delegations by sender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;prevDelegate&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $prev_delegate Filters delegations by prev delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $new_delegate Filters delegations by new delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;prevDelegate&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters delegations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters delegations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
@@ -5194,9 +6869,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\DelegationOperation[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationsGetDelegationsWithHttpInfo($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
+    public function operationsGetDelegationsWithHttpInfo($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $id = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
     {
-        $request = $this->operationsGetDelegationsRequest($anyof, $initiator, $sender, $prev_delegate, $new_delegate, $level, $timestamp, $sender_code_hash, $status, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetDelegationsRequest($anyof, $initiator, $sender, $prev_delegate, $new_delegate, $id, $level, $timestamp, $sender_code_hash, $status, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5292,6 +6967,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $sender Filters delegations by sender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;prevDelegate&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $prev_delegate Filters delegations by prev delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $new_delegate Filters delegations by new delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;prevDelegate&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters delegations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters delegations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
@@ -5306,9 +6982,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetDelegationsAsync($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
+    public function operationsGetDelegationsAsync($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $id = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
     {
-        return $this->operationsGetDelegationsAsyncWithHttpInfo($anyof, $initiator, $sender, $prev_delegate, $new_delegate, $level, $timestamp, $sender_code_hash, $status, $select, $sort, $offset, $limit, $quote, $contentType)
+        return $this->operationsGetDelegationsAsyncWithHttpInfo($anyof, $initiator, $sender, $prev_delegate, $new_delegate, $id, $level, $timestamp, $sender_code_hash, $status, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5326,6 +7002,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $sender Filters delegations by sender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;prevDelegate&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $prev_delegate Filters delegations by prev delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $new_delegate Filters delegations by new delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;prevDelegate&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters delegations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters delegations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
@@ -5340,10 +7017,10 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetDelegationsAsyncWithHttpInfo($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
+    public function operationsGetDelegationsAsyncWithHttpInfo($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $id = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\DelegationOperation[]';
-        $request = $this->operationsGetDelegationsRequest($anyof, $initiator, $sender, $prev_delegate, $new_delegate, $level, $timestamp, $sender_code_hash, $status, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetDelegationsRequest($anyof, $initiator, $sender, $prev_delegate, $new_delegate, $id, $level, $timestamp, $sender_code_hash, $status, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5389,6 +7066,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $sender Filters delegations by sender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;prevDelegate&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $prev_delegate Filters delegations by prev delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;newDelegate&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $new_delegate Filters delegations by new delegate. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;initiator&#x60;, &#x60;sender&#x60;, &#x60;prevDelegate&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters delegations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters delegations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
@@ -5403,8 +7081,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationsGetDelegationsRequest($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
+    public function operationsGetDelegationsRequest($anyof = null, $initiator = null, $sender = null, $prev_delegate = null, $new_delegate = null, $id = null, $level = null, $timestamp = null, $sender_code_hash = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDelegations'][0])
     {
+
 
 
 
@@ -5475,6 +7154,15 @@ class OperationsApi
             $new_delegate,
             'newDelegate', // param base name
             'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -5918,6 +7606,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double baking operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double baking operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double baking operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -5931,9 +7620,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\DoubleBakingOperation[]
      */
-    public function operationsGetDoubleBaking($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
+    public function operationsGetDoubleBaking($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
     {
-        list($response) = $this->operationsGetDoubleBakingWithHttpInfo($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        list($response) = $this->operationsGetDoubleBakingWithHttpInfo($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -5945,6 +7634,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double baking operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double baking operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double baking operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -5958,9 +7648,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\DoubleBakingOperation[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationsGetDoubleBakingWithHttpInfo($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
+    public function operationsGetDoubleBakingWithHttpInfo($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
     {
-        $request = $this->operationsGetDoubleBakingRequest($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetDoubleBakingRequest($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6054,6 +7744,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double baking operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double baking operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double baking operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -6066,9 +7757,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetDoubleBakingAsync($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
+    public function operationsGetDoubleBakingAsync($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
     {
-        return $this->operationsGetDoubleBakingAsyncWithHttpInfo($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
+        return $this->operationsGetDoubleBakingAsyncWithHttpInfo($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -6084,6 +7775,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double baking operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double baking operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double baking operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -6096,10 +7788,10 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetDoubleBakingAsyncWithHttpInfo($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
+    public function operationsGetDoubleBakingAsyncWithHttpInfo($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\DoubleBakingOperation[]';
-        $request = $this->operationsGetDoubleBakingRequest($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetDoubleBakingRequest($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6143,6 +7835,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double baking operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double baking operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double baking operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double baking operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double baking operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -6155,8 +7848,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationsGetDoubleBakingRequest($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
+    public function operationsGetDoubleBakingRequest($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleBaking'][0])
     {
+
 
 
 
@@ -6205,6 +7899,15 @@ class OperationsApi
             $offender,
             'offender', // param base name
             'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -6928,6 +8631,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double endorsing operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double endorsing operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double endorsing operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double endorsing operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double endorsing operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -6941,9 +8645,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\DoubleEndorsingOperation[]
      */
-    public function operationsGetDoubleEndorsing($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
+    public function operationsGetDoubleEndorsing($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
     {
-        list($response) = $this->operationsGetDoubleEndorsingWithHttpInfo($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        list($response) = $this->operationsGetDoubleEndorsingWithHttpInfo($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -6955,6 +8659,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double endorsing operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double endorsing operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double endorsing operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double endorsing operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double endorsing operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -6968,9 +8673,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\DoubleEndorsingOperation[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationsGetDoubleEndorsingWithHttpInfo($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
+    public function operationsGetDoubleEndorsingWithHttpInfo($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
     {
-        $request = $this->operationsGetDoubleEndorsingRequest($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetDoubleEndorsingRequest($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -7064,6 +8769,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double endorsing operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double endorsing operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double endorsing operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double endorsing operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double endorsing operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -7076,9 +8782,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetDoubleEndorsingAsync($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
+    public function operationsGetDoubleEndorsingAsync($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
     {
-        return $this->operationsGetDoubleEndorsingAsyncWithHttpInfo($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
+        return $this->operationsGetDoubleEndorsingAsyncWithHttpInfo($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -7094,6 +8800,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double endorsing operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double endorsing operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double endorsing operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double endorsing operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double endorsing operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -7106,10 +8813,10 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetDoubleEndorsingAsyncWithHttpInfo($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
+    public function operationsGetDoubleEndorsingAsyncWithHttpInfo($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\DoubleEndorsingOperation[]';
-        $request = $this->operationsGetDoubleEndorsingRequest($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetDoubleEndorsingRequest($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -7153,6 +8860,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters double endorsing operations by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters double endorsing operations by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters double endorsing operations by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters double endorsing operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters double endorsing operations by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -7165,8 +8873,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationsGetDoubleEndorsingRequest($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
+    public function operationsGetDoubleEndorsingRequest($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoubleEndorsing'][0])
     {
+
 
 
 
@@ -7215,6 +8924,15 @@ class OperationsApi
             $offender,
             'offender', // param base name
             'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -7938,6 +9656,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -7951,9 +9670,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\DoublePreendorsingOperation[]
      */
-    public function operationsGetDoublePreendorsing($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
+    public function operationsGetDoublePreendorsing($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
     {
-        list($response) = $this->operationsGetDoublePreendorsingWithHttpInfo($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        list($response) = $this->operationsGetDoublePreendorsingWithHttpInfo($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -7965,6 +9684,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -7978,9 +9698,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\DoublePreendorsingOperation[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationsGetDoublePreendorsingWithHttpInfo($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
+    public function operationsGetDoublePreendorsingWithHttpInfo($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
     {
-        $request = $this->operationsGetDoublePreendorsingRequest($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetDoublePreendorsingRequest($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8074,6 +9794,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -8086,9 +9807,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetDoublePreendorsingAsync($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
+    public function operationsGetDoublePreendorsingAsync($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
     {
-        return $this->operationsGetDoublePreendorsingAsyncWithHttpInfo($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
+        return $this->operationsGetDoublePreendorsingAsyncWithHttpInfo($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -8104,6 +9825,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -8116,10 +9838,10 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetDoublePreendorsingAsyncWithHttpInfo($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
+    public function operationsGetDoublePreendorsingAsyncWithHttpInfo($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\DoublePreendorsingOperation[]';
-        $request = $this->operationsGetDoublePreendorsingRequest($anyof, $accuser, $offender, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetDoublePreendorsingRequest($anyof, $accuser, $offender, $id, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -8163,6 +9885,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.accuser.offender&#x3D;tz1...&#x60; will return operations where &#x60;accuser&#x60; OR &#x60;offender&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $accuser Filters by accuser. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;offender&#x60;. (optional)
      * @param  AccountsGetDelegateParameter $offender Filters by offender. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;accuser&#x60;. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
      * @param  AccountsGetSelectParameter $select Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both &#x60;.fields&#x60; and &#x60;.values&#x60; modes. (optional)
@@ -8175,8 +9898,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationsGetDoublePreendorsingRequest($anyof = null, $accuser = null, $offender = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
+    public function operationsGetDoublePreendorsingRequest($anyof = null, $accuser = null, $offender = null, $id = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetDoublePreendorsing'][0])
     {
+
 
 
 
@@ -8225,6 +9949,15 @@ class OperationsApi
             $offender,
             'offender', // param base name
             'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -11233,6 +12966,7 @@ class OperationsApi
      *
      * Get endorsing rewards
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -11247,9 +12981,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\EndorsingRewardOperation[]
      */
-    public function operationsGetEndorsingRewards($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
+    public function operationsGetEndorsingRewards($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
     {
-        list($response) = $this->operationsGetEndorsingRewardsWithHttpInfo($baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        list($response) = $this->operationsGetEndorsingRewardsWithHttpInfo($id, $baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -11258,6 +12992,7 @@ class OperationsApi
      *
      * Get endorsing rewards
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -11272,9 +13007,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\EndorsingRewardOperation[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationsGetEndorsingRewardsWithHttpInfo($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
+    public function operationsGetEndorsingRewardsWithHttpInfo($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
     {
-        $request = $this->operationsGetEndorsingRewardsRequest($baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetEndorsingRewardsRequest($id, $baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -11365,6 +13100,7 @@ class OperationsApi
      *
      * Get endorsing rewards
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -11378,9 +13114,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetEndorsingRewardsAsync($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
+    public function operationsGetEndorsingRewardsAsync($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
     {
-        return $this->operationsGetEndorsingRewardsAsyncWithHttpInfo($baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
+        return $this->operationsGetEndorsingRewardsAsyncWithHttpInfo($id, $baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -11393,6 +13129,7 @@ class OperationsApi
      *
      * Get endorsing rewards
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -11406,10 +13143,10 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetEndorsingRewardsAsyncWithHttpInfo($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
+    public function operationsGetEndorsingRewardsAsyncWithHttpInfo($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\EndorsingRewardOperation[]';
-        $request = $this->operationsGetEndorsingRewardsRequest($baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetEndorsingRewardsRequest($id, $baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -11450,6 +13187,7 @@ class OperationsApi
     /**
      * Create request for operation 'operationsGetEndorsingRewards'
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -11463,8 +13201,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationsGetEndorsingRewardsRequest($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
+    public function operationsGetEndorsingRewardsRequest($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetEndorsingRewards'][0])
     {
+
 
 
 
@@ -11488,6 +13227,15 @@ class OperationsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $baker,
@@ -13239,7 +14987,7 @@ class OperationsApi
      * Get migrations
      *
      * @param  AccountsGetDelegateParameter $account Filters migration operations by account. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;). (optional)
+     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;, &#x60;remove_bigmap_key&#x60;). (optional)
      * @param  AccountsGetBalanceParameter $balance_change Filters migration operations by amount. (optional)
      * @param  AccountsGetBalanceParameter $id Filters migration operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters migration operations by level. (optional)
@@ -13268,7 +15016,7 @@ class OperationsApi
      * Get migrations
      *
      * @param  AccountsGetDelegateParameter $account Filters migration operations by account. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;). (optional)
+     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;, &#x60;remove_bigmap_key&#x60;). (optional)
      * @param  AccountsGetBalanceParameter $balance_change Filters migration operations by amount. (optional)
      * @param  AccountsGetBalanceParameter $id Filters migration operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters migration operations by level. (optional)
@@ -13379,7 +15127,7 @@ class OperationsApi
      * Get migrations
      *
      * @param  AccountsGetDelegateParameter $account Filters migration operations by account. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;). (optional)
+     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;, &#x60;remove_bigmap_key&#x60;). (optional)
      * @param  AccountsGetBalanceParameter $balance_change Filters migration operations by amount. (optional)
      * @param  AccountsGetBalanceParameter $id Filters migration operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters migration operations by level. (optional)
@@ -13411,7 +15159,7 @@ class OperationsApi
      * Get migrations
      *
      * @param  AccountsGetDelegateParameter $account Filters migration operations by account. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;). (optional)
+     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;, &#x60;remove_bigmap_key&#x60;). (optional)
      * @param  AccountsGetBalanceParameter $balance_change Filters migration operations by amount. (optional)
      * @param  AccountsGetBalanceParameter $id Filters migration operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters migration operations by level. (optional)
@@ -13472,7 +15220,7 @@ class OperationsApi
      * Create request for operation 'operationsGetMigrations'
      *
      * @param  AccountsGetDelegateParameter $account Filters migration operations by account. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;). (optional)
+     * @param  OperationsGetMigrationsKindParameter $kind Filters migration operations by kind (&#x60;bootstrap&#x60;, &#x60;activate_delegate&#x60;, &#x60;airdrop&#x60;, &#x60;proposal_invoice&#x60;, &#x60;origination&#x60;, &#x60;subsidy&#x60;, &#x60;remove_bigmap_key&#x60;). (optional)
      * @param  AccountsGetBalanceParameter $balance_change Filters migration operations by amount. (optional)
      * @param  AccountsGetBalanceParameter $id Filters migration operations by internal TzKT id. (optional)
      * @param  AccountsGetIdParameter $level Filters migration operations by level. (optional)
@@ -15611,7 +17359,7 @@ class OperationsApi
      * @param  AccountsGetIdParameter $type_hash Filters origination operations by 32-bit hash of originated contract parameter and storage types (helpful for searching originations of similar contracts) (optional)
      * @param  AccountsGetIdParameter $code_hash Filters origination operations by 32-bit hash of originated contract code (helpful for searching originations of same contracts) (optional)
      * @param  AccountsGetIdParameter $level Filters origination operations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters origination operations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters origination operations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $any_code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;codeHash&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters origination operations by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -15648,7 +17396,7 @@ class OperationsApi
      * @param  AccountsGetIdParameter $type_hash Filters origination operations by 32-bit hash of originated contract parameter and storage types (helpful for searching originations of similar contracts) (optional)
      * @param  AccountsGetIdParameter $code_hash Filters origination operations by 32-bit hash of originated contract code (helpful for searching originations of same contracts) (optional)
      * @param  AccountsGetIdParameter $level Filters origination operations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters origination operations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters origination operations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $any_code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;codeHash&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters origination operations by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -15767,7 +17515,7 @@ class OperationsApi
      * @param  AccountsGetIdParameter $type_hash Filters origination operations by 32-bit hash of originated contract parameter and storage types (helpful for searching originations of similar contracts) (optional)
      * @param  AccountsGetIdParameter $code_hash Filters origination operations by 32-bit hash of originated contract code (helpful for searching originations of same contracts) (optional)
      * @param  AccountsGetIdParameter $level Filters origination operations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters origination operations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters origination operations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $any_code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;codeHash&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters origination operations by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -15807,7 +17555,7 @@ class OperationsApi
      * @param  AccountsGetIdParameter $type_hash Filters origination operations by 32-bit hash of originated contract parameter and storage types (helpful for searching originations of similar contracts) (optional)
      * @param  AccountsGetIdParameter $code_hash Filters origination operations by 32-bit hash of originated contract code (helpful for searching originations of same contracts) (optional)
      * @param  AccountsGetIdParameter $level Filters origination operations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters origination operations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters origination operations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $any_code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;codeHash&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters origination operations by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -15876,7 +17624,7 @@ class OperationsApi
      * @param  AccountsGetIdParameter $type_hash Filters origination operations by 32-bit hash of originated contract parameter and storage types (helpful for searching originations of similar contracts) (optional)
      * @param  AccountsGetIdParameter $code_hash Filters origination operations by 32-bit hash of originated contract code (helpful for searching originations of same contracts) (optional)
      * @param  AccountsGetIdParameter $level Filters origination operations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters origination operations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters origination operations by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $any_code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;codeHash&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters origination operations by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -16022,7 +17770,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $timestamp,
             'timestamp', // param base name
-            'OneOfDateTimeParameter', // openApiType
+            'OneOfTimestampParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -16171,7 +17919,7 @@ class OperationsApi
      * Get originations count
      *
      * @param  AccountsGetIdParameter $level Filters originations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters originations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters originations by timestamp. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetOriginationsCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
@@ -16190,7 +17938,7 @@ class OperationsApi
      * Get originations count
      *
      * @param  AccountsGetIdParameter $level Filters originations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters originations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters originations by timestamp. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetOriginationsCount'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
@@ -16291,7 +18039,7 @@ class OperationsApi
      * Get originations count
      *
      * @param  AccountsGetIdParameter $level Filters originations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters originations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters originations by timestamp. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetOriginationsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -16313,7 +18061,7 @@ class OperationsApi
      * Get originations count
      *
      * @param  AccountsGetIdParameter $level Filters originations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters originations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters originations by timestamp. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetOriginationsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -16364,7 +18112,7 @@ class OperationsApi
      * Create request for operation 'operationsGetOriginationsCount'
      *
      * @param  AccountsGetIdParameter $level Filters originations by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters originations by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters originations by timestamp. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetOriginationsCount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -16396,7 +18144,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $timestamp,
             'timestamp', // param base name
-            'OneOfDateTimeParameter', // openApiType
+            'OneOfTimestampParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -19080,7 +20828,7 @@ class OperationsApi
      * Get register constants
      *
      * @param  AccountsGetDelegateParameter $sender Filters operations by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  ConstantsGetAddressParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
      * @param  AccountsGetIdParameter $level Filters operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters operations by timestamp. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters operations by status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -19108,7 +20856,7 @@ class OperationsApi
      * Get register constants
      *
      * @param  AccountsGetDelegateParameter $sender Filters operations by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  ConstantsGetAddressParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
      * @param  AccountsGetIdParameter $level Filters operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters operations by timestamp. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters operations by status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -19218,7 +20966,7 @@ class OperationsApi
      * Get register constants
      *
      * @param  AccountsGetDelegateParameter $sender Filters operations by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  ConstantsGetAddressParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
      * @param  AccountsGetIdParameter $level Filters operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters operations by timestamp. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters operations by status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -19249,7 +20997,7 @@ class OperationsApi
      * Get register constants
      *
      * @param  AccountsGetDelegateParameter $sender Filters operations by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  ConstantsGetAddressParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
      * @param  AccountsGetIdParameter $level Filters operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters operations by timestamp. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters operations by status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -19309,7 +21057,7 @@ class OperationsApi
      * Create request for operation 'operationsGetRegisterConstants'
      *
      * @param  AccountsGetDelegateParameter $sender Filters operations by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
-     * @param  ConstantsGetAddressParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $address Filters operations by global address of the created constant (starts with &#x60;expr..&#x60;). (optional)
      * @param  AccountsGetIdParameter $level Filters operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters operations by timestamp. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters operations by status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -21084,6 +22832,7 @@ class OperationsApi
      *
      * Get revelation penalties
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters revelation penalty operations by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters revelation penalty operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters revelation penalty operations by timestamp. (optional)
@@ -21098,9 +22847,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\RevelationPenaltyOperation[]
      */
-    public function operationsGetRevelationPenalties($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
+    public function operationsGetRevelationPenalties($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
     {
-        list($response) = $this->operationsGetRevelationPenaltiesWithHttpInfo($baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        list($response) = $this->operationsGetRevelationPenaltiesWithHttpInfo($id, $baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
         return $response;
     }
 
@@ -21109,6 +22858,7 @@ class OperationsApi
      *
      * Get revelation penalties
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters revelation penalty operations by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters revelation penalty operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters revelation penalty operations by timestamp. (optional)
@@ -21123,9 +22873,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\RevelationPenaltyOperation[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationsGetRevelationPenaltiesWithHttpInfo($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
+    public function operationsGetRevelationPenaltiesWithHttpInfo($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
     {
-        $request = $this->operationsGetRevelationPenaltiesRequest($baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetRevelationPenaltiesRequest($id, $baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -21216,6 +22966,7 @@ class OperationsApi
      *
      * Get revelation penalties
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters revelation penalty operations by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters revelation penalty operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters revelation penalty operations by timestamp. (optional)
@@ -21229,9 +22980,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetRevelationPenaltiesAsync($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
+    public function operationsGetRevelationPenaltiesAsync($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
     {
-        return $this->operationsGetRevelationPenaltiesAsyncWithHttpInfo($baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
+        return $this->operationsGetRevelationPenaltiesAsyncWithHttpInfo($id, $baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -21244,6 +22995,7 @@ class OperationsApi
      *
      * Get revelation penalties
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters revelation penalty operations by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters revelation penalty operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters revelation penalty operations by timestamp. (optional)
@@ -21257,10 +23009,10 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetRevelationPenaltiesAsyncWithHttpInfo($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
+    public function operationsGetRevelationPenaltiesAsyncWithHttpInfo($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\RevelationPenaltyOperation[]';
-        $request = $this->operationsGetRevelationPenaltiesRequest($baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
+        $request = $this->operationsGetRevelationPenaltiesRequest($id, $baker, $level, $timestamp, $select, $sort, $offset, $limit, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -21301,6 +23053,7 @@ class OperationsApi
     /**
      * Create request for operation 'operationsGetRevelationPenalties'
      *
+     * @param  AccountsGetBalanceParameter $id Filters operations by internal TzKT id. (optional)
      * @param  AccountsGetDelegateParameter $baker Filters revelation penalty operations by baker. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters revelation penalty operations by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters revelation penalty operations by timestamp. (optional)
@@ -21314,8 +23067,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationsGetRevelationPenaltiesRequest($baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
+    public function operationsGetRevelationPenaltiesRequest($id = null, $baker = null, $level = null, $timestamp = null, $select = null, $sort = null, $offset = null, $limit = 100, $quote = null, string $contentType = self::contentTypes['operationsGetRevelationPenalties'][0])
     {
+
 
 
 
@@ -21339,6 +23093,15 @@ class OperationsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $baker,
@@ -22004,6 +23767,823 @@ class OperationsApi
                 $resourcePath
             );
         }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation operationsGetSetDelegateParametersOps
+     *
+     * Get set_delegate_parameters ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOps'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\SetDelegateParametersOperation[]
+     */
+    public function operationsGetSetDelegateParametersOps($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOps'][0])
+    {
+        list($response) = $this->operationsGetSetDelegateParametersOpsWithHttpInfo($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation operationsGetSetDelegateParametersOpsWithHttpInfo
+     *
+     * Get set_delegate_parameters ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOps'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\SetDelegateParametersOperation[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function operationsGetSetDelegateParametersOpsWithHttpInfo($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOps'][0])
+    {
+        $request = $this->operationsGetSetDelegateParametersOpsRequest($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\SetDelegateParametersOperation[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\SetDelegateParametersOperation[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\SetDelegateParametersOperation[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\SetDelegateParametersOperation[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\SetDelegateParametersOperation[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation operationsGetSetDelegateParametersOpsAsync
+     *
+     * Get set_delegate_parameters ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetSetDelegateParametersOpsAsync($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOps'][0])
+    {
+        return $this->operationsGetSetDelegateParametersOpsAsyncWithHttpInfo($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation operationsGetSetDelegateParametersOpsAsyncWithHttpInfo
+     *
+     * Get set_delegate_parameters ops
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetSetDelegateParametersOpsAsyncWithHttpInfo($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOps'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\SetDelegateParametersOperation[]';
+        $request = $this->operationsGetSetDelegateParametersOpsRequest($id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'operationsGetSetDelegateParametersOps'
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function operationsGetSetDelegateParametersOpsRequest($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOps'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+        if ($limit !== null && $limit > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling OperationsApi.operationsGetSetDelegateParametersOps, must be smaller than or equal to 10000.');
+        }
+        if ($limit !== null && $limit < 0) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling OperationsApi.operationsGetSetDelegateParametersOps, must be bigger than or equal to 0.');
+        }
+        
+
+
+
+        $resourcePath = '/v1/operations/set_delegate_parameters';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $hash,
+            'hash', // param base name
+            'OneOfOpHashParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $counter,
+            'counter', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfOperationStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sender,
+            'sender', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation operationsGetSetDelegateParametersOpsCount
+     *
+     * Get set_delegate_parameters ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOpsCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return int
+     */
+    public function operationsGetSetDelegateParametersOpsCount($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOpsCount'][0])
+    {
+        list($response) = $this->operationsGetSetDelegateParametersOpsCountWithHttpInfo($id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation operationsGetSetDelegateParametersOpsCountWithHttpInfo
+     *
+     * Get set_delegate_parameters ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOpsCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of int, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function operationsGetSetDelegateParametersOpsCountWithHttpInfo($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOpsCount'][0])
+    {
+        $request = $this->operationsGetSetDelegateParametersOpsCountRequest($id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('int' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'int', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'int';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'int',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation operationsGetSetDelegateParametersOpsCountAsync
+     *
+     * Get set_delegate_parameters ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetSetDelegateParametersOpsCountAsync($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOpsCount'][0])
+    {
+        return $this->operationsGetSetDelegateParametersOpsCountAsyncWithHttpInfo($id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation operationsGetSetDelegateParametersOpsCountAsyncWithHttpInfo
+     *
+     * Get set_delegate_parameters ops count
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetSetDelegateParametersOpsCountAsyncWithHttpInfo($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOpsCount'][0])
+    {
+        $returnType = 'int';
+        $request = $this->operationsGetSetDelegateParametersOpsCountRequest($id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'operationsGetSetDelegateParametersOpsCount'
+     *
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSetDelegateParametersOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function operationsGetSetDelegateParametersOpsCountRequest($id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetSetDelegateParametersOpsCount'][0])
+    {
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/v1/operations/set_delegate_parameters/count';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $hash,
+            'hash', // param base name
+            'OneOfOpHashParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $counter,
+            'counter', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfOperationStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sender,
+            'sender', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -23342,17 +25922,17 @@ class OperationsApi
      *
      * Get smart rollup add messages
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOps'] to see the possible values for this operation
      *
@@ -23371,17 +25951,17 @@ class OperationsApi
      *
      * Get smart rollup add messages
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOps'] to see the possible values for this operation
      *
@@ -23482,17 +26062,17 @@ class OperationsApi
      *
      * Get smart rollup add messages
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOps'] to see the possible values for this operation
      *
@@ -23514,17 +26094,17 @@ class OperationsApi
      *
      * Get smart rollup add messages
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOps'] to see the possible values for this operation
      *
@@ -23575,17 +26155,17 @@ class OperationsApi
     /**
      * Create request for operation 'operationsGetSmartRollupAddMessagesOps'
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOps'] to see the possible values for this operation
      *
@@ -23625,7 +26205,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -23791,11 +26371,11 @@ class OperationsApi
      *
      * Get smart rollup add messages count
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOpsCount'] to see the possible values for this operation
@@ -23815,11 +26395,11 @@ class OperationsApi
      *
      * Get smart rollup add messages count
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOpsCount'] to see the possible values for this operation
@@ -23921,11 +26501,11 @@ class OperationsApi
      *
      * Get smart rollup add messages count
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOpsCount'] to see the possible values for this operation
@@ -23948,11 +26528,11 @@ class OperationsApi
      *
      * Get smart rollup add messages count
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOpsCount'] to see the possible values for this operation
@@ -24004,11 +26584,11 @@ class OperationsApi
     /**
      * Create request for operation 'operationsGetSmartRollupAddMessagesOpsCount'
      *
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupAddMessagesOpsCount'] to see the possible values for this operation
@@ -24038,7 +26618,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -24160,17 +26740,17 @@ class OperationsApi
      * Get smart rollup cement
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOps'] to see the possible values for this operation
      *
@@ -24190,17 +26770,17 @@ class OperationsApi
      * Get smart rollup cement
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOps'] to see the possible values for this operation
      *
@@ -24302,17 +26882,17 @@ class OperationsApi
      * Get smart rollup cement
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOps'] to see the possible values for this operation
      *
@@ -24335,17 +26915,17 @@ class OperationsApi
      * Get smart rollup cement
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOps'] to see the possible values for this operation
      *
@@ -24397,17 +26977,17 @@ class OperationsApi
      * Create request for operation 'operationsGetSmartRollupCementOps'
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOps'] to see the possible values for this operation
      *
@@ -24457,7 +27037,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -24624,11 +27204,11 @@ class OperationsApi
      * Get smart rollup cement count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOpsCount'] to see the possible values for this operation
@@ -24649,11 +27229,11 @@ class OperationsApi
      * Get smart rollup cement count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOpsCount'] to see the possible values for this operation
@@ -24756,11 +27336,11 @@ class OperationsApi
      * Get smart rollup cement count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOpsCount'] to see the possible values for this operation
@@ -24784,11 +27364,11 @@ class OperationsApi
      * Get smart rollup cement count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOpsCount'] to see the possible values for this operation
@@ -24841,11 +27421,11 @@ class OperationsApi
      * Create request for operation 'operationsGetSmartRollupCementOpsCount'
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupCementOpsCount'] to see the possible values for this operation
@@ -24885,7 +27465,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -25007,17 +27587,17 @@ class OperationsApi
      * Get smart rollup execute
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOps'] to see the possible values for this operation
      *
@@ -25037,17 +27617,17 @@ class OperationsApi
      * Get smart rollup execute
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOps'] to see the possible values for this operation
      *
@@ -25149,17 +27729,17 @@ class OperationsApi
      * Get smart rollup execute
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOps'] to see the possible values for this operation
      *
@@ -25182,17 +27762,17 @@ class OperationsApi
      * Get smart rollup execute
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOps'] to see the possible values for this operation
      *
@@ -25244,17 +27824,17 @@ class OperationsApi
      * Create request for operation 'operationsGetSmartRollupExecuteOps'
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOps'] to see the possible values for this operation
      *
@@ -25304,7 +27884,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -25471,11 +28051,11 @@ class OperationsApi
      * Get smart rollup execute count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOpsCount'] to see the possible values for this operation
@@ -25496,11 +28076,11 @@ class OperationsApi
      * Get smart rollup execute count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOpsCount'] to see the possible values for this operation
@@ -25603,11 +28183,11 @@ class OperationsApi
      * Get smart rollup execute count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOpsCount'] to see the possible values for this operation
@@ -25631,11 +28211,11 @@ class OperationsApi
      * Get smart rollup execute count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOpsCount'] to see the possible values for this operation
@@ -25688,11 +28268,11 @@ class OperationsApi
      * Create request for operation 'operationsGetSmartRollupExecuteOpsCount'
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupExecuteOpsCount'] to see the possible values for this operation
@@ -25732,7 +28312,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -25854,17 +28434,17 @@ class OperationsApi
      * Get smart rollup originate
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  AccountsGetOperationsMichelineParameter $micheline Format of the parameter type value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - raw micheline, &#x60;3&#x60; - raw micheline string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOps'] to see the possible values for this operation
@@ -25885,17 +28465,17 @@ class OperationsApi
      * Get smart rollup originate
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  AccountsGetOperationsMichelineParameter $micheline Format of the parameter type value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - raw micheline, &#x60;3&#x60; - raw micheline string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOps'] to see the possible values for this operation
@@ -25998,17 +28578,17 @@ class OperationsApi
      * Get smart rollup originate
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  AccountsGetOperationsMichelineParameter $micheline Format of the parameter type value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - raw micheline, &#x60;3&#x60; - raw micheline string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOps'] to see the possible values for this operation
@@ -26032,17 +28612,17 @@ class OperationsApi
      * Get smart rollup originate
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  AccountsGetOperationsMichelineParameter $micheline Format of the parameter type value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - raw micheline, &#x60;3&#x60; - raw micheline string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOps'] to see the possible values for this operation
@@ -26095,17 +28675,17 @@ class OperationsApi
      * Create request for operation 'operationsGetSmartRollupOriginateOps'
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  AccountsGetOperationsMichelineParameter $micheline Format of the parameter type value: &#x60;0&#x60; - JSON, &#x60;1&#x60; - JSON string, &#x60;2&#x60; - raw micheline, &#x60;3&#x60; - raw micheline string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOps'] to see the possible values for this operation
@@ -26157,7 +28737,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -26333,11 +28913,11 @@ class OperationsApi
      * Get smart rollup originate count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOpsCount'] to see the possible values for this operation
@@ -26358,11 +28938,11 @@ class OperationsApi
      * Get smart rollup originate count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOpsCount'] to see the possible values for this operation
@@ -26465,11 +29045,11 @@ class OperationsApi
      * Get smart rollup originate count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOpsCount'] to see the possible values for this operation
@@ -26493,11 +29073,11 @@ class OperationsApi
      * Get smart rollup originate count
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOpsCount'] to see the possible values for this operation
@@ -26550,11 +29130,11 @@ class OperationsApi
      * Create request for operation 'operationsGetSmartRollupOriginateOpsCount'
      *
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupOriginateOpsCount'] to see the possible values for this operation
@@ -26594,7 +29174,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -26718,17 +29298,17 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOps'] to see the possible values for this operation
      *
@@ -26750,17 +29330,17 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOps'] to see the possible values for this operation
      *
@@ -26864,17 +29444,17 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOps'] to see the possible values for this operation
      *
@@ -26899,17 +29479,17 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOps'] to see the possible values for this operation
      *
@@ -26963,17 +29543,17 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOps'] to see the possible values for this operation
      *
@@ -27043,7 +29623,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -27212,11 +29792,11 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOpsCount'] to see the possible values for this operation
@@ -27239,11 +29819,11 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOpsCount'] to see the possible values for this operation
@@ -27348,11 +29928,11 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOpsCount'] to see the possible values for this operation
@@ -27378,11 +29958,11 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOpsCount'] to see the possible values for this operation
@@ -27437,11 +30017,11 @@ class OperationsApi
      * @param  AccountsGetIdParameter $commitment_id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupPublishOpsCommitmentHashParameter $commitment_hash Filter by commitment hash.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupPublishOpsCount'] to see the possible values for this operation
@@ -27501,7 +30081,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -27625,17 +30205,17 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOps'] to see the possible values for this operation
      *
@@ -27657,17 +30237,17 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOps'] to see the possible values for this operation
      *
@@ -27771,17 +30351,17 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOps'] to see the possible values for this operation
      *
@@ -27806,17 +30386,17 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOps'] to see the possible values for this operation
      *
@@ -27870,17 +30450,17 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOps'] to see the possible values for this operation
      *
@@ -27950,7 +30530,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -28119,11 +30699,11 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOpsCount'] to see the possible values for this operation
@@ -28146,11 +30726,11 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOpsCount'] to see the possible values for this operation
@@ -28255,11 +30835,11 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOpsCount'] to see the possible values for this operation
@@ -28285,11 +30865,11 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOpsCount'] to see the possible values for this operation
@@ -28344,11 +30924,11 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60; or &#x60;staker&#x60;). Example: &#x60;anyof.sender.staker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;staker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $staker Filter by staker address.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRecoverBondOpsCount'] to see the possible values for this operation
@@ -28408,7 +30988,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -28540,17 +31120,17 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOps'] to see the possible values for this operation
      *
@@ -28580,17 +31160,17 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOps'] to see the possible values for this operation
      *
@@ -28702,17 +31282,17 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOps'] to see the possible values for this operation
      *
@@ -28745,17 +31325,17 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOps'] to see the possible values for this operation
      *
@@ -28817,17 +31397,17 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
      * @param  int $limit Maximum number of items to return. (optional)
-     * @param  DomainsGetSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
      * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOps'] to see the possible values for this operation
      *
@@ -28977,7 +31557,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
-            'OneOfInt32Parameter', // openApiType
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -29154,11 +31734,11 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOpsCount'] to see the possible values for this operation
@@ -29189,11 +31769,11 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOpsCount'] to see the possible values for this operation
@@ -29306,11 +31886,11 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOpsCount'] to see the possible values for this operation
@@ -29344,11 +31924,11 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOpsCount'] to see the possible values for this operation
@@ -29411,11 +31991,11 @@ class OperationsApi
      * @param  OperationsGetSmartRollupRefuteOpsMoveParameter $move Filter by refutation game move (&#x60;start&#x60;, &#x60;dissection&#x60;, &#x60;proof&#x60;, or &#x60;timeout&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupRefuteOpsGameStatusParameter $game_status Filter by refutation game status (&#x60;none&#x60;, &#x60;ongoing&#x60;, &#x60;loser&#x60;, or &#x60;draw&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupCementOpsRollupParameter $rollup Filter by rollup address.   Click on the parameter to expand more details. (optional)
-     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
      * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
      * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetSmartRollupRefuteOpsCount'] to see the possible values for this operation
@@ -29555,7 +32135,914 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $id,
             'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $hash,
+            'hash', // param base name
+            'OneOfOpHashParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $counter,
+            'counter', // param base name
             'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfOperationStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sender,
+            'sender', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation operationsGetStakingOps
+     *
+     * Get staking ops
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOps'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\StakingOperation[]
+     */
+    public function operationsGetStakingOps($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetStakingOps'][0])
+    {
+        list($response) = $this->operationsGetStakingOpsWithHttpInfo($anyof, $baker, $action, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation operationsGetStakingOpsWithHttpInfo
+     *
+     * Get staking ops
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOps'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\StakingOperation[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function operationsGetStakingOpsWithHttpInfo($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetStakingOps'][0])
+    {
+        $request = $this->operationsGetStakingOpsRequest($anyof, $baker, $action, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\StakingOperation[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\StakingOperation[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\StakingOperation[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\StakingOperation[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\StakingOperation[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation operationsGetStakingOpsAsync
+     *
+     * Get staking ops
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetStakingOpsAsync($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetStakingOps'][0])
+    {
+        return $this->operationsGetStakingOpsAsyncWithHttpInfo($anyof, $baker, $action, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation operationsGetStakingOpsAsyncWithHttpInfo
+     *
+     * Get staking ops
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetStakingOpsAsyncWithHttpInfo($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetStakingOps'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\StakingOperation[]';
+        $request = $this->operationsGetStakingOpsRequest($anyof, $baker, $action, $id, $hash, $counter, $level, $timestamp, $status, $sender, $sort, $offset, $limit, $select, $quote, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'operationsGetStakingOps'
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsQuoteParameter $quote Comma-separated list of ticker symbols to inject historical prices into response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOps'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function operationsGetStakingOpsRequest($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, $sort = null, $offset = null, $limit = null, $select = null, $quote = null, string $contentType = self::contentTypes['operationsGetStakingOps'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if ($limit !== null && $limit > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling OperationsApi.operationsGetStakingOps, must be smaller than or equal to 10000.');
+        }
+        if ($limit !== null && $limit < 0) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling OperationsApi.operationsGetStakingOps, must be bigger than or equal to 0.');
+        }
+        
+
+
+
+        $resourcePath = '/v1/operations/staking';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $anyof,
+            'anyof', // param base name
+            'OneOfAnyOfParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $baker,
+            'baker', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $action,
+            'action', // param base name
+            'OneOfStakingActionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $hash,
+            'hash', // param base name
+            'OneOfOpHashParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $counter,
+            'counter', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'OneOfOperationStatusParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sender,
+            'sender', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $quote,
+            'quote', // param base name
+            'OneOfSymbols', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation operationsGetStakingOpsCount
+     *
+     * Get staking ops count
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return int
+     */
+    public function operationsGetStakingOpsCount($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetStakingOpsCount'][0])
+    {
+        list($response) = $this->operationsGetStakingOpsCountWithHttpInfo($anyof, $baker, $action, $id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation operationsGetStakingOpsCountWithHttpInfo
+     *
+     * Get staking ops count
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of int, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function operationsGetStakingOpsCountWithHttpInfo($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetStakingOpsCount'][0])
+    {
+        $request = $this->operationsGetStakingOpsCountRequest($anyof, $baker, $action, $id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('int' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('int' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'int', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'int';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'int',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation operationsGetStakingOpsCountAsync
+     *
+     * Get staking ops count
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetStakingOpsCountAsync($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetStakingOpsCount'][0])
+    {
+        return $this->operationsGetStakingOpsCountAsyncWithHttpInfo($anyof, $baker, $action, $id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation operationsGetStakingOpsCountAsyncWithHttpInfo
+     *
+     * Get staking ops count
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function operationsGetStakingOpsCountAsyncWithHttpInfo($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetStakingOpsCount'][0])
+    {
+        $returnType = 'int';
+        $request = $this->operationsGetStakingOpsCountRequest($anyof, $baker, $action, $id, $hash, $counter, $level, $timestamp, $status, $sender, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'operationsGetStakingOpsCount'
+     *
+     * @param  BlocksGetAnyofParameter $anyof Filter by any of the specified fields (&#x60;sender&#x60;, or &#x60;baker&#x60;). Example: &#x60;anyof.sender.baker&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;baker&#x60; is equal to the specified value. This parameter is useful when you need to get all operations somehow related to the account in a single request.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $baker Filter by baker address.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetStakingOpsActionParameter $action Filter by staking action (&#x60;stake&#x60;, &#x60;unstake&#x60;, &#x60;finalize&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetBalanceParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  OperationsGetSmartRollupAddMessagesOpsHashParameter $hash Filter by operation hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $counter Filter by operation counter.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $level Filter by the domain level.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filter by timestamp (ISO 8601) of the operation.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsStatusParameter $status Filter by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetDelegateParameter $sender Filter by operation sender address.   Click on the parameter to expand more details. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationsGetStakingOpsCount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function operationsGetStakingOpsCountRequest($anyof = null, $baker = null, $action = null, $id = null, $hash = null, $counter = null, $level = null, $timestamp = null, $status = null, $sender = null, string $contentType = self::contentTypes['operationsGetStakingOpsCount'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/v1/operations/staking/count';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $anyof,
+            'anyof', // param base name
+            'OneOfAnyOfParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $baker,
+            'baker', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $action,
+            'action', // param base name
+            'OneOfStakingActionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -31248,7 +34735,7 @@ class OperationsApi
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetBalanceParameter $id Filters transactions by id. (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $target_code_hash Filters by &#x60;targetCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;targetCodeHash&#x60;. (optional)
@@ -31286,7 +34773,7 @@ class OperationsApi
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetBalanceParameter $id Filters transactions by id. (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $target_code_hash Filters by &#x60;targetCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;targetCodeHash&#x60;. (optional)
@@ -31406,7 +34893,7 @@ class OperationsApi
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetBalanceParameter $id Filters transactions by id. (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $target_code_hash Filters by &#x60;targetCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;targetCodeHash&#x60;. (optional)
@@ -31447,7 +34934,7 @@ class OperationsApi
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetBalanceParameter $id Filters transactions by id. (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $target_code_hash Filters by &#x60;targetCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;targetCodeHash&#x60;. (optional)
@@ -31517,7 +35004,7 @@ class OperationsApi
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetBalanceParameter $id Filters transactions by id. (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetIdParameter $sender_code_hash Filters by &#x60;senderCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $target_code_hash Filters by &#x60;targetCodeHash&#x60;. (optional)
      * @param  AccountsGetIdParameter $code_hash Filters by either &#x60;senderCodeHash&#x60; or &#x60;targetCodeHash&#x60;. (optional)
@@ -31641,7 +35128,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $timestamp,
             'timestamp', // param base name
-            'OneOfDateTimeParameter', // openApiType
+            'OneOfTimestampParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -31831,7 +35318,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $target Filters transactions by target. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;sender&#x60;, &#x60;initiator&#x60;. (optional)
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetOperationsEntrypointParameter $entrypoint Filters transactions by entrypoint called on the target contract. (optional)
      * @param  AccountsGetOperationsParameterParameter $parameter Filters transactions by parameter value. Note, this query parameter supports the following format: &#x60;?parameter{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?parameter.token_id&#x3D;...&#x60; or &#x60;?parameter.sigs.0.ne&#x3D;...&#x60;.             Also, note that &#x60;.value&#x60; part must be omitted in the path, so, for example, filtering by &#x60;parameter.value.foo&#x60; must be specified as &#x60;?parameter.foo&#x3D;...&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters transactions by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -31858,7 +35345,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $target Filters transactions by target. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;sender&#x60;, &#x60;initiator&#x60;. (optional)
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetOperationsEntrypointParameter $entrypoint Filters transactions by entrypoint called on the target contract. (optional)
      * @param  AccountsGetOperationsParameterParameter $parameter Filters transactions by parameter value. Note, this query parameter supports the following format: &#x60;?parameter{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?parameter.token_id&#x3D;...&#x60; or &#x60;?parameter.sigs.0.ne&#x3D;...&#x60;.             Also, note that &#x60;.value&#x60; part must be omitted in the path, so, for example, filtering by &#x60;parameter.value.foo&#x60; must be specified as &#x60;?parameter.foo&#x3D;...&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters transactions by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -31967,7 +35454,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $target Filters transactions by target. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;sender&#x60;, &#x60;initiator&#x60;. (optional)
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetOperationsEntrypointParameter $entrypoint Filters transactions by entrypoint called on the target contract. (optional)
      * @param  AccountsGetOperationsParameterParameter $parameter Filters transactions by parameter value. Note, this query parameter supports the following format: &#x60;?parameter{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?parameter.token_id&#x3D;...&#x60; or &#x60;?parameter.sigs.0.ne&#x3D;...&#x60;.             Also, note that &#x60;.value&#x60; part must be omitted in the path, so, for example, filtering by &#x60;parameter.value.foo&#x60; must be specified as &#x60;?parameter.foo&#x3D;...&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters transactions by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -31997,7 +35484,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $target Filters transactions by target. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;sender&#x60;, &#x60;initiator&#x60;. (optional)
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetOperationsEntrypointParameter $entrypoint Filters transactions by entrypoint called on the target contract. (optional)
      * @param  AccountsGetOperationsParameterParameter $parameter Filters transactions by parameter value. Note, this query parameter supports the following format: &#x60;?parameter{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?parameter.token_id&#x3D;...&#x60; or &#x60;?parameter.sigs.0.ne&#x3D;...&#x60;.             Also, note that &#x60;.value&#x60; part must be omitted in the path, so, for example, filtering by &#x60;parameter.value.foo&#x60; must be specified as &#x60;?parameter.foo&#x3D;...&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters transactions by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -32056,7 +35543,7 @@ class OperationsApi
      * @param  AccountsGetDelegateParameter $target Filters transactions by target. Allowed fields for &#x60;.eqx&#x60; mode: &#x60;sender&#x60;, &#x60;initiator&#x60;. (optional)
      * @param  AccountsGetBalanceParameter $amount Filters transactions by amount (micro tez). (optional)
      * @param  AccountsGetIdParameter $level Filters transactions by level. (optional)
-     * @param  AccountsGetOperationsTimestampParameter $timestamp Filters transactions by timestamp. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters transactions by timestamp. (optional)
      * @param  AccountsGetOperationsEntrypointParameter $entrypoint Filters transactions by entrypoint called on the target contract. (optional)
      * @param  AccountsGetOperationsParameterParameter $parameter Filters transactions by parameter value. Note, this query parameter supports the following format: &#x60;?parameter{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?parameter.token_id&#x3D;...&#x60; or &#x60;?parameter.sigs.0.ne&#x3D;...&#x60;.             Also, note that &#x60;.value&#x60; part must be omitted in the path, so, for example, filtering by &#x60;parameter.value.foo&#x60; must be specified as &#x60;?parameter.foo&#x3D;...&#x60;. (optional)
      * @param  AccountsGetOperationsStatusParameter $status Filters transactions by operation status (&#x60;applied&#x60;, &#x60;failed&#x60;, &#x60;backtracked&#x60;, &#x60;skipped&#x60;). (optional)
@@ -32144,7 +35631,7 @@ class OperationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $timestamp,
             'timestamp', // param base name
-            'OneOfDateTimeParameter', // openApiType
+            'OneOfTimestampParameter', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -32241,6 +35728,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.sender.target&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;target&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $sender Filters by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $target Filters by target. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters by id. (optional)
      * @param  AccountsGetDelegateParameter $ticketer Filters by ticketer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -32257,9 +35745,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\TransferTicketOperation[]
      */
-    public function operationsGetTransferTicketOps($anyof = null, $sender = null, $target = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
+    public function operationsGetTransferTicketOps($anyof = null, $sender = null, $target = null, $id = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
     {
-        list($response) = $this->operationsGetTransferTicketOpsWithHttpInfo($anyof, $sender, $target, $ticketer, $level, $timestamp, $status, $select, $sort, $offset, $limit, $micheline, $quote, $contentType);
+        list($response) = $this->operationsGetTransferTicketOpsWithHttpInfo($anyof, $sender, $target, $id, $ticketer, $level, $timestamp, $status, $select, $sort, $offset, $limit, $micheline, $quote, $contentType);
         return $response;
     }
 
@@ -32271,6 +35759,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.sender.target&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;target&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $sender Filters by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $target Filters by target. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters by id. (optional)
      * @param  AccountsGetDelegateParameter $ticketer Filters by ticketer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -32287,9 +35776,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\TransferTicketOperation[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationsGetTransferTicketOpsWithHttpInfo($anyof = null, $sender = null, $target = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
+    public function operationsGetTransferTicketOpsWithHttpInfo($anyof = null, $sender = null, $target = null, $id = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
     {
-        $request = $this->operationsGetTransferTicketOpsRequest($anyof, $sender, $target, $ticketer, $level, $timestamp, $status, $select, $sort, $offset, $limit, $micheline, $quote, $contentType);
+        $request = $this->operationsGetTransferTicketOpsRequest($anyof, $sender, $target, $id, $ticketer, $level, $timestamp, $status, $select, $sort, $offset, $limit, $micheline, $quote, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -32383,6 +35872,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.sender.target&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;target&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $sender Filters by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $target Filters by target. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters by id. (optional)
      * @param  AccountsGetDelegateParameter $ticketer Filters by ticketer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -32398,9 +35888,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetTransferTicketOpsAsync($anyof = null, $sender = null, $target = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
+    public function operationsGetTransferTicketOpsAsync($anyof = null, $sender = null, $target = null, $id = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
     {
-        return $this->operationsGetTransferTicketOpsAsyncWithHttpInfo($anyof, $sender, $target, $ticketer, $level, $timestamp, $status, $select, $sort, $offset, $limit, $micheline, $quote, $contentType)
+        return $this->operationsGetTransferTicketOpsAsyncWithHttpInfo($anyof, $sender, $target, $id, $ticketer, $level, $timestamp, $status, $select, $sort, $offset, $limit, $micheline, $quote, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -32416,6 +35906,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.sender.target&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;target&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $sender Filters by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $target Filters by target. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters by id. (optional)
      * @param  AccountsGetDelegateParameter $ticketer Filters by ticketer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -32431,10 +35922,10 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationsGetTransferTicketOpsAsyncWithHttpInfo($anyof = null, $sender = null, $target = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
+    public function operationsGetTransferTicketOpsAsyncWithHttpInfo($anyof = null, $sender = null, $target = null, $id = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\TransferTicketOperation[]';
-        $request = $this->operationsGetTransferTicketOpsRequest($anyof, $sender, $target, $ticketer, $level, $timestamp, $status, $select, $sort, $offset, $limit, $micheline, $quote, $contentType);
+        $request = $this->operationsGetTransferTicketOpsRequest($anyof, $sender, $target, $id, $ticketer, $level, $timestamp, $status, $select, $sort, $offset, $limit, $micheline, $quote, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -32478,6 +35969,7 @@ class OperationsApi
      * @param  BlocksGetAnyofParameter $anyof Filters by any of the specified fields. Example: &#x60;anyof.sender.target&#x3D;tz1...&#x60; will return operations where &#x60;sender&#x60; OR &#x60;target&#x60; is equal to the specified value. This parameter is useful when you need to retrieve all operations associated with a specified account. (optional)
      * @param  AccountsGetDelegateParameter $sender Filters by sender. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetDelegateParameter $target Filters by target. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
+     * @param  AccountsGetBalanceParameter $id Filters by id. (optional)
      * @param  AccountsGetDelegateParameter $ticketer Filters by ticketer. Allowed fields for &#x60;.eqx&#x60; mode: none. (optional)
      * @param  AccountsGetIdParameter $level Filters by level. (optional)
      * @param  AccountsGetOperationsTimestampParameter $timestamp Filters by timestamp. (optional)
@@ -32493,8 +35985,9 @@ class OperationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationsGetTransferTicketOpsRequest($anyof = null, $sender = null, $target = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
+    public function operationsGetTransferTicketOpsRequest($anyof = null, $sender = null, $target = null, $id = null, $ticketer = null, $level = null, $timestamp = null, $status = null, $select = null, $sort = null, $offset = null, $limit = 100, $micheline = null, $quote = null, string $contentType = self::contentTypes['operationsGetTransferTicketOps'][0])
     {
+
 
 
 
@@ -32546,6 +36039,15 @@ class OperationsApi
             $target,
             'target', // param base name
             'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt64Parameter', // openApiType
             'form', // style
             true, // explode
             false // required

@@ -13,9 +13,9 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:   - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Mumbainet: `https://api.mumbainet.tzkt.io/` ([view docs](https://api.mumbainet.tzkt.io)) - Nairobinet: `https://api.nairobinet.tzkt.io/` ([view docs](https://api.nairobinet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer.  You can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community  to help developers build more services and dapps on top of Tezos.  TzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service, because you can always clone, build and run it yourself to have full control over all the components.  Feel free to contact us if you have any questions or feature requests. Your feedback is much appreciated!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊  # Get Started  There are two API services provided for public use: - **Free TzKT API** with free anonymous access; - **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.  You can find more details about differences between available tiers [here](https://tzkt.io/api).  ## Free TzKT API  Free-tier TzKT API is the best way to get started and explore available Tezos data and API functionality. It doesn't require authorization and is free for everyone and for both commercial and non-commercial use.  > #### Note: attribution required If you use free-tier TzKT API, you **must** mention it on your website or application by placing the label \"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Parisnet: `https://api.parisnet.tzkt.io/` ([view docs](https://api.parisnet.tzkt.io))  ### Sending Requests  To send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network (for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint (for example, chain's head: `/v1/head`), that's pretty much it:   ```bash curl https://api.tzkt.io/v1/head ```  Read through this documentation to explore available endpoints, query parameters (note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.) and response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits.  If you exceed the limit, the API will respond with `HTTP 429` status code.  ## TzKT Pro  TzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA. TzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io)) - Testnets: *let us know if you need TzKT Pro for testnets*  ### Authorization  To access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription. This can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.  Note that you can have multiple API keys within a single subscription.  Keep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories. If your key was compromised, just let us know and we will issue a new one.  Also note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted, but query string is not, so the key can be unintentionally exposed to third parties.  ### Sending Requests  Sending a request with the API key passed as a query string parameter:  ```bash curl https://pro.tzkt.io/v1/head?apikey={your_key} ```  Sending a request with the API key passed via an HTTP header:  ```bash curl https://pro.tzkt.io/v1/head \\     -H 'apikey: {your_key}' ```  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.  Also, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests and the time remaining (in seconds) until the quota is reset. Here's an example:  ``` RateLimit-Limit: 50 RateLimit-Remaining: 49 RateLimit-Reset: 1 ```  It also sends general information about your rate limits per second and per day:  ``` X-RateLimit-Limit-Second: 50 X-RateLimit-Remaining-Second: 49 X-RateLimit-Limit-Day: 3000000 X-RateLimit-Remaining-Day: 2994953 ```  If you exceed the limit, the API will respond with `HTTP 429` status code.
  *
- * The version of the OpenAPI document: 1.12.1
+ * The version of the OpenAPI document: 1.14.4
  * Contact: hello@bakingbad.dev
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.2.1
@@ -66,8 +66,18 @@ class Delegate extends Account
         'balance' => 'int',
         'rollup_bonds' => 'int',
         'smart_rollup_bonds' => 'int',
-        'frozen_deposit' => 'int',
+        'staked_balance' => 'int',
+        'unstaked_balance' => 'int',
+        'unstaked_baker' => 'OneOfAlias',
+        'external_staked_balance' => 'int',
+        'external_unstaked_balance' => 'int',
+        'rounding_error' => 'int',
+        'total_staked_balance' => 'int',
+        'issued_pseudotokens' => 'string',
+        'stakers_count' => 'int',
         'frozen_deposit_limit' => 'int',
+        'limit_of_staking_over_baking' => 'int',
+        'edge_of_baking_over_staking' => 'int',
         'counter' => 'int',
         'activation_level' => 'int',
         'activation_time' => '\DateTime',
@@ -81,6 +91,9 @@ class Delegate extends Account
         'active_tokens_count' => 'int',
         'token_balances_count' => 'int',
         'token_transfers_count' => 'int',
+        'active_tickets_count' => 'int',
+        'ticket_balances_count' => 'int',
+        'ticket_transfers_count' => 'int',
         'num_delegators' => 'int',
         'num_blocks' => 'int',
         'num_endorsements' => 'int',
@@ -123,16 +136,23 @@ class Delegate extends Account
         'smart_rollup_refute_count' => 'int',
         'refutation_games_count' => 'int',
         'active_refutation_games_count' => 'int',
+        'staking_ops_count' => 'int',
+        'autostaking_ops_count' => 'int',
+        'staking_updates_count' => 'int',
+        'set_delegate_parameters_ops_count' => 'int',
+        'dal_publish_commitment_ops_count' => 'int',
         'first_activity' => 'int',
         'first_activity_time' => '\DateTime',
         'last_activity' => 'int',
         'last_activity_time' => '\DateTime',
         'extras' => 'mixed',
         'software' => 'OneOfSoftwareAlias',
+        'lost_balance' => 'int',
+        'frozen_deposit' => 'int',
         'frozen_deposits' => 'int',
         'frozen_rewards' => 'int',
         'frozen_fees' => 'int',
-        'metadata' => 'OneOfObject'
+        'metadata' => 'mixed'
     ];
 
     /**
@@ -153,8 +173,18 @@ class Delegate extends Account
         'balance' => 'int64',
         'rollup_bonds' => 'int64',
         'smart_rollup_bonds' => 'int64',
-        'frozen_deposit' => 'int64',
+        'staked_balance' => 'int64',
+        'unstaked_balance' => 'int64',
+        'unstaked_baker' => null,
+        'external_staked_balance' => 'int64',
+        'external_unstaked_balance' => 'int64',
+        'rounding_error' => 'int64',
+        'total_staked_balance' => 'int64',
+        'issued_pseudotokens' => null,
+        'stakers_count' => 'int32',
         'frozen_deposit_limit' => 'int64',
+        'limit_of_staking_over_baking' => 'int64',
+        'edge_of_baking_over_staking' => 'int64',
         'counter' => 'int32',
         'activation_level' => 'int32',
         'activation_time' => 'date-time',
@@ -168,6 +198,9 @@ class Delegate extends Account
         'active_tokens_count' => 'int32',
         'token_balances_count' => 'int32',
         'token_transfers_count' => 'int32',
+        'active_tickets_count' => 'int32',
+        'ticket_balances_count' => 'int32',
+        'ticket_transfers_count' => 'int32',
         'num_delegators' => 'int32',
         'num_blocks' => 'int32',
         'num_endorsements' => 'int32',
@@ -210,12 +243,19 @@ class Delegate extends Account
         'smart_rollup_refute_count' => 'int32',
         'refutation_games_count' => 'int32',
         'active_refutation_games_count' => 'int32',
+        'staking_ops_count' => 'int32',
+        'autostaking_ops_count' => 'int32',
+        'staking_updates_count' => 'int32',
+        'set_delegate_parameters_ops_count' => 'int32',
+        'dal_publish_commitment_ops_count' => 'int32',
         'first_activity' => 'int32',
         'first_activity_time' => 'date-time',
         'last_activity' => 'int32',
         'last_activity_time' => 'date-time',
         'extras' => null,
         'software' => null,
+        'lost_balance' => 'int64',
+        'frozen_deposit' => 'int64',
         'frozen_deposits' => 'int64',
         'frozen_rewards' => 'int64',
         'frozen_fees' => 'int64',
@@ -238,8 +278,18 @@ class Delegate extends Account
 		'balance' => false,
 		'rollup_bonds' => false,
 		'smart_rollup_bonds' => false,
-		'frozen_deposit' => false,
+		'staked_balance' => false,
+		'unstaked_balance' => false,
+		'unstaked_baker' => true,
+		'external_staked_balance' => false,
+		'external_unstaked_balance' => false,
+		'rounding_error' => false,
+		'total_staked_balance' => false,
+		'issued_pseudotokens' => true,
+		'stakers_count' => false,
 		'frozen_deposit_limit' => true,
+		'limit_of_staking_over_baking' => true,
+		'edge_of_baking_over_staking' => true,
 		'counter' => false,
 		'activation_level' => false,
 		'activation_time' => false,
@@ -253,6 +303,9 @@ class Delegate extends Account
 		'active_tokens_count' => false,
 		'token_balances_count' => false,
 		'token_transfers_count' => false,
+		'active_tickets_count' => false,
+		'ticket_balances_count' => false,
+		'ticket_transfers_count' => false,
 		'num_delegators' => false,
 		'num_blocks' => false,
 		'num_endorsements' => false,
@@ -295,12 +348,19 @@ class Delegate extends Account
 		'smart_rollup_refute_count' => false,
 		'refutation_games_count' => false,
 		'active_refutation_games_count' => false,
+		'staking_ops_count' => false,
+		'autostaking_ops_count' => false,
+		'staking_updates_count' => false,
+		'set_delegate_parameters_ops_count' => false,
+		'dal_publish_commitment_ops_count' => false,
 		'first_activity' => false,
 		'first_activity_time' => false,
 		'last_activity' => false,
 		'last_activity_time' => false,
 		'extras' => true,
 		'software' => true,
+		'lost_balance' => false,
+		'frozen_deposit' => false,
 		'frozen_deposits' => false,
 		'frozen_rewards' => false,
 		'frozen_fees' => false,
@@ -403,8 +463,18 @@ class Delegate extends Account
         'balance' => 'balance',
         'rollup_bonds' => 'rollupBonds',
         'smart_rollup_bonds' => 'smartRollupBonds',
-        'frozen_deposit' => 'frozenDeposit',
+        'staked_balance' => 'stakedBalance',
+        'unstaked_balance' => 'unstakedBalance',
+        'unstaked_baker' => 'unstakedBaker',
+        'external_staked_balance' => 'externalStakedBalance',
+        'external_unstaked_balance' => 'externalUnstakedBalance',
+        'rounding_error' => 'roundingError',
+        'total_staked_balance' => 'totalStakedBalance',
+        'issued_pseudotokens' => 'issuedPseudotokens',
+        'stakers_count' => 'stakersCount',
         'frozen_deposit_limit' => 'frozenDepositLimit',
+        'limit_of_staking_over_baking' => 'limitOfStakingOverBaking',
+        'edge_of_baking_over_staking' => 'edgeOfBakingOverStaking',
         'counter' => 'counter',
         'activation_level' => 'activationLevel',
         'activation_time' => 'activationTime',
@@ -418,6 +488,9 @@ class Delegate extends Account
         'active_tokens_count' => 'activeTokensCount',
         'token_balances_count' => 'tokenBalancesCount',
         'token_transfers_count' => 'tokenTransfersCount',
+        'active_tickets_count' => 'activeTicketsCount',
+        'ticket_balances_count' => 'ticketBalancesCount',
+        'ticket_transfers_count' => 'ticketTransfersCount',
         'num_delegators' => 'numDelegators',
         'num_blocks' => 'numBlocks',
         'num_endorsements' => 'numEndorsements',
@@ -460,12 +533,19 @@ class Delegate extends Account
         'smart_rollup_refute_count' => 'smartRollupRefuteCount',
         'refutation_games_count' => 'refutationGamesCount',
         'active_refutation_games_count' => 'activeRefutationGamesCount',
+        'staking_ops_count' => 'stakingOpsCount',
+        'autostaking_ops_count' => 'autostakingOpsCount',
+        'staking_updates_count' => 'stakingUpdatesCount',
+        'set_delegate_parameters_ops_count' => 'setDelegateParametersOpsCount',
+        'dal_publish_commitment_ops_count' => 'dalPublishCommitmentOpsCount',
         'first_activity' => 'firstActivity',
         'first_activity_time' => 'firstActivityTime',
         'last_activity' => 'lastActivity',
         'last_activity_time' => 'lastActivityTime',
         'extras' => 'extras',
         'software' => 'software',
+        'lost_balance' => 'lostBalance',
+        'frozen_deposit' => 'frozenDeposit',
         'frozen_deposits' => 'frozenDeposits',
         'frozen_rewards' => 'frozenRewards',
         'frozen_fees' => 'frozenFees',
@@ -488,8 +568,18 @@ class Delegate extends Account
         'balance' => 'setBalance',
         'rollup_bonds' => 'setRollupBonds',
         'smart_rollup_bonds' => 'setSmartRollupBonds',
-        'frozen_deposit' => 'setFrozenDeposit',
+        'staked_balance' => 'setStakedBalance',
+        'unstaked_balance' => 'setUnstakedBalance',
+        'unstaked_baker' => 'setUnstakedBaker',
+        'external_staked_balance' => 'setExternalStakedBalance',
+        'external_unstaked_balance' => 'setExternalUnstakedBalance',
+        'rounding_error' => 'setRoundingError',
+        'total_staked_balance' => 'setTotalStakedBalance',
+        'issued_pseudotokens' => 'setIssuedPseudotokens',
+        'stakers_count' => 'setStakersCount',
         'frozen_deposit_limit' => 'setFrozenDepositLimit',
+        'limit_of_staking_over_baking' => 'setLimitOfStakingOverBaking',
+        'edge_of_baking_over_staking' => 'setEdgeOfBakingOverStaking',
         'counter' => 'setCounter',
         'activation_level' => 'setActivationLevel',
         'activation_time' => 'setActivationTime',
@@ -503,6 +593,9 @@ class Delegate extends Account
         'active_tokens_count' => 'setActiveTokensCount',
         'token_balances_count' => 'setTokenBalancesCount',
         'token_transfers_count' => 'setTokenTransfersCount',
+        'active_tickets_count' => 'setActiveTicketsCount',
+        'ticket_balances_count' => 'setTicketBalancesCount',
+        'ticket_transfers_count' => 'setTicketTransfersCount',
         'num_delegators' => 'setNumDelegators',
         'num_blocks' => 'setNumBlocks',
         'num_endorsements' => 'setNumEndorsements',
@@ -545,12 +638,19 @@ class Delegate extends Account
         'smart_rollup_refute_count' => 'setSmartRollupRefuteCount',
         'refutation_games_count' => 'setRefutationGamesCount',
         'active_refutation_games_count' => 'setActiveRefutationGamesCount',
+        'staking_ops_count' => 'setStakingOpsCount',
+        'autostaking_ops_count' => 'setAutostakingOpsCount',
+        'staking_updates_count' => 'setStakingUpdatesCount',
+        'set_delegate_parameters_ops_count' => 'setSetDelegateParametersOpsCount',
+        'dal_publish_commitment_ops_count' => 'setDalPublishCommitmentOpsCount',
         'first_activity' => 'setFirstActivity',
         'first_activity_time' => 'setFirstActivityTime',
         'last_activity' => 'setLastActivity',
         'last_activity_time' => 'setLastActivityTime',
         'extras' => 'setExtras',
         'software' => 'setSoftware',
+        'lost_balance' => 'setLostBalance',
+        'frozen_deposit' => 'setFrozenDeposit',
         'frozen_deposits' => 'setFrozenDeposits',
         'frozen_rewards' => 'setFrozenRewards',
         'frozen_fees' => 'setFrozenFees',
@@ -573,8 +673,18 @@ class Delegate extends Account
         'balance' => 'getBalance',
         'rollup_bonds' => 'getRollupBonds',
         'smart_rollup_bonds' => 'getSmartRollupBonds',
-        'frozen_deposit' => 'getFrozenDeposit',
+        'staked_balance' => 'getStakedBalance',
+        'unstaked_balance' => 'getUnstakedBalance',
+        'unstaked_baker' => 'getUnstakedBaker',
+        'external_staked_balance' => 'getExternalStakedBalance',
+        'external_unstaked_balance' => 'getExternalUnstakedBalance',
+        'rounding_error' => 'getRoundingError',
+        'total_staked_balance' => 'getTotalStakedBalance',
+        'issued_pseudotokens' => 'getIssuedPseudotokens',
+        'stakers_count' => 'getStakersCount',
         'frozen_deposit_limit' => 'getFrozenDepositLimit',
+        'limit_of_staking_over_baking' => 'getLimitOfStakingOverBaking',
+        'edge_of_baking_over_staking' => 'getEdgeOfBakingOverStaking',
         'counter' => 'getCounter',
         'activation_level' => 'getActivationLevel',
         'activation_time' => 'getActivationTime',
@@ -588,6 +698,9 @@ class Delegate extends Account
         'active_tokens_count' => 'getActiveTokensCount',
         'token_balances_count' => 'getTokenBalancesCount',
         'token_transfers_count' => 'getTokenTransfersCount',
+        'active_tickets_count' => 'getActiveTicketsCount',
+        'ticket_balances_count' => 'getTicketBalancesCount',
+        'ticket_transfers_count' => 'getTicketTransfersCount',
         'num_delegators' => 'getNumDelegators',
         'num_blocks' => 'getNumBlocks',
         'num_endorsements' => 'getNumEndorsements',
@@ -630,12 +743,19 @@ class Delegate extends Account
         'smart_rollup_refute_count' => 'getSmartRollupRefuteCount',
         'refutation_games_count' => 'getRefutationGamesCount',
         'active_refutation_games_count' => 'getActiveRefutationGamesCount',
+        'staking_ops_count' => 'getStakingOpsCount',
+        'autostaking_ops_count' => 'getAutostakingOpsCount',
+        'staking_updates_count' => 'getStakingUpdatesCount',
+        'set_delegate_parameters_ops_count' => 'getSetDelegateParametersOpsCount',
+        'dal_publish_commitment_ops_count' => 'getDalPublishCommitmentOpsCount',
         'first_activity' => 'getFirstActivity',
         'first_activity_time' => 'getFirstActivityTime',
         'last_activity' => 'getLastActivity',
         'last_activity_time' => 'getLastActivityTime',
         'extras' => 'getExtras',
         'software' => 'getSoftware',
+        'lost_balance' => 'getLostBalance',
+        'frozen_deposit' => 'getFrozenDeposit',
         'frozen_deposits' => 'getFrozenDeposits',
         'frozen_rewards' => 'getFrozenRewards',
         'frozen_fees' => 'getFrozenFees',
@@ -705,8 +825,18 @@ class Delegate extends Account
         $this->setIfExists('balance', $data ?? [], null);
         $this->setIfExists('rollup_bonds', $data ?? [], null);
         $this->setIfExists('smart_rollup_bonds', $data ?? [], null);
-        $this->setIfExists('frozen_deposit', $data ?? [], null);
+        $this->setIfExists('staked_balance', $data ?? [], null);
+        $this->setIfExists('unstaked_balance', $data ?? [], null);
+        $this->setIfExists('unstaked_baker', $data ?? [], null);
+        $this->setIfExists('external_staked_balance', $data ?? [], null);
+        $this->setIfExists('external_unstaked_balance', $data ?? [], null);
+        $this->setIfExists('rounding_error', $data ?? [], null);
+        $this->setIfExists('total_staked_balance', $data ?? [], null);
+        $this->setIfExists('issued_pseudotokens', $data ?? [], null);
+        $this->setIfExists('stakers_count', $data ?? [], null);
         $this->setIfExists('frozen_deposit_limit', $data ?? [], null);
+        $this->setIfExists('limit_of_staking_over_baking', $data ?? [], null);
+        $this->setIfExists('edge_of_baking_over_staking', $data ?? [], null);
         $this->setIfExists('counter', $data ?? [], null);
         $this->setIfExists('activation_level', $data ?? [], null);
         $this->setIfExists('activation_time', $data ?? [], null);
@@ -720,6 +850,9 @@ class Delegate extends Account
         $this->setIfExists('active_tokens_count', $data ?? [], null);
         $this->setIfExists('token_balances_count', $data ?? [], null);
         $this->setIfExists('token_transfers_count', $data ?? [], null);
+        $this->setIfExists('active_tickets_count', $data ?? [], null);
+        $this->setIfExists('ticket_balances_count', $data ?? [], null);
+        $this->setIfExists('ticket_transfers_count', $data ?? [], null);
         $this->setIfExists('num_delegators', $data ?? [], null);
         $this->setIfExists('num_blocks', $data ?? [], null);
         $this->setIfExists('num_endorsements', $data ?? [], null);
@@ -762,12 +895,19 @@ class Delegate extends Account
         $this->setIfExists('smart_rollup_refute_count', $data ?? [], null);
         $this->setIfExists('refutation_games_count', $data ?? [], null);
         $this->setIfExists('active_refutation_games_count', $data ?? [], null);
+        $this->setIfExists('staking_ops_count', $data ?? [], null);
+        $this->setIfExists('autostaking_ops_count', $data ?? [], null);
+        $this->setIfExists('staking_updates_count', $data ?? [], null);
+        $this->setIfExists('set_delegate_parameters_ops_count', $data ?? [], null);
+        $this->setIfExists('dal_publish_commitment_ops_count', $data ?? [], null);
         $this->setIfExists('first_activity', $data ?? [], null);
         $this->setIfExists('first_activity_time', $data ?? [], null);
         $this->setIfExists('last_activity', $data ?? [], null);
         $this->setIfExists('last_activity_time', $data ?? [], null);
         $this->setIfExists('extras', $data ?? [], null);
         $this->setIfExists('software', $data ?? [], null);
+        $this->setIfExists('lost_balance', $data ?? [], null);
+        $this->setIfExists('frozen_deposit', $data ?? [], null);
         $this->setIfExists('frozen_deposits', $data ?? [], null);
         $this->setIfExists('frozen_rewards', $data ?? [], null);
         $this->setIfExists('frozen_fees', $data ?? [], null);
@@ -1135,30 +1275,276 @@ class Delegate extends Account
     }
 
     /**
-     * Gets frozen_deposit
+     * Gets staked_balance
      *
      * @return int|null
      */
-    public function getFrozenDeposit()
+    public function getStakedBalance()
     {
-        return $this->container['frozen_deposit'];
+        return $this->container['staked_balance'];
     }
 
     /**
-     * Sets frozen_deposit
+     * Sets staked_balance
      *
-     * @param int|null $frozen_deposit Amount of security deposit, currently locked for baked (produced) blocks and (or) given endorsements (micro tez)
+     * @param int|null $staked_balance Amount staked from the own balance (micro tez). Like delegated amount, except for it is frozen and can be slashed.
      *
      * @return self
      */
-    public function setFrozenDeposit($frozen_deposit)
+    public function setStakedBalance($staked_balance)
     {
 
-        if (is_null($frozen_deposit)) {
-            throw new \InvalidArgumentException('non-nullable frozen_deposit cannot be null');
+        if (is_null($staked_balance)) {
+            throw new \InvalidArgumentException('non-nullable staked_balance cannot be null');
         }
 
-        $this->container['frozen_deposit'] = $frozen_deposit;
+        $this->container['staked_balance'] = $staked_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets unstaked_balance
+     *
+     * @return int|null
+     */
+    public function getUnstakedBalance()
+    {
+        return $this->container['unstaked_balance'];
+    }
+
+    /**
+     * Sets unstaked_balance
+     *
+     * @param int|null $unstaked_balance Amount that was unstaked, but not yet finalized (i.e. it is still frozen) (micro tez).
+     *
+     * @return self
+     */
+    public function setUnstakedBalance($unstaked_balance)
+    {
+
+        if (is_null($unstaked_balance)) {
+            throw new \InvalidArgumentException('non-nullable unstaked_balance cannot be null');
+        }
+
+        $this->container['unstaked_balance'] = $unstaked_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets unstaked_baker
+     *
+     * @return OneOfAlias|null
+     */
+    public function getUnstakedBaker()
+    {
+        return $this->container['unstaked_baker'];
+    }
+
+    /**
+     * Sets unstaked_baker
+     *
+     * @param OneOfAlias|null $unstaked_baker Information about the baker, for which there are pending unstake requests.
+     *
+     * @return self
+     */
+    public function setUnstakedBaker($unstaked_baker)
+    {
+
+        if (is_null($unstaked_baker)) {
+            array_push($this->openAPINullablesSetToNull, 'unstaked_baker');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('unstaked_baker', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['unstaked_baker'] = $unstaked_baker;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_staked_balance
+     *
+     * @return int|null
+     */
+    public function getExternalStakedBalance()
+    {
+        return $this->container['external_staked_balance'];
+    }
+
+    /**
+     * Sets external_staked_balance
+     *
+     * @param int|null $external_staked_balance Amount staked from external stakers (micro tez). Like delegated amount, except for it is frozen and can be slashed.
+     *
+     * @return self
+     */
+    public function setExternalStakedBalance($external_staked_balance)
+    {
+
+        if (is_null($external_staked_balance)) {
+            throw new \InvalidArgumentException('non-nullable external_staked_balance cannot be null');
+        }
+
+        $this->container['external_staked_balance'] = $external_staked_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_unstaked_balance
+     *
+     * @return int|null
+     */
+    public function getExternalUnstakedBalance()
+    {
+        return $this->container['external_unstaked_balance'];
+    }
+
+    /**
+     * Sets external_unstaked_balance
+     *
+     * @param int|null $external_unstaked_balance Amount that was unstaked by external stakers, but not yet finalized (i.e. it is still frozen) (micro tez).
+     *
+     * @return self
+     */
+    public function setExternalUnstakedBalance($external_unstaked_balance)
+    {
+
+        if (is_null($external_unstaked_balance)) {
+            throw new \InvalidArgumentException('non-nullable external_unstaked_balance cannot be null');
+        }
+
+        $this->container['external_unstaked_balance'] = $external_unstaked_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets rounding_error
+     *
+     * @return int|null
+     */
+    public function getRoundingError()
+    {
+        return $this->container['rounding_error'];
+    }
+
+    /**
+     * Sets rounding_error
+     *
+     * @param int|null $rounding_error Amount that was lost due to inconsistend rounding introduced in Oxford (micro tez).
+     *
+     * @return self
+     */
+    public function setRoundingError($rounding_error)
+    {
+
+        if (is_null($rounding_error)) {
+            throw new \InvalidArgumentException('non-nullable rounding_error cannot be null');
+        }
+
+        $this->container['rounding_error'] = $rounding_error;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_staked_balance
+     *
+     * @return int|null
+     */
+    public function getTotalStakedBalance()
+    {
+        return $this->container['total_staked_balance'];
+    }
+
+    /**
+     * Sets total_staked_balance
+     *
+     * @param int|null $total_staked_balance Total staked balance, which is `stakedBalance + externalStakedBalance`.
+     *
+     * @return self
+     */
+    public function setTotalStakedBalance($total_staked_balance)
+    {
+
+        if (is_null($total_staked_balance)) {
+            throw new \InvalidArgumentException('non-nullable total_staked_balance cannot be null');
+        }
+
+        $this->container['total_staked_balance'] = $total_staked_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets issued_pseudotokens
+     *
+     * @return string|null
+     */
+    public function getIssuedPseudotokens()
+    {
+        return $this->container['issued_pseudotokens'];
+    }
+
+    /**
+     * Sets issued_pseudotokens
+     *
+     * @param string|null $issued_pseudotokens Total amount of issued \"pseudo-tokens\". These pseudotokens are used for unstaking.
+     *
+     * @return self
+     */
+    public function setIssuedPseudotokens($issued_pseudotokens)
+    {
+
+        if (is_null($issued_pseudotokens)) {
+            array_push($this->openAPINullablesSetToNull, 'issued_pseudotokens');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('issued_pseudotokens', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['issued_pseudotokens'] = $issued_pseudotokens;
+
+        return $this;
+    }
+
+    /**
+     * Gets stakers_count
+     *
+     * @return int|null
+     */
+    public function getStakersCount()
+    {
+        return $this->container['stakers_count'];
+    }
+
+    /**
+     * Sets stakers_count
+     *
+     * @param int|null $stakers_count Number of external stakers.
+     *
+     * @return self
+     */
+    public function setStakersCount($stakers_count)
+    {
+
+        if (is_null($stakers_count)) {
+            throw new \InvalidArgumentException('non-nullable stakers_count cannot be null');
+        }
+
+        $this->container['stakers_count'] = $stakers_count;
 
         return $this;
     }
@@ -1195,6 +1581,78 @@ class Delegate extends Account
         }
 
         $this->container['frozen_deposit_limit'] = $frozen_deposit_limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets limit_of_staking_over_baking
+     *
+     * @return int|null
+     */
+    public function getLimitOfStakingOverBaking()
+    {
+        return $this->container['limit_of_staking_over_baking'];
+    }
+
+    /**
+     * Sets limit_of_staking_over_baking
+     *
+     * @param int|null $limit_of_staking_over_baking This parameter determines the maximum portion (millionth) of external stake by stakers over the baker's own staked funds.
+     *
+     * @return self
+     */
+    public function setLimitOfStakingOverBaking($limit_of_staking_over_baking)
+    {
+
+        if (is_null($limit_of_staking_over_baking)) {
+            array_push($this->openAPINullablesSetToNull, 'limit_of_staking_over_baking');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('limit_of_staking_over_baking', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['limit_of_staking_over_baking'] = $limit_of_staking_over_baking;
+
+        return $this;
+    }
+
+    /**
+     * Gets edge_of_baking_over_staking
+     *
+     * @return int|null
+     */
+    public function getEdgeOfBakingOverStaking()
+    {
+        return $this->container['edge_of_baking_over_staking'];
+    }
+
+    /**
+     * Sets edge_of_baking_over_staking
+     *
+     * @param int|null $edge_of_baking_over_staking This parameter determines the fraction (billionth) of the rewards that accrue to the baker's liquid spendable balance — the remainder accrues to frozen stakes.
+     *
+     * @return self
+     */
+    public function setEdgeOfBakingOverStaking($edge_of_baking_over_staking)
+    {
+
+        if (is_null($edge_of_baking_over_staking)) {
+            array_push($this->openAPINullablesSetToNull, 'edge_of_baking_over_staking');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('edge_of_baking_over_staking', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['edge_of_baking_over_staking'] = $edge_of_baking_over_staking;
 
         return $this;
     }
@@ -1586,6 +2044,93 @@ class Delegate extends Account
         }
 
         $this->container['token_transfers_count'] = $token_transfers_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets active_tickets_count
+     *
+     * @return int|null
+     */
+    public function getActiveTicketsCount()
+    {
+        return $this->container['active_tickets_count'];
+    }
+
+    /**
+     * Sets active_tickets_count
+     *
+     * @param int|null $active_tickets_count Number of tickets the account owns.
+     *
+     * @return self
+     */
+    public function setActiveTicketsCount($active_tickets_count)
+    {
+
+        if (is_null($active_tickets_count)) {
+            throw new \InvalidArgumentException('non-nullable active_tickets_count cannot be null');
+        }
+
+        $this->container['active_tickets_count'] = $active_tickets_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets ticket_balances_count
+     *
+     * @return int|null
+     */
+    public function getTicketBalancesCount()
+    {
+        return $this->container['ticket_balances_count'];
+    }
+
+    /**
+     * Sets ticket_balances_count
+     *
+     * @param int|null $ticket_balances_count Number of tickets the account ever owned.
+     *
+     * @return self
+     */
+    public function setTicketBalancesCount($ticket_balances_count)
+    {
+
+        if (is_null($ticket_balances_count)) {
+            throw new \InvalidArgumentException('non-nullable ticket_balances_count cannot be null');
+        }
+
+        $this->container['ticket_balances_count'] = $ticket_balances_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets ticket_transfers_count
+     *
+     * @return int|null
+     */
+    public function getTicketTransfersCount()
+    {
+        return $this->container['ticket_transfers_count'];
+    }
+
+    /**
+     * Sets ticket_transfers_count
+     *
+     * @param int|null $ticket_transfers_count Number of ticket transfers from/to the account.
+     *
+     * @return self
+     */
+    public function setTicketTransfersCount($ticket_transfers_count)
+    {
+
+        if (is_null($ticket_transfers_count)) {
+            throw new \InvalidArgumentException('non-nullable ticket_transfers_count cannot be null');
+        }
+
+        $this->container['ticket_transfers_count'] = $ticket_transfers_count;
 
         return $this;
     }
@@ -2809,6 +3354,151 @@ class Delegate extends Account
     }
 
     /**
+     * Gets staking_ops_count
+     *
+     * @return int|null
+     */
+    public function getStakingOpsCount()
+    {
+        return $this->container['staking_ops_count'];
+    }
+
+    /**
+     * Sets staking_ops_count
+     *
+     * @param int|null $staking_ops_count Number of staking operations related to the account
+     *
+     * @return self
+     */
+    public function setStakingOpsCount($staking_ops_count)
+    {
+
+        if (is_null($staking_ops_count)) {
+            throw new \InvalidArgumentException('non-nullable staking_ops_count cannot be null');
+        }
+
+        $this->container['staking_ops_count'] = $staking_ops_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets autostaking_ops_count
+     *
+     * @return int|null
+     */
+    public function getAutostakingOpsCount()
+    {
+        return $this->container['autostaking_ops_count'];
+    }
+
+    /**
+     * Sets autostaking_ops_count
+     *
+     * @param int|null $autostaking_ops_count Number of autostaking operations related to the account
+     *
+     * @return self
+     */
+    public function setAutostakingOpsCount($autostaking_ops_count)
+    {
+
+        if (is_null($autostaking_ops_count)) {
+            throw new \InvalidArgumentException('non-nullable autostaking_ops_count cannot be null');
+        }
+
+        $this->container['autostaking_ops_count'] = $autostaking_ops_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets staking_updates_count
+     *
+     * @return int|null
+     */
+    public function getStakingUpdatesCount()
+    {
+        return $this->container['staking_updates_count'];
+    }
+
+    /**
+     * Sets staking_updates_count
+     *
+     * @param int|null $staking_updates_count Number of staking updates related to the account
+     *
+     * @return self
+     */
+    public function setStakingUpdatesCount($staking_updates_count)
+    {
+
+        if (is_null($staking_updates_count)) {
+            throw new \InvalidArgumentException('non-nullable staking_updates_count cannot be null');
+        }
+
+        $this->container['staking_updates_count'] = $staking_updates_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets set_delegate_parameters_ops_count
+     *
+     * @return int|null
+     */
+    public function getSetDelegateParametersOpsCount()
+    {
+        return $this->container['set_delegate_parameters_ops_count'];
+    }
+
+    /**
+     * Sets set_delegate_parameters_ops_count
+     *
+     * @param int|null $set_delegate_parameters_ops_count Number of set delegate parameters operations related to the account
+     *
+     * @return self
+     */
+    public function setSetDelegateParametersOpsCount($set_delegate_parameters_ops_count)
+    {
+
+        if (is_null($set_delegate_parameters_ops_count)) {
+            throw new \InvalidArgumentException('non-nullable set_delegate_parameters_ops_count cannot be null');
+        }
+
+        $this->container['set_delegate_parameters_ops_count'] = $set_delegate_parameters_ops_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets dal_publish_commitment_ops_count
+     *
+     * @return int|null
+     */
+    public function getDalPublishCommitmentOpsCount()
+    {
+        return $this->container['dal_publish_commitment_ops_count'];
+    }
+
+    /**
+     * Sets dal_publish_commitment_ops_count
+     *
+     * @param int|null $dal_publish_commitment_ops_count Number of DAL publish commitment operations related to the account
+     *
+     * @return self
+     */
+    public function setDalPublishCommitmentOpsCount($dal_publish_commitment_ops_count)
+    {
+
+        if (is_null($dal_publish_commitment_ops_count)) {
+            throw new \InvalidArgumentException('non-nullable dal_publish_commitment_ops_count cannot be null');
+        }
+
+        $this->container['dal_publish_commitment_ops_count'] = $dal_publish_commitment_ops_count;
+
+        return $this;
+    }
+
+    /**
      * Gets first_activity
      *
      * @return int|null
@@ -2997,6 +3687,64 @@ class Delegate extends Account
     }
 
     /**
+     * Gets lost_balance
+     *
+     * @return int|null
+     */
+    public function getLostBalance()
+    {
+        return $this->container['lost_balance'];
+    }
+
+    /**
+     * Sets lost_balance
+     *
+     * @param int|null $lost_balance [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setLostBalance($lost_balance)
+    {
+
+        if (is_null($lost_balance)) {
+            throw new \InvalidArgumentException('non-nullable lost_balance cannot be null');
+        }
+
+        $this->container['lost_balance'] = $lost_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets frozen_deposit
+     *
+     * @return int|null
+     */
+    public function getFrozenDeposit()
+    {
+        return $this->container['frozen_deposit'];
+    }
+
+    /**
+     * Sets frozen_deposit
+     *
+     * @param int|null $frozen_deposit [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setFrozenDeposit($frozen_deposit)
+    {
+
+        if (is_null($frozen_deposit)) {
+            throw new \InvalidArgumentException('non-nullable frozen_deposit cannot be null');
+        }
+
+        $this->container['frozen_deposit'] = $frozen_deposit;
+
+        return $this;
+    }
+
+    /**
      * Gets frozen_deposits
      *
      * @return int|null
@@ -3086,7 +3834,7 @@ class Delegate extends Account
     /**
      * Gets metadata
      *
-     * @return OneOfObject|null
+     * @return mixed|null
      */
     public function getMetadata()
     {
@@ -3096,7 +3844,7 @@ class Delegate extends Account
     /**
      * Sets metadata
      *
-     * @param OneOfObject|null $metadata [DEPRECATED]
+     * @param mixed|null $metadata [DEPRECATED]
      *
      * @return self
      */

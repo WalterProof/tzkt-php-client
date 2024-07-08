@@ -13,9 +13,9 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:   - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Mumbainet: `https://api.mumbainet.tzkt.io/` ([view docs](https://api.mumbainet.tzkt.io)) - Nairobinet: `https://api.nairobinet.tzkt.io/` ([view docs](https://api.nairobinet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer.  You can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community  to help developers build more services and dapps on top of Tezos.  TzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service, because you can always clone, build and run it yourself to have full control over all the components.  Feel free to contact us if you have any questions or feature requests. Your feedback is much appreciated!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊  # Get Started  There are two API services provided for public use: - **Free TzKT API** with free anonymous access; - **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.  You can find more details about differences between available tiers [here](https://tzkt.io/api).  ## Free TzKT API  Free-tier TzKT API is the best way to get started and explore available Tezos data and API functionality. It doesn't require authorization and is free for everyone and for both commercial and non-commercial use.  > #### Note: attribution required If you use free-tier TzKT API, you **must** mention it on your website or application by placing the label \"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Parisnet: `https://api.parisnet.tzkt.io/` ([view docs](https://api.parisnet.tzkt.io))  ### Sending Requests  To send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network (for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint (for example, chain's head: `/v1/head`), that's pretty much it:   ```bash curl https://api.tzkt.io/v1/head ```  Read through this documentation to explore available endpoints, query parameters (note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.) and response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits.  If you exceed the limit, the API will respond with `HTTP 429` status code.  ## TzKT Pro  TzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA. TzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io)) - Testnets: *let us know if you need TzKT Pro for testnets*  ### Authorization  To access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription. This can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.  Note that you can have multiple API keys within a single subscription.  Keep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories. If your key was compromised, just let us know and we will issue a new one.  Also note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted, but query string is not, so the key can be unintentionally exposed to third parties.  ### Sending Requests  Sending a request with the API key passed as a query string parameter:  ```bash curl https://pro.tzkt.io/v1/head?apikey={your_key} ```  Sending a request with the API key passed via an HTTP header:  ```bash curl https://pro.tzkt.io/v1/head \\     -H 'apikey: {your_key}' ```  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.  Also, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests and the time remaining (in seconds) until the quota is reset. Here's an example:  ``` RateLimit-Limit: 50 RateLimit-Remaining: 49 RateLimit-Reset: 1 ```  It also sends general information about your rate limits per second and per day:  ``` X-RateLimit-Limit-Second: 50 X-RateLimit-Remaining-Second: 49 X-RateLimit-Limit-Day: 3000000 X-RateLimit-Remaining-Day: 2994953 ```  If you exceed the limit, the API will respond with `HTTP 429` status code.
  *
- * The version of the OpenAPI document: 1.12.1
+ * The version of the OpenAPI document: 1.14.4
  * Contact: hello@bakingbad.dev
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.2.1
@@ -71,10 +71,14 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'delegation_level' => 'int',
         'delegation_time' => '\DateTime',
         'num_contracts' => 'int',
-        'active_tokens_count' => 'int',
         'tokens_count' => 'int',
+        'active_tokens_count' => 'int',
         'token_balances_count' => 'int',
         'token_transfers_count' => 'int',
+        'tickets_count' => 'int',
+        'active_tickets_count' => 'int',
+        'ticket_balances_count' => 'int',
+        'ticket_transfers_count' => 'int',
         'num_delegations' => 'int',
         'num_originations' => 'int',
         'num_transactions' => 'int',
@@ -87,11 +91,11 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_activity_time' => '\DateTime',
         'last_activity' => 'int',
         'last_activity_time' => '\DateTime',
-        'storage' => 'mixed',
         'type_hash' => 'int',
         'code_hash' => 'int',
         'metadata' => 'mixed',
-        'extras' => 'mixed'
+        'extras' => 'mixed',
+        'storage' => 'mixed'
     ];
 
     /**
@@ -115,10 +119,14 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'delegation_level' => 'int32',
         'delegation_time' => 'date-time',
         'num_contracts' => 'int32',
-        'active_tokens_count' => 'int32',
         'tokens_count' => 'int32',
+        'active_tokens_count' => 'int32',
         'token_balances_count' => 'int32',
         'token_transfers_count' => 'int32',
+        'tickets_count' => 'int32',
+        'active_tickets_count' => 'int32',
+        'ticket_balances_count' => 'int32',
+        'ticket_transfers_count' => 'int32',
         'num_delegations' => 'int32',
         'num_originations' => 'int32',
         'num_transactions' => 'int32',
@@ -131,11 +139,11 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_activity_time' => 'date-time',
         'last_activity' => 'int32',
         'last_activity_time' => 'date-time',
-        'storage' => null,
         'type_hash' => 'int32',
         'code_hash' => 'int32',
         'metadata' => null,
-        'extras' => null
+        'extras' => null,
+        'storage' => null
     ];
 
     /**
@@ -157,10 +165,14 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 		'delegation_level' => true,
 		'delegation_time' => true,
 		'num_contracts' => false,
-		'active_tokens_count' => false,
 		'tokens_count' => false,
+		'active_tokens_count' => false,
 		'token_balances_count' => false,
 		'token_transfers_count' => false,
+		'tickets_count' => false,
+		'active_tickets_count' => false,
+		'ticket_balances_count' => false,
+		'ticket_transfers_count' => false,
 		'num_delegations' => false,
 		'num_originations' => false,
 		'num_transactions' => false,
@@ -173,11 +185,11 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 		'first_activity_time' => false,
 		'last_activity' => false,
 		'last_activity_time' => false,
-		'storage' => true,
 		'type_hash' => false,
 		'code_hash' => false,
 		'metadata' => true,
-		'extras' => true
+		'extras' => true,
+		'storage' => true
     ];
 
     /**
@@ -279,10 +291,14 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'delegation_level' => 'delegationLevel',
         'delegation_time' => 'delegationTime',
         'num_contracts' => 'numContracts',
-        'active_tokens_count' => 'activeTokensCount',
         'tokens_count' => 'tokensCount',
+        'active_tokens_count' => 'activeTokensCount',
         'token_balances_count' => 'tokenBalancesCount',
         'token_transfers_count' => 'tokenTransfersCount',
+        'tickets_count' => 'ticketsCount',
+        'active_tickets_count' => 'activeTicketsCount',
+        'ticket_balances_count' => 'ticketBalancesCount',
+        'ticket_transfers_count' => 'ticketTransfersCount',
         'num_delegations' => 'numDelegations',
         'num_originations' => 'numOriginations',
         'num_transactions' => 'numTransactions',
@@ -295,11 +311,11 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_activity_time' => 'firstActivityTime',
         'last_activity' => 'lastActivity',
         'last_activity_time' => 'lastActivityTime',
-        'storage' => 'storage',
         'type_hash' => 'typeHash',
         'code_hash' => 'codeHash',
         'metadata' => 'metadata',
-        'extras' => 'extras'
+        'extras' => 'extras',
+        'storage' => 'storage'
     ];
 
     /**
@@ -321,10 +337,14 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'delegation_level' => 'setDelegationLevel',
         'delegation_time' => 'setDelegationTime',
         'num_contracts' => 'setNumContracts',
-        'active_tokens_count' => 'setActiveTokensCount',
         'tokens_count' => 'setTokensCount',
+        'active_tokens_count' => 'setActiveTokensCount',
         'token_balances_count' => 'setTokenBalancesCount',
         'token_transfers_count' => 'setTokenTransfersCount',
+        'tickets_count' => 'setTicketsCount',
+        'active_tickets_count' => 'setActiveTicketsCount',
+        'ticket_balances_count' => 'setTicketBalancesCount',
+        'ticket_transfers_count' => 'setTicketTransfersCount',
         'num_delegations' => 'setNumDelegations',
         'num_originations' => 'setNumOriginations',
         'num_transactions' => 'setNumTransactions',
@@ -337,11 +357,11 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_activity_time' => 'setFirstActivityTime',
         'last_activity' => 'setLastActivity',
         'last_activity_time' => 'setLastActivityTime',
-        'storage' => 'setStorage',
         'type_hash' => 'setTypeHash',
         'code_hash' => 'setCodeHash',
         'metadata' => 'setMetadata',
-        'extras' => 'setExtras'
+        'extras' => 'setExtras',
+        'storage' => 'setStorage'
     ];
 
     /**
@@ -363,10 +383,14 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'delegation_level' => 'getDelegationLevel',
         'delegation_time' => 'getDelegationTime',
         'num_contracts' => 'getNumContracts',
-        'active_tokens_count' => 'getActiveTokensCount',
         'tokens_count' => 'getTokensCount',
+        'active_tokens_count' => 'getActiveTokensCount',
         'token_balances_count' => 'getTokenBalancesCount',
         'token_transfers_count' => 'getTokenTransfersCount',
+        'tickets_count' => 'getTicketsCount',
+        'active_tickets_count' => 'getActiveTicketsCount',
+        'ticket_balances_count' => 'getTicketBalancesCount',
+        'ticket_transfers_count' => 'getTicketTransfersCount',
         'num_delegations' => 'getNumDelegations',
         'num_originations' => 'getNumOriginations',
         'num_transactions' => 'getNumTransactions',
@@ -379,11 +403,11 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_activity_time' => 'getFirstActivityTime',
         'last_activity' => 'getLastActivity',
         'last_activity_time' => 'getLastActivityTime',
-        'storage' => 'getStorage',
         'type_hash' => 'getTypeHash',
         'code_hash' => 'getCodeHash',
         'metadata' => 'getMetadata',
-        'extras' => 'getExtras'
+        'extras' => 'getExtras',
+        'storage' => 'getStorage'
     ];
 
     /**
@@ -456,10 +480,14 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('delegation_level', $data ?? [], null);
         $this->setIfExists('delegation_time', $data ?? [], null);
         $this->setIfExists('num_contracts', $data ?? [], null);
-        $this->setIfExists('active_tokens_count', $data ?? [], null);
         $this->setIfExists('tokens_count', $data ?? [], null);
+        $this->setIfExists('active_tokens_count', $data ?? [], null);
         $this->setIfExists('token_balances_count', $data ?? [], null);
         $this->setIfExists('token_transfers_count', $data ?? [], null);
+        $this->setIfExists('tickets_count', $data ?? [], null);
+        $this->setIfExists('active_tickets_count', $data ?? [], null);
+        $this->setIfExists('ticket_balances_count', $data ?? [], null);
+        $this->setIfExists('ticket_transfers_count', $data ?? [], null);
         $this->setIfExists('num_delegations', $data ?? [], null);
         $this->setIfExists('num_originations', $data ?? [], null);
         $this->setIfExists('num_transactions', $data ?? [], null);
@@ -472,11 +500,11 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('first_activity_time', $data ?? [], null);
         $this->setIfExists('last_activity', $data ?? [], null);
         $this->setIfExists('last_activity_time', $data ?? [], null);
-        $this->setIfExists('storage', $data ?? [], null);
         $this->setIfExists('type_hash', $data ?? [], null);
         $this->setIfExists('code_hash', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('extras', $data ?? [], null);
+        $this->setIfExists('storage', $data ?? [], null);
     }
 
     /**
@@ -534,7 +562,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param int|null $id Internal TzKT id
+     * @param int|null $id Internal TzKT id.   **[sortable]**
      *
      * @return self
      */
@@ -563,7 +591,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets type
      *
-     * @param string|null $type Type of the account, `contract` - smart contract programmable account
+     * @param string|null $type Type of the account, `contract` - smart contract programmable account.
      *
      * @return self
      */
@@ -635,7 +663,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets kind
      *
-     * @param string|null $kind Kind of the contract (`delegator_contract` or `smart_contract`), where `delegator_contract` - manager.tz smart contract for delegation purpose only
+     * @param string|null $kind Kind of the contract (`delegator_contract` or `smart_contract`), where `delegator_contract` - manager.tz smart contract for delegation purpose only.
      *
      * @return self
      */
@@ -671,7 +699,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tzips
      *
-     * @param string[]|null $tzips List of implemented standards (TZIPs)
+     * @param string[]|null $tzips List of implemented standards (TZIPs).
      *
      * @return self
      */
@@ -707,7 +735,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets alias
      *
-     * @param string|null $alias Name of the project behind the contract or contract description
+     * @param string|null $alias Name of the project behind the contract or contract description.
      *
      * @return self
      */
@@ -743,7 +771,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets balance
      *
-     * @param int|null $balance Contract balance (micro tez)
+     * @param int|null $balance Contract balance (micro tez).   **[sortable]**
      *
      * @return self
      */
@@ -772,7 +800,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets creator
      *
-     * @param OneOfCreatorInfo|null $creator Information about the account, which has deployed the contract to the blockchain
+     * @param OneOfCreatorInfo|null $creator Information about the account, which has deployed the contract to the blockchain.   Click on the field to expand more details.
      *
      * @return self
      */
@@ -808,7 +836,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets manager
      *
-     * @param OneOfManagerInfo|null $manager Information about the account, which was marked as a manager when contract was deployed to the blockchain
+     * @param OneOfManagerInfo|null $manager Information about the account, which was marked as a manager when contract was deployed to the blockchain.   Click on the field to expand more details.
      *
      * @return self
      */
@@ -844,7 +872,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets delegate
      *
-     * @param OneOfDelegateInfo|null $delegate Information about the current delegate of the contract. `null` if it's not delegated
+     * @param OneOfDelegateInfo|null $delegate Information about the current delegate of the contract. `null` if it's not delegated.   Click on the field to expand more details.
      *
      * @return self
      */
@@ -880,7 +908,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets delegation_level
      *
-     * @param int|null $delegation_level Block height of latest delegation. `null` if it's not delegated
+     * @param int|null $delegation_level Block height of latest delegation. `null` if it's not delegated.
      *
      * @return self
      */
@@ -916,7 +944,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets delegation_time
      *
-     * @param \DateTime|null $delegation_time Block datetime of latest delegation (ISO 8601, e.g. `2020-02-20T02:40:57Z`). `null` if it's not delegated
+     * @param \DateTime|null $delegation_time Block datetime of latest delegation (ISO 8601, e.g. `2020-02-20T02:40:57Z`). `null` if it's not delegated.
      *
      * @return self
      */
@@ -952,7 +980,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_contracts
      *
-     * @param int|null $num_contracts Number of contracts, created (originated) and/or managed by the contract
+     * @param int|null $num_contracts Number of contracts, created (originated) and/or managed by the contract.
      *
      * @return self
      */
@@ -964,35 +992,6 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['num_contracts'] = $num_contracts;
-
-        return $this;
-    }
-
-    /**
-     * Gets active_tokens_count
-     *
-     * @return int|null
-     */
-    public function getActiveTokensCount()
-    {
-        return $this->container['active_tokens_count'];
-    }
-
-    /**
-     * Sets active_tokens_count
-     *
-     * @param int|null $active_tokens_count Number of account tokens with non-zero balances
-     *
-     * @return self
-     */
-    public function setActiveTokensCount($active_tokens_count)
-    {
-
-        if (is_null($active_tokens_count)) {
-            throw new \InvalidArgumentException('non-nullable active_tokens_count cannot be null');
-        }
-
-        $this->container['active_tokens_count'] = $active_tokens_count;
 
         return $this;
     }
@@ -1010,7 +1009,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tokens_count
      *
-     * @param int|null $tokens_count Number of tokens minted in the contract
+     * @param int|null $tokens_count Number of tokens minted in the contract.
      *
      * @return self
      */
@@ -1022,6 +1021,35 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['tokens_count'] = $tokens_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets active_tokens_count
+     *
+     * @return int|null
+     */
+    public function getActiveTokensCount()
+    {
+        return $this->container['active_tokens_count'];
+    }
+
+    /**
+     * Sets active_tokens_count
+     *
+     * @param int|null $active_tokens_count Number of account tokens with non-zero balances.
+     *
+     * @return self
+     */
+    public function setActiveTokensCount($active_tokens_count)
+    {
+
+        if (is_null($active_tokens_count)) {
+            throw new \InvalidArgumentException('non-nullable active_tokens_count cannot be null');
+        }
+
+        $this->container['active_tokens_count'] = $active_tokens_count;
 
         return $this;
     }
@@ -1039,7 +1067,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets token_balances_count
      *
-     * @param int|null $token_balances_count Number of tokens the account ever had
+     * @param int|null $token_balances_count Number of tokens the account ever had.
      *
      * @return self
      */
@@ -1068,7 +1096,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets token_transfers_count
      *
-     * @param int|null $token_transfers_count Number of token transfers from/to the account
+     * @param int|null $token_transfers_count Number of token transfers from/to the account.
      *
      * @return self
      */
@@ -1080,6 +1108,122 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['token_transfers_count'] = $token_transfers_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tickets_count
+     *
+     * @return int|null
+     */
+    public function getTicketsCount()
+    {
+        return $this->container['tickets_count'];
+    }
+
+    /**
+     * Sets tickets_count
+     *
+     * @param int|null $tickets_count Number of tickets minted in the contract.
+     *
+     * @return self
+     */
+    public function setTicketsCount($tickets_count)
+    {
+
+        if (is_null($tickets_count)) {
+            throw new \InvalidArgumentException('non-nullable tickets_count cannot be null');
+        }
+
+        $this->container['tickets_count'] = $tickets_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets active_tickets_count
+     *
+     * @return int|null
+     */
+    public function getActiveTicketsCount()
+    {
+        return $this->container['active_tickets_count'];
+    }
+
+    /**
+     * Sets active_tickets_count
+     *
+     * @param int|null $active_tickets_count Number of tickets the account owns.
+     *
+     * @return self
+     */
+    public function setActiveTicketsCount($active_tickets_count)
+    {
+
+        if (is_null($active_tickets_count)) {
+            throw new \InvalidArgumentException('non-nullable active_tickets_count cannot be null');
+        }
+
+        $this->container['active_tickets_count'] = $active_tickets_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets ticket_balances_count
+     *
+     * @return int|null
+     */
+    public function getTicketBalancesCount()
+    {
+        return $this->container['ticket_balances_count'];
+    }
+
+    /**
+     * Sets ticket_balances_count
+     *
+     * @param int|null $ticket_balances_count Number of tickets the account ever owned.
+     *
+     * @return self
+     */
+    public function setTicketBalancesCount($ticket_balances_count)
+    {
+
+        if (is_null($ticket_balances_count)) {
+            throw new \InvalidArgumentException('non-nullable ticket_balances_count cannot be null');
+        }
+
+        $this->container['ticket_balances_count'] = $ticket_balances_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets ticket_transfers_count
+     *
+     * @return int|null
+     */
+    public function getTicketTransfersCount()
+    {
+        return $this->container['ticket_transfers_count'];
+    }
+
+    /**
+     * Sets ticket_transfers_count
+     *
+     * @param int|null $ticket_transfers_count Number of ticket transfers from/to the account.
+     *
+     * @return self
+     */
+    public function setTicketTransfersCount($ticket_transfers_count)
+    {
+
+        if (is_null($ticket_transfers_count)) {
+            throw new \InvalidArgumentException('non-nullable ticket_transfers_count cannot be null');
+        }
+
+        $this->container['ticket_transfers_count'] = $ticket_transfers_count;
 
         return $this;
     }
@@ -1097,7 +1241,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_delegations
      *
-     * @param int|null $num_delegations Number of delegation operations of the contract
+     * @param int|null $num_delegations Number of delegation operations of the contract.
      *
      * @return self
      */
@@ -1126,7 +1270,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_originations
      *
-     * @param int|null $num_originations Number of origination (deployment / contract creation) operations, related the contract
+     * @param int|null $num_originations Number of origination (deployment / contract creation) operations, related the contract.
      *
      * @return self
      */
@@ -1155,7 +1299,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_transactions
      *
-     * @param int|null $num_transactions Number of transaction (transfer) operations, related to the contract
+     * @param int|null $num_transactions Number of transaction (transfer) operations, related to the contract.   **[sortable]**
      *
      * @return self
      */
@@ -1184,7 +1328,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_reveals
      *
-     * @param int|null $num_reveals Number of reveal (is used to reveal the public key associated with an account) operations of the contract
+     * @param int|null $num_reveals Number of reveal (is used to reveal the public key associated with an account) operations of the contract.
      *
      * @return self
      */
@@ -1213,7 +1357,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_migrations
      *
-     * @param int|null $num_migrations Number of migration (result of the context (database) migration during a protocol update) operations related to the contract (synthetic type)
+     * @param int|null $num_migrations Number of migration (result of the context (database) migration during a protocol update) operations. related to the contract (synthetic type).
      *
      * @return self
      */
@@ -1242,7 +1386,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets transfer_ticket_count
      *
-     * @param int|null $transfer_ticket_count Number of transfer ticket operations related to the contract
+     * @param int|null $transfer_ticket_count Number of transfer ticket operations related to the contract.
      *
      * @return self
      */
@@ -1271,7 +1415,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets increase_paid_storage_count
      *
-     * @param int|null $increase_paid_storage_count Number of `increase_paid_storage` operations related to the contract
+     * @param int|null $increase_paid_storage_count Number of `increase_paid_storage` operations related to the contract.
      *
      * @return self
      */
@@ -1300,7 +1444,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets events_count
      *
-     * @param int|null $events_count Number of events produced by the contract
+     * @param int|null $events_count Number of events produced by the contract.
      *
      * @return self
      */
@@ -1329,7 +1473,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_activity
      *
-     * @param int|null $first_activity Block height of the contract creation
+     * @param int|null $first_activity Block height of the contract creation.   **[sortable]**
      *
      * @return self
      */
@@ -1358,7 +1502,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_activity_time
      *
-     * @param \DateTime|null $first_activity_time Block datetime of the contract creation (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+     * @param \DateTime|null $first_activity_time Block datetime of the contract creation (ISO 8601, e.g. `2020-02-20T02:40:57Z`).
      *
      * @return self
      */
@@ -1387,7 +1531,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_activity
      *
-     * @param int|null $last_activity Height of the block in which the account state was changed last time
+     * @param int|null $last_activity Height of the block in which the account state was changed last time.   **[sortable]**
      *
      * @return self
      */
@@ -1416,7 +1560,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_activity_time
      *
-     * @param \DateTime|null $last_activity_time Datetime of the block in which the account state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+     * @param \DateTime|null $last_activity_time Datetime of the block in which the account state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`).
      *
      * @return self
      */
@@ -1428,42 +1572,6 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['last_activity_time'] = $last_activity_time;
-
-        return $this;
-    }
-
-    /**
-     * Gets storage
-     *
-     * @return mixed|null
-     */
-    public function getStorage()
-    {
-        return $this->container['storage'];
-    }
-
-    /**
-     * Sets storage
-     *
-     * @param mixed|null $storage Contract storage value. Omitted by default. Use `?includeStorage=true` to include it in response.
-     *
-     * @return self
-     */
-    public function setStorage($storage)
-    {
-
-        if (is_null($storage)) {
-            array_push($this->openAPINullablesSetToNull, 'storage');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('storage', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['storage'] = $storage;
 
         return $this;
     }
@@ -1539,7 +1647,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param mixed|null $metadata TZIP-16 metadata (with `?legacy=true` this field will contain tzkt profile info)
+     * @param mixed|null $metadata TZIP-16 metadata (with `?legacy=true` this field will contain tzkt profile info).
      *
      * @return self
      */
@@ -1575,7 +1683,7 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets extras
      *
-     * @param mixed|null $extras Off-chain extras
+     * @param mixed|null $extras Off-chain extras.
      *
      * @return self
      */
@@ -1594,6 +1702,42 @@ class ContractAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['extras'] = $extras;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage
+     *
+     * @return mixed|null
+     */
+    public function getStorage()
+    {
+        return $this->container['storage'];
+    }
+
+    /**
+     * Sets storage
+     *
+     * @param mixed|null $storage Contract storage value. Omitted by default. Use `?includeStorage=true` to include it into response.
+     *
+     * @return self
+     */
+    public function setStorage($storage)
+    {
+
+        if (is_null($storage)) {
+            array_push($this->openAPINullablesSetToNull, 'storage');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('storage', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['storage'] = $storage;
 
         return $this;
     }

@@ -2,22 +2,15 @@
 
 # Introduction
 
-TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos.
-TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.
+TzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. 
+You can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community 
+to help developers build more services and dapps on top of Tezos.
 
-TzKT API is available for the following Tezos networks with the following base URLs: 
-
-- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) 
-- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))
-- Mumbainet: `https://api.mumbainet.tzkt.io/` ([view docs](https://api.mumbainet.tzkt.io))
-- Nairobinet: `https://api.nairobinet.tzkt.io/` ([view docs](https://api.nairobinet.tzkt.io))
-
-We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:
-
-- Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))
+TzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,
+because you can always clone, build and run it yourself to have full control over all the components.
 
 Feel free to contact us if you have any questions or feature requests.
-Your feedback really helps us make TzKT better!
+Your feedback is much appreciated!
 
 - Discord: https://discord.gg/aG8XKuwsQd
 - Telegram: https://t.me/baking_bad_chat
@@ -25,26 +18,112 @@ Your feedback really helps us make TzKT better!
 - Twitter: https://twitter.com/TezosBakingBad
 - Email: hello@bakingbad.dev
 
-And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)
+And don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊
 
-# Terms of Use
+# Get Started
 
-TzKT API is free for everyone and for both commercial and non-commercial usage.
+There are two API services provided for public use:
+- **Free TzKT API** with free anonymous access;
+- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.
 
-If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend,
-you must mention that fact on your website or application by placing the label
-**\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).
+You can find more details about differences between available tiers [here](https://tzkt.io/api).
 
+## Free TzKT API
 
-# Rate Limits
+Free-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.
+It doesn't require authorization and is free for everyone and for both commercial and non-commercial use.
 
-There will be no rate limits as long as our servers can handle the load without additional infrastructure costs.
-However, any apparent abuse will be prevented by setting targeted rate limits.
+> #### Note: attribution required
+If you use free-tier TzKT API, you **must** mention it on your website or application by placing the label
+\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).
 
-Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/)
-and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).
+It's available for the following Tezos networks with the following base URLs:
 
----
+- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))
+- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))
+- Parisnet: `https://api.parisnet.tzkt.io/` ([view docs](https://api.parisnet.tzkt.io))
+
+### Sending Requests
+
+To send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network
+(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint
+(for example, chain's head: `/v1/head`), that's pretty much it: 
+
+```bash
+curl https://api.tzkt.io/v1/head
+```
+
+Read through this documentation to explore available endpoints, query parameters
+(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)
+and response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉
+
+### Rate Limits
+
+Please, refer to https://tzkt.io/api to check relevant rate limits.
+
+If you exceed the limit, the API will respond with `HTTP 429` status code.
+
+## TzKT Pro
+
+TzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.
+TzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.
+
+It's available for the following Tezos networks with the following base URLs:
+
+- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))
+- Testnets: *let us know if you need TzKT Pro for testnets*
+
+### Authorization
+
+To access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.
+This can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.
+
+Note that you can have multiple API keys within a single subscription.
+
+Keep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.
+If your key was compromised, just let us know and we will issue a new one.
+
+Also note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,
+but query string is not, so the key can be unintentionally exposed to third parties.
+
+### Sending Requests
+
+Sending a request with the API key passed as a query string parameter:
+
+```bash
+curl https://pro.tzkt.io/v1/head?apikey={your_key}
+```
+
+Sending a request with the API key passed via an HTTP header:
+
+```bash
+curl https://pro.tzkt.io/v1/head \\
+    -H 'apikey: {your_key}'
+```
+
+### Rate Limits
+
+Please, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.
+
+Also, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests
+and the time remaining (in seconds) until the quota is reset. Here's an example:
+
+```
+RateLimit-Limit: 50
+RateLimit-Remaining: 49
+RateLimit-Reset: 1
+```
+
+It also sends general information about your rate limits per second and per day:
+
+```
+X-RateLimit-Limit-Second: 50
+X-RateLimit-Remaining-Second: 49
+X-RateLimit-Limit-Day: 3000000
+X-RateLimit-Remaining-Day: 2994953
+```
+
+If you exceed the limit, the API will respond with `HTTP 429` status code.
 
 
 For more information, please visit [https://bakingbad.dev](https://bakingbad.dev).
@@ -106,6 +185,7 @@ $address = new \Bzzhh\Tzkt\Model\AccountsGetAddressParameter(); // AccountsGetAd
 $type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters accounts by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`).
 $kind = new \Bzzhh\Tzkt\Model\AccountsGetKindParameter(); // AccountsGetKindParameter | Filters accounts by contract kind (`delegator_contract` or `smart_contract`)
 $delegate = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters accounts by delegate. Allowed fields for `.eqx` mode: none.
+$staked_pseudotokens = new \Bzzhh\Tzkt\Model\AccountsGetStakedPseudotokensParameter(); // AccountsGetStakedPseudotokensParameter | Filters accounts by amount of staked pseudotokens.
 $balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters accounts by balance
 $staked = new \Bzzhh\Tzkt\Model\AccountsGetStakedParameter(); // AccountsGetStakedParameter | Filters accounts by participation in staking
 $last_activity = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters accounts by last activity level (where the account was updated)
@@ -115,7 +195,7 @@ $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffs
 $limit = 100; // int | Maximum number of items to return
 
 try {
-    $result = $apiInstance->accountsGet($id, $address, $type, $kind, $delegate, $balance, $staked, $last_activity, $select, $sort, $offset, $limit);
+    $result = $apiInstance->accountsGet($id, $address, $type, $kind, $delegate, $staked_pseudotokens, $balance, $staked, $last_activity, $select, $sort, $offset, $limit);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->accountsGet: ', $e->getMessage(), PHP_EOL;
@@ -142,8 +222,10 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**accountsGetDelegators**](docs/Api/AccountsApi.md#accountsgetdelegators) | **GET** /v1/accounts/{address}/delegators | Get account delegators
 *AccountsApi* | [**accountsGetOperations**](docs/Api/AccountsApi.md#accountsgetoperations) | **GET** /v1/accounts/{address}/operations | Get account operations
 *BigMapsApi* | [**bigMapsGetBigMapById**](docs/Api/BigMapsApi.md#bigmapsgetbigmapbyid) | **GET** /v1/bigmaps/{id} | Get bigmap by Id
+*BigMapsApi* | [**bigMapsGetBigMapKeys**](docs/Api/BigMapsApi.md#bigmapsgetbigmapkeys) | **GET** /v1/bigmaps/keys | Get bigmap keys
 *BigMapsApi* | [**bigMapsGetBigMapType**](docs/Api/BigMapsApi.md#bigmapsgetbigmaptype) | **GET** /v1/bigmaps/{id}/type | Get bigmap type
-*BigMapsApi* | [**bigMapsGetBigMapUpdates**](docs/Api/BigMapsApi.md#bigmapsgetbigmapupdates) | **GET** /v1/bigmaps/updates | Get bigmap updates
+*BigMapsApi* | [**bigMapsGetBigMapUpdates**](docs/Api/BigMapsApi.md#bigmapsgetbigmapupdates) | **GET** /v1/bigmaps/updates/count | Get bigmap updates count
+*BigMapsApi* | [**bigMapsGetBigMapUpdates2**](docs/Api/BigMapsApi.md#bigmapsgetbigmapupdates2) | **GET** /v1/bigmaps/updates | Get bigmap updates
 *BigMapsApi* | [**bigMapsGetBigMaps**](docs/Api/BigMapsApi.md#bigmapsgetbigmaps) | **GET** /v1/bigmaps | Get bigmaps
 *BigMapsApi* | [**bigMapsGetBigMapsCount**](docs/Api/BigMapsApi.md#bigmapsgetbigmapscount) | **GET** /v1/bigmaps/count | Get bigmaps count
 *BigMapsApi* | [**bigMapsGetHistoricalKeys**](docs/Api/BigMapsApi.md#bigmapsgethistoricalkeys) | **GET** /v1/bigmaps/{id}/historical_keys/{level} | Get historical keys
@@ -207,6 +289,8 @@ Class | Method | HTTP request | Description
 *OperationsApi* | [**operationsGetActivationByHash**](docs/Api/OperationsApi.md#operationsgetactivationbyhash) | **GET** /v1/operations/activations/{hash} | Get activation by hash
 *OperationsApi* | [**operationsGetActivations**](docs/Api/OperationsApi.md#operationsgetactivations) | **GET** /v1/operations/activations | Get activations
 *OperationsApi* | [**operationsGetActivationsCount**](docs/Api/OperationsApi.md#operationsgetactivationscount) | **GET** /v1/operations/activations/count | Get activations count
+*OperationsApi* | [**operationsGetAutostakingOps**](docs/Api/OperationsApi.md#operationsgetautostakingops) | **GET** /v1/operations/autostaking | Get autostaking ops
+*OperationsApi* | [**operationsGetAutostakingOpsCount**](docs/Api/OperationsApi.md#operationsgetautostakingopscount) | **GET** /v1/operations/autostaking/count | Get autostaking ops count
 *OperationsApi* | [**operationsGetBaking**](docs/Api/OperationsApi.md#operationsgetbaking) | **GET** /v1/operations/baking | Get baking
 *OperationsApi* | [**operationsGetBakingById**](docs/Api/OperationsApi.md#operationsgetbakingbyid) | **GET** /v1/operations/baking/{id} | Get baking by id
 *OperationsApi* | [**operationsGetBakingCount**](docs/Api/OperationsApi.md#operationsgetbakingcount) | **GET** /v1/operations/baking/count | Get baking count
@@ -216,6 +300,8 @@ Class | Method | HTTP request | Description
 *OperationsApi* | [**operationsGetByHash**](docs/Api/OperationsApi.md#operationsgetbyhash) | **GET** /v1/operations/{hash} | Get operations by hash
 *OperationsApi* | [**operationsGetByHashCounter**](docs/Api/OperationsApi.md#operationsgetbyhashcounter) | **GET** /v1/operations/{hash}/{counter} | Get operations by hash and counter
 *OperationsApi* | [**operationsGetByHashCounterNonce**](docs/Api/OperationsApi.md#operationsgetbyhashcounternonce) | **GET** /v1/operations/{hash}/{counter}/{nonce} | Get operations by hash, counter and nonce
+*OperationsApi* | [**operationsGetDalPublishCommitmentOps**](docs/Api/OperationsApi.md#operationsgetdalpublishcommitmentops) | **GET** /v1/operations/dal_publish_commitment | Get dal_publish_commitment ops
+*OperationsApi* | [**operationsGetDalPublishCommitmentOpsCount**](docs/Api/OperationsApi.md#operationsgetdalpublishcommitmentopscount) | **GET** /v1/operations/dal_publish_commitment/count | Get dal_publish_commitment ops count
 *OperationsApi* | [**operationsGetDelegationByHash**](docs/Api/OperationsApi.md#operationsgetdelegationbyhash) | **GET** /v1/operations/delegations/{hash} | Get delegation by hash
 *OperationsApi* | [**operationsGetDelegationStatus**](docs/Api/OperationsApi.md#operationsgetdelegationstatus) | **GET** /v1/operations/delegations/{hash}/status | Get delegation status
 *OperationsApi* | [**operationsGetDelegations**](docs/Api/OperationsApi.md#operationsgetdelegations) | **GET** /v1/operations/delegations | Get delegations
@@ -268,6 +354,8 @@ Class | Method | HTTP request | Description
 *OperationsApi* | [**operationsGetRevelationPenalties**](docs/Api/OperationsApi.md#operationsgetrevelationpenalties) | **GET** /v1/operations/revelation_penalties | Get revelation penalties
 *OperationsApi* | [**operationsGetRevelationPenaltiesCount**](docs/Api/OperationsApi.md#operationsgetrevelationpenaltiescount) | **GET** /v1/operations/revelation_penalties/count | Get revelation penalties count
 *OperationsApi* | [**operationsGetRevelationPenaltyById**](docs/Api/OperationsApi.md#operationsgetrevelationpenaltybyid) | **GET** /v1/operations/revelation_penalties/{id} | Get revelation penalty by id
+*OperationsApi* | [**operationsGetSetDelegateParametersOps**](docs/Api/OperationsApi.md#operationsgetsetdelegateparametersops) | **GET** /v1/operations/set_delegate_parameters | Get set_delegate_parameters ops
+*OperationsApi* | [**operationsGetSetDelegateParametersOpsCount**](docs/Api/OperationsApi.md#operationsgetsetdelegateparametersopscount) | **GET** /v1/operations/set_delegate_parameters/count | Get set_delegate_parameters ops count
 *OperationsApi* | [**operationsGetSetDepositsLimitByHash**](docs/Api/OperationsApi.md#operationsgetsetdepositslimitbyhash) | **GET** /v1/operations/set_deposits_limits/{hash} | Get set deposits limit by hash
 *OperationsApi* | [**operationsGetSetDepositsLimitStatus**](docs/Api/OperationsApi.md#operationsgetsetdepositslimitstatus) | **GET** /v1/operations/set_deposits_limits/{hash}/status | Get set deposits limit status
 *OperationsApi* | [**operationsGetSetDepositsLimits**](docs/Api/OperationsApi.md#operationsgetsetdepositslimits) | **GET** /v1/operations/set_deposits_limits | Get set deposits limits
@@ -286,6 +374,8 @@ Class | Method | HTTP request | Description
 *OperationsApi* | [**operationsGetSmartRollupRecoverBondOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrolluprecoverbondopscount) | **GET** /v1/operations/sr_recover_bond/count | Get smart rollup recover bond count
 *OperationsApi* | [**operationsGetSmartRollupRefuteOps**](docs/Api/OperationsApi.md#operationsgetsmartrolluprefuteops) | **GET** /v1/operations/sr_refute | Get smart rollup refute
 *OperationsApi* | [**operationsGetSmartRollupRefuteOpsCount**](docs/Api/OperationsApi.md#operationsgetsmartrolluprefuteopscount) | **GET** /v1/operations/sr_refute/count | Get smart rollup refute count
+*OperationsApi* | [**operationsGetStakingOps**](docs/Api/OperationsApi.md#operationsgetstakingops) | **GET** /v1/operations/staking | Get staking ops
+*OperationsApi* | [**operationsGetStakingOpsCount**](docs/Api/OperationsApi.md#operationsgetstakingopscount) | **GET** /v1/operations/staking/count | Get staking ops count
 *OperationsApi* | [**operationsGetStatus**](docs/Api/OperationsApi.md#operationsgetstatus) | **GET** /v1/operations/{hash}/status | Get operation status
 *OperationsApi* | [**operationsGetTransactionByHash**](docs/Api/OperationsApi.md#operationsgettransactionbyhash) | **GET** /v1/operations/transactions/{hash} | Get transaction by hash
 *OperationsApi* | [**operationsGetTransactionByHashCounter**](docs/Api/OperationsApi.md#operationsgettransactionbyhashcounter) | **GET** /v1/operations/transactions/{hash}/{counter} | Get transaction by hash and counter
@@ -345,17 +435,17 @@ Class | Method | HTTP request | Description
 *QuotesApi* | [**quotesGetCount**](docs/Api/QuotesApi.md#quotesgetcount) | **GET** /v1/quotes/count | Get quotes count
 *QuotesApi* | [**quotesGetLast**](docs/Api/QuotesApi.md#quotesgetlast) | **GET** /v1/quotes/last | Get last quote
 *RewardsApi* | [**rewardsGetBakerRewards**](docs/Api/RewardsApi.md#rewardsgetbakerrewards) | **GET** /v1/rewards/bakers/{address} | Get baker cycle rewards
-*RewardsApi* | [**rewardsGetBakerRewardsByCycle**](docs/Api/RewardsApi.md#rewardsgetbakerrewardsbycycle) | **GET** /v1/rewards/bakers/{address}/{cycle} | Get baker cycle rewards by cycle
 *RewardsApi* | [**rewardsGetBakerRewardsCount**](docs/Api/RewardsApi.md#rewardsgetbakerrewardscount) | **GET** /v1/rewards/bakers/{address}/count | Get baker cycle rewards count
 *RewardsApi* | [**rewardsGetDelegatorRewards**](docs/Api/RewardsApi.md#rewardsgetdelegatorrewards) | **GET** /v1/rewards/delegators/{address} | Get delegator cycle rewards
-*RewardsApi* | [**rewardsGetDelegatorRewardsByCycle**](docs/Api/RewardsApi.md#rewardsgetdelegatorrewardsbycycle) | **GET** /v1/rewards/delegators/{address}/{cycle} | Get delegator cycle rewards by cycle
 *RewardsApi* | [**rewardsGetDelegatorRewardsCount**](docs/Api/RewardsApi.md#rewardsgetdelegatorrewardscount) | **GET** /v1/rewards/delegators/{address}/count | Get delegator cycle rewards count
 *RewardsApi* | [**rewardsGetRewardSplit**](docs/Api/RewardsApi.md#rewardsgetrewardsplit) | **GET** /v1/rewards/split/{baker}/{cycle} | Get reward split
 *RewardsApi* | [**rewardsGetRewardSplitDelegator**](docs/Api/RewardsApi.md#rewardsgetrewardsplitdelegator) | **GET** /v1/rewards/split/{baker}/{cycle}/{delegator} | Get reward split delegator
 *RightsApi* | [**rightsGet**](docs/Api/RightsApi.md#rightsget) | **GET** /v1/rights | Get rights
 *RightsApi* | [**rightsGetCount**](docs/Api/RightsApi.md#rightsgetcount) | **GET** /v1/rights/count | Get rights count
+*SmartRollupsApi* | [**smartRollupsGetEntrypoints**](docs/Api/SmartRollupsApi.md#smartrollupsgetentrypoints) | **GET** /v1/smart_rollups/{address}/entrypoints | Get smart rollup entrypoints
 *SmartRollupsApi* | [**smartRollupsGetInboxMessages**](docs/Api/SmartRollupsApi.md#smartrollupsgetinboxmessages) | **GET** /v1/smart_rollups/inbox | Get inbox messages
 *SmartRollupsApi* | [**smartRollupsGetInboxMessagesCount**](docs/Api/SmartRollupsApi.md#smartrollupsgetinboxmessagescount) | **GET** /v1/smart_rollups/inbox/count | Get inbox messages count
+*SmartRollupsApi* | [**smartRollupsGetInterface**](docs/Api/SmartRollupsApi.md#smartrollupsgetinterface) | **GET** /v1/smart_rollups/{address}/interface | Get JSON Schema [2020-12] interface for the smart rollup
 *SmartRollupsApi* | [**smartRollupsGetSmartRollup**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollup) | **GET** /v1/smart_rollups/{address} | Get smart rollup by address
 *SmartRollupsApi* | [**smartRollupsGetSmartRollupCommitments**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupcommitments) | **GET** /v1/smart_rollups/commitments | Get smart rollup commitments
 *SmartRollupsApi* | [**smartRollupsGetSmartRollupCommitmentsCount**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupcommitmentscount) | **GET** /v1/smart_rollups/commitments/count | Get smart rollup commitments count
@@ -366,10 +456,21 @@ Class | Method | HTTP request | Description
 *SmartRollupsApi* | [**smartRollupsGetSmartRollupsCount**](docs/Api/SmartRollupsApi.md#smartrollupsgetsmartrollupscount) | **GET** /v1/smart_rollups/count | Get smart rollups count
 *SoftwareApi* | [**softwareGet**](docs/Api/SoftwareApi.md#softwareget) | **GET** /v1/software | Get baker software
 *SoftwareApi* | [**softwareGetCount**](docs/Api/SoftwareApi.md#softwaregetcount) | **GET** /v1/software/count | Get software count
+*StakingApi* | [**stakingGetStakingUpdates**](docs/Api/StakingApi.md#stakinggetstakingupdates) | **GET** /v1/staking/updates | Get staking updates
+*StakingApi* | [**stakingGetStakingUpdatesCount**](docs/Api/StakingApi.md#stakinggetstakingupdatescount) | **GET** /v1/staking/updates/count | Get staking updates count
+*StakingApi* | [**stakingGetUnstakeRequests**](docs/Api/StakingApi.md#stakinggetunstakerequests) | **GET** /v1/staking/unstake_requests | Get unstake requests
+*StakingApi* | [**stakingGetUnstakeRequestsCount**](docs/Api/StakingApi.md#stakinggetunstakerequestscount) | **GET** /v1/staking/unstake_requests/count | Get unstake requests count
 *StatisticsApi* | [**statisticsGet**](docs/Api/StatisticsApi.md#statisticsget) | **GET** /v1/statistics | Get statistics
 *StatisticsApi* | [**statisticsGetCycles**](docs/Api/StatisticsApi.md#statisticsgetcycles) | **GET** /v1/statistics/current | Get current statistics
 *StatisticsApi* | [**statisticsGetCyclesAll**](docs/Api/StatisticsApi.md#statisticsgetcyclesall) | **GET** /v1/statistics/cyclic | Get cyclic statistics
 *StatisticsApi* | [**statisticsGetDaily**](docs/Api/StatisticsApi.md#statisticsgetdaily) | **GET** /v1/statistics/daily | Get daily statistics
+*TicketsApi* | [**ticketsGetHistoricalTicketBalances**](docs/Api/TicketsApi.md#ticketsgethistoricalticketbalances) | **GET** /v1/tickets/historical_balances/{level} | Get historical ticket balances
+*TicketsApi* | [**ticketsGetTicketBalances**](docs/Api/TicketsApi.md#ticketsgetticketbalances) | **GET** /v1/tickets/balances | Get ticket balances
+*TicketsApi* | [**ticketsGetTicketBalancesCount**](docs/Api/TicketsApi.md#ticketsgetticketbalancescount) | **GET** /v1/tickets/balances/count | Get ticket balances count
+*TicketsApi* | [**ticketsGetTicketTransfers**](docs/Api/TicketsApi.md#ticketsgettickettransfers) | **GET** /v1/tickets/transfers | Get ticket transfers
+*TicketsApi* | [**ticketsGetTicketTransfersCount**](docs/Api/TicketsApi.md#ticketsgettickettransferscount) | **GET** /v1/tickets/transfers/count | Get ticket transfers count
+*TicketsApi* | [**ticketsGetTickets**](docs/Api/TicketsApi.md#ticketsgettickets) | **GET** /v1/tickets | Get tickets
+*TicketsApi* | [**ticketsGetTicketsCount**](docs/Api/TicketsApi.md#ticketsgetticketscount) | **GET** /v1/tickets/count | Get tickets count
 *TokensApi* | [**tokensGetTokenBalances**](docs/Api/TokensApi.md#tokensgettokenbalances) | **GET** /v1/tokens/balances | Get token balances
 *TokensApi* | [**tokensGetTokenBalances2**](docs/Api/TokensApi.md#tokensgettokenbalances2) | **GET** /v1/tokens/historical_balances/{level} | Get historical token balances
 *TokensApi* | [**tokensGetTokenBalancesCount**](docs/Api/TokensApi.md#tokensgettokenbalancescount) | **GET** /v1/tokens/balances/count | Get token balances count
@@ -413,6 +514,7 @@ Class | Method | HTTP request | Description
 - [AccountsGetSelectParameter](docs/Model/AccountsGetSelectParameter.md)
 - [AccountsGetSortParameter](docs/Model/AccountsGetSortParameter.md)
 - [AccountsGetStakedParameter](docs/Model/AccountsGetStakedParameter.md)
+- [AccountsGetStakedPseudotokensParameter](docs/Model/AccountsGetStakedPseudotokensParameter.md)
 - [AccountsGetTypeParameter](docs/Model/AccountsGetTypeParameter.md)
 - [ActivationOperation](docs/Model/ActivationOperation.md)
 - [ActivationOperationAllOf](docs/Model/ActivationOperationAllOf.md)
@@ -421,6 +523,8 @@ Class | Method | HTTP request | Description
 - [Alias](docs/Model/Alias.md)
 - [AnnotationType](docs/Model/AnnotationType.md)
 - [AnyOfParameter](docs/Model/AnyOfParameter.md)
+- [AutostakingOperation](docs/Model/AutostakingOperation.md)
+- [AutostakingOperationAllOf](docs/Model/AutostakingOperationAllOf.md)
 - [BakerRewards](docs/Model/BakerRewards.md)
 - [BakingOperation](docs/Model/BakingOperation.md)
 - [BakingOperationAllOf](docs/Model/BakingOperationAllOf.md)
@@ -434,23 +538,25 @@ Class | Method | HTTP request | Description
 - [BallotOperationAllOf](docs/Model/BallotOperationAllOf.md)
 - [BaseOperationError](docs/Model/BaseOperationError.md)
 - [BaseOperationErrorAllOf](docs/Model/BaseOperationErrorAllOf.md)
+- [BigIntegerNullableParameter](docs/Model/BigIntegerNullableParameter.md)
 - [BigMap](docs/Model/BigMap.md)
 - [BigMapActionParameter](docs/Model/BigMapActionParameter.md)
 - [BigMapContract](docs/Model/BigMapContract.md)
 - [BigMapDiff](docs/Model/BigMapDiff.md)
 - [BigMapDiffContent](docs/Model/BigMapDiffContent.md)
 - [BigMapInterface](docs/Model/BigMapInterface.md)
-- [BigMapInterfaceKeySchema](docs/Model/BigMapInterfaceKeySchema.md)
-- [BigMapInterfaceValueSchema](docs/Model/BigMapInterfaceValueSchema.md)
 - [BigMapKey](docs/Model/BigMapKey.md)
+- [BigMapKeyFull](docs/Model/BigMapKeyFull.md)
 - [BigMapKeyHistorical](docs/Model/BigMapKeyHistorical.md)
 - [BigMapKeyShort](docs/Model/BigMapKeyShort.md)
 - [BigMapKeyUpdate](docs/Model/BigMapKeyUpdate.md)
 - [BigMapTagsParameter](docs/Model/BigMapTagsParameter.md)
 - [BigMapUpdate](docs/Model/BigMapUpdate.md)
 - [BigMapUpdateContent](docs/Model/BigMapUpdateContent.md)
+- [BigMapsGetBigMapKeysFirstTimeParameter](docs/Model/BigMapsGetBigMapKeysFirstTimeParameter.md)
+- [BigMapsGetBigMapKeysHashParameter](docs/Model/BigMapsGetBigMapKeysHashParameter.md)
+- [BigMapsGetBigMapKeysSelectParameter](docs/Model/BigMapsGetBigMapKeysSelectParameter.md)
 - [BigMapsGetBigMapUpdatesActionParameter](docs/Model/BigMapsGetBigMapUpdatesActionParameter.md)
-- [BigMapsGetBigMapUpdatesTimestampParameter](docs/Model/BigMapsGetBigMapUpdatesTimestampParameter.md)
 - [BigMapsGetBigMapsTagsParameter](docs/Model/BigMapsGetBigMapsTagsParameter.md)
 - [Block](docs/Model/Block.md)
 - [BlockBaker](docs/Model/BlockBaker.md)
@@ -465,14 +571,11 @@ Class | Method | HTTP request | Description
 - [CommitmentsGetAllActivationLevelParameter](docs/Model/CommitmentsGetAllActivationLevelParameter.md)
 - [Constant](docs/Model/Constant.md)
 - [ConstantCreator](docs/Model/ConstantCreator.md)
-- [ConstantMetadata](docs/Model/ConstantMetadata.md)
-- [ConstantsGetAddressParameter](docs/Model/ConstantsGetAddressParameter.md)
 - [Contract](docs/Model/Contract.md)
 - [ContractAllOf](docs/Model/ContractAllOf.md)
 - [ContractEvent](docs/Model/ContractEvent.md)
 - [ContractEventContract](docs/Model/ContractEventContract.md)
 - [ContractInterface](docs/Model/ContractInterface.md)
-- [ContractInterfaceStorageSchema](docs/Model/ContractInterfaceStorageSchema.md)
 - [ContractKindParameter](docs/Model/ContractKindParameter.md)
 - [ContractTagsParameter](docs/Model/ContractTagsParameter.md)
 - [ContractView](docs/Model/ContractView.md)
@@ -482,6 +585,8 @@ Class | Method | HTTP request | Description
 - [CreatorInfo](docs/Model/CreatorInfo.md)
 - [Cycle](docs/Model/Cycle.md)
 - [CycleQuote](docs/Model/CycleQuote.md)
+- [DalPublishCommitmentOperation](docs/Model/DalPublishCommitmentOperation.md)
+- [DalPublishCommitmentOperationAllOf](docs/Model/DalPublishCommitmentOperationAllOf.md)
 - [DateTimeParameter](docs/Model/DateTimeParameter.md)
 - [Delegate](docs/Model/Delegate.md)
 - [DelegateAllOf](docs/Model/DelegateAllOf.md)
@@ -493,10 +598,8 @@ Class | Method | HTTP request | Description
 - [DelegatorRewardsBaker](docs/Model/DelegatorRewardsBaker.md)
 - [Domain](docs/Model/Domain.md)
 - [DomainAddress](docs/Model/DomainAddress.md)
-- [DomainData](docs/Model/DomainData.md)
 - [DomainOwner](docs/Model/DomainOwner.md)
 - [DomainsGetCountOwnerParameter](docs/Model/DomainsGetCountOwnerParameter.md)
-- [DomainsGetSelectParameter](docs/Model/DomainsGetSelectParameter.md)
 - [DoubleBakingOperation](docs/Model/DoubleBakingOperation.md)
 - [DoubleBakingOperationAllOf](docs/Model/DoubleBakingOperationAllOf.md)
 - [DoubleEndorsingOperation](docs/Model/DoubleEndorsingOperation.md)
@@ -513,10 +616,8 @@ Class | Method | HTTP request | Description
 - [EndorsingRewardOperationAllOf](docs/Model/EndorsingRewardOperationAllOf.md)
 - [Entrypoint](docs/Model/Entrypoint.md)
 - [EntrypointInterface](docs/Model/EntrypointInterface.md)
-- [EntrypointInterfaceParameterSchema](docs/Model/EntrypointInterfaceParameterSchema.md)
 - [EntrypointMichelineParameters](docs/Model/EntrypointMichelineParameters.md)
 - [EventInterface](docs/Model/EventInterface.md)
-- [EventInterfaceEventSchema](docs/Model/EventInterfaceEventSchema.md)
 - [ExpressionAlreadyRegisteredError](docs/Model/ExpressionAlreadyRegisteredError.md)
 - [ExpressionAlreadyRegisteredErrorAllOf](docs/Model/ExpressionAlreadyRegisteredErrorAllOf.md)
 - [ExpressionParameter](docs/Model/ExpressionParameter.md)
@@ -535,6 +636,9 @@ Class | Method | HTTP request | Description
 - [JsonParameter](docs/Model/JsonParameter.md)
 - [ManagerInfo](docs/Model/ManagerInfo.md)
 - [MichelineFormat](docs/Model/MichelineFormat.md)
+- [MichelineParameter](docs/Model/MichelineParameter.md)
+- [MichelineParameterEq](docs/Model/MichelineParameterEq.md)
+- [MichelineParameterNe](docs/Model/MichelineParameterNe.md)
 - [MichelinePrim](docs/Model/MichelinePrim.md)
 - [MichelineType](docs/Model/MichelineType.md)
 - [MigrationKindParameter](docs/Model/MigrationKindParameter.md)
@@ -558,6 +662,7 @@ Class | Method | HTTP request | Description
 - [OperationsGetSmartRollupPublishOpsCommitmentHashParameter](docs/Model/OperationsGetSmartRollupPublishOpsCommitmentHashParameter.md)
 - [OperationsGetSmartRollupRefuteOpsGameStatusParameter](docs/Model/OperationsGetSmartRollupRefuteOpsGameStatusParameter.md)
 - [OperationsGetSmartRollupRefuteOpsMoveParameter](docs/Model/OperationsGetSmartRollupRefuteOpsMoveParameter.md)
+- [OperationsGetStakingOpsActionParameter](docs/Model/OperationsGetStakingOpsActionParameter.md)
 - [OriginatedContract](docs/Model/OriginatedContract.md)
 - [OriginationOperation](docs/Model/OriginationOperation.md)
 - [OriginationOperationAllOf](docs/Model/OriginationOperationAllOf.md)
@@ -592,6 +697,8 @@ Class | Method | HTTP request | Description
 - [RollupAllOf](docs/Model/RollupAllOf.md)
 - [SelectParameter](docs/Model/SelectParameter.md)
 - [SelectionParameter](docs/Model/SelectionParameter.md)
+- [SetDelegateParametersOperation](docs/Model/SetDelegateParametersOperation.md)
+- [SetDelegateParametersOperationAllOf](docs/Model/SetDelegateParametersOperationAllOf.md)
 - [SetDepositsLimitOperation](docs/Model/SetDepositsLimitOperation.md)
 - [SetDepositsLimitOperationAllOf](docs/Model/SetDepositsLimitOperationAllOf.md)
 - [SmartRollup](docs/Model/SmartRollup.md)
@@ -646,6 +753,16 @@ Class | Method | HTTP request | Description
 - [SrStaker](docs/Model/SrStaker.md)
 - [SrStakerAllOf](docs/Model/SrStakerAllOf.md)
 - [Src1HashParameter](docs/Model/Src1HashParameter.md)
+- [StakingActionParameter](docs/Model/StakingActionParameter.md)
+- [StakingGetStakingUpdatesCountRoundingErrorParameter](docs/Model/StakingGetStakingUpdatesCountRoundingErrorParameter.md)
+- [StakingGetStakingUpdatesCountTypeParameter](docs/Model/StakingGetStakingUpdatesCountTypeParameter.md)
+- [StakingGetUnstakeRequestsCountStatusParameter](docs/Model/StakingGetUnstakeRequestsCountStatusParameter.md)
+- [StakingOperation](docs/Model/StakingOperation.md)
+- [StakingOperationAllOf](docs/Model/StakingOperationAllOf.md)
+- [StakingUpdate](docs/Model/StakingUpdate.md)
+- [StakingUpdateBaker](docs/Model/StakingUpdateBaker.md)
+- [StakingUpdateStaker](docs/Model/StakingUpdateStaker.md)
+- [StakingUpdateTypeParameter](docs/Model/StakingUpdateTypeParameter.md)
 - [State](docs/Model/State.md)
 - [Statistics](docs/Model/Statistics.md)
 - [StatisticsQuote](docs/Model/StatisticsQuote.md)
@@ -653,22 +770,37 @@ Class | Method | HTTP request | Description
 - [StorageRecordOperation](docs/Model/StorageRecordOperation.md)
 - [StringParameter](docs/Model/StringParameter.md)
 - [Symbols](docs/Model/Symbols.md)
+- [Ticket](docs/Model/Ticket.md)
+- [TicketBalance](docs/Model/TicketBalance.md)
+- [TicketBalanceAccount](docs/Model/TicketBalanceAccount.md)
+- [TicketBalanceShort](docs/Model/TicketBalanceShort.md)
+- [TicketBalanceShortTicket](docs/Model/TicketBalanceShortTicket.md)
+- [TicketBalanceTicket](docs/Model/TicketBalanceTicket.md)
+- [TicketFirstMinter](docs/Model/TicketFirstMinter.md)
+- [TicketInfo](docs/Model/TicketInfo.md)
+- [TicketInfoShort](docs/Model/TicketInfoShort.md)
+- [TicketRawContent](docs/Model/TicketRawContent.md)
+- [TicketRawType](docs/Model/TicketRawType.md)
+- [TicketTicketer](docs/Model/TicketTicketer.md)
+- [TicketTransfer](docs/Model/TicketTransfer.md)
+- [TicketTransferFrom](docs/Model/TicketTransferFrom.md)
+- [TicketTransferTo](docs/Model/TicketTransferTo.md)
+- [TicketsGetTicketBalancesCountBalanceParameter](docs/Model/TicketsGetTicketBalancesCountBalanceParameter.md)
+- [TicketsGetTicketsCountRawTypeParameter](docs/Model/TicketsGetTicketsCountRawTypeParameter.md)
 - [TimestampParameter](docs/Model/TimestampParameter.md)
 - [Token](docs/Model/Token.md)
 - [TokenBalance](docs/Model/TokenBalance.md)
-- [TokenBalanceAccount](docs/Model/TokenBalanceAccount.md)
 - [TokenBalanceShort](docs/Model/TokenBalanceShort.md)
+- [TokenBalanceShortToken](docs/Model/TokenBalanceShortToken.md)
 - [TokenBalanceToken](docs/Model/TokenBalanceToken.md)
 - [TokenContract](docs/Model/TokenContract.md)
 - [TokenFirstMinter](docs/Model/TokenFirstMinter.md)
 - [TokenInfo](docs/Model/TokenInfo.md)
+- [TokenInfoShort](docs/Model/TokenInfoShort.md)
 - [TokenStandardParameter](docs/Model/TokenStandardParameter.md)
 - [TokenTransfer](docs/Model/TokenTransfer.md)
-- [TokenTransferFrom](docs/Model/TokenTransferFrom.md)
 - [TokenTransferTo](docs/Model/TokenTransferTo.md)
-- [TokensGetTokenTransfersCountTransactionIdParameter](docs/Model/TokensGetTokenTransfersCountTransactionIdParameter.md)
 - [TokensGetTokensCountStandardParameter](docs/Model/TokensGetTokensCountStandardParameter.md)
-- [TokensGetTokensCountTokenIdParameter](docs/Model/TokensGetTokensCountTokenIdParameter.md)
 - [TransactionOperation](docs/Model/TransactionOperation.md)
 - [TransactionOperationAllOf](docs/Model/TransactionOperationAllOf.md)
 - [TransferTicketOperation](docs/Model/TransferTicketOperation.md)
@@ -692,6 +824,8 @@ Class | Method | HTTP request | Description
 - [TxRollupSubmitBatchOperationAllOf](docs/Model/TxRollupSubmitBatchOperationAllOf.md)
 - [UnregisteredDelegateError](docs/Model/UnregisteredDelegateError.md)
 - [UnregisteredDelegateErrorAllOf](docs/Model/UnregisteredDelegateErrorAllOf.md)
+- [UnstakeRequest](docs/Model/UnstakeRequest.md)
+- [UnstakeRequestStatusParameter](docs/Model/UnstakeRequestStatusParameter.md)
 - [UpdateConsensusKeyOperation](docs/Model/UpdateConsensusKeyOperation.md)
 - [UpdateConsensusKeyOperationAllOf](docs/Model/UpdateConsensusKeyOperationAllOf.md)
 - [User](docs/Model/User.md)
@@ -725,5 +859,5 @@ hello@bakingbad.dev
 
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: `1.12.1`
+- API version: `1.14.4`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

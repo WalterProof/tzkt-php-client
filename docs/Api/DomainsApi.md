@@ -41,13 +41,13 @@ $reverse = new \Bzzhh\Tzkt\Model\AccountsGetStakedParameter(); // AccountsGetSta
 $expiration = new \Bzzhh\Tzkt\Model\AccountsGetOperationsTimestampParameter(); // AccountsGetOperationsTimestampParameter | Filter by the domain expiration.   Click on the parameter to expand more details.
 $data = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filter by the domain data.   Note, this parameter supports the following format: `data{.path?}{.mode?}=...`, so you can specify a path to a particular field to filter by (for example, `?data.foo=bar`).   Click on the parameter to expand more details.
 $first_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block where the domain was first seen.   Click on the parameter to expand more details.
-$first_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the block where the domain was first seen.   Click on the parameter to expand more details.
+$first_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysFirstTimeParameter(); // BigMapsGetBigMapKeysFirstTimeParameter | Filter by timestamp (ISO 8601) of the block where the domain was first seen.   Click on the parameter to expand more details.
 $last_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block where the domain was last seen.   Click on the parameter to expand more details.
-$last_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the block where the domain was last seen.   Click on the parameter to expand more details.
+$last_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysFirstTimeParameter(); // BigMapsGetBigMapKeysFirstTimeParameter | Filter by timestamp (ISO 8601) of the block where the domain was last seen.   Click on the parameter to expand more details.
 $sort = new \Bzzhh\Tzkt\Model\AccountsGetSortParameter(); // AccountsGetSortParameter | Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details.
 $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffsetParameter | Specifies which or how many items should be skipped.   Click on the parameter to expand more details.
 $limit = 56; // int | Maximum number of items to return.
-$select = new \Bzzhh\Tzkt\Model\DomainsGetSelectParameter(); // DomainsGetSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
+$select = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysSelectParameter(); // BigMapsGetBigMapKeysSelectParameter | Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection (for example, `?select=balance,token.metadata.symbol as token,...`).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details.
 
 try {
     $result = $apiInstance->domainsGet($id, $level, $name, $owner, $address, $reverse, $expiration, $data, $first_level, $first_time, $last_level, $last_time, $sort, $offset, $limit, $select);
@@ -70,13 +70,13 @@ try {
 | **expiration** | [**AccountsGetOperationsTimestampParameter**](../Model/.md)| Filter by the domain expiration.   Click on the parameter to expand more details. | [optional] |
 | **data** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filter by the domain data.   Note, this parameter supports the following format: &#x60;data{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?data.foo&#x3D;bar&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **first_level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block where the domain was first seen.   Click on the parameter to expand more details. | [optional] |
-| **first_time** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the domain was first seen.   Click on the parameter to expand more details. | [optional] |
+| **first_time** | [**BigMapsGetBigMapKeysFirstTimeParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the domain was first seen.   Click on the parameter to expand more details. | [optional] |
 | **last_level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block where the domain was last seen.   Click on the parameter to expand more details. | [optional] |
-| **last_time** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the domain was last seen.   Click on the parameter to expand more details. | [optional] |
+| **last_time** | [**BigMapsGetBigMapKeysFirstTimeParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the domain was last seen.   Click on the parameter to expand more details. | [optional] |
 | **sort** | [**AccountsGetSortParameter**](../Model/.md)| Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. | [optional] |
 | **offset** | [**AccountsGetOffsetParameter**](../Model/.md)| Specifies which or how many items should be skipped.   Click on the parameter to expand more details. | [optional] |
 | **limit** | **int**| Maximum number of items to return. | [optional] |
-| **select** | [**DomainsGetSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
+| **select** | [**BigMapsGetBigMapKeysSelectParameter**](../Model/.md)| Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. | [optional] |
 
 ### Return type
 
@@ -183,9 +183,9 @@ $reverse = new \Bzzhh\Tzkt\Model\AccountsGetStakedParameter(); // AccountsGetSta
 $expiration = new \Bzzhh\Tzkt\Model\AccountsGetOperationsTimestampParameter(); // AccountsGetOperationsTimestampParameter | Filter by the domain expiration.   Click on the parameter to expand more details.
 $data = new \Bzzhh\Tzkt\Model\AccountsGetOperationsParameterParameter(); // AccountsGetOperationsParameterParameter | Filter by the domain data.   Note, this parameter supports the following format: `data{.path?}{.mode?}=...`, so you can specify a path to a particular field to filter by (for example, `?data.foo=bar`).   Click on the parameter to expand more details.
 $first_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block where the domain was first seen.   Click on the parameter to expand more details.
-$first_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the block where the domain was first seen.   Click on the parameter to expand more details.
+$first_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysFirstTimeParameter(); // BigMapsGetBigMapKeysFirstTimeParameter | Filter by timestamp (ISO 8601) of the block where the domain was first seen.   Click on the parameter to expand more details.
 $last_level = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filter by level of the block where the domain was last seen.   Click on the parameter to expand more details.
-$last_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapUpdatesTimestampParameter(); // BigMapsGetBigMapUpdatesTimestampParameter | Filter by timestamp (ISO 8601) of the block where the domain was last seen.   Click on the parameter to expand more details.
+$last_time = new \Bzzhh\Tzkt\Model\BigMapsGetBigMapKeysFirstTimeParameter(); // BigMapsGetBigMapKeysFirstTimeParameter | Filter by timestamp (ISO 8601) of the block where the domain was last seen.   Click on the parameter to expand more details.
 
 try {
     $result = $apiInstance->domainsGetCount($id, $level, $name, $owner, $address, $reverse, $expiration, $data, $first_level, $first_time, $last_level, $last_time);
@@ -208,9 +208,9 @@ try {
 | **expiration** | [**AccountsGetOperationsTimestampParameter**](../Model/.md)| Filter by the domain expiration.   Click on the parameter to expand more details. | [optional] |
 | **data** | [**AccountsGetOperationsParameterParameter**](../Model/.md)| Filter by the domain data.   Note, this parameter supports the following format: &#x60;data{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?data.foo&#x3D;bar&#x60;).   Click on the parameter to expand more details. | [optional] |
 | **first_level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block where the domain was first seen.   Click on the parameter to expand more details. | [optional] |
-| **first_time** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the domain was first seen.   Click on the parameter to expand more details. | [optional] |
+| **first_time** | [**BigMapsGetBigMapKeysFirstTimeParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the domain was first seen.   Click on the parameter to expand more details. | [optional] |
 | **last_level** | [**AccountsGetIdParameter**](../Model/.md)| Filter by level of the block where the domain was last seen.   Click on the parameter to expand more details. | [optional] |
-| **last_time** | [**BigMapsGetBigMapUpdatesTimestampParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the domain was last seen.   Click on the parameter to expand more details. | [optional] |
+| **last_time** | [**BigMapsGetBigMapKeysFirstTimeParameter**](../Model/.md)| Filter by timestamp (ISO 8601) of the block where the domain was last seen.   Click on the parameter to expand more details. | [optional] |
 
 ### Return type
 

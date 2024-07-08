@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **active_tokens_count** | **int** | Number of account tokens with non-zero balances | [optional]
 **token_balances_count** | **int** | Number of tokens the account ever had | [optional]
 **token_transfers_count** | **int** | Number of token transfers from/to the account | [optional]
+**active_tickets_count** | **int** | Number of tickets the account owns. | [optional]
+**ticket_balances_count** | **int** | Number of tickets the account ever owned. | [optional]
+**ticket_transfers_count** | **int** | Number of ticket transfers from/to the account. | [optional]
 **num_transactions** | **int** | Number of transaction operations related to the account | [optional]
 **tx_rollup_origination_count** | **int** | Number of tx rollup origination operations related to the account | [optional]
 **tx_rollup_submit_batch_count** | **int** | Number of tx rollup submit batch operations related to the account | [optional]
@@ -28,6 +31,6 @@ Name | Type | Description | Notes
 **last_activity** | **int** | Height of the block in which the ghost contract state was changed last time | [optional]
 **last_activity_time** | **\DateTime** | Datetime of the block in which the ghost contract state was changed last time (ISO 8601, e.g. &#x60;2020-02-20T02:40:57Z&#x60;) | [optional]
 **extras** | **mixed** | Off-chain extras | [optional]
-**metadata** | [**OneOfObject**](OneOfObject.md) | [DEPRECATED] | [optional]
+**metadata** | **mixed** | [DEPRECATED] | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

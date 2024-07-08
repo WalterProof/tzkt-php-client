@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **level** | **int** | Level of the block, at which the token transfer was made.   **[sortable]** | [optional]
 **timestamp** | **\DateTime** | Timestamp of the block, at which the token transfer was made. | [optional]
 **token** | [**\Bzzhh\Tzkt\Model\TokenBalanceToken**](TokenBalanceToken.md) |  | [optional]
-**from** | [**\Bzzhh\Tzkt\Model\TokenTransferFrom**](TokenTransferFrom.md) |  | [optional]
+**from** | [**\Bzzhh\Tzkt\Model\TicketTransferFrom**](TicketTransferFrom.md) |  | [optional]
 **to** | [**\Bzzhh\Tzkt\Model\TokenTransferTo**](TokenTransferTo.md) |  | [optional]
 **amount** | **string** | Amount of tokens transferred (raw value, not divided by &#x60;decimals&#x60;).   **[sortable]** | [optional]
 **transaction_id** | **int** | Internal TzKT id of the transaction operation, caused the token transfer. | [optional]

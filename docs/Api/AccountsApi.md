@@ -21,7 +21,7 @@ All URIs are relative to https://api.tzkt.io, except if the operation defines an
 ## `accountsGet()`
 
 ```php
-accountsGet($id, $address, $type, $kind, $delegate, $balance, $staked, $last_activity, $select, $sort, $offset, $limit): \Bzzhh\Tzkt\Model\Account[]
+accountsGet($id, $address, $type, $kind, $delegate, $staked_pseudotokens, $balance, $staked, $last_activity, $select, $sort, $offset, $limit): \Bzzhh\Tzkt\Model\Account[]
 ```
 
 Get accounts
@@ -46,6 +46,7 @@ $address = new \Bzzhh\Tzkt\Model\AccountsGetAddressParameter(); // AccountsGetAd
 $type = new \Bzzhh\Tzkt\Model\AccountsGetTypeParameter(); // AccountsGetTypeParameter | Filters accounts by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`).
 $kind = new \Bzzhh\Tzkt\Model\AccountsGetKindParameter(); // AccountsGetKindParameter | Filters accounts by contract kind (`delegator_contract` or `smart_contract`)
 $delegate = new \Bzzhh\Tzkt\Model\AccountsGetDelegateParameter(); // AccountsGetDelegateParameter | Filters accounts by delegate. Allowed fields for `.eqx` mode: none.
+$staked_pseudotokens = new \Bzzhh\Tzkt\Model\AccountsGetStakedPseudotokensParameter(); // AccountsGetStakedPseudotokensParameter | Filters accounts by amount of staked pseudotokens.
 $balance = new \Bzzhh\Tzkt\Model\AccountsGetBalanceParameter(); // AccountsGetBalanceParameter | Filters accounts by balance
 $staked = new \Bzzhh\Tzkt\Model\AccountsGetStakedParameter(); // AccountsGetStakedParameter | Filters accounts by participation in staking
 $last_activity = new \Bzzhh\Tzkt\Model\AccountsGetIdParameter(); // AccountsGetIdParameter | Filters accounts by last activity level (where the account was updated)
@@ -55,7 +56,7 @@ $offset = new \Bzzhh\Tzkt\Model\AccountsGetOffsetParameter(); // AccountsGetOffs
 $limit = 100; // int | Maximum number of items to return
 
 try {
-    $result = $apiInstance->accountsGet($id, $address, $type, $kind, $delegate, $balance, $staked, $last_activity, $select, $sort, $offset, $limit);
+    $result = $apiInstance->accountsGet($id, $address, $type, $kind, $delegate, $staked_pseudotokens, $balance, $staked, $last_activity, $select, $sort, $offset, $limit);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->accountsGet: ', $e->getMessage(), PHP_EOL;
@@ -71,6 +72,7 @@ try {
 | **type** | [**AccountsGetTypeParameter**](../Model/.md)| Filters accounts by type (&#x60;user&#x60;, &#x60;delegate&#x60;, &#x60;contract&#x60;, &#x60;rollup&#x60;, &#x60;smart_rollup&#x60;, &#x60;ghost&#x60;). | [optional] |
 | **kind** | [**AccountsGetKindParameter**](../Model/.md)| Filters accounts by contract kind (&#x60;delegator_contract&#x60; or &#x60;smart_contract&#x60;) | [optional] |
 | **delegate** | [**AccountsGetDelegateParameter**](../Model/.md)| Filters accounts by delegate. Allowed fields for &#x60;.eqx&#x60; mode: none. | [optional] |
+| **staked_pseudotokens** | [**AccountsGetStakedPseudotokensParameter**](../Model/.md)| Filters accounts by amount of staked pseudotokens. | [optional] |
 | **balance** | [**AccountsGetBalanceParameter**](../Model/.md)| Filters accounts by balance | [optional] |
 | **staked** | [**AccountsGetStakedParameter**](../Model/.md)| Filters accounts by participation in staking | [optional] |
 | **last_activity** | [**AccountsGetIdParameter**](../Model/.md)| Filters accounts by last activity level (where the account was updated) | [optional] |
@@ -160,7 +162,7 @@ accountsGetBalanceAtDate($address, $datetime): int
 
 Get balance at date
 
-Returns account balance at the specified datetime
+Returns account balance* at the specified datetime.   \\* - for non-baker tz-accounts historical balances do not include staked tez, because stakers do not really have staked tez on their balance, they have staking pseudotokens instead. If you want to get a full historical balance, including staked tez, use the Tezos node RPC: `/chains/main/blocks/{level}/context/contracts/{address}/full_balance`.
 
 ### Example
 
@@ -218,7 +220,7 @@ accountsGetBalanceAtLevel($address, $level): int
 
 Get balance at level
 
-Returns account balance at the specified block
+Returns account balance* at the specified block.   \\* - for non-baker tz-accounts historical balances do not include staked tez, because stakers do not really have staked tez on their balance, they have staking pseudotokens instead. If you want to get a full historical balance, including staked tez, use the Tezos node RPC: `/chains/main/blocks/{level}/context/contracts/{address}/full_balance`.
 
 ### Example
 
@@ -276,7 +278,7 @@ accountsGetBalanceHistory($address, $step, $select, $sort, $offset, $limit, $quo
 
 Get balance history
 
-Returns time series with historical balances (only changes, without duplicates).
+Returns time series with historical balances* (only changes, without duplicates).   \\* - for non-baker tz-accounts historical balances do not include staked tez, because stakers do not really have staked tez on their balance, they have staking pseudotokens instead. If you want to get a full historical balance, including staked tez, use the Tezos node RPC: `/chains/main/blocks/{level}/context/contracts/{address}/full_balance`.
 
 ### Example
 

@@ -14,7 +14,12 @@ Name | Type | Description | Notes
 **cycle** | **int** | Cycle in which the operation was included | [optional]
 **solution** | **string** | Vdf solution | [optional]
 **proof** | **string** | Vdf proof | [optional]
-**reward** | **int** | Baker reward for including vdf revelation into a block | [optional]
+**reward_delegated** | **int** | Reward, corresponding to delegated stake, paid to baker&#39;s liquid balance (micro tez) (it is not frozen and can be spent immediately). | [optional]
+**reward_staked_own** | **int** | Reward, corresponding to baker&#39;s own stake, paid to baker&#39;s own staked balance (micro tez) (it is frozen and belongs to the baker). | [optional]
+**reward_staked_edge** | **int** | Reward, corresponding to baker&#39;s edge from external stake, paid to baker&#39;s own staked balance (micro tez) (it is frozen and belongs to the baker). | [optional]
+**reward_staked_shared** | **int** | Reward, corresponding to baker&#39;s external stake, paid to baker&#39;s external staked balance (micro tez) (it is frozen and belongs to baker&#39;s stakers). | [optional]
 **quote** | [**OneOfQuoteShort**](OneOfQuoteShort.md) | Injected historical quote at the time of operation | [optional]
+**reward_liquid** | **int** | [DEPRECATED] | [optional]
+**reward** | **int** | [DEPRECATED] | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

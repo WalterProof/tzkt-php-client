@@ -13,9 +13,9 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:   - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Mumbainet: `https://api.mumbainet.tzkt.io/` ([view docs](https://api.mumbainet.tzkt.io)) - Nairobinet: `https://api.nairobinet.tzkt.io/` ([view docs](https://api.nairobinet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer.  You can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community  to help developers build more services and dapps on top of Tezos.  TzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service, because you can always clone, build and run it yourself to have full control over all the components.  Feel free to contact us if you have any questions or feature requests. Your feedback is much appreciated!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊  # Get Started  There are two API services provided for public use: - **Free TzKT API** with free anonymous access; - **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.  You can find more details about differences between available tiers [here](https://tzkt.io/api).  ## Free TzKT API  Free-tier TzKT API is the best way to get started and explore available Tezos data and API functionality. It doesn't require authorization and is free for everyone and for both commercial and non-commercial use.  > #### Note: attribution required If you use free-tier TzKT API, you **must** mention it on your website or application by placing the label \"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Parisnet: `https://api.parisnet.tzkt.io/` ([view docs](https://api.parisnet.tzkt.io))  ### Sending Requests  To send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network (for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint (for example, chain's head: `/v1/head`), that's pretty much it:   ```bash curl https://api.tzkt.io/v1/head ```  Read through this documentation to explore available endpoints, query parameters (note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.) and response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits.  If you exceed the limit, the API will respond with `HTTP 429` status code.  ## TzKT Pro  TzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA. TzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io)) - Testnets: *let us know if you need TzKT Pro for testnets*  ### Authorization  To access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription. This can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.  Note that you can have multiple API keys within a single subscription.  Keep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories. If your key was compromised, just let us know and we will issue a new one.  Also note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted, but query string is not, so the key can be unintentionally exposed to third parties.  ### Sending Requests  Sending a request with the API key passed as a query string parameter:  ```bash curl https://pro.tzkt.io/v1/head?apikey={your_key} ```  Sending a request with the API key passed via an HTTP header:  ```bash curl https://pro.tzkt.io/v1/head \\     -H 'apikey: {your_key}' ```  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.  Also, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests and the time remaining (in seconds) until the quota is reset. Here's an example:  ``` RateLimit-Limit: 50 RateLimit-Remaining: 49 RateLimit-Reset: 1 ```  It also sends general information about your rate limits per second and per day:  ``` X-RateLimit-Limit-Second: 50 X-RateLimit-Remaining-Second: 49 X-RateLimit-Limit-Day: 3000000 X-RateLimit-Remaining-Day: 2994953 ```  If you exceed the limit, the API will respond with `HTTP 429` status code.
  *
- * The version of the OpenAPI document: 1.12.1
+ * The version of the OpenAPI document: 1.14.4
  * Contact: hello@bakingbad.dev
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.2.1
@@ -63,16 +63,23 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'start_time' => '\DateTime',
         'last_level' => 'int',
         'end_time' => '\DateTime',
-        'snapshot_index' => 'int',
         'snapshot_level' => 'int',
         'random_seed' => 'string',
         'total_bakers' => 'int',
+        'total_baking_power' => 'int',
+        'block_reward' => 'int',
+        'block_bonus_per_slot' => 'int',
+        'endorsement_reward_per_slot' => 'int',
+        'nonce_revelation_reward' => 'int',
+        'vdf_revelation_reward' => 'int',
+        'quote' => '\Bzzhh\Tzkt\Model\CycleQuote',
+        'snapshot_index' => 'int',
+        'lb_subsidy' => 'int',
         'total_staking' => 'int',
         'total_delegators' => 'int',
         'total_delegated' => 'int',
         'selected_bakers' => 'int',
         'selected_stake' => 'int',
-        'quote' => '\Bzzhh\Tzkt\Model\CycleQuote',
         'total_rolls' => 'int'
     ];
 
@@ -89,16 +96,23 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'start_time' => 'date-time',
         'last_level' => 'int32',
         'end_time' => 'date-time',
-        'snapshot_index' => 'int32',
         'snapshot_level' => 'int32',
         'random_seed' => null,
         'total_bakers' => 'int32',
+        'total_baking_power' => 'int64',
+        'block_reward' => 'int64',
+        'block_bonus_per_slot' => 'int64',
+        'endorsement_reward_per_slot' => 'int64',
+        'nonce_revelation_reward' => 'int64',
+        'vdf_revelation_reward' => 'int64',
+        'quote' => null,
+        'snapshot_index' => 'int32',
+        'lb_subsidy' => 'int64',
         'total_staking' => 'int64',
         'total_delegators' => 'int32',
         'total_delegated' => 'int64',
         'selected_bakers' => 'int32',
         'selected_stake' => 'int64',
-        'quote' => null,
         'total_rolls' => 'int32'
     ];
 
@@ -113,16 +127,23 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
 		'start_time' => false,
 		'last_level' => false,
 		'end_time' => false,
-		'snapshot_index' => false,
 		'snapshot_level' => false,
 		'random_seed' => true,
 		'total_bakers' => false,
+		'total_baking_power' => false,
+		'block_reward' => false,
+		'block_bonus_per_slot' => false,
+		'endorsement_reward_per_slot' => false,
+		'nonce_revelation_reward' => false,
+		'vdf_revelation_reward' => false,
+		'quote' => true,
+		'snapshot_index' => false,
+		'lb_subsidy' => false,
 		'total_staking' => false,
 		'total_delegators' => false,
 		'total_delegated' => false,
 		'selected_bakers' => false,
 		'selected_stake' => false,
-		'quote' => true,
 		'total_rolls' => false
     ];
 
@@ -217,16 +238,23 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'start_time' => 'startTime',
         'last_level' => 'lastLevel',
         'end_time' => 'endTime',
-        'snapshot_index' => 'snapshotIndex',
         'snapshot_level' => 'snapshotLevel',
         'random_seed' => 'randomSeed',
         'total_bakers' => 'totalBakers',
+        'total_baking_power' => 'totalBakingPower',
+        'block_reward' => 'blockReward',
+        'block_bonus_per_slot' => 'blockBonusPerSlot',
+        'endorsement_reward_per_slot' => 'endorsementRewardPerSlot',
+        'nonce_revelation_reward' => 'nonceRevelationReward',
+        'vdf_revelation_reward' => 'vdfRevelationReward',
+        'quote' => 'quote',
+        'snapshot_index' => 'snapshotIndex',
+        'lb_subsidy' => 'lbSubsidy',
         'total_staking' => 'totalStaking',
         'total_delegators' => 'totalDelegators',
         'total_delegated' => 'totalDelegated',
         'selected_bakers' => 'selectedBakers',
         'selected_stake' => 'selectedStake',
-        'quote' => 'quote',
         'total_rolls' => 'totalRolls'
     ];
 
@@ -241,16 +269,23 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'start_time' => 'setStartTime',
         'last_level' => 'setLastLevel',
         'end_time' => 'setEndTime',
-        'snapshot_index' => 'setSnapshotIndex',
         'snapshot_level' => 'setSnapshotLevel',
         'random_seed' => 'setRandomSeed',
         'total_bakers' => 'setTotalBakers',
+        'total_baking_power' => 'setTotalBakingPower',
+        'block_reward' => 'setBlockReward',
+        'block_bonus_per_slot' => 'setBlockBonusPerSlot',
+        'endorsement_reward_per_slot' => 'setEndorsementRewardPerSlot',
+        'nonce_revelation_reward' => 'setNonceRevelationReward',
+        'vdf_revelation_reward' => 'setVdfRevelationReward',
+        'quote' => 'setQuote',
+        'snapshot_index' => 'setSnapshotIndex',
+        'lb_subsidy' => 'setLbSubsidy',
         'total_staking' => 'setTotalStaking',
         'total_delegators' => 'setTotalDelegators',
         'total_delegated' => 'setTotalDelegated',
         'selected_bakers' => 'setSelectedBakers',
         'selected_stake' => 'setSelectedStake',
-        'quote' => 'setQuote',
         'total_rolls' => 'setTotalRolls'
     ];
 
@@ -265,16 +300,23 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         'start_time' => 'getStartTime',
         'last_level' => 'getLastLevel',
         'end_time' => 'getEndTime',
-        'snapshot_index' => 'getSnapshotIndex',
         'snapshot_level' => 'getSnapshotLevel',
         'random_seed' => 'getRandomSeed',
         'total_bakers' => 'getTotalBakers',
+        'total_baking_power' => 'getTotalBakingPower',
+        'block_reward' => 'getBlockReward',
+        'block_bonus_per_slot' => 'getBlockBonusPerSlot',
+        'endorsement_reward_per_slot' => 'getEndorsementRewardPerSlot',
+        'nonce_revelation_reward' => 'getNonceRevelationReward',
+        'vdf_revelation_reward' => 'getVdfRevelationReward',
+        'quote' => 'getQuote',
+        'snapshot_index' => 'getSnapshotIndex',
+        'lb_subsidy' => 'getLbSubsidy',
         'total_staking' => 'getTotalStaking',
         'total_delegators' => 'getTotalDelegators',
         'total_delegated' => 'getTotalDelegated',
         'selected_bakers' => 'getSelectedBakers',
         'selected_stake' => 'getSelectedStake',
-        'quote' => 'getQuote',
         'total_rolls' => 'getTotalRolls'
     ];
 
@@ -340,16 +382,23 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('start_time', $data ?? [], null);
         $this->setIfExists('last_level', $data ?? [], null);
         $this->setIfExists('end_time', $data ?? [], null);
-        $this->setIfExists('snapshot_index', $data ?? [], null);
         $this->setIfExists('snapshot_level', $data ?? [], null);
         $this->setIfExists('random_seed', $data ?? [], null);
         $this->setIfExists('total_bakers', $data ?? [], null);
+        $this->setIfExists('total_baking_power', $data ?? [], null);
+        $this->setIfExists('block_reward', $data ?? [], null);
+        $this->setIfExists('block_bonus_per_slot', $data ?? [], null);
+        $this->setIfExists('endorsement_reward_per_slot', $data ?? [], null);
+        $this->setIfExists('nonce_revelation_reward', $data ?? [], null);
+        $this->setIfExists('vdf_revelation_reward', $data ?? [], null);
+        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('snapshot_index', $data ?? [], null);
+        $this->setIfExists('lb_subsidy', $data ?? [], null);
         $this->setIfExists('total_staking', $data ?? [], null);
         $this->setIfExists('total_delegators', $data ?? [], null);
         $this->setIfExists('total_delegated', $data ?? [], null);
         $this->setIfExists('selected_bakers', $data ?? [], null);
         $this->setIfExists('selected_stake', $data ?? [], null);
-        $this->setIfExists('quote', $data ?? [], null);
         $this->setIfExists('total_rolls', $data ?? [], null);
     }
 
@@ -541,35 +590,6 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets snapshot_index
-     *
-     * @return int|null
-     */
-    public function getSnapshotIndex()
-    {
-        return $this->container['snapshot_index'];
-    }
-
-    /**
-     * Sets snapshot_index
-     *
-     * @param int|null $snapshot_index Index of the snapshot
-     *
-     * @return self
-     */
-    public function setSnapshotIndex($snapshot_index)
-    {
-
-        if (is_null($snapshot_index)) {
-            throw new \InvalidArgumentException('non-nullable snapshot_index cannot be null');
-        }
-
-        $this->container['snapshot_index'] = $snapshot_index;
-
-        return $this;
-    }
-
-    /**
      * Gets snapshot_level
      *
      * @return int|null
@@ -664,146 +684,175 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets total_staking
+     * Gets total_baking_power
      *
      * @return int|null
      */
-    public function getTotalStaking()
+    public function getTotalBakingPower()
     {
-        return $this->container['total_staking'];
+        return $this->container['total_baking_power'];
     }
 
     /**
-     * Sets total_staking
+     * Sets total_baking_power
      *
-     * @param int|null $total_staking Total staking balance of all active in this cycle bakers
+     * @param int|null $total_baking_power Total baking power of all active in this cycle bakers
      *
      * @return self
      */
-    public function setTotalStaking($total_staking)
+    public function setTotalBakingPower($total_baking_power)
     {
 
-        if (is_null($total_staking)) {
-            throw new \InvalidArgumentException('non-nullable total_staking cannot be null');
+        if (is_null($total_baking_power)) {
+            throw new \InvalidArgumentException('non-nullable total_baking_power cannot be null');
         }
 
-        $this->container['total_staking'] = $total_staking;
+        $this->container['total_baking_power'] = $total_baking_power;
 
         return $this;
     }
 
     /**
-     * Gets total_delegators
+     * Gets block_reward
      *
      * @return int|null
      */
-    public function getTotalDelegators()
+    public function getBlockReward()
     {
-        return $this->container['total_delegators'];
+        return $this->container['block_reward'];
     }
 
     /**
-     * Sets total_delegators
+     * Sets block_reward
      *
-     * @param int|null $total_delegators Total number of active bakers' delegators
+     * @param int|null $block_reward Fixed reward paid to the block payload proposer in this cycle (micro tez)
      *
      * @return self
      */
-    public function setTotalDelegators($total_delegators)
+    public function setBlockReward($block_reward)
     {
 
-        if (is_null($total_delegators)) {
-            throw new \InvalidArgumentException('non-nullable total_delegators cannot be null');
+        if (is_null($block_reward)) {
+            throw new \InvalidArgumentException('non-nullable block_reward cannot be null');
         }
 
-        $this->container['total_delegators'] = $total_delegators;
+        $this->container['block_reward'] = $block_reward;
 
         return $this;
     }
 
     /**
-     * Gets total_delegated
+     * Gets block_bonus_per_slot
      *
      * @return int|null
      */
-    public function getTotalDelegated()
+    public function getBlockBonusPerSlot()
     {
-        return $this->container['total_delegated'];
+        return $this->container['block_bonus_per_slot'];
     }
 
     /**
-     * Sets total_delegated
+     * Sets block_bonus_per_slot
      *
-     * @param int|null $total_delegated Total balance delegated to active bakers
+     * @param int|null $block_bonus_per_slot Bonus reward paid to the block producer in this cycle (micro tez)
      *
      * @return self
      */
-    public function setTotalDelegated($total_delegated)
+    public function setBlockBonusPerSlot($block_bonus_per_slot)
     {
 
-        if (is_null($total_delegated)) {
-            throw new \InvalidArgumentException('non-nullable total_delegated cannot be null');
+        if (is_null($block_bonus_per_slot)) {
+            throw new \InvalidArgumentException('non-nullable block_bonus_per_slot cannot be null');
         }
 
-        $this->container['total_delegated'] = $total_delegated;
+        $this->container['block_bonus_per_slot'] = $block_bonus_per_slot;
 
         return $this;
     }
 
     /**
-     * Gets selected_bakers
+     * Gets endorsement_reward_per_slot
      *
      * @return int|null
      */
-    public function getSelectedBakers()
+    public function getEndorsementRewardPerSlot()
     {
-        return $this->container['selected_bakers'];
+        return $this->container['endorsement_reward_per_slot'];
     }
 
     /**
-     * Sets selected_bakers
+     * Sets endorsement_reward_per_slot
      *
-     * @param int|null $selected_bakers Total number of bakers in stake distribution for the cycle
+     * @param int|null $endorsement_reward_per_slot Reward for endorsing in this cycle (micro tez)
      *
      * @return self
      */
-    public function setSelectedBakers($selected_bakers)
+    public function setEndorsementRewardPerSlot($endorsement_reward_per_slot)
     {
 
-        if (is_null($selected_bakers)) {
-            throw new \InvalidArgumentException('non-nullable selected_bakers cannot be null');
+        if (is_null($endorsement_reward_per_slot)) {
+            throw new \InvalidArgumentException('non-nullable endorsement_reward_per_slot cannot be null');
         }
 
-        $this->container['selected_bakers'] = $selected_bakers;
+        $this->container['endorsement_reward_per_slot'] = $endorsement_reward_per_slot;
 
         return $this;
     }
 
     /**
-     * Gets selected_stake
+     * Gets nonce_revelation_reward
      *
      * @return int|null
      */
-    public function getSelectedStake()
+    public function getNonceRevelationReward()
     {
-        return $this->container['selected_stake'];
+        return $this->container['nonce_revelation_reward'];
     }
 
     /**
-     * Sets selected_stake
+     * Sets nonce_revelation_reward
      *
-     * @param int|null $selected_stake Total stake of bakers in stake distribution for the cycle
+     * @param int|null $nonce_revelation_reward Reward for seed nonce revelation in this cycle (micro tez)
      *
      * @return self
      */
-    public function setSelectedStake($selected_stake)
+    public function setNonceRevelationReward($nonce_revelation_reward)
     {
 
-        if (is_null($selected_stake)) {
-            throw new \InvalidArgumentException('non-nullable selected_stake cannot be null');
+        if (is_null($nonce_revelation_reward)) {
+            throw new \InvalidArgumentException('non-nullable nonce_revelation_reward cannot be null');
         }
 
-        $this->container['selected_stake'] = $selected_stake;
+        $this->container['nonce_revelation_reward'] = $nonce_revelation_reward;
+
+        return $this;
+    }
+
+    /**
+     * Gets vdf_revelation_reward
+     *
+     * @return int|null
+     */
+    public function getVdfRevelationReward()
+    {
+        return $this->container['vdf_revelation_reward'];
+    }
+
+    /**
+     * Sets vdf_revelation_reward
+     *
+     * @param int|null $vdf_revelation_reward Reward for vdf revelation in this cycle (micro tez)
+     *
+     * @return self
+     */
+    public function setVdfRevelationReward($vdf_revelation_reward)
+    {
+
+        if (is_null($vdf_revelation_reward)) {
+            throw new \InvalidArgumentException('non-nullable vdf_revelation_reward cannot be null');
+        }
+
+        $this->container['vdf_revelation_reward'] = $vdf_revelation_reward;
 
         return $this;
     }
@@ -840,6 +889,209 @@ class Cycle implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets snapshot_index
+     *
+     * @return int|null
+     */
+    public function getSnapshotIndex()
+    {
+        return $this->container['snapshot_index'];
+    }
+
+    /**
+     * Sets snapshot_index
+     *
+     * @param int|null $snapshot_index [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setSnapshotIndex($snapshot_index)
+    {
+
+        if (is_null($snapshot_index)) {
+            throw new \InvalidArgumentException('non-nullable snapshot_index cannot be null');
+        }
+
+        $this->container['snapshot_index'] = $snapshot_index;
+
+        return $this;
+    }
+
+    /**
+     * Gets lb_subsidy
+     *
+     * @return int|null
+     */
+    public function getLbSubsidy()
+    {
+        return $this->container['lb_subsidy'];
+    }
+
+    /**
+     * Sets lb_subsidy
+     *
+     * @param int|null $lb_subsidy [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setLbSubsidy($lb_subsidy)
+    {
+
+        if (is_null($lb_subsidy)) {
+            throw new \InvalidArgumentException('non-nullable lb_subsidy cannot be null');
+        }
+
+        $this->container['lb_subsidy'] = $lb_subsidy;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_staking
+     *
+     * @return int|null
+     */
+    public function getTotalStaking()
+    {
+        return $this->container['total_staking'];
+    }
+
+    /**
+     * Sets total_staking
+     *
+     * @param int|null $total_staking [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setTotalStaking($total_staking)
+    {
+
+        if (is_null($total_staking)) {
+            throw new \InvalidArgumentException('non-nullable total_staking cannot be null');
+        }
+
+        $this->container['total_staking'] = $total_staking;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_delegators
+     *
+     * @return int|null
+     */
+    public function getTotalDelegators()
+    {
+        return $this->container['total_delegators'];
+    }
+
+    /**
+     * Sets total_delegators
+     *
+     * @param int|null $total_delegators [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setTotalDelegators($total_delegators)
+    {
+
+        if (is_null($total_delegators)) {
+            throw new \InvalidArgumentException('non-nullable total_delegators cannot be null');
+        }
+
+        $this->container['total_delegators'] = $total_delegators;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_delegated
+     *
+     * @return int|null
+     */
+    public function getTotalDelegated()
+    {
+        return $this->container['total_delegated'];
+    }
+
+    /**
+     * Sets total_delegated
+     *
+     * @param int|null $total_delegated [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setTotalDelegated($total_delegated)
+    {
+
+        if (is_null($total_delegated)) {
+            throw new \InvalidArgumentException('non-nullable total_delegated cannot be null');
+        }
+
+        $this->container['total_delegated'] = $total_delegated;
+
+        return $this;
+    }
+
+    /**
+     * Gets selected_bakers
+     *
+     * @return int|null
+     */
+    public function getSelectedBakers()
+    {
+        return $this->container['selected_bakers'];
+    }
+
+    /**
+     * Sets selected_bakers
+     *
+     * @param int|null $selected_bakers [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setSelectedBakers($selected_bakers)
+    {
+
+        if (is_null($selected_bakers)) {
+            throw new \InvalidArgumentException('non-nullable selected_bakers cannot be null');
+        }
+
+        $this->container['selected_bakers'] = $selected_bakers;
+
+        return $this;
+    }
+
+    /**
+     * Gets selected_stake
+     *
+     * @return int|null
+     */
+    public function getSelectedStake()
+    {
+        return $this->container['selected_stake'];
+    }
+
+    /**
+     * Sets selected_stake
+     *
+     * @param int|null $selected_stake [DEPRECATED]
+     *
+     * @return self
+     */
+    public function setSelectedStake($selected_stake)
+    {
+
+        if (is_null($selected_stake)) {
+            throw new \InvalidArgumentException('non-nullable selected_stake cannot be null');
+        }
+
+        $this->container['selected_stake'] = $selected_stake;
 
         return $this;
     }

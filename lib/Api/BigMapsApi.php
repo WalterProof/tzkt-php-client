@@ -12,9 +12,9 @@
 /**
  * TzKT API
  *
- * # Introduction  TzKT Explorer provides free REST API and WebSocket API for accessing detailed Tezos blockchain data and helps developers build more services and applications on top of Tezos. TzKT is an open-source project, so you can easily clone and build it and use it as a self-hosted service to avoid any risks of depending on third-party services.  TzKT API is available for the following Tezos networks with the following base URLs:   - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))  - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Mumbainet: `https://api.mumbainet.tzkt.io/` ([view docs](https://api.mumbainet.tzkt.io)) - Nairobinet: `https://api.nairobinet.tzkt.io/` ([view docs](https://api.nairobinet.tzkt.io))  We also provide a staging environment for testing newest features and pre-updating client applications before deploying to production:  - Mainnet staging: `https://staging.api.tzkt.io/` or `https://staging.api.mainnet.tzkt.io/` ([view docs](https://staging.api.tzkt.io))  Feel free to contact us if you have any questions or feature requests. Your feedback really helps us make TzKT better!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT project [on GitHub](https://github.com/baking-bad/tzkt) ;)  # Terms of Use  TzKT API is free for everyone and for both commercial and non-commercial usage.  If your application or service uses the TzKT API in any forms: directly on frontend or indirectly on backend, you must mention that fact on your website or application by placing the label **\"Powered by TzKT API\"** or **\"Built with TzKT API\"** with a direct link to [tzkt.io](https://tzkt.io).   # Rate Limits  There will be no rate limits as long as our servers can handle the load without additional infrastructure costs. However, any apparent abuse will be prevented by setting targeted rate limits.  Check out [Tezos Explorer API Best Practices](https://baking-bad.org/blog/tag/TzKT/) and in particular [how to optimize requests count](https://baking-bad.org/blog/2020/07/29/tezos-explorer-api-tzkt-how-often-to-make-requests/).  ---
+ * # Introduction  TzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer.  You can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community  to help developers build more services and dapps on top of Tezos.  TzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service, because you can always clone, build and run it yourself to have full control over all the components.  Feel free to contact us if you have any questions or feature requests. Your feedback is much appreciated!  - Discord: https://discord.gg/aG8XKuwsQd - Telegram: https://t.me/baking_bad_chat - Slack: https://tezos-dev.slack.com/archives/CV5NX7F2L - Twitter: https://twitter.com/TezosBakingBad - Email: hello@bakingbad.dev  And don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊  # Get Started  There are two API services provided for public use: - **Free TzKT API** with free anonymous access; - **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.  You can find more details about differences between available tiers [here](https://tzkt.io/api).  ## Free TzKT API  Free-tier TzKT API is the best way to get started and explore available Tezos data and API functionality. It doesn't require authorization and is free for everyone and for both commercial and non-commercial use.  > #### Note: attribution required If you use free-tier TzKT API, you **must** mention it on your website or application by placing the label \"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io)) - Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io)) - Parisnet: `https://api.parisnet.tzkt.io/` ([view docs](https://api.parisnet.tzkt.io))  ### Sending Requests  To send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network (for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint (for example, chain's head: `/v1/head`), that's pretty much it:   ```bash curl https://api.tzkt.io/v1/head ```  Read through this documentation to explore available endpoints, query parameters (note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.) and response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits.  If you exceed the limit, the API will respond with `HTTP 429` status code.  ## TzKT Pro  TzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA. TzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.  It's available for the following Tezos networks with the following base URLs:  - Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io)) - Testnets: *let us know if you need TzKT Pro for testnets*  ### Authorization  To access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription. This can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.  Note that you can have multiple API keys within a single subscription.  Keep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories. If your key was compromised, just let us know and we will issue a new one.  Also note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted, but query string is not, so the key can be unintentionally exposed to third parties.  ### Sending Requests  Sending a request with the API key passed as a query string parameter:  ```bash curl https://pro.tzkt.io/v1/head?apikey={your_key} ```  Sending a request with the API key passed via an HTTP header:  ```bash curl https://pro.tzkt.io/v1/head \\     -H 'apikey: {your_key}' ```  ### Rate Limits  Please, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.  Also, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests and the time remaining (in seconds) until the quota is reset. Here's an example:  ``` RateLimit-Limit: 50 RateLimit-Remaining: 49 RateLimit-Reset: 1 ```  It also sends general information about your rate limits per second and per day:  ``` X-RateLimit-Limit-Second: 50 X-RateLimit-Remaining-Second: 49 X-RateLimit-Limit-Day: 3000000 X-RateLimit-Remaining-Day: 2994953 ```  If you exceed the limit, the API will respond with `HTTP 429` status code.
  *
- * The version of the OpenAPI document: 1.12.1
+ * The version of the OpenAPI document: 1.14.4
  * Contact: hello@bakingbad.dev
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.2.1
@@ -75,10 +75,16 @@ class BigMapsApi
         'bigMapsGetBigMapById' => [
             'application/json',
         ],
+        'bigMapsGetBigMapKeys' => [
+            'application/json',
+        ],
         'bigMapsGetBigMapType' => [
             'application/json',
         ],
         'bigMapsGetBigMapUpdates' => [
+            'application/json',
+        ],
+        'bigMapsGetBigMapUpdates2' => [
             'application/json',
         ],
         'bigMapsGetBigMaps' => [
@@ -449,6 +455,515 @@ class BigMapsApi
     }
 
     /**
+     * Operation bigMapsGetBigMapKeys
+     *
+     * Get bigmap keys
+     *
+     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $bigmap Filter by bigmap ptr.   Click on the parameter to expand more details. (optional)
+     * @param  bool $active Filters by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $hash Filter by key hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filter by key.   Note, this parameter supports the following format: &#x60;key{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?key.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filter by value.   Note, this parameter supports the following format: &#x60;value{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?value.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_level Filter by level of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_time Filter by timestamp (ISO 8601) of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_level Filter by level of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_time Filter by timestamp (ISO 8601) of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $updates Filter by number of actions with the bigmap key.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the &#x60;key&#x60; and &#x60;value&#x60; fields: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapKeys'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\BigMapKeyFull[]
+     */
+    public function bigMapsGetBigMapKeys($id = null, $bigmap = null, $active = null, $hash = null, $key = null, $value = null, $first_level = null, $first_time = null, $last_level = null, $last_time = null, $updates = null, $sort = null, $offset = null, $limit = null, $select = null, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapKeys'][0])
+    {
+        list($response) = $this->bigMapsGetBigMapKeysWithHttpInfo($id, $bigmap, $active, $hash, $key, $value, $first_level, $first_time, $last_level, $last_time, $updates, $sort, $offset, $limit, $select, $micheline, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation bigMapsGetBigMapKeysWithHttpInfo
+     *
+     * Get bigmap keys
+     *
+     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $bigmap Filter by bigmap ptr.   Click on the parameter to expand more details. (optional)
+     * @param  bool $active Filters by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $hash Filter by key hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filter by key.   Note, this parameter supports the following format: &#x60;key{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?key.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filter by value.   Note, this parameter supports the following format: &#x60;value{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?value.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_level Filter by level of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_time Filter by timestamp (ISO 8601) of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_level Filter by level of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_time Filter by timestamp (ISO 8601) of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $updates Filter by number of actions with the bigmap key.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the &#x60;key&#x60; and &#x60;value&#x60; fields: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapKeys'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\BigMapKeyFull[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function bigMapsGetBigMapKeysWithHttpInfo($id = null, $bigmap = null, $active = null, $hash = null, $key = null, $value = null, $first_level = null, $first_time = null, $last_level = null, $last_time = null, $updates = null, $sort = null, $offset = null, $limit = null, $select = null, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapKeys'][0])
+    {
+        $request = $this->bigMapsGetBigMapKeysRequest($id, $bigmap, $active, $hash, $key, $value, $first_level, $first_time, $last_level, $last_time, $updates, $sort, $offset, $limit, $select, $micheline, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\BigMapKeyFull[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMapKeyFull[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\BigMapKeyFull[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\BigMapKeyFull[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\BigMapKeyFull[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation bigMapsGetBigMapKeysAsync
+     *
+     * Get bigmap keys
+     *
+     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $bigmap Filter by bigmap ptr.   Click on the parameter to expand more details. (optional)
+     * @param  bool $active Filters by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $hash Filter by key hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filter by key.   Note, this parameter supports the following format: &#x60;key{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?key.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filter by value.   Note, this parameter supports the following format: &#x60;value{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?value.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_level Filter by level of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_time Filter by timestamp (ISO 8601) of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_level Filter by level of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_time Filter by timestamp (ISO 8601) of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $updates Filter by number of actions with the bigmap key.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the &#x60;key&#x60; and &#x60;value&#x60; fields: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function bigMapsGetBigMapKeysAsync($id = null, $bigmap = null, $active = null, $hash = null, $key = null, $value = null, $first_level = null, $first_time = null, $last_level = null, $last_time = null, $updates = null, $sort = null, $offset = null, $limit = null, $select = null, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapKeys'][0])
+    {
+        return $this->bigMapsGetBigMapKeysAsyncWithHttpInfo($id, $bigmap, $active, $hash, $key, $value, $first_level, $first_time, $last_level, $last_time, $updates, $sort, $offset, $limit, $select, $micheline, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation bigMapsGetBigMapKeysAsyncWithHttpInfo
+     *
+     * Get bigmap keys
+     *
+     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $bigmap Filter by bigmap ptr.   Click on the parameter to expand more details. (optional)
+     * @param  bool $active Filters by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $hash Filter by key hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filter by key.   Note, this parameter supports the following format: &#x60;key{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?key.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filter by value.   Note, this parameter supports the following format: &#x60;value{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?value.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_level Filter by level of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_time Filter by timestamp (ISO 8601) of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_level Filter by level of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_time Filter by timestamp (ISO 8601) of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $updates Filter by number of actions with the bigmap key.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the &#x60;key&#x60; and &#x60;value&#x60; fields: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function bigMapsGetBigMapKeysAsyncWithHttpInfo($id = null, $bigmap = null, $active = null, $hash = null, $key = null, $value = null, $first_level = null, $first_time = null, $last_level = null, $last_time = null, $updates = null, $sort = null, $offset = null, $limit = null, $select = null, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapKeys'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\BigMapKeyFull[]';
+        $request = $this->bigMapsGetBigMapKeysRequest($id, $bigmap, $active, $hash, $key, $value, $first_level, $first_time, $last_level, $last_time, $updates, $sort, $offset, $limit, $select, $micheline, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'bigMapsGetBigMapKeys'
+     *
+     * @param  AccountsGetIdParameter $id Filter by internal TzKT id.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $bigmap Filter by bigmap ptr.   Click on the parameter to expand more details. (optional)
+     * @param  bool $active Filters by status: &#x60;true&#x60; - active, &#x60;false&#x60; - removed. (optional)
+     * @param  BigMapsGetBigMapKeysHashParameter $hash Filter by key hash.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $key Filter by key.   Note, this parameter supports the following format: &#x60;key{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?key.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filter by value.   Note, this parameter supports the following format: &#x60;value{.path?}{.mode?}&#x3D;...&#x60;, so you can specify a path to a particular field to filter by (for example, &#x60;?value.foo.in&#x3D;bar,baz&#x60;).   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $first_level Filter by level of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $first_time Filter by timestamp (ISO 8601) of the block where the key was first seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $last_level Filter by level of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $last_time Filter by timestamp (ISO 8601) of the block where the key was last seen.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetIdParameter $updates Filter by number of actions with the bigmap key.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetSortParameter $sort Sorts items (asc or desc) by the specified field. You can see what fields can be used for sorting in the response description, below.   Click on the parameter to expand more details. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped.   Click on the parameter to expand more details. (optional)
+     * @param  int $limit Maximum number of items to return. (optional)
+     * @param  BigMapsGetBigMapKeysSelectParameter $select Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields. This parameter accepts values of the following format: &#x60;{field}{path?}{as alias?}&#x60;, so you can do deep selection (for example, &#x60;?select&#x3D;balance,token.metadata.symbol as token,...&#x60;).   Note, if you select just one field, the response will be flatten into a simple array of values.   Click on the parameter to expand the details. (optional)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the &#x60;key&#x60; and &#x60;value&#x60; fields: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function bigMapsGetBigMapKeysRequest($id = null, $bigmap = null, $active = null, $hash = null, $key = null, $value = null, $first_level = null, $first_time = null, $last_level = null, $last_time = null, $updates = null, $sort = null, $offset = null, $limit = null, $select = null, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapKeys'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if ($limit !== null && $limit > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling BigMapsApi.bigMapsGetBigMapKeys, must be smaller than or equal to 10000.');
+        }
+        if ($limit !== null && $limit < 0) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling BigMapsApi.bigMapsGetBigMapKeys, must be bigger than or equal to 0.');
+        }
+        
+
+
+
+        $resourcePath = '/v1/bigmaps/keys';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $bigmap,
+            'bigmap', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $active,
+            'active', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $hash,
+            'hash', // param base name
+            'OneOfExpressionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $key,
+            'key', // param base name
+            'OneOfJsonParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $value,
+            'value', // param base name
+            'OneOfJsonParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $first_level,
+            'firstLevel', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $first_time,
+            'firstTime', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_level,
+            'lastLevel', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $last_time,
+            'lastTime', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $updates,
+            'updates', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'OneOfSortParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'OneOfOffsetParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $select,
+            'select', // param base name
+            'OneOfSelectionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $micheline,
+            'micheline', // param base name
+            'OneOfMichelineFormat', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation bigMapsGetBigMapType
      *
      * Get bigmap type
@@ -734,58 +1249,50 @@ class BigMapsApi
     /**
      * Operation bigMapsGetBigMapUpdates
      *
-     * Get bigmap updates
+     * Get bigmap updates count
      *
-     * @param  AccountsGetIdParameter $bigmap Filters updates by bigmap ptr (optional)
-     * @param  AccountsGetOperationsEntrypointParameter $path Filters updates by bigmap path (optional)
-     * @param  AccountsGetDelegateParameter $contract Filters updates by bigmap contract (optional)
-     * @param  BigMapsGetBigMapsTagsParameter $tags Filters updates by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
-     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters updates by action (optional)
-     * @param  AccountsGetOperationsParameterParameter $value Filters updates by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  AccountsGetIdParameter $level Filters updates by level (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters updates by timestamp. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bzzhh\Tzkt\Model\BigMapUpdate[]
      */
-    public function bigMapsGetBigMapUpdates($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
+    public function bigMapsGetBigMapUpdates($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
     {
-        list($response) = $this->bigMapsGetBigMapUpdatesWithHttpInfo($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $sort, $offset, $limit, $micheline, $contentType);
+        list($response) = $this->bigMapsGetBigMapUpdatesWithHttpInfo($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $contentType);
         return $response;
     }
 
     /**
      * Operation bigMapsGetBigMapUpdatesWithHttpInfo
      *
-     * Get bigmap updates
+     * Get bigmap updates count
      *
-     * @param  AccountsGetIdParameter $bigmap Filters updates by bigmap ptr (optional)
-     * @param  AccountsGetOperationsEntrypointParameter $path Filters updates by bigmap path (optional)
-     * @param  AccountsGetDelegateParameter $contract Filters updates by bigmap contract (optional)
-     * @param  BigMapsGetBigMapsTagsParameter $tags Filters updates by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
-     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters updates by action (optional)
-     * @param  AccountsGetOperationsParameterParameter $value Filters updates by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  AccountsGetIdParameter $level Filters updates by level (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters updates by timestamp. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates'] to see the possible values for this operation
      *
      * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bzzhh\Tzkt\Model\BigMapUpdate[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function bigMapsGetBigMapUpdatesWithHttpInfo($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
+    public function bigMapsGetBigMapUpdatesWithHttpInfo($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
     {
-        $request = $this->bigMapsGetBigMapUpdatesRequest($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $sort, $offset, $limit, $micheline, $contentType);
+        $request = $this->bigMapsGetBigMapUpdatesRequest($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -874,28 +1381,24 @@ class BigMapsApi
     /**
      * Operation bigMapsGetBigMapUpdatesAsync
      *
-     * Get bigmap updates
+     * Get bigmap updates count
      *
-     * @param  AccountsGetIdParameter $bigmap Filters updates by bigmap ptr (optional)
-     * @param  AccountsGetOperationsEntrypointParameter $path Filters updates by bigmap path (optional)
-     * @param  AccountsGetDelegateParameter $contract Filters updates by bigmap contract (optional)
-     * @param  BigMapsGetBigMapsTagsParameter $tags Filters updates by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
-     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters updates by action (optional)
-     * @param  AccountsGetOperationsParameterParameter $value Filters updates by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  AccountsGetIdParameter $level Filters updates by level (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters updates by timestamp. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function bigMapsGetBigMapUpdatesAsync($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
+    public function bigMapsGetBigMapUpdatesAsync($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
     {
-        return $this->bigMapsGetBigMapUpdatesAsyncWithHttpInfo($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $sort, $offset, $limit, $micheline, $contentType)
+        return $this->bigMapsGetBigMapUpdatesAsyncWithHttpInfo($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -906,29 +1409,25 @@ class BigMapsApi
     /**
      * Operation bigMapsGetBigMapUpdatesAsyncWithHttpInfo
      *
-     * Get bigmap updates
+     * Get bigmap updates count
      *
-     * @param  AccountsGetIdParameter $bigmap Filters updates by bigmap ptr (optional)
-     * @param  AccountsGetOperationsEntrypointParameter $path Filters updates by bigmap path (optional)
-     * @param  AccountsGetDelegateParameter $contract Filters updates by bigmap contract (optional)
-     * @param  BigMapsGetBigMapsTagsParameter $tags Filters updates by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
-     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters updates by action (optional)
-     * @param  AccountsGetOperationsParameterParameter $value Filters updates by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  AccountsGetIdParameter $level Filters updates by level (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters updates by timestamp. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function bigMapsGetBigMapUpdatesAsyncWithHttpInfo($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
+    public function bigMapsGetBigMapUpdatesAsyncWithHttpInfo($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
     {
         $returnType = '\Bzzhh\Tzkt\Model\BigMapUpdate[]';
-        $request = $this->bigMapsGetBigMapUpdatesRequest($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $sort, $offset, $limit, $micheline, $contentType);
+        $request = $this->bigMapsGetBigMapUpdatesRequest($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -969,24 +1468,423 @@ class BigMapsApi
     /**
      * Create request for operation 'bigMapsGetBigMapUpdates'
      *
-     * @param  AccountsGetIdParameter $bigmap Filters updates by bigmap ptr (optional)
-     * @param  AccountsGetOperationsEntrypointParameter $path Filters updates by bigmap path (optional)
-     * @param  AccountsGetDelegateParameter $contract Filters updates by bigmap contract (optional)
-     * @param  BigMapsGetBigMapsTagsParameter $tags Filters updates by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
-     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters updates by action (optional)
-     * @param  AccountsGetOperationsParameterParameter $value Filters updates by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
-     * @param  AccountsGetIdParameter $level Filters updates by level (optional)
-     * @param  BigMapsGetBigMapUpdatesTimestampParameter $timestamp Filters updates by timestamp. (optional)
-     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
-     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
-     * @param  int $limit Maximum number of items to return (optional, default to 100)
-     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function bigMapsGetBigMapUpdatesRequest($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
+    public function bigMapsGetBigMapUpdatesRequest($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/v1/bigmaps/updates/count';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $bigmap,
+            'bigmap', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $path,
+            'path', // param base name
+            'OneOfStringParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $contract,
+            'contract', // param base name
+            'OneOfAccountParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $tags,
+            'tags', // param base name
+            'OneOfBigMapTagsParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $action,
+            'action', // param base name
+            'OneOfBigMapActionParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $value,
+            'value', // param base name
+            'OneOfJsonParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $level,
+            'level', // param base name
+            'OneOfInt32Parameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $timestamp,
+            'timestamp', // param base name
+            'OneOfTimestampParameter', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation bigMapsGetBigMapUpdates2
+     *
+     * Get bigmap updates
+     *
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates2'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Bzzhh\Tzkt\Model\BigMapUpdate[]
+     */
+    public function bigMapsGetBigMapUpdates2($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates2'][0])
+    {
+        list($response) = $this->bigMapsGetBigMapUpdates2WithHttpInfo($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $sort, $offset, $limit, $micheline, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation bigMapsGetBigMapUpdates2WithHttpInfo
+     *
+     * Get bigmap updates
+     *
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates2'] to see the possible values for this operation
+     *
+     * @throws \Bzzhh\Tzkt\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Bzzhh\Tzkt\Model\BigMapUpdate[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function bigMapsGetBigMapUpdates2WithHttpInfo($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates2'][0])
+    {
+        $request = $this->bigMapsGetBigMapUpdates2Request($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $sort, $offset, $limit, $micheline, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Bzzhh\Tzkt\Model\BigMapUpdate[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Bzzhh\Tzkt\Model\BigMapUpdate[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Bzzhh\Tzkt\Model\BigMapUpdate[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Bzzhh\Tzkt\Model\BigMapUpdate[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Bzzhh\Tzkt\Model\BigMapUpdate[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation bigMapsGetBigMapUpdates2Async
+     *
+     * Get bigmap updates
+     *
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function bigMapsGetBigMapUpdates2Async($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates2'][0])
+    {
+        return $this->bigMapsGetBigMapUpdates2AsyncWithHttpInfo($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $sort, $offset, $limit, $micheline, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation bigMapsGetBigMapUpdates2AsyncWithHttpInfo
+     *
+     * Get bigmap updates
+     *
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function bigMapsGetBigMapUpdates2AsyncWithHttpInfo($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates2'][0])
+    {
+        $returnType = '\Bzzhh\Tzkt\Model\BigMapUpdate[]';
+        $request = $this->bigMapsGetBigMapUpdates2Request($bigmap, $path, $contract, $tags, $action, $value, $level, $timestamp, $sort, $offset, $limit, $micheline, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'bigMapsGetBigMapUpdates2'
+     *
+     * @param  AccountsGetIdParameter $bigmap Filters by bigmap ptr (optional)
+     * @param  AccountsGetOperationsEntrypointParameter $path Filters by bigmap path (optional)
+     * @param  AccountsGetDelegateParameter $contract Filters by bigmap contract (optional)
+     * @param  BigMapsGetBigMapsTagsParameter $tags Filters by bigmap tags: &#x60;metadata&#x60;, &#x60;token_metadata&#x60;, &#x60;ledger&#x60; (optional)
+     * @param  BigMapsGetBigMapUpdatesActionParameter $action Filters by action (optional)
+     * @param  AccountsGetOperationsParameterParameter $value Filters by JSON value. Note, this query parameter supports the following format: &#x60;?value{.path?}{.mode?}&#x3D;...&#x60;,             so you can specify a path to a particular field to filter by, for example: &#x60;?value.balance.gt&#x3D;...&#x60;. (optional)
+     * @param  AccountsGetIdParameter $level Filters by level (optional)
+     * @param  BigMapsGetBigMapKeysFirstTimeParameter $timestamp Filters by timestamp (optional)
+     * @param  AccountsGetSortParameter $sort Sorts bigmaps by specified field. Supported fields: &#x60;id&#x60; (default), &#x60;ptr&#x60;, &#x60;firstLevel&#x60;, &#x60;lastLevel&#x60;, &#x60;totalKeys&#x60;, &#x60;activeKeys&#x60;, &#x60;updates&#x60;. (optional)
+     * @param  AccountsGetOffsetParameter $offset Specifies which or how many items should be skipped (optional)
+     * @param  int $limit Maximum number of items to return (optional, default to 100)
+     * @param  AccountsGetOperationsMichelineParameter $micheline Format of the bigmap key and value type: &#x60;0&#x60; - JSON, &#x60;2&#x60; - Micheline (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bigMapsGetBigMapUpdates2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function bigMapsGetBigMapUpdates2Request($bigmap = null, $path = null, $contract = null, $tags = null, $action = null, $value = null, $level = null, $timestamp = null, $sort = null, $offset = null, $limit = 100, $micheline = null, string $contentType = self::contentTypes['bigMapsGetBigMapUpdates2'][0])
     {
 
 
@@ -1000,10 +1898,10 @@ class BigMapsApi
 
 
         if ($limit !== null && $limit > 10000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling BigMapsApi.bigMapsGetBigMapUpdates, must be smaller than or equal to 10000.');
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling BigMapsApi.bigMapsGetBigMapUpdates2, must be smaller than or equal to 10000.');
         }
         if ($limit !== null && $limit < 0) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling BigMapsApi.bigMapsGetBigMapUpdates, must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling BigMapsApi.bigMapsGetBigMapUpdates2, must be bigger than or equal to 0.');
         }
         
 
